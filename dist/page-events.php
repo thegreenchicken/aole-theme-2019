@@ -13,76 +13,37 @@
 get_header(); ?>
 <!-- template part: <?php echo basename(__FILE__);  ?> -->
 
-<div class="main-wrap events-page full-width" role="main" >
-	<div data-equalizer>
-		<?php do_action( 'foundationpress_before_content' ); ?>
-		<?php while ( have_posts() ) : the_post(); ?>
-			
-			<div class="right-header-container" data-equalizer-watch>
-				<div class="right-header">
-					<div class="right-header-content">
-						<?php the_post_thumbnail(); ?>
-					</div>
-				</div>
-			</div>
+<?php get_template_part('template-parts-sections/single-content'); ?>
 
-			<article <?php post_class('events-description-container left-header-container') ?> data-equalizer-watch id="post-<?php the_ID(); ?>">
-				<div class="left-header">
-					<div class="events-description-content left-header-content">
-						<header>
-							<h2 class="entry-title"><?php the_title(); ?></h2>
-						</header>
-						<?php do_action( 'foundationpress_page_before_entry_content' ); ?>
-						<div class="entry-content">
-							<a class="ical-all-events-link" href=<?php echo site_url( "/events.ics", $scheme ); ?>>iCal - export all events</a>
-							<?php the_content(); ?>
-							<?php edit_post_link( __( 'Edit', 'foundationpress' ), '<span class="edit-link">', '</span>' ); ?>
-							<hr>
-							<div class="event-calendar">
-								<?php echo do_shortcode("[events_calendar long_events=1 full=0 month=".date('n')."]"); ?>
-							</div>
-							<div id="day-event-list">
+<div class="section-container">	
 
-								<b>Click</b> on a day in the calendar to see that day's events!
-							</div>
-						</div>
-						<footer>
-							<?php
-							wp_link_pages(
-								array(
-									'before' => '<nav id="page-nav"><p>' . __( 'Pages:', 'foundationpress' ),
-									'after'  => '</p></nav>',
-									)
-								);
-								?>
-								<p><?php the_tags(); ?></p>
-							</footer>
-							<?php do_action( 'foundationpress_page_before_comments' ); ?>
-							<?php comments_template(); ?>
-							<?php do_action( 'foundationpress_page_after_comments' ); ?>
-						</div>
-					</div>
-				</article>
-			</div>
-		<?php endwhile;?>
+	<a class="ical-all-events-link" href=<?php echo site_url( "/events.ics", $scheme ); ?>>iCal - export all events</a>
+	<div class="event-calendar">
+		<?php echo do_shortcode("[events_calendar long_events=1 full=0 month=".date('n')."]"); ?>
+	</div>
+	
+</div>
 
-		<?php
-		// Fetch all the A!OLE events
-		$future_events = EM_Events::get(array("scope"=>"future"));
-		$past_events = EM_Events::get(array("scope"=>"past", "order"=>"DESC"));
+<?php
+	// Fetch all the A!OLE events
+	$future_events = EM_Events::get(array("scope"=>"future"));
+	$past_events = EM_Events::get(array("scope"=>"past", "order"=>"DESC"));
 
-		function create_event_array($em_events){
-			$events_array = [];
-			$event_information = [];
+	function create_event_array($em_events){
+		$events_array = [];
+		$event_information = [];
 
-			foreach ($em_events as $idx=>$event){
-				$events_array[] = get_all_event_info($event);
-			}	
-			return $events_array;
-		}
-		$upcoming_events = create_event_array($future_events);
-		$past_events = create_event_array($past_events);
-		?>
+		foreach ($em_events as $idx=>$event){
+			$events_array[] = get_all_event_info($event);
+		}	
+		return $events_array;
+	}
+	$upcoming_events = create_event_array($future_events);
+	$past_events = create_event_array($past_events);
+?>
+
+
+
 		<section class="events upcoming-events">
 			<div class="events-section-title-container">
 				<div class="events-section-title">

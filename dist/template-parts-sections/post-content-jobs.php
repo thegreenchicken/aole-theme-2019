@@ -13,7 +13,6 @@
 get_header(); ?>
 
 
-<!-- template part: <?php echo basename(__FILE__);  ?> -->
 
 
 

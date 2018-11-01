@@ -18,6 +18,7 @@ require_once("custom-functions.php"); // For logic needed on multiple pages (e.g
 <head>
 
 <link rel="stylesheet" type="text/css" href="<?php echo get_stylesheet_uri(); ?>" />
+<link rel="stylesheet" type="text/css" href="<?php echo get_template_directory_uri(); ?>/css/main.css" />
 
 
 						<!-- Google Tag Manager -->

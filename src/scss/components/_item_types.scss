@@ -1,0 +1,53 @@
+/**
+this file contains the properties of some of the list items such as 
+individual posts in a posts list, and their wrappers.
+
+*/
+
+
+@import "columnized";
+
+/* Items that go inside section-container. Their type vary*/
+$items-per-line: 3;
+$item-h-spacing: 20px;
+
+
+.item-post-thumbnail-container .size-post-thumbnail {
+    width: 100%;
+}
+
+.item-paragraph-container {
+    width: 100%;
+    // margin: $item-h-spacing;
+}
+
+.items-pilots-wrapper {
+    @include columnized-wrapper( $items-per-line,$content-box-width,$item-h-spacing);
+    
+    margin-top: $item-h-spacing;
+    
+    .item-pilot-container {
+        @include columnized-item( $items-per-line,$content-box-width,$item-h-spacing);
+
+
+        overflow: hidden;
+        display: inline-block;
+        
+        // background-color: #999;
+        *{
+            text-overflow: ellipsis;
+        }
+        img {
+            width: 100%;
+        }
+
+        
+        .post-title-container{
+            font-weight: 1em;
+            color: black;
+            size: 15px;
+            // padding:10px;
+        }
+
+    }
+}

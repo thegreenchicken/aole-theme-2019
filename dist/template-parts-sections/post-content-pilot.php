@@ -8,7 +8,6 @@
 
 get_header(); ?>
 
-<!-- template part: <?php echo basename(__FILE__);  ?> -->
 
 <div class="main-wrap single-pilot-page full-width" role="main">
 	<div data-equalizer>

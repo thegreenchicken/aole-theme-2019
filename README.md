@@ -1,4 +1,17 @@
+# aole 2018 worpress theme
+
+having node js installed, cd to the root of this project (same directory as this readme) and run `npm install`. After this, get the scss to auto-compile using the `npm run sass` command.
+* The stylesheets are compiled from the contents inside the src folder, into the dist/css folder.
+* it is possible to add compilation of js files into this pipeline.
+  
+# Blank slate
+
+# Aleksi Tapale foundationpress
+# Foundation press
+
+
 # Primitive
+https://github.com/taniarascia/primitive
 
 Primitive is a minimalist Sass boilerplate and CSS framework that provides helpful, browser-consistent styling for buttons, forms, tables, lists, and typography.
 
