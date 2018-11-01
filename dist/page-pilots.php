@@ -58,7 +58,7 @@ as pilot information for each pilot under those theme groups
 				
 			</div>
 		</div>
-		<div class="items-pilots-wrapper">
+		<div class="items-wrapper items-pilots-wrapper">
 			<?php 
 			foreach ($theme_groups[$idx]["pilots"] as $pilot):
 				?>

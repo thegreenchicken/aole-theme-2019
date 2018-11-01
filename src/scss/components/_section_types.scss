@@ -1,0 +1,8 @@
+
+.section-container{}
+.event-section-container{
+    .event-facilitator-list{
+        @include remove-list-style();
+        @include subtitle();
+    }
+}

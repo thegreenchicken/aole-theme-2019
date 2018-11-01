@@ -34,20 +34,6 @@ ol li ol {
 }
 
 // Headings
-h1,
-h2,
-h3,
-h4,
-h5 {
-    margin: $margins 0;
-    font-weight: $heading-font-weight;
-    font-family: $heading-font-family;
-    line-height: $heading-line-height;
-    color: $heading-font-color;
-    &:not(:first-child) {
-        margin: 1.5rem 0;
-    }
-}
 
 // Increased margin on additional headings
 h1:not(:first-child),
@@ -58,48 +44,48 @@ h3:not(:first-child) {
 
 // Heading individual styles
 h1 {
-    font-size: $h1-mobile;
+    @include title1();
 }
 
 h2 {
-    font-size: $h2-mobile;
+    @include title2();
 }
 
 h3 {
-    font-size: $h3-mobile;
+    @include title3();
 }
 
 h4 {
-    font-size: $h4-mobile;
+    @include title4();
 }
 
 h5 {
-    font-size: $h5-mobile;
+    @include title5();
 }
 
-@include small-breakpoint {
-    // Increased margin on additional headings
-    h1:not(:first-child),
-    h2:not(:first-child),
-    h3:not(:first-child) {
-        margin-top: 2.5rem;
-    } // Heading desktop individual styles
-    h1 {
-        font-size: $h1;
-    }
-    h2 {
-        font-size: $h2;
-    }
-    h3 {
-        font-size: $h3;
-    }
-    h4 {
-        font-size: $h4;
-    }
-    h5 {
-        font-size: $h5;
-    }
-}
+// @include small-breakpoint {
+//     // Increased margin on additional headings
+//     h1:not(:first-child),
+//     h2:not(:first-child),
+//     h3:not(:first-child) {
+//         margin-top: 2.5rem;
+//     } // Heading desktop individual styles
+//     h1 {
+//         font-size: $h1;
+//     }
+//     h2 {
+//         font-size: $h2;
+//     }
+//     h3 {
+//         font-size: $h3;
+//     }
+//     h4 {
+//         font-size: $h4;
+//     }
+//     h5 {
+//         font-size: $h5;
+//     }
+// }
 
 // Link styling
 a {

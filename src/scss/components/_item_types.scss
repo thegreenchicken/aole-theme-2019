@@ -6,7 +6,7 @@ individual posts in a posts list, and their wrappers.
 
 
 @import "columnized";
-
+@import "uneven_columns";
 /* Items that go inside section-container. Their type vary*/
 $items-per-line: 3;
 $item-h-spacing: 20px;
@@ -51,3 +51,4 @@ $item-h-spacing: 20px;
 
     }
 }
+

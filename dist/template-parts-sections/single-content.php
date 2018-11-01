@@ -17,7 +17,7 @@ This insert contains the page content part, to be inserted in the body of any pa
             <h2 class="entry-title"><?php the_title();?></h2>
 
             <?php the_content();?>
-            <?php edit_post_link(__('Edit', 'foundationpress'), '<span class="edit-link">', '</span>');?>
+            <?php edit_post_link('Edit', '<span class="edit-link">', '</span>');?>
 
 
             <p><?php the_tags();?></p>
