@@ -1,0 +1,14 @@
+{
+  "name": "aole_blankslate",
+  "version": "1.0.0",
+  "description": "IMPORTANT - PLEASE READ: http://tidythemes.com/concept/",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "sass": "^1.14.3"
+  }
+}
