@@ -12,19 +12,19 @@ body{
     /* 
     main-container wraps all the page contents
     */
-    width: 100%;
-    max-width: 900px;
+    // width: 100%;
+    // max-width: 900px;
     text-align: initial;
     padding: 0px;
     margin: 0px;
 
-    padding-left: 15px;
-    padding-right: 15px;
+    // padding-left: 15px;
+    // padding-right: 15px;
     
-    display: inline-block;
+    // display: inline-block;
     /*dev settings:*/
     background-color: white;
-    overflow: hidden;
+    // overflow: hidden;
 }
 
 // has yet to be placed in the right files:
@@ -32,29 +32,24 @@ body{
 
 /* Specific properties: header */
 
-header.header-container {
-    width: 100%;
-    background-color: crimson;
-    display: block;
-    position: relative;
-}
+
 
 /* wrappers inside the header */
 
 header.header-container .logo-container {
-    display: inline-block;
+    // display: inline-block;
 }
 
 header.header-container .title-container {
-    display: inline-block;
+    // display: inline-block;
 }
 
 header.header-container .main-menu-container {
     /* this makes the menu items to appear at the right    */
-    position: absolute;
-    width: 100%;
+    // position: absolute;
+    // width: 100%;
     text-align: right;
-    top: 0px;
+    // top: 0px;
 }
 
 header.header-container .menu-navigation-container ul {

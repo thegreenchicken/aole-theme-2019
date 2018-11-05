@@ -10,6 +10,8 @@ The rules for this template are the following:
 * In order to be able to style in different ways posts of different types, the css class contains information about the post type, etc. so that the CSS can tailor custom behaviours.
 * Re-use styles and scss variables as much as possible, encouraging consistency.
 * have only one CSS `@media` query, when the screen is small enough. Try to make the content flexible for the rest of the width size range 
+* https://en.bem.info/methodology/quick-start/
+* https://www.sitepoint.com/sass-semantically-extend-bootstrap/
 
 The agnostic html structure is as follows:
 

@@ -1,8 +1,3 @@
-/*! Primitive
- * A front end Sass boilerplate
- *
- * Author: Tania Rascia 
- */
 
 // Configuration
 @import "base/variables";
@@ -12,7 +7,12 @@
 @import "base/normalize";
 @import "base/reset";
 
+//libraries
+@import "plugins/bootstrap";
+
 // Components
+@import "components/columnized";
+
 @import "components/scaffolding";
 @import "components/grid";
 @import "components/helpers";

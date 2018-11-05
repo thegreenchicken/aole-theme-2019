@@ -4,33 +4,30 @@
     Each item has a margin-right, but there needs to be a bit of extra space for the last item on each line.
     */
 
-    margin-right:-$item-h-spacing;
+    // margin-right:-$item-h-spacing;
     
-    text-align: justify;
-    text-align-last: justify;
+    // text-align: justify;
+    // text-align-last: justify;
 
-    *{
-        text-align: left;
-        text-align-last: left;
-    }
-    
+    // *{
+    //     text-align: left;
+    //     text-align-last: left;
+    // }
+    @extend .row;
 }
 
 @mixin columnized-item($items-per-line,$availableWidth,$item-h-spacing) {
     /*each item needs to fit three times in the column width 
     when in full width. get that with from the amount of items to fit, 
     their spacing and the avail.width*/
-    // $grace-space: $items-per-line * 2;
 
-    $line-spacing-sum: ($items-per-line * $item-h-spacing) - 1;
-    
-    $itm-width: ($availableWidth - $line-spacing-sum) / $items-per-line;
-    
-    width:$itm-width;
-    // margin-right: $item-h-spacing - $grace-space;
+    // $line-spacing-sum: ($items-per-line * $item-h-spacing) - 1;
+    // $itm-width: ($availableWidth - $line-spacing-sum) / $items-per-line;
+    // width:$itm-width;
+    // height: $itm-width * 0.8;
 
-    
-    height: $itm-width * 0.8;// * 1/$arbitrary-box-ratio;
+    @extend .col-sm-4;
+
 
     
 }

@@ -10,6 +10,7 @@
  * @since FoundationPress 1.0.0
  */
 
+wp_dequeue_style("events_manager.css");
 get_header(); ?>
 <!-- template part: <?php echo basename(__FILE__);  ?> -->
 

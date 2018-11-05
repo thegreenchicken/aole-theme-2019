@@ -1,8 +1,53 @@
 
-.section-container{}
+.section-container{
+    @extend .container;
+}
+
+.header-container{
+    @extend .container;
+    background-color: crimson;
+}
+
+.section-listpage-header-container{
+    background-color: #FD7E29;
+    width:100vw;
+    max-width: none;
+}
+
 .event-section-container{
     .event-facilitator-list{
         @include remove-list-style();
         @include subtitle();
+    }
+}
+
+//this should actually go in the calendar plugin ting... or remove it altoghether.
+.event-calendar{
+    //active cal buttons
+    width: 226px;
+    right: 0px;
+    td.eventful a, td.eventful-today a {
+
+        background-color: #FD7E29;
+        display: block;
+        border-radius: 50%;
+        width: 25px;
+        height: 25px;
+        color: white;
+
+    }
+
+    td.eventless *, td.eventless-today * {
+        display: block;
+        border-radius: 50%;
+        width: 25px;
+        height: 25px;
+    }
+
+    .em-calendar * {
+        font-weight: 100;
+    }
+    td{
+        border:none;
     }
 }

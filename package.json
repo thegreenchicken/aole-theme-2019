@@ -21,13 +21,17 @@
   },
   "scripts": {
     "sass-docs": "node-sass -w -r ./src/scss/ -o ./docs/css/",
-    "sass-min": "node-sass ./src/scss/ -o ./dist/css/ -w -r --source-map-embed --source-map-contents --output-style expanded | node-sass ./src/scss/main.scss ./dist/css/main.min.css -w --output-style compressed",
-    "sass-dev": "node-sass ./src/scss/ -o ./dist/css/ -w -r --source-map-embed --source-map-contents --output-style expanded | node-sass ./src/scss/main.scss ./dist/css/main.css -w"
+    "sass-min": "node-sass ./src/scss/ -o ./dist/css/ -w -r --source-map-embed --source-map-contents --output-style expanded | node-sass ./src/scss/main.scss --use autoprefixer ./dist/css/main.min.css -w --output-style compressed",
+    "sass-dev": "node-sass ./src/scss/ -o ./dist/css/ -w --source-map-embed --source-map-contents --output-style expanded"
   },
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/taniarascia/primitive/issues"
   },
   "homepage": "https://taniarascia.github.io/primitive",
-  "private": true
+  "private": true,
+  "devDependencies": {
+    "autoprefixer": "^9.3.1",
+    "bootstrap-sass": "^3.3.7"
+  }
 }

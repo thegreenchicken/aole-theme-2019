@@ -12,9 +12,12 @@
 
 get_header(); ?>
 <!-- template part: <?php echo basename(__FILE__);  ?> -->
+<div class="section-container section-listpage-header-container">
+	<h1>Pilots. <?php  get_the_title() ?></h1>
+	<p>This is a test section header text.</p>
+</div>
 
 <?php get_template_part('template-parts-sections/single-content'); ?>
-
 <div class="section-container">	
 	
 	<?php
