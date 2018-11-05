@@ -5,13 +5,32 @@
 
 .header-container{
     @extend .container;
-    background-color: crimson;
+    // background-color: $red;
 }
 
 .section-listpage-header-container{
-    background-color: #FD7E29;
-    width:100vw;
+    //we want this element to break out, 
+    background-color: $yellow;
+    width:100%;
     max-width: none;
+    //but in order for the contained elements to adjust to the grid, 
+    //we need to apply the container class to the children.
+    .item-paragraph-container{
+        @extend .container;
+        //.5 rem. Why? no idea. It misaligns otherwise
+        padding: 0 .5rem;
+        color:white;
+
+        >h1{
+            font-size: 1rem;
+            font-weight: 100;
+            color:white;
+        }
+        >p{
+            font-size:3rem;
+            font-weight: 400;
+        }
+    }
 }
 
 .event-section-container{

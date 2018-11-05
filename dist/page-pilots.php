@@ -13,8 +13,10 @@
 get_header(); ?>
 <!-- template part: <?php echo basename(__FILE__);  ?> -->
 <div class="section-container section-listpage-header-container">
-	<h1>Pilots. <?php  get_the_title() ?></h1>
-	<p>This is a test section header text.</p>
+	<div class="item-paragraph-container">
+		<h1>Pilots. <?php  get_the_title() ?></h1>
+		<p>This is a test section header text.</p>
+	</div>
 </div>
 
 <?php get_template_part('template-parts-sections/single-content'); ?>
@@ -67,7 +69,7 @@ as pilot information for each pilot under those theme groups
 				?>
 				<div class='item-pilot-container'>
 					
-					<a href="<?php echo get_the_permalink($pilot->ID);?>">
+					<a class="item-paragraph-container" href="<?php echo get_the_permalink($pilot->ID);?>">
 
 						<img src="<?php echo get_pilot_image_url($pilot->ID, 'medium'); ?>" />
 						<div class="post-title-container">

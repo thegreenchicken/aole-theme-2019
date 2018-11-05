@@ -5,11 +5,10 @@ individual posts in a posts list, and their wrappers.
 */
 
 
-@import "columnized";
-@import "uneven_columns";
+
 /* Items that go inside section-container. Their type vary*/
-$items-per-line: 3;
-$item-h-spacing: 20px;
+$items-per-line: 4;
+$item-spacing: 20px;
 
 
 .item-post-thumbnail-container .size-post-thumbnail {
@@ -17,38 +16,49 @@ $item-h-spacing: 20px;
 }
 
 .item-paragraph-container {
-    width: 100%;
-    // margin: $item-h-spacing;
+    // width: 100%;
 }
 
 .items-pilots-wrapper {
-    @include columnized-wrapper( $items-per-line,$content-box-width,$item-h-spacing);
+    @include columnized-wrapper();
     
-    margin-top: $item-h-spacing;
+    margin-top: $item-spacing;
     
     .item-pilot-container {
-        @include columnized-item( $items-per-line,$content-box-width,$item-h-spacing);
+        $borderpx:3;
 
+        @include columnized-item( $items-per-line );
 
         overflow: hidden;
         display: inline-block;
-        
+
+        padding: $item-spacing;
+        margin: -$borderpx;
+
         // background-color: #999;
         *{
             text-overflow: ellipsis;
         }
-        img {
-            width: 100%;
-        }
 
-        
-        .post-title-container{
-            font-weight: 1em;
-            color: black;
-            size: 15px;
-            // padding:10px;
-        }
+        .item-paragraph-container{
+            border: solid #{$borderpx}+px $blackish;
+            
+            border: solid 3px #433A3F;
+            display: block;
+            height: 182px;
+            overflow: hidden;
 
+            img {
+                width: 100%;
+            }
+            
+            .post-title-container{
+                font-weight: 1em;
+                color: black;
+                size: 15px;
+                // padding:10px;
+            }
+        }
     }
 }
 

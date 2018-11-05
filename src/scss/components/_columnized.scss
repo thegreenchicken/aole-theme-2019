@@ -1,5 +1,5 @@
 
-@mixin columnized-wrapper($items-per-line,$availableWidth,$item-h-spacing) {
+@mixin columnized-wrapper() {
     /*
     Each item has a margin-right, but there needs to be a bit of extra space for the last item on each line.
     */
@@ -16,7 +16,7 @@
     @extend .row;
 }
 
-@mixin columnized-item($items-per-line,$availableWidth,$item-h-spacing) {
+@mixin columnized-item($items-per-line) {
     /*each item needs to fit three times in the column width 
     when in full width. get that with from the amount of items to fit, 
     their spacing and the avail.width*/
@@ -25,8 +25,19 @@
     // $itm-width: ($availableWidth - $line-spacing-sum) / $items-per-line;
     // width:$itm-width;
     // height: $itm-width * 0.8;
-
-    @extend .col-sm-4;
+    @if ($items-per-line==1){
+        @extend .col-sm-12;
+    }@else if ($items-per-line==2){
+        @extend .col-sm-6;
+    }@else if ($items-per-line==3){
+        @extend .col-sm-4;
+    }@else if ($items-per-line==4){
+        @extend .col-sm-3;
+    }@else if ($items-per-line==6){
+        @extend .col-sm-2;
+    }@else{
+        @debug "$invalid items-per-line for columnized-items #{$items-per-line}"
+    }
 
 
     

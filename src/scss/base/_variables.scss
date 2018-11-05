@@ -21,17 +21,24 @@ $tablet: $small;
 $desktop: $medium;
 
 /* Colors */
+$red: #E84351;
+$yellow: #F9BF1D;
+$blackish: #433A3F;
+$blue:#2B90CF;
+$blue-dark: #00639E;
+$blue-light: #6BC0FF;
 
 $background: white; 
-$primary-color: #0366EE;
-$secondary-color: #29de7d; 
-$accent-color: #cdcdcd;
-$alternate-background: #fafafa;
-$alternate-color: #404040;
+$primary-color: $blue;
+$secondary-color: $red; 
+$accent-color: $yellow;
+$alternate-background: $blackish;
+$alternate-color: $blue-dark;
 $link-color: $primary-color;
-$link-hover-color: darken($link-color, 15%);
-$highlight: #ffeea8;
-$error: #D33C40;
+$link-hover-color: $blue-light;
+$highlight: $yellow;
+$error: $red;
+//bq=blockquote
 $bq-border: 16px solid #f0f0f0;
 
 /* Typography */
@@ -43,7 +50,7 @@ $font-style: normal;
 $font-variant: normal;
 $font-weight: normal;
 $font-color: #404040;
-$font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue, Helvetica, Arial, sans-serif;
+$font-family: Raleway, sans-serif;
 $line-height: 1.6;
 
 
@@ -51,7 +58,7 @@ $line-height: 1.6;
 // Headings
 $heading-font-color: #000;
 $heading-font-weight: 600;
-$heading-font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue, Helvetica, Arial, sans-serif;
+$heading-font-family: Poppins, sans-serif;
 $heading-line-height: 1em;
 $heading-margin-bottom: 1em;
 
@@ -123,7 +130,7 @@ $button-background: $primary-color;
 $button-background-hover: darken($button-background, 10%);
 $button-color: #ffffff;
 $button-font-weight: 600;
-$button-font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue, Helvetica, Arial, sans-serif;
+$button-font-family: inherit;//-apple-system, BlinkMacSystemFont, Helvetica Neue, Helvetica, Arial, sans-serif;
 $button-font-size: 1rem;
 $button-border-width: 1px;
 $button-border-style: solid;
