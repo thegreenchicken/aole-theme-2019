@@ -3,7 +3,10 @@
  *
  * All variables and most of the configuration is defined on this page. */
 
-
+/**
+import fonts
+*/
+@import url('https://fonts.googleapis.com/css?family=Poppins:700,800|Raleway:500,500i,700');
 /* Containers */
 $arbitrary-box-ratio: 1.61803399;
 
@@ -50,7 +53,7 @@ $font-style: normal;
 $font-variant: normal;
 $font-weight: normal;
 $font-color: #404040;
-$font-family: Raleway, sans-serif;
+$font-family: 'Raleway', sans-serif;
 $line-height: 1.6;
 
 
@@ -58,16 +61,16 @@ $line-height: 1.6;
 // Headings
 $heading-font-color: #000;
 $heading-font-weight: 600;
-$heading-font-family: Poppins, sans-serif;
+$heading-font-family: 'Poppins', sans-serif;
 $heading-line-height: 1em;
 $heading-margin-bottom: 1em;
 
 // Heading font size
 $h1: 2.25rem;
-$h2: 2rem;
-$h3: 1.75rem;
-$h4: 1.5rem;
-$h5: 1.25rem;
+$h2: 1.3rem;
+$h3: 1rem;
+$h4: 0.8rem;
+$h5: 0.6rem;
 
 @mixin title1() {
     color:$heading-font-color;
@@ -77,13 +80,16 @@ $h5: 1.25rem;
     font-size:$h1;
     margin:0;
     margin-bottom: $heading-margin-bottom;
+    
 }
 @mixin title2() {
     @include title1();
+    text-transform: uppercase;
     font-size:$h2;
 }
 @mixin title3() {
     @include title2();
+    text-transform: none;
     font-size:$h3;
 }
 @mixin title4() {

@@ -6,25 +6,26 @@ get_header(); ?>
 <div class="main-wrap" role="main">
 	<article <?php post_class('main-content') ?> id="post-<?php the_ID(); ?>">
 		<header>
-			<h2 class="entry-title"><?php _e( 'Yikes! No such page exists. :(', 'foundationpress' ); ?></h2>
+			<h2 class="entry-title">Yikes! No such page exists.</h2>
 		</header>
 		<div class="entry-content">
 			<div class="error">
-				<p class="bottom"><?php _e( 'The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.', 'foundationpress' ); ?></p>
+				<p class="bottom">
+					The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.</p>
 			</div>
-			<p><?php _e( 'Please try the following:', 'foundationpress' ); ?></p>
+			<p>Please try the following</p>
 			<ul>
-				<li><?php _e( 'Check your spelling', 'foundationpress' ); ?></li>
+				<li>Check your spelling</li>
 				<li>
 					<?php
 					/* translators: %s: home page url */
-					printf( __(
-						'Return to the <a href="%s">home page</a>', 'foundationpress' ),
-					home_url()
+					printf(
+						'Return to the <a href="%s">home page</a>',
+						home_url()
 					);
 					?>
 				</li>
-				<li><?php _e( 'Click the <a href="javascript:history.back()">Back</a> button', 'foundationpress' ); ?></li>
+				<li>Click the <a href="javascript:history.back()">Back</a> button</li>
 			</ul>
 		</div>
 	</article>

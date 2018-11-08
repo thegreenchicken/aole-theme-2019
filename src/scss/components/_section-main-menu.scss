@@ -1,0 +1,34 @@
+.header-container{
+    @extend .container;
+    height:87px;
+    text-align: justify;
+    .main-menu-container {
+        
+        float: right;
+    }
+    .title-container{
+        display:inline-block;
+    }
+    .menu-navigation-container ul {
+        @include remove-list-style();
+    }
+
+    .menu-navigation-container ul li{
+        //display:inline-block;
+        a {
+            color: #000;
+            text-decoration: none;
+            // background: pink;
+            font-size: 0.8em;
+            font-weight: 500;
+            line-height: 16px;
+            padding: 7px;
+        }
+        a:hover{
+            text-decoration: underline;
+        }
+        a:active{
+            text-decoration: underline;
+        }
+    }
+}

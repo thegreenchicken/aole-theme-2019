@@ -1,23 +1,7 @@
 <?php
-/**
- * The template for displaying pages
- *
- * This is the template that displays all pages by default.
- * Please note that this is the WordPress construct of pages and that
- * other "pages" on your WordPress site will use a different template.
- *
- * @package FoundationPress
- * @since FoundationPress 1.0.0
- */
 
 get_header(); ?>
 <!-- template part: <?php echo basename(__FILE__);  ?> -->
-<div class="section-container section-listpage-header-container">
-	<div class="item-paragraph-container">
-		<h1>Pilots. <?php  get_the_title() ?></h1>
-		<p>This is a test section header text.</p>
-	</div>
-</div>
 
 <?php get_template_part('template-parts-sections/single-content'); ?>
 <div class="section-container">	
@@ -63,12 +47,37 @@ as pilot information for each pilot under those theme groups
 				
 			</div>
 		</div>
-		<div class="items-wrapper items-pilots-wrapper">
+		<div class="items-wrapper items-pilots-wrapper classifiable-container">
 			<?php 
 			foreach ($theme_groups[$idx]["pilots"] as $pilot):
 				?>
-				<div class='item-pilot-container'>
-					
+				<div class='item-pilot-container classifiable-item'>
+					<div style="display:none" class="classifiable-attributes"><?php
+						$generatorTags=["random","generated","tags","because","posts","don't","have","metadata","lalala","cooltag"];
+						echo "{";
+						echo "\"tags\":[";
+						for ($n = 0; $n < 7; $n++) {
+							echo "\"" . $generatorTags[ rand(0, count($generatorTags)-1 )] . "\"";
+							if ($n !== 6 ) {
+								echo ",";
+							}
+
+						}
+						echo "],";
+						$generatorTags = ["afro","asymmetric cut","beehive","bangs","beach waves","big hair","blow out","Bouffant","bowl cut","Braid","brus cut","bun","bunches","burr"];
+
+						echo "\"hairdo styles\":[";
+						for ($n = 0; $n < 7; $n++) {
+							echo "\"" . $generatorTags[ rand(0, count($generatorTags)-1 )] . "\"";
+							if ($n !== 6 ) {
+								echo ",";
+							}
+
+						}
+						echo "]";
+
+						echo "}";
+					?></div>
 					<a class="item-paragraph-container" href="<?php echo get_the_permalink($pilot->ID);?>">
 
 						<img src="<?php echo get_pilot_image_url($pilot->ID, 'medium'); ?>" />

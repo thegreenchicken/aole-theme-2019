@@ -1,19 +1,4 @@
 <?php
-/**
- * Author: Ole Fredrik Lie
- * URL: http://olefredrik.com
- *
- * FoundationPress functions and definitions
- *
- * Set up the theme and provides some helper functions, which are used in the
- * theme as custom template tags. Others are attached to action and filter
- * hooks in WordPress to change core functionality.
- *
- * @link https://codex.wordpress.org/Theme_Development
- * @package FoundationPress
- * @since FoundationPress 1.0.0
- */
-
 /** Various clean up functions */
 
 $fullWPpath = '/Users/taipala2/Documents/OneDrive - Aalto-yliopisto/Web Projects/htdocs/wordpress';

@@ -11,15 +11,10 @@
 @import "plugins/bootstrap";
 
 // Components
-@import "components/columnized";
 
-@import "components/scaffolding";
-@import "components/grid";
-@import "components/helpers";
-@import "components/buttons";
-@import "components/forms";
-@import "components/tables";
-@import "components/navigation"; 
+@import "components/helpers"; 
 @import "components/layout"; 
-@import "components/item_types";
-@import "components/section_types";
+@import "components/scaffolding"; 
+@import "components/section-specific";
+@import "components/section-main-menu";
+@import "components/page-specific";

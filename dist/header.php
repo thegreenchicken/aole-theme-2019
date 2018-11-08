@@ -1,14 +1,6 @@
 <!-- template part: <?php echo basename(__FILE__);  ?> -->
 
 <?php
-/**
- * The template for displaying the header
- *
- * Displays all of the head element and everything up until the "container" div.
- *
- * @package FoundationPress
- * @since FoundationPress 1.0.0
- */
 
 require_once("custom-functions.php"); // For logic needed on multiple pages (e.g. fetching posts of a certain category / taxonomy)
 ?>
@@ -16,9 +8,12 @@ require_once("custom-functions.php"); // For logic needed on multiple pages (e.g
 <!doctype html>
 <html class="no-js" <?php language_attributes(); ?> >
 <head>
+	<?php
+	wp_enqueue_script('styling-general', get_template_directory_uri() . '/js/styling-general.js', array('jquery'), 1.1, true);
+	?>
 
-<link rel="stylesheet" type="text/css" href="<?php echo get_stylesheet_uri(); ?>" />
-<link rel="stylesheet" type="text/css" href="<?php echo get_template_directory_uri(); ?>/css/main.css" />
+	<link rel="stylesheet" type="text/css" href="<?php echo get_stylesheet_uri(); ?>" />
+	<link rel="stylesheet" type="text/css" href="<?php echo get_template_directory_uri(); ?>/css/main.css" />
 
 
 						<!-- Google Tag Manager -->
@@ -55,9 +50,19 @@ require_once("custom-functions.php"); // For logic needed on multiple pages (e.g
 						})});
 						</script>
 </head>
-<body <?php body_class(); ?>>
-	
-	<div class="main-container">
+<?php 
+//get the requested page name, to add it as class in the main container.
+try{
+	$current_page = sanitize_post($GLOBALS['wp_the_query']->get_queried_object());
+	$slug = $current_page->post_name;
+}catch (Exception $e) {
+	echo '<!-- Caught exception: ', $e->getMessage(), " -->\n";
+	$slug = "unknown";
+}
+
+?>
+<body <?php body_class(); ?>>	
+	<div class="main-container main-<?php echo $slug ?>-container">
 
 		<!-- Google Tag Manager (noscript) -->
 		<noscript>

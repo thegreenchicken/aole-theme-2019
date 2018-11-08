@@ -20,6 +20,7 @@
     "node-sass": "*"
   },
   "scripts": {
+    "dev": "npm run sass-dev",
     "sass-docs": "node-sass -w -r ./src/scss/ -o ./docs/css/",
     "sass-min": "node-sass ./src/scss/ -o ./dist/css/ -w -r --source-map-embed --source-map-contents --output-style expanded | node-sass ./src/scss/main.scss --use autoprefixer ./dist/css/main.min.css -w --output-style compressed",
     "sass-dev": "node-sass ./src/scss/ -o ./dist/css/ -w --source-map-embed --source-map-contents --output-style expanded"
