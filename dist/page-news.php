@@ -13,24 +13,25 @@ get_header(); ?>
 
 		foreach ($posts as $post) : setup_postdata($post);
 			?>
-			<div class="item-container item-news-container">
-				<span class="item-author-container"><?php the_author(); ?></span>
-				<div class="item-title-container">
-					<a href="<?php echo get_permalink(); ?>"><?php the_title(); ?></a>
+			<a href="<?php echo get_permalink(); ?>">
+				<div class="item-container item-news-container">
+					<div class="item-image-container">
+						<?php the_post_thumbnail(); ?>
+					</div>
+					<div class="item-title-container">
+						<?php the_title(); ?>
+					</div>
+					<div class="item-paragraph-container" style="position:relative; top:0px; left:0px; opacity:0.5">
+						<p><?php
+							if( has_excerpt() ) {
+								the_excerpt();
+							}
+							?>
+						</p>
+					</div>
+					<span class="item-author-container"><?php the_author(); ?></span>
 				</div>
-				<div class="item-paragraph-container">
-					<p><?php
-						if( has_excerpt() ) {
-							the_excerpt();
-						}
-						?>
-					</p>
-				</div>
-				<div class="item-image-container">
-					<?php the_post_thumbnail(); ?>
-				</div>
-			</div>
-
+			</a>
 
 		<?php endforeach; 
 		wp_reset_postdata();

@@ -5,14 +5,12 @@ wp_dequeue_style("events_manager.css");
 get_header(); ?>
 <!-- template part: <?php echo basename(__FILE__);  ?> -->
 
-<?php get_template_part('template-parts-sections/single-content'); ?>
+<?php get_template_part('template-parts-sections/single-content-page-events'); ?>
 
 <div class="section-container">	
 
 	<a class="ical-all-events-link" href=<?php echo site_url( "/events.ics", $scheme ); ?>>iCal - export all events</a>
-	<div class="event-calendar">
-		<?php echo do_shortcode("[events_calendar long_events=1 full=0 month=".date('n')."]"); ?>
-	</div>
+	
 	
 </div>
 
@@ -72,17 +70,56 @@ get_header(); ?>
 			<?php
 				$n++;
 				foreach ($scoped_event as $ne=>$event) {
-					// echo $ne;
-					// echo "---";
-					// echo $event;
-					echo '<pre style="height:200px; overflow:scroll; display:block">';
-					print_r($event);
-					echo '</pre>';
-					echo $event->event_name;
+					//for some strange reason, past events get nested... here is the workaround:
+					if($scopeName=="past"){
+						$postObject=$event;
+						$event=$postObject["event"];
+					}
+					// to display all the event's data: 
+					// echo '<pre class="item-events-container" style="height:200px; overflow:scroll; display:block">';
+					// print_r($event);
+					// echo '</pre>';
+
 					?>
 
-					
+					<a href="http: //onlinelearning.aalto.fi/?post_type=event&p=3131">
+						<div class="item-container item-events-container">
+							
+							<div class="item-image-container">
+								<?php if(get_event_image_url($event->post_id)){ ?>
+									<img src="<?php echo get_event_image_url($event->post_id, 'event-thumbnail');?>">
+								<?php } ?>
+							</div>
+							<?php
+								//date string to date object
+								$date = new DateTime($event->event_start_date);
+							?>	
 
+							<div class="item-date-container">
+								<span class="weekday">
+									<?php
+									echo $date->format('l');
+									?>
+								</span>
+								<span class="calendar-day">
+									<?php 
+									// echo $event->event_start_date 
+									echo $date->format('d M');
+									?>
+								</span>
+								<span class="timezone">
+									<?php echo $event->event_timezone ?>
+								</span>
+								<span class="hours">
+									<?php echo $event->event_start_time ?> - 
+									<?php echo $event->event_end_time ?>
+								</span>
+							</div>
+							<div class="item-title-container">
+								<?php echo $event->event_name; ?>
+							</div>
+						</div>
+					</a>
 					<?php 
 				}
 				?>

@@ -29,6 +29,7 @@ $item-spacing: 20px;
         @extend .col-sm-4;
     }
 }
+
 .section-post-header-container{
     //we want this element to break out, 
     background-color: $yellow;
@@ -78,9 +79,6 @@ $item-spacing: 20px;
             position: absolute;
             right: 0px;
             height: 100%;
-        }
-        ::after{
-            content:"-script to fill-"
         }
     
     }

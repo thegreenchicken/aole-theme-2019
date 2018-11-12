@@ -5,8 +5,143 @@
 //  but in this context I can use the scss variables and the so.
 //perhaps a future development could be to define the SCSS compiler
 // to make multiple css files.
-.main-events-container{
+
+
+//these class names are generated in the header.php:
+//<div class="main-container main-<?php echo $slug ?>-container">
+
+@mixin fully-wide-item(){
+    $my-breakpoint: $screen-sm;
+    $my-margin:10px;
     
+
+    border: solid 3px $font-color;
+    position: relative;
+    overflow: hidden;
+    height: 200px;
+    margin: 55px auto;
+    
+    >div,>span{
+        color: $font-color;
+        text-decoration:none;
+        margin: $my-margin;
+    }
+
+    .item-image-container{
+        width: 66%;
+        height: 100%;
+        float: right;
+        margin:0;
+        // margin-top: -3%;
+        // transition: margin-top 2s;
+        
+        img{
+            // width:100%;
+            // height:100%;
+            min-height: 100%;
+            min-width: 100%;
+        }
+        @media (max-width: $my-breakpoint) {
+            position: relative;
+            width: 100%;
+        }
+    }
+    @media (max-width: $my-breakpoint) {
+        height:auto;
+    }
+    &:hover{
+        .item-image-container{
+            opacity: 0.87;
+            // margin-top: 0px;
+            // transition: margin-top 2s;
+        }
+        
+        .item-title-container{
+            text-decoration: underline;
+        }
+    }
+}
+.main-news-container{
+    $my-breakpoint: $screen-sm;
+    .items-wrapper{
+        .item-news-container{
+            @include fully-wide-item();       
+            .item-author-container{
+                opacity: 0.7;
+                text-transform: uppercase;
+                font-size: 0.7em;
+                position: absolute;
+                bottom:0px;
+                @media (max-width: $my-breakpoint) {
+                    position: relative;
+                }
+            }     
+        } 
+    }
+}
+
+
+.main-events-container{
+    .items-wrapper{
+        .item-events-container{
+            @include fully-wide-item();
+            .item-title-container{
+                font-weight: 900;
+            }
+            .item-date-container{
+                .hours{
+                    font-size: 0.8em;
+                }
+                .timezone{
+                    display: none;
+                }
+                .calendar-day{
+                    display: block;
+                    font-size: 2em;
+                    text-transform: uppercase;
+                    font-weight: 1000;
+                }
+                .weekday{
+                    font-size: 0.8em;
+                    display: block;
+                }
+            }
+        }
+        .items-past-events-wrapper.item-events-container{
+            transform: rotate(180deg);
+        }
+    }
+
+
+    .item-calendar-container{
+        //I would 
+        // @extend .item-post-thumbnail-container;
+        //but for some reason it doesn't allow me to override border color & height
+
+        @extend .col-sm-4;
+        @extend .col-xs-12;
+
+        position: relative;
+        top: -100px;
+
+        // cursor:pointer;
+        border: solid 3px black;
+        background-color: white;
+        height: auto;
+        text-align: center;
+
+        img{
+            position: absolute;
+            right: 0px;
+            height: 100%;
+        }
+
+
+        .em-calendar-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+    }   
     .event-section-container{
         .event-facilitator-list{
             @include remove-list-style();

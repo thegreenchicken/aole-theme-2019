@@ -13,6 +13,7 @@ This insert contains the page content part, to be inserted in the body of any pa
 wp_enqueue_script('decoNoise', get_template_directory_uri() . '/js/decoNoise.js', array('jquery'), 1.1, true);
 wp_enqueue_script('tagClassifyPosts', get_template_directory_uri() . '/js/tagClassifyPosts.js', array('jquery'), 1.1, true);
 
+
 ?>
 <?php while (have_posts()): the_post();?>
     <div class="section-container section-post-header-container" style="<?php 
@@ -31,16 +32,22 @@ wp_enqueue_script('tagClassifyPosts', get_template_directory_uri() . '/js/tagCla
     </div>
     <div class="section-container section-post-container" role="main">
         <?php if(has_post_thumbnail()){ ?>
-            <div <?php post_class('item-post-thumbnail-container')?>>
+            <!--<div <?php post_class('item-post-thumbnail-container')?>>
                     <?php the_post_thumbnail(); ?>
+            </div>-->
+
+            <div class="item-calendar-container">
+                <?php echo do_shortcode("[events_calendar long_events=1 full=0 month=".date('n')."]"); ?>
             </div>
+
         <?php } ?>
+
         <div class="item-post-content-container">
             <?php the_content();?>
             <?php edit_post_link('Edit', '<span class="edit-link">', '</span>');?>
-    
-    
+
+
             <p><?php the_tags();?></p>
         </div>
-    </div>
-<?php endwhile;?>
+    <?php endwhile;?>
+</div>
