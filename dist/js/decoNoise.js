@@ -7,7 +7,7 @@ function hideThis(domel){
 document.addEventListener("DOMContentLoaded", function (event) {
     console.log("decoNoise.js");
     var imgels = [];
-    var imgstr = "<img>";
+    var imgstr = '<img class="deco-noise">';
     var piclist = [
         vars.templateUrl+"/res-noise-pics/path1.png",
         vars.templateUrl+"/res-noise-pics/path2.png",
@@ -44,6 +44,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
             pos.y += speed.y;
             nimg.css("left", pos.x + "%");
             nimg.css("top", pos.y + "%");
+            nimg.css("mix-blend-mode","overlay");
         }
 
         this.frame();

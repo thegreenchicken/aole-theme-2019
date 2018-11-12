@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
     console.log("styling.js");
 
-
+    //keep some of the elements in the proportion of a square
     var makeSquare=throttle(function() {
         $(".item-post-thumbnail-container").each(function () {
             // console.log(this);
@@ -43,4 +43,51 @@ document.addEventListener("DOMContentLoaded", function (event) {
     },200);
     makeSquare();
     $(window).on("resize", makeSquare);
+
+    //make parallax effects on some elements
+    function ParallaxItem($itm,zlevel){
+        
+        /*
+            zlevel:
+            negative: slower than scroll
+            positive: faster than scroll
+
+        */
+        var anchory=0;
+        ParallaxItem.list.push(this);
+        anchory=parseInt( $itm.css("top") );
+
+        $itm.attr("data-parallax",zlevel);
+
+        // $itm.css("border", "solid 3px red");
+
+        this.scroll=function(event){
+            if (zlevel == 0) return;
+            $itm.css("top", anchory - (event.top / zlevel)+"px");
+            // console.log(event);
+        }
+    }
+    ParallaxItem.list=[];
+
+    $(".item-calendar-container,.item-post-thumbnail-container").each(function () {
+        new ParallaxItem($(this), 10);
+    });
+
+    var pinterval=setInterval(function(){
+        //these take longer to appear...
+        $(".section-post-header-container .deco-noise").each(function () {
+            new ParallaxItem($(this), Math.random(5)-6);
+            clearInterval(pinterval);
+        });
+    },200);
+
+    $(document).on("scroll",function(event){
+        var doc = document.documentElement;
+        var left = (window.pageXOffset || doc.scrollLeft) - (doc.clientLeft || 0);
+        var top = (window.pageYOffset || doc.scrollTop) - (doc.clientTop || 0);
+        for(var n in ParallaxItem.list){
+            var pitem=ParallaxItem.list[n];
+            pitem.scroll({top:top,left:left});
+        }
+    });
 });
