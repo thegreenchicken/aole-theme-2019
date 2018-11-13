@@ -1,0 +1,12 @@
+@mixin side-thing {
+    @extend .col-sm-4;
+    @extend .col-xs-12;
+    position: relative;
+    overflow: hidden;
+    border: solid 3px white;
+}
+@mixin side-thing-counterpart{
+    @extend .col-sm-7;
+    @extend .col-xs-12;
+    float: right;
+}

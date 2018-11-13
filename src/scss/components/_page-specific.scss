@@ -117,25 +117,14 @@
         //I would 
         // @extend .item-post-thumbnail-container;
         //but for some reason it doesn't allow me to override border color & height
-
-        @extend .col-sm-4;
-        @extend .col-xs-12;
-
-        position: relative;
-        top: -100px;
+        // @include side-thing();
+        // top: -100px;
 
         // cursor:pointer;
         border: solid 3px black;
         background-color: white;
         height: auto;
         text-align: center;
-
-        img{
-            position: absolute;
-            right: 0px;
-            height: 100%;
-        }
-
 
         .em-calendar-wrapper {
             position: relative;
@@ -195,5 +184,11 @@
                 }
             }
         }
+    }
+}
+.single-pilot{
+    .item-side-data-container{
+        // @include side-thing();
+        border:solid 3px $blue;
     }
 }
