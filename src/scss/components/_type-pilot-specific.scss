@@ -2,5 +2,28 @@
 targeted to post of pilot type-
 */
 body.single-pilot{
-    
+    .tag {
+
+        background-color: $blue;//actually it was #2D8FCE;
+        display: inline-block;
+        padding: 12px;
+        line-height: 0.3em;
+        font-size: 0.9em;
+        color: white;
+        margin: 3px;
+        text-transform: capitalize;
+    }
+    .item-title-container{
+        font-size: 2.3em;
+        margin-bottom: 0.5em;
+    }
+    .item-tags-container{
+        margin-top:2em;
+    }
+    .item-subtitle-container{
+        font-size: 1.4em;
+    }
+    .item-post-type-container{
+        color:$gray;
+    }
 }

@@ -1,3 +1,4 @@
+<!-- template part: <?php echo basename(__FILE__);  ?> -->
 
 <script>
 vars={templateUrl:"<?php

@@ -11,11 +11,8 @@ get_header(); ?>
 
 <?php get_template_part('template-parts-sections/single-content-pilot'); ?>
 
-<div class="section-container section-post-container">
-</div>
-<div class="section-container section-pilots-list-container">
-</div>
- 
+<?php get_template_part('template-parts-postlists/pilots-lister-mini'); ?>
+
 <?php get_sidebar(); ?>
 </div>
 <?php get_footer();

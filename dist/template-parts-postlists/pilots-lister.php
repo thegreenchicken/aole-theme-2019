@@ -1,3 +1,5 @@
+<!-- template part: <?php echo basename(__FILE__);  ?> -->
+
 <div class="section-container section-pilots-list-container">
 	<?php
 /*

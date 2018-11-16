@@ -1,4 +1,5 @@
 
+<!-- template part: <?php echo basename(__FILE__);  ?> -->
 <script>
 vars={templateUrl:"<?php
     echo get_template_directory_uri();

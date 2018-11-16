@@ -29,6 +29,52 @@ $item-spacing: 20px;
     .section-container{
         @extend .container;
     }
+
+
+    .items-pilots-wrapper {
+        @extend .row;
+        
+        margin-top: $item-spacing;
+        
+        .item-pilot-container {
+            $borderpx:3;
+
+            @extend .col-sm-3;
+            // @extend .col-sm-4;
+            @extend .col-xs-6;
+
+            overflow: hidden;
+            display: inline-block;
+
+            padding: $item-spacing;
+            margin: -$borderpx;
+
+            // background-color: #999;
+            *{
+                text-overflow: ellipsis;
+            }
+
+            .item-paragraph-container{
+                border: solid #{$borderpx}+px $blackish;
+                
+                border: solid 3px #433A3F;
+                display: block;
+                height: 182px;
+                overflow: hidden;
+
+                img {
+                    width: 100%;
+                }
+                
+                .post-title-container{
+                    font-weight: 1em;
+                    color: black;
+                    size: 15px;
+                    // padding:10px;
+                }
+            }
+        }
+    }
 }
 
 

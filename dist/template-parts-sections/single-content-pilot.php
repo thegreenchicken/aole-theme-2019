@@ -1,3 +1,4 @@
+<!-- template part: <?php echo basename(__FILE__);  ?> -->
 
 <script>
 vars={templateUrl:"<?php
@@ -18,16 +19,18 @@ This insert contains the page content part, to be inserted in the body of any pa
     <div class="section-container section-post-header-container">
         <p class="item-post-type-container">Pilot Case</p>
         <h2 class="item-title-container"><?php the_title(); ?></h2>
-        <span class="item-subtitle-container">
-            <?php
-                $echo = get_field('subtitle');
-                $max = 30;
-                if ($echo) {
-                    $echo = strlen($echo) > $max ? substr($echo, 0, $max) . "..." : $echo;
-                    echo $echo;
-                }
+        <?php
+        $echo = get_field('subtitle');
+        if ($echo) {
             ?>
-        </span>
+            <span class="item-subtitle-container">
+                <?php
+                    $max = 30;
+                        $echo = strlen($echo) > $max ? substr($echo, 0, $max) . "..." : $echo;
+                        echo $echo;
+                        ?>
+            </span>
+        <?php } ?>
         <div class="item-tags-container">
             <span class="tag">Test tag</span>
             <span class="tag">Test tag a</span>
