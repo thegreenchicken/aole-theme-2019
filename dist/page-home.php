@@ -5,9 +5,7 @@ Template Name: Front
 get_header(); ?>
 <!-- template part: <?php echo basename(__FILE__);  ?> -->
 
-<?php 
-do_action( 'foundationpress_before_content' ); 
-
+<?php
 $what_is_aole_section = get_field('what_is_aole_section');
 $target_groups_section = get_field('target_groups_section');
 
@@ -274,12 +272,6 @@ $target_groups_section = get_field('target_groups_section');
 						</div>
 					</div>
 				</section>
-
-
-				<?php do_action( 'foundationpress_after_content' ); ?>
-
-
-
 
 
 				<?php get_footer();

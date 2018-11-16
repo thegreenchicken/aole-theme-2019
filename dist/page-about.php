@@ -107,7 +107,7 @@ get_header(); ?>
 					<div class="aole-article-images">
 						<?php foreach( $post_gallery as $image ): ?>
 							<div class="aole-article-image">
-								<img src="<?php echo $image['sizes']['large']; ?>" alt="<?php echo $image['alt']; ?>"></img>
+								<img src="<?php echo $image['sizes']['large']; ?>" alt="<?php echo $image['alt']; ?>"/>
 							</div>
 						<?php endforeach; ?>
 					</div>

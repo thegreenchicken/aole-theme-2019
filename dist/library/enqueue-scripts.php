@@ -5,7 +5,7 @@ if (!function_exists('aole_scripts')):
 {
 	
         // Enqueue the main Stylesheet.
-        wp_enqueue_style('main-stylesheet', get_template_directory_uri() . '/assets/stylesheets/foundation.css', array(), '2.9.3', 'all');
+        //wp_enqueue_style('main-stylesheet', get_template_directory_uri() . '/assets/stylesheets/foundation.css', array(), '2.9.3', 'all');
 
         // Deregister the jquery version bundled with WordPress.
         wp_deregister_script('jquery');
