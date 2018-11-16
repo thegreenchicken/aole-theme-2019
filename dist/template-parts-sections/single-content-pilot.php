@@ -16,6 +16,7 @@ This insert contains the page content part, to be inserted in the body of any pa
 
 <?php while (have_posts()): the_post();?>
     <div class="section-container section-post-header-container">
+        <p class="item-post-type-container">Pilot Case</p>
         <h2 class="item-title-container"><?php the_title(); ?></h2>
         <span class="item-subtitle-container">
             <?php
@@ -27,14 +28,19 @@ This insert contains the page content part, to be inserted in the body of any pa
                 }
             ?>
         </span>
-        <span class="item-tags-container">
+        <div class="item-tags-container">
+            <span class="tag">Test tag</span>
+            <span class="tag">Test tag a</span>
+            <span class="tag">Test tag b</span>
+            <span class="tag">Test tag c</span>
+            <span class="tag">Test tag d</span>
             <?php
                 $echo = get_field('tags');
                 if ($echo) {
                     print_r($echo);
                 }
             ?>
-        </span>
+        </div>
         <?php if(has_post_thumbnail()){ ?>
             <div <?php post_class('item-post-thumbnail-container')?>>
                     <?php the_post_thumbnail(); ?>
@@ -77,7 +83,8 @@ This insert contains the page content part, to be inserted in the body of any pa
                     "Pedagogical methods"=>"pedagogical_methods_used",
                     "Tools used"=>"tools_used",
                     "Links and materials"=>"links_materials",
-                    "Reflection"=>"reflection"
+                    "Reflection"=>"reflection",
+                    "whatever"=>"whatever"
                 );
 
                 foreach($displayfields as $title => $fieldSlug){
@@ -95,6 +102,8 @@ This insert contains the page content part, to be inserted in the body of any pa
             <?php edit_post_link('Edit', '<span class="edit-link">', '</span>');?>
         </div>
     </div>
+
+    
     <?php if(is_user_logged_in()){ ?>
         <div class="section container section-dev-container">
             <h2>Fields:</h2>

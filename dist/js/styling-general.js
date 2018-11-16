@@ -36,9 +36,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
     //keep some of the elements in the proportion of a square
     var makeSquare=throttle(function() {
-        $(".item-post-thumbnail-container").each(function () {
+        $("body.page .item-post-thumbnail-container").each(function () {
             // console.log(this);
             $(this).css("height", $(this).width());
+            console.log("changing the height of ",$(this));
         });
     },200);
     makeSquare();
@@ -58,6 +59,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
         anchory=parseInt( $itm.css("top") );
 
         $itm.attr("data-parallax",zlevel);
+        console.log("apply parallax to ", $itm);
+
 
         // $itm.css("border", "solid 3px red");
 
@@ -69,7 +72,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
     }
     ParallaxItem.list=[];
 
-    $(".item-calendar-container,.item-post-thumbnail-container").each(function () {
+    $(".item-calendar-container,body.page .item-post-thumbnail-container").each(function () {
         new ParallaxItem($(this), 10);
     });
 

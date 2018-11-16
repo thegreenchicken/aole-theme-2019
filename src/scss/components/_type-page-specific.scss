@@ -1,0 +1,106 @@
+/**
+these are page specific rules for the pages which 
+contain a list of items of a certain post type and
+a static page. in other words, the "news", "events",
+"pilots","home", "jobs", "about"
+*/
+body.page{
+    
+
+
+
+
+    .section-single-header-container{
+        @extend .row;
+        .featured-image-container{
+            @extend .col-sm-4;
+        }
+    }
+
+    .section-post-header-container{
+        //we want this element to break out, 
+        background-color: $yellow;
+        width:100%;
+        max-width: none;
+        //but in order for the contained elements to adjust to the grid, 
+        //we need to apply the container class to the children.
+        //.5 rem. Why? no idea. It misaligns otherwise
+        padding: 0 .5rem;
+        color:white;
+        padding-top: 189px;
+        padding-bottom: 97px;
+        margin-bottom: 60px;
+        // @extend .container;
+        
+        .item-post-title-container{
+            @extend .container;
+            >h2{
+                font-size: 0.9rem;
+                font-weight: 100;
+                color:white;
+                font-family: $font-family;
+            }
+            >p{
+                font-size: 3.4rem;
+                line-height: 1em;
+                font-weight: 400;
+                font-family: $heading-font-family;
+                text-transform: uppercase;
+            }
+        }
+    }
+
+
+    .section-post-container{
+        @extend .container;
+        @extend .row;
+        .item-post-thumbnail-container,.item-calendar-container{
+            @include side-thing();
+            // display: inline-block;
+            top: -100px;
+            // width:100px;
+            // height: 200px;
+            img{
+                position: absolute;
+                right: 0px;
+                height: 100%;
+            }
+        }
+        .item-post-thumbnail-container{
+            border: solid 3px white;
+        }
+        
+        
+    }
+
+    //this should actually go in the calendar plugin ting... or remove it altoghether.
+    .event-calendar{
+        //active cal buttons
+        width: 226px;
+        right: 0px;
+        td.eventful a, td.eventful-today a {
+
+            background-color: #FD7E29;
+            display: block;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            color: white;
+
+        }
+
+        td.eventless *, td.eventless-today * {
+            display: block;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+        }
+
+        .em-calendar * {
+            font-weight: 100;
+        }
+        td{
+            border:none;
+        }
+    }
+}

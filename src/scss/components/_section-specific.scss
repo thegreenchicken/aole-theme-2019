@@ -9,118 +9,26 @@ individual posts in a posts list, and their wrappers.
 
 $item-spacing: 20px;
 
-
-.item-paragraph-container {
-    // width: 100%;
-}
-
-
-
-
-
-.section-container{
-    @extend .container;
-}
-
-
-.section-single-header-container{
-    @extend .row;
-    .featured-image-container{
-        @extend .col-sm-4;
-    }
-}
-
-.section-post-header-container{
-    //we want this element to break out, 
-    background-color: $yellow;
-    width:100%;
-    max-width: none;
-    //but in order for the contained elements to adjust to the grid, 
-    //we need to apply the container class to the children.
-    //.5 rem. Why? no idea. It misaligns otherwise
-    padding: 0 .5rem;
-    color:white;
-    padding-top: 189px;
-    padding-bottom: 97px;
-    margin-bottom: 60px;
-    // @extend .container;
+.main-container{
     
-    .item-post-title-container{
-        @extend .container;
-        >h2{
-            font-size: 0.9rem;
-            font-weight: 100;
-            color:white;
-            font-family: $font-family;
-        }
-        >p{
-            font-size: 3.4rem;
-            line-height: 1em;
-            font-weight: 400;
-            font-family: $heading-font-family;
-            text-transform: uppercase;
-        }
-    }
-}
-
-
-.section-post-container{
-    @extend .container;
-    @extend .row;
-    .item-post-thumbnail-container,.item-calendar-container{
-        @include side-thing();
-        // display: inline-block;
-        
-        top: -100px;
-        // width:100px;
-        height: 200px;
-        img{
-            position: absolute;
-            right: 0px;
-            height: 100%;
-        }
-    }
     .item-side-data-container{
         @include side-thing();
         position:sticky;
         top:50px;
     }
-    
-    .item-post-content-container{
-        @include side-thing-counterpart();
-        img{
-            max-width: 100%;
+
+    .section-post-container{
+        .item-post-content-container{
+            @include side-thing-counterpart();
+            img{
+                max-width: 100%;
+            }
         }
     }
-}
 
-//this should actually go in the calendar plugin ting... or remove it altoghether.
-.event-calendar{
-    //active cal buttons
-    width: 226px;
-    right: 0px;
-    td.eventful a, td.eventful-today a {
-
-        background-color: #FD7E29;
-        display: block;
-        border-radius: 50%;
-        width: 25px;
-        height: 25px;
-        color: white;
-
-    }
-
-    td.eventless *, td.eventless-today * {
-        display: block;
-        border-radius: 50%;
-        width: 25px;
-        height: 25px;
-    }
-
-    .em-calendar * {
-        font-weight: 100;
-    }
-    td{
-        border:none;
+    .section-container{
+        @extend .container;
     }
 }
+
+
