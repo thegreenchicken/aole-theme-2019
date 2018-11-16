@@ -61,9 +61,9 @@
         }
     }
 }
-.main-news-container{
+.main-news-container,.main-home-container{
     $my-breakpoint: $screen-sm;
-    .items-wrapper{
+    .items-news-wrapper{
         .item-news-container{
             @include fully-wide-item();       
             .item-author-container{

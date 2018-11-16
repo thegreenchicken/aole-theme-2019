@@ -4,6 +4,12 @@ function familyName($fname)
     echo "$fname Refsnes.<br>";
 }
 
+function get_template_part_with_var($partName,$var){
+    $_GET_TEMPLATE_VARS=$var;
+    echo "include: ".$partName.".php";
+    include locate_template($partName.".php", false, false);
+}
+
 function get_pilots($term_slug = false, $amount = "-1")
 {
     $req = array(

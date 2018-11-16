@@ -39,8 +39,6 @@ wp_enqueue_script('tagClassifyPosts', get_template_directory_uri() . '/js/tagCla
         <div class="item-post-content-container">
             <?php the_content();?>
             <?php edit_post_link('Edit', '<span class="edit-link">', '</span>');?>
-    
-    
             <p><?php the_tags();?></p>
         </div>
     </div>
