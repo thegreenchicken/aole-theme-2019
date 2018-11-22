@@ -4,11 +4,8 @@ contain a list of items of a certain post type and
 a static page. in other words, the "news", "events",
 "pilots","home", "jobs", "about"
 */
+
 body.page{
-    
-
-
-
 
     .section-single-header-container{
         @extend .row;
@@ -104,3 +101,4 @@ body.page{
         }
     }
 }
+

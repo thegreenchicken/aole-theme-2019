@@ -1,23 +1,25 @@
 <!-- template part: <?php echo basename(__FILE__);  ?> -->
 
-<script>
-vars={templateUrl:"<?php
-    echo get_template_directory_uri();
-?>"}
-console.log(vars);
-</script>
-<?php
-/*
-This insert contains the page content part, to be inserted in the body of any page.
-
- */
-// wp_enqueue_script('decoNoise', get_template_directory_uri() . '/js/decoNoise.js', array('jquery'), 1.1, true);
-
-?>
 
 <?php while (have_posts()): the_post();?>
     <div class="section-container section-post-header-container">
-        <p class="item-post-type-container">Pilot Case</p>
+        <?php 
+        /* event posts have three facets in this context:
+            * standard wp_post data
+                * acquired through normal wp_ functions
+            * custom_fields related data
+                * acquired using get_field functions, but are not used in events
+            * EventManager related data
+                * will be stored in the $eventManagerData object
+
+        */
+        $eventManagerData = EM_Events::get();
+        echo '<li>'.$eventManagerData[0]->event_slug.'</li>';
+        echo '<li>'.$eventManagerData[1]->event_slug.'</li>';
+        echo '<li>'.$eventManagerData[2]->event_slug.'</li>';
+        echo '<li>'.$eventManagerData[3]->event_slug.'</li>';
+        ?>
+        <p class="item-post-type-container">Event</p>
         <h2 class="item-title-container"><?php the_title(); ?></h2>
         <?php
         $echo = get_field('subtitle');
@@ -31,19 +33,7 @@ This insert contains the page content part, to be inserted in the body of any pa
                         ?>
             </span>
         <?php } ?>
-        <div class="item-tags-container">
-            <span class="tag">Test tag</span>
-            <span class="tag">Test tag a</span>
-            <span class="tag">Test tag b</span>
-            <span class="tag">Test tag c</span>
-            <span class="tag">Test tag d</span>
-            <?php
-                $echo = get_field('tags');
-                if ($echo) {
-                    print_r($echo);
-                }
-            ?>
-        </div>
+
         <?php if(has_post_thumbnail()){ ?>
             <div <?php post_class('item-post-thumbnail-container')?>>
                     <?php the_post_thumbnail(); ?>
@@ -58,7 +48,7 @@ This insert contains the page content part, to be inserted in the body of any pa
                 //TODO: create a way to customize the display titles of these fields. There should be an easy way.
                 //if not, I could use a consistent text transformation function, such as replacing underscore with spaces
                 $displayfields = array(
-                    "Pilot leader" => "people",
+                    "" => "post_title",
                     "School" => "school",
                     "Reach" => "reach",
                     "Timeline" => "timeline",
@@ -106,13 +96,12 @@ This insert contains the page content part, to be inserted in the body of any pa
         </div>
     </div>
 
-    <div class="section-container section-after-pilot-container">
-        Idea part, make it a page
+    <div class="section-container section-after-event-container">
     </div>
     
-    <?php if(is_user_logged_in()&&false){ ?>
+    <?php if(is_user_logged_in()){ ?>
         <div class="section container section-dev-container">
-            <h2>Fields:</h2>
+            <h2>Custom Fields:</h2>
             <textarea style="width:100%; height:300px">
                 <?php print_r( get_fields() ) ?>
             </textarea>
@@ -120,6 +109,15 @@ This insert contains the page content part, to be inserted in the body of any pa
             <h2>Post:</h2>
             <textarea style="width:100%; height:300px">
                 <?php print_r( get_post() ) ?>
+            </textarea>
+
+            <h2>Event:</h2>
+            <textarea style="width:100%; height:300px">
+                <?php 
+                if (class_exists('EM_Events')) {
+                    print_r( $eventManagerData );
+                }                
+                ?>
             </textarea>
         </div>
     <?php } ?>

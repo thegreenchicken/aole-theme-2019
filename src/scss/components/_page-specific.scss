@@ -61,11 +61,12 @@
         }
     }
 }
+
 .main-news-container,.main-home-container{
     $my-breakpoint: $screen-sm;
     .items-news-wrapper{
         .item-news-container{
-            @include fully-wide-item();       
+            @include fully-wide-item();
             .item-author-container{
                 opacity: 0.7;
                 text-transform: uppercase;
@@ -126,6 +127,9 @@
         height: auto;
         text-align: center;
 
+        // a{
+        //     border-bottom:unset;
+        // }
         .em-calendar-wrapper {
             position: relative;
             display: inline-block;

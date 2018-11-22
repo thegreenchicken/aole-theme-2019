@@ -8,5 +8,5 @@ get_header(); ?>
 <?php get_template_part('template-parts-postlists/pilots-lister-mini'); ?>
 
 <?php get_sidebar(); ?>
-</div>
+
 <?php get_footer();

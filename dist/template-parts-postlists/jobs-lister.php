@@ -2,10 +2,9 @@
 <div class="section-container section-news-container">	
 	<div class="items-wrapper items-news-wrapper classifiable-container">
 		<?php 
-
-		$args = array( 'category_name'=> 'News' );
-		$posts = get_posts($args);
-        
+		$args = array( 'post_type' => 'jobs' );
+		
+        $posts = get_posts($args);
 		foreach ($posts as $post) : setup_postdata($post);
 			?>
 			<a href="<?php echo get_permalink(); ?>">
@@ -20,6 +19,8 @@
 						<p><?php
 							if( has_excerpt() ) {
 								the_excerpt();
+							}else{
+								echo substr(get_the_content(),0,200);
 							}
 							?>
 						</p>

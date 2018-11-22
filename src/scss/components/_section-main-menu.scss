@@ -12,6 +12,10 @@
     .menu-navigation-container ul {
         @include remove-list-style();
     }
+    
+    // a{
+    //     border-bottom:unset;
+    // }
 
     .menu-navigation-container ul li{
         //display:inline-block;

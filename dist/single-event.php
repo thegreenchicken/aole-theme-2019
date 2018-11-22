@@ -1,10 +1,16 @@
 <?php
-get_header();?>
-<!-- template part: <?php echo basename(__FILE__); ?> -->
+/* 
+part for single posts 
+ */
 
-<?php get_template_part('template-parts-sections/post-content-event');?>
+get_header(); ?>
+<!-- template part: <?php echo basename(__FILE__);  ?> -->
 
 
-<?php get_sidebar();?>
+<?php get_template_part('template-parts-sections/single-content-event'); ?>
+
+<?php get_template_part('template-parts-postlists/events-lister-mini');?>
+
+<?php get_sidebar(); ?>
 
 <?php get_footer();

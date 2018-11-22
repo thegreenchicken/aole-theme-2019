@@ -9,7 +9,8 @@ get_header(); ?>
 
 <?php get_template_part('template-parts-sections/single-content'); ?>
 
+<?php get_template_part('template-parts-postlists/lister-mini');?>
 
 <?php get_sidebar(); ?>
-</div>
+
 <?php get_footer();

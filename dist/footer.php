@@ -3,86 +3,43 @@
 <?php
 
 ?>
-	<div class="footer-container" data-sticky-footer>
-		<div class="item-paragraph-container">
-			<span id="responsive-flag"></span>
-			<footer class="footer">
+
+		<footer class="section-container section-footer-container">
+			<div class="item-paragraph-container">
+				<!--
 				<div class="footer-logos">
 					<a href="http://www.aalto.fi/en/"><img src="<?php echo get_field("aalto_logo_large_white", "option"); ?>" /></a>
 					<img src="<?php echo get_field("aole_logo_white", "option"); ?>" />
 				</div>
-				<div class="footer-text">
-					<?php the_field("footer_text", "option"); ?>
-							<div class="footer-feedback"><a href="<?php the_permalink(get_page_by_title('Feedback')); ?>">Give feedback to Aalto Online Learning</a></div>
-				</div>
-					<div class="footer-links">
-						<div class="footer-links-container">
-							<div class="aole-some">
-								<p><b>Aalto Online Learning</b> in social media</p>
-								<?php 
-								$aole_some = get_field("aole_social_media_links", "option");
-						
+				-->		
+				<?php
 
-								if ($aole_some):
-									?>
+				// $args = array( 
+				// 	// 'meta_key'=>'post_title',
+				// 	// 'meta_value'=> 'Footer',
+				// 	'post_type' => 'page',
+				// );
+				
+				// $args['meta_key'] = array(
+				// 	array(
+				// 		// 'taxonomy' => 'post_title',
+				// 		'field' => 'slug',
+				// 		'terms' => 'footer',
+				// 	),
+				// );
 
-								<?php if ($aole_some["aole_facebook"]): ?>
-									<a href="<?php echo $aole_some["aole_facebook"]; ?>"><i class="fa fa-facebook-square fa-3x" aria-hidden="true"></i></a>
-								<?php endif;?>
 
-								<?php if ($aole_some["aole_twitter"]): ?>
-									<a href="<?php echo $aole_some["aole_twitter"]; ?>"><i class="fa fa-twitter-square fa-3x" aria-hidden="true"></i></a>
-								<?php endif;?>
+				$footer = get_page_by_path('footer');
 
-								<?php if ($aole_some["aole_instagram"]): ?>
-									<a href="<?php echo $aole_some["aole_instagram"]; ?>"><i class="fa fa-instagram-square fa-3x" aria-hidden="true"></i></a>
-								<?php endif;?>
-
-								<?php endif; ?>
-							</div>
-						</div>
-						<div class="aalto-some">
-							<p><b>Aalto University</b> in social media</p>
-							<?php 
-							$aalto_some = get_field("aalto_social_media_links", "option");
-
-							if ($aalto_some):
-								?>
-
-							<?php if ($aalto_some["aalto_facebook"]): ?>
-								<a href="<?php echo $aalto_some["aalto_facebook"]; ?>"><i class="fa fa-facebook-square fa-3x" aria-hidden="true"></i></a>
-							<?php endif;?>
-
-							<?php if ($aalto_some["aalto_twitter"]): ?>
-								<a href="<?php echo $aalto_some["aalto_twitter"]; ?>"><i class="fa fa-twitter-square fa-3x" aria-hidden="true"></i></a>
-							<?php endif;?>
-
-							<?php if ($aalto_some["aalto_youtube"]): ?>
-								<a href="<?php echo $aalto_some["aalto_youtube"]; ?>"><i class="fa fa-youtube-square fa-3x" aria-hidden="true"></i></a>
-							<?php endif;?>
-
-							<?php if ($aalto_some["aalto_instagram"]): ?>
-								<a href="<?php echo $aalto_some["aalto_instagram"]; ?>"><i class="fa fa-instagram fa-3x" aria-hidden="true"></i></a>
-							<?php endif;?>
-
-						<?php endif; ?>
-					</div>
-				</div>
-
+				print_r($footer->post_content);
+				
+				
+				
+				wp_footer(); ?>
+				
 			</div>
 		</footer>
-		</div>
-
-
-		<?php if ( get_theme_mod( 'wpt_mobile_menu_layout' ) === 'offcanvas' ) : ?>
-		</div><!-- Close off-canvas content -->
-		</div><!-- Close off-canvas wrapper -->
-		<?php endif; ?>
-
-
-		<?php wp_footer(); ?>
-		
-		</div>
-	</div><!-- /main-container -->
+	<!-- /main-container -->
+	</div>
 </body>
 </html>

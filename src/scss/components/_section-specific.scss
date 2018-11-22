@@ -17,6 +17,43 @@ $item-spacing: 20px;
         top:50px;
     }
 
+    
+    .section-footer-container {
+        $is-full-width:false;
+
+        width: 100%;
+        @if($is-full-width == false){
+            max-width: none;
+        };
+        background-color: #555;
+
+        .item-paragraph-container{
+            @if($is-full-width == false){
+                @extend .container;
+            }
+            padding:58px;
+            color: white;
+            overflow: hidden;
+            font-size: 0.8em;
+            h1 {
+                font-size: 1em;
+                color: white;
+                text-transform: none;
+            }
+            h2 {
+                font-size: 0.8em;
+                color: white;
+                text-transform: none;
+            }
+            h3 {
+                font-size: 0.7em;
+                font-weight: 300;
+                color: white;
+                text-transform: none;
+            }
+        }
+    }
+
     .section-post-container{
         .item-post-content-container{
             @include side-thing-counterpart();
@@ -24,10 +61,20 @@ $item-spacing: 20px;
                 max-width: 100%;
             }
         }
+        a{
+        
+            border-bottom: solid 1px $link-color;
+            &:hover{
+                color: $link-color;
+                border-bottom: solid 1px $link-hover-color;
+                text-decoration:none;
+            }
+        }
     }
 
     .section-container{
         @extend .container;
+        
     }
 
 

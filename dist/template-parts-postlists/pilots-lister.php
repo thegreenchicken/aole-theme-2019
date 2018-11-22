@@ -84,7 +84,10 @@ as pilot information for each pilot under those theme groups
 					
 				</div>
 			
-			<?php endforeach; ?>
+			<?php endforeach; 
+			wp_reset_postdata();
+
+			?>
 		</div>
 
 	<?php 
