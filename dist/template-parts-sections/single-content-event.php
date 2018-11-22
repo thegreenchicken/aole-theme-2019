@@ -8,19 +8,47 @@
             * standard wp_post data
                 * acquired through normal wp_ functions
             * custom_fields related data
-                * acquired using get_field functions, but are not used in events
+                * acquired using get_field functions
             * EventManager related data
                 * will be stored in the $eventManagerData object
 
         */
-        $eventManagerData = EM_Events::get();
-        echo '<li>'.$eventManagerData[0]->event_slug.'</li>';
-        echo '<li>'.$eventManagerData[1]->event_slug.'</li>';
-        echo '<li>'.$eventManagerData[2]->event_slug.'</li>';
-        echo '<li>'.$eventManagerData[3]->event_slug.'</li>';
+        
+        $eventManagerData = EM_Events::get(
+            array("scope"=>"all", "post_id"=>get_the_ID())
+        )[0];
+        $date = new DateTime($eventManagerData->event_start_date);
+
+    
         ?>
+        <div class="item-date-container">
+            <div class="wrap">
+                <span class="weekday"><?php echo $date->format('l'); ?></span>
+                <span class="monthday"><?php echo $date->format('d'); ?></span> 
+                <span class="month"><?php echo $date->format('M'); ?><span>
+            </div>
+        </div>
+
         <p class="item-post-type-container">Event</p>
         <h2 class="item-title-container"><?php the_title(); ?></h2>
+        <?php
+        $facilitators=get_field('facilitators');
+        if ($facilitators) {
+            ?>
+            <ul class="item-facilitators-container">
+                <?php
+                foreach($facilitators as $num => $item){
+                    echo '<li>'.$item['facilitator'].'</li>';
+                }
+                ?>
+            </ul>
+            <?php
+        }
+        ?>
+        <ul class="items-categories-wrapper">
+            <?php foreach($event["event"]->event_categories as $cat){ echo "<li>".$cat->name."</li>"; } ?>
+        </ul>
+
         <?php
         $echo = get_field('subtitle');
         if ($echo) {
@@ -39,68 +67,89 @@
                     <?php the_post_thumbnail(); ?>
             </div>
         <?php } ?>
+
+            
     </div>
+    
     <div class="section-container section-post-container">
         <div class="item-side-data-container">
-            <?php
-                //from a list of potential fields, display all those which are present as post body
-                //displayfields title => field_slug.
-                //TODO: create a way to customize the display titles of these fields. There should be an easy way.
-                //if not, I could use a consistent text transformation function, such as replacing underscore with spaces
-                $displayfields = array(
-                    "" => "post_title",
-                    "School" => "school",
-                    "Reach" => "reach",
-                    "Timeline" => "timeline",
-                );
-
-                foreach ($displayfields as $title => $fieldSlug) {
-                    if (get_field($fieldSlug)) {
-                        echo '<div class="item-' . $fieldSlug . '-field-container">';
-                        echo '  <h2 class="title">' . $title . '</h2>';
-                        echo '  <p class="content">';
-                        echo get_field($fieldSlug);
-                        echo '  </p>';
-                        echo '</div>';
+            <h2 class="post_title">
+                <?php the_title(); ?>
+            </h2>
+            <span class="start_date">
+                <?php
+                echo $eventManagerData->start_date;
+                ?>
+            </span>
+            <span class="start_time">
+                <?php
+                echo $eventManagerData->start_time;
+                ?>
+            </span>
+            <span class="end_time">
+                <?php
+                echo $eventManagerData->end_time;
+                ?>
+            </span>
+            <span class="location-name">
+                <?php
+                // print_r($eventManagerData->location);
+                if($eventManagerData->location){
+                    if($eventManagerData->location->location_name){
+                        echo $eventManagerData->location->location_name;
+                    }
+                ?>
+            </span>
+            <span class="location-address">
+                <?php
+                    if($eventManagerData->location->location_address){
+                        echo $eventManagerData->location->location_address;
                     }
                 }
                 ?>
+            </span>
+            <span class="event-ispublic">
+                ?Public event ?
+            </span>
+            <div class="button singn-up-button">
+                Sugn up here
+            </div>
+            <span class="ical-export">
+                ?export event to calendar ?
+            </span>
         </div>
         <div class="item-post-content-container">
-            <?php
-                //the same
-                $displayfields=Array(
-                    "Overview"=>"overview",
-                    "Description"=>"description",
-                    "People"=>"people",
-                    "Pedagogical methods"=>"pedagogical_methods_used",
-                    "Tools used"=>"tools_used",
-                    "Links and materials"=>"links_materials",
-                    "Reflection"=>"reflection",
-                    "whatever"=>"whatever"
-                );
-
-                foreach($displayfields as $title => $fieldSlug){
-                    if( get_field($fieldSlug) ){
-                        echo '<div class="item-'.$fieldSlug.'-field-container">';
-                        echo '  <h2 class="title">'.$title.'</h2>';
-                        echo '  <p class="content">';
-                        echo        get_field($fieldSlug);
-                        echo '  </p>';
-                        echo '</div>';
-                    }
-                }
-            ?>
+            <p class="item-content-container">'
+                <?php echo $eventManagerData->post_content; ?>
+            </p>
             
             <?php edit_post_link('Edit', '<span class="edit-link">', '</span>');?>
         </div>
     </div>
 
-    <div class="section-container section-after-event-container">
+    <div class="section-container section-after-post-container">
+        <div class="items-wrapper items-other-posts-wrapper">
+            <a class="previous-post-link">
+                <span class="link-head"> &lt; previous event </span>
+                <span class="title">
+                    <?php
+                        echo "other event";
+                    ?>
+                </span>
+            </a>
+            <a class="next-post-link">
+                <span class="link-head"> next event &gt; </span>
+                <span class="title">
+                    <?php
+                        echo "other event";
+                    ?>
+                </span>
+            </a>
+        </div>
     </div>
     
     <?php if(is_user_logged_in()){ ?>
-        <div class="section container section-dev-container">
+        <div class="section-container section-dev-container">
             <h2>Custom Fields:</h2>
             <textarea style="width:100%; height:300px">
                 <?php print_r( get_fields() ) ?>

@@ -1,0 +1,84 @@
+/**
+targeted to post of pilot type-
+*/
+body.single-event{
+        
+    
+    .section-post-header-container{
+        
+        .item-date-container{
+            position: relative;
+            font-family: $heading-font-family;
+            line-height:4em;
+            width: 100%;
+            .wrap{
+                @extend .col-sm-2;
+                position: absolute;
+                right:0px;
+                border:solid 3px black;
+                span{
+                    display:block;
+                }
+                .monthday{
+                    font-size:8rem;
+                }
+                .month{
+                    font-size:3em;
+                }
+            }
+        }
+        
+        &>.item-title-container{
+            @extend .col-sm-8;
+        }
+
+        // position: relative;
+        .item-title-container{
+            font-size: 2.3em;
+            margin-bottom: 0.5em;
+        }
+        .item-post-type-container{
+            color:$gray;
+        }
+        
+    }
+    .section-after-post-container{
+        //in this case, containing "prev" and "next" links;
+        .items-wrapper{
+            @extend .row;
+            
+            a{
+                @extend .col-sm-6;
+                span{
+                    display:block;
+                }
+            }
+        }
+    }
+
+    .item-side-data-container{
+        border:solid 3px $blackish;
+        span{
+            display:block;
+        }
+        h2{
+            font-size:1.2em;
+            margin-bottom:1.5em;
+            margin-top: 1em;
+            text-transform:none;
+            font-weight: 300;
+        }
+        .event-ispublic,.button, .ical-export {
+            margin-top: 2em;
+            font-weight: 600;
+        }
+        .button{
+            text-align:center;
+            text-transform: uppercase;
+            color:white;
+            background: $red;
+            width: 100%;
+        }
+    }
+    
+}

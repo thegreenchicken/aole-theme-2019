@@ -10,6 +10,10 @@ individual posts in a posts list, and their wrappers.
 $item-spacing: 20px;
 
 .main-container{
+
+    .section-container{
+        margin-top:2em;
+    }
     
     .item-side-data-container{
         @include side-thing();
@@ -25,7 +29,7 @@ $item-spacing: 20px;
         @if($is-full-width == false){
             max-width: none;
         };
-        background-color: #555;
+        background-color: $blackish;
 
         .item-paragraph-container{
             @if($is-full-width == false){

@@ -13,8 +13,9 @@ body.page{
             @extend .col-sm-4;
         }
     }
-
+    
     .section-post-header-container{
+        margin-top:0;
         //we want this element to break out, 
         background-color: $yellow;
         width:100%;
