@@ -1,5 +1,5 @@
 
-<!-- template part: <?php echo basename(__FILE__);  ?> -->
+ <?php if(is_user_logged_in()) { ?> <!-- template part: <?php echo dirname(__FILE__).'/'.basename(__FILE__);  ?> --> <?php } ?> 
 
 <form role="search" method="get" id="searchform" action="<?php echo home_url( '/' ); ?>">
 

@@ -1,4 +1,4 @@
-<!-- template part: <?php echo basename(__FILE__);  ?> -->
+ <?php if(is_user_logged_in()) { ?> <!-- template part: <?php echo dirname(__FILE__).'/'.basename(__FILE__);  ?> --> <?php } ?> 
 
 <?php
 /*
@@ -11,7 +11,7 @@ This insert contains the page content part, to be inserted in the body of any pa
 
 <?php while (have_posts()): the_post();?>
     <div class="section-container section-post-header-container">
-        <p class="item-post-type-container">Pilot Case</p>
+        <p class="item-post-type-container"><?php ?></p>
         <h2 class="item-title-container"><?php the_title(); ?></h2>
         <?php
         $echo = get_field('subtitle');

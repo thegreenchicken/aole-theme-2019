@@ -7,7 +7,7 @@
  */
 
 get_header(); ?>
-<!-- template part: <?php echo basename(__FILE__);  ?> -->
+ <?php if(is_user_logged_in()) { ?> <!-- template part: <?php echo dirname(__FILE__).'/'.basename(__FILE__);  ?> --> <?php } ?> 
 
 <div class="main-wrap" role="main">
 

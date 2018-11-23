@@ -4,7 +4,7 @@ part for single posts
  */
 
 get_header(); ?>
-<!-- template part: <?php echo basename(__FILE__);  ?> -->
+ <?php if(is_user_logged_in()) { ?> <!-- template part: <?php echo dirname(__FILE__).'/'.basename(__FILE__);  ?> --> <?php } ?> 
 
 
 <?php get_template_part('template-parts-sections/single-content'); ?>
