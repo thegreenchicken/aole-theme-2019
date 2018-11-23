@@ -47,7 +47,6 @@ as pilot information for each pilot under those theme groups
 			foreach ($theme_groups[$idx]["pilots"] as $pilot):
 				include locate_template('includes/lister-pilots-single.php');
 			endforeach; 
-			wp_reset_postdata();
 
 			?>
 		</div>
