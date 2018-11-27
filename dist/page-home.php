@@ -6,40 +6,40 @@ get_header();
 
  <?php if(is_user_logged_in()) { ?> <!-- template part: <?php echo dirname(__FILE__).'/'.basename(__FILE__);  ?> --> <?php } ?> 
 
-<?php
-while (have_posts()): the_post();?>
-
-	     <?php if (is_user_logged_in()) {?>
-	        <div class="section container section-dev-container">
-	            <h2>Fields:</h2>
-	            <textarea style="width:100%; height:800px">
-	                <?php print_r(get_fields())?>
-	            </textarea>
-
-	            <h2>Post:</h2>
-	            <textarea style="width:100%; height:800px">
-	                <?php print_r(get_post())?>
-	            </textarea>
-	        </div>
-        <?php } ?>
-<div class="section-container section-post-header-container">
 
 <?php
-    foreach ($displayfields as $title => $fieldSlug) {
-        if (get_field($fieldSlug)) {
-            echo '<div class="item-' . $fieldSlug . '-field-container">';
-            echo '  <h2 class="title">' . $title . '</h2>';
-            echo '  <p class="content">';
-            echo get_field($fieldSlug);
-            echo '  </p>';
-            echo '</div>';
-        }
-    }
-?>
+while (have_posts()):the_post();
+$post=get_post();
+    ?>
+    <div class="section-container section-post-header-container">
 
-</div>
+        <?php echo get_field('featured_header'); ?>
 
-<?php
+    </div>
+
+    <div class="section-container section-post-content-container">
+        <?php
+        echo $post->post_content;
+        ?>
+        
+    </div>
+
+    <?php if (is_user_logged_in()) {?>
+    <div class="section-container section-dev-container">
+        <h2>Fields:</h2>
+        <textarea style="width:100%; height:800px">
+            <?php print_r(get_fields())?>
+        </textarea>
+
+        <h2>Post:</h2>
+        <textarea style="width:100%; height:800px">
+            <?php print_r($post)?>
+        </textarea>
+    </div>
+    <?php }?>
+
+            
+    <?php
 endwhile;
 
 
@@ -48,7 +48,9 @@ endwhile;
 //Next three events, if there are less, then hide the section
 //get_template_part();
 //manually selected featured pilots
-get_template_part('template-parts-postlists/pilots-lister-mini');
+
+include locate_template('includes/lister-pilots.php');
+
 //latest news
 get_template_part('template-parts-postlists/news-lister');
 

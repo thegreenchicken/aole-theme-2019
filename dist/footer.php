@@ -1,6 +1,9 @@
  <?php if(is_user_logged_in()) { ?> <!-- template part: <?php echo dirname(__FILE__).'/'.basename(__FILE__);  ?> --> <?php } ?> 
 
 <?php
+echo "a";
+// get_theme_mod('custom_js', 'LLL');
+print_r(get_theme_mod('customizer_test')['custom_js']);
 
 ?>
 
@@ -41,5 +44,16 @@
 		</footer>
 	<!-- /main-container -->
 	</div>
+	<script>
+		<?php 
+		$mod=get_theme_mod('customizer_test');
+		if($mod){
+			echo $mod['custom_js'];
+		}
+
+		
+		?>
+
+	</script>
 </body>
 </html>

@@ -83,11 +83,12 @@ try{
 				</span>
 			</div>
 			<nav class="main-menu-container" role="navigation">
-				<?php wp_nav_menu(array('theme_location' => 'main-menu')); ?>
+				<?php wp_nav_menu(); ?>
 			</nav>
 		</header>
 
 		<?php
+		
 			if( is_single() && !is_singular(array("pilot", "event", "jobs")) && !(in_category(["news", "awards", "blog"], get_post()))) {
 				global $wp_query;
 				$wp_query->set_404();

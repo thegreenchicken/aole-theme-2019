@@ -1,4 +1,6 @@
 <?php
+include locate_template("customizer/index.php");
+
 /** Various clean up functions */
 
 $fullWPpath = '/Users/taipala2/Documents/OneDrive - Aalto-yliopisto/Web Projects/htdocs/wordpress';

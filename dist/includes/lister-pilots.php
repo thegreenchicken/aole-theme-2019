@@ -1,6 +1,6 @@
 
 <?php if(is_user_logged_in()) { ?>
- <?php if(is_user_logged_in()) { ?> <!-- template part: <?php echo dirname(__FILE__).'/'.basename(__FILE__);  ?> --> <?php } ?>
+    <?php if(is_user_logged_in()) { ?> <!-- template part: <?php echo dirname(__FILE__).'/'.basename(__FILE__);  ?> --> <?php } ?>
 <?php } ?>
 
 <div class="section-container section-pilots-list-container">
@@ -10,7 +10,6 @@
 	
 	*/
 
-	$pilots = get_pilots("","4");
 
 	?>
 		
@@ -18,7 +17,7 @@
 		<?php 
 		foreach ($pilots as $pilot):
 		
-		include locate_template('includes/lister-pilots-single.php');
+		include locate_template('includes/lister-pilot.php');
 
 		endforeach; 
 		wp_reset_postdata();

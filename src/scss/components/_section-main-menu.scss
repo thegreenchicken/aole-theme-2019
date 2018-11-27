@@ -9,30 +9,28 @@
     .title-container{
         display:inline-block;
     }
-    .menu-navigation-container ul {
-        @include remove-list-style();
-    }
-    
-    // a{
-    //     border-bottom:unset;
-    // }
+    .main-menu-container{
+        ul {
+            @include remove-list-style();
+        }
 
-    .menu-navigation-container ul li{
-        //display:inline-block;
-        a {
-            color: #000;
-            text-decoration: none;
-            // background: pink;
-            font-size: 0.8em;
-            font-weight: 500;
-            line-height: 16px;
-            padding: 7px;
-        }
-        a:hover{
-            text-decoration: underline;
-        }
-        a:active{
-            text-decoration: underline;
+        ul li{
+            //display:inline-block;
+            a {
+                color: #000;
+                text-decoration: none;
+                // background: pink;
+                font-size: 0.8em;
+                font-weight: 500;
+                line-height: 16px;
+                padding: 7px;
+            }
+            a:hover{
+                text-decoration: underline;
+            }
+            a:active{
+                text-decoration: underline;
+            }
         }
     }
 }
