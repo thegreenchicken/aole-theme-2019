@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
     //keep some of the elements in the proportion of a square
     var makeSquare=throttle(function() {
-        $("body.page .item-post-thumbnail-container").each(function () {
+        $("body.page .item-post-thumbnail-container, .square").each(function () {
             // console.log(this);
             $(this).css("height", $(this).width());
             console.log("changing the height of ",$(this));
@@ -54,11 +54,19 @@ document.addEventListener("DOMContentLoaded", function (event) {
             positive: faster than scroll
 
         */
-        var anchory=0;
+        if($itm.attr("data-parallax-applied")){
+            return false;
+        }
         ParallaxItem.list.push(this);
+        
+        var anchory=0;
         anchory=parseInt( $itm.css("top") );
 
-        $itm.attr("data-parallax",zlevel);
+        // $itm.attr("css", "fixed");
+        $itm.attr("data-parallax", zlevel);
+        $itm.attr("data-parallax-applied",zlevel);
+        
+
         console.log("apply parallax to ", $itm);
 
 
@@ -66,20 +74,24 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
         this.scroll=function(event){
             if (zlevel == 0) return;
-            $itm.css("top", anchory - (event.top / zlevel)+"px");
+            
+            $itm.css("top", anchory - ( event.top * zlevel )+"px");
             // console.log(event);
         }
     }
     ParallaxItem.list=[];
 
-    $(".item-calendar-container,body.page .item-post-thumbnail-container").each(function () {
-        new ParallaxItem($(this), 10);
-    });
-
+    //deconoise items come to appear later, hence the wait.
     var pinterval=setInterval(function(){
         //these take longer to appear...
-        $(".section-post-header-container .deco-noise").each(function () {
-            new ParallaxItem($(this), Math.random(5)-6);
+        $(".item-calendar-container,body.page .item-post-thumbnail-container, .parallax").each(function () {
+            var zlevel = -0.1;
+            var $zindex = parseFloat($(this).attr("parallax-z"));
+            if ($zindex){
+                // console.log($zindex );
+                zlevel = $zindex;
+            }
+            new ParallaxItem($(this),zlevel);
             clearInterval(pinterval);
         });
     },200);

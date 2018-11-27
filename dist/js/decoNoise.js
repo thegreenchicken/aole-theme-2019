@@ -27,6 +27,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
             x: Math.random() - 0.5,
             y: Math.random() - 0.5
         }
+        nimg.addClass("parallax");
+        nimg.attr("parallax-z",-(0.1 + Math.random()/2 ) );
         nimg.attr("src", piclist[Math.floor(Math.random() * piclist.length)]);
         nimg.attr("onerror", "hideThis(this)" );
 
@@ -50,16 +52,16 @@ document.addEventListener("DOMContentLoaded", function (event) {
         this.frame();
         return this;
     }
-    $(".section-post-header-container").each(function () {
+    $(".section-post-header-container, .deco-noise").each(function () {
         console.log(this);
 
         $(this).css({ 
             position: "relative",
             overflow: "hidden"
         });
-        $(this).children().css({
-            position: "relative"
-        });
+        // $(this).children().css({
+        //     position: "relative"
+        // });
 
         for (var a = 0; a < 4; a++) {
             new NoiseEl($(this));

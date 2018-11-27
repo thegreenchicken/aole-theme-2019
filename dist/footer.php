@@ -1,12 +1,5 @@
  <?php if(is_user_logged_in()) { ?> <!-- template part: <?php echo dirname(__FILE__).'/'.basename(__FILE__);  ?> --> <?php } ?> 
 
-<?php
-echo "a";
-// get_theme_mod('custom_js', 'LLL');
-print_r(get_theme_mod('customizer_test')['custom_js']);
-
-?>
-
 		<footer class="section-container section-footer-container">
 			<div class="item-paragraph-container">
 				<!--

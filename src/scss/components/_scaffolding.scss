@@ -110,7 +110,7 @@ mark {
 // Blockquote
 blockquote {
     margin: 0 0 $margins 0;
-    border-left: $bq-border;
+    // border-left: $bq-border;
     padding: 0 1.5rem;
     font-size: 1.5rem;
     cite {
@@ -216,4 +216,14 @@ dd {
     .content-section {
         padding: $content-padding;
     }
+}
+
+#{$buttons}{
+    background-color: #E84351;
+    color: white;
+    display: inline-block;
+    border: none;
+    padding: 0.2rem 2rem;
+    text-transform: uppercase;
+    text-align: center;
 }

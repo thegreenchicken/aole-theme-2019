@@ -9,3 +9,21 @@
     @extend .col-xs-12;
     float: right;
 }
+@mixin hero-item{
+    
+    //we want this element to break out, 
+    width:100vw !important;
+    max-width: none;
+    //but in order for the contained elements to adjust to the grid, 
+    //we need to apply the container class to the children.
+    //.5 rem. Why? no idea. It misaligns otherwise
+    
+    padding: 0 .5rem;
+    color:white;
+    padding-top: 189px;
+    padding-bottom: 97px;
+    margin-bottom: 60px;
+
+    margin-left:0px;
+    margin-right:0px;
+}

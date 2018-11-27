@@ -1,0 +1,16 @@
+body.home{
+    .section-container.section-more-about-container{
+        @include hero-item();
+        background-color:$blue;
+        
+        &>*{
+            @extend .container;
+        }
+        blockquote{
+            font-family: $heading-font-family;
+            font-size: 2rem;	
+            font-weight: bold;
+            line-height: 3rem;
+        }
+    }
+}
