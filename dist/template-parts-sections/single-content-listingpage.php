@@ -33,7 +33,7 @@ wp_enqueue_script('tagClassifyPosts', get_template_directory_uri() . '/js/tagCla
     <div class="section-container section-post-container" role="main">
         <?php if(has_post_thumbnail()){ ?>
             <div <?php post_class('item-post-thumbnail-container')?>>
-                    <?php the_post_thumbnail(); ?>
+                    <img src="<?php the_post_thumbnail_url("large"); ?>" class="post-thumbnail"/>
             </div>
         <?php } ?>
         <div class="item-post-content-container">

@@ -40,7 +40,7 @@ This insert contains the page content part, to be inserted in the body of any pa
         </div>
         <?php if(has_post_thumbnail()){ ?>
             <div <?php post_class('item-post-thumbnail-container')?>>
-                    <?php the_post_thumbnail(); ?>
+                    <img src="<?php the_post_thumbnail_url(); ?>" class="post-thumbnail"/>
             </div>
         <?php } ?>
     </div>

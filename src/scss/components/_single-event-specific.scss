@@ -60,6 +60,13 @@ body.single-event{
         }
         
     }
+    .section-post-thumbnail-container{
+        max-height: 600px;
+        overflow: hidden;
+        .post-thumbnail{
+            width:100%;
+        }
+    }
     .section-after-post-container{
         //in this case, containing "prev" and "next" links;
         .items-wrapper{

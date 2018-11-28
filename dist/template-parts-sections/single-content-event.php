@@ -61,15 +61,12 @@
                         ?>
             </span>
         <?php } ?>
-
-        <?php if(has_post_thumbnail()){ ?>
-            <div <?php post_class('item-post-thumbnail-container')?>>
-                    <?php the_post_thumbnail(); ?>
-            </div>
-        <?php } ?>
-
-            
     </div>
+    <?php if(has_post_thumbnail()){ ?>
+        <div class="section-container section-post-thumbnail-container">
+            <img src="<?php the_post_thumbnail_url(array(1200, 1200)); ?>" class="post-thumbnail"/>
+        </div>
+    <?php } ?>
     
     <div class="section-container section-post-container">
         <div class="item-side-data-container">
