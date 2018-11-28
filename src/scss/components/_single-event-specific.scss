@@ -11,31 +11,49 @@ body.single-event{
             font-family: $heading-font-family;
             line-height:4em;
             width: 100%;
+            text-align: center;
             .wrap{
                 @extend .col-sm-2;
                 position: absolute;
                 right:0px;
                 border:solid 3px black;
+                background-color: white;
+                padding: 2rem 0;
                 span{
                     display:block;
                 }
+                .weekday{
+                    font-size:1.2rem;
+                }
                 .monthday{
-                    font-size:8rem;
+                    font-size:5rem;
                 }
                 .month{
-                    font-size:3em;
+                    font-size: 2.4em;
+                    text-transform: uppercase;
                 }
             }
         }
         
-        &>.item-title-container{
+        &>*{
             @extend .col-sm-8;
+        }
+
+        ul{
+            list-style-type: none;
+            list-style-image: none;
+            text-transform: uppercase;
+            color: grey;
+            font-size: .85em;
         }
 
         // position: relative;
         .item-title-container{
             font-size: 2.3em;
             margin-bottom: 0.5em;
+        }
+        .items-categories-wrapper{
+            min-height: 9em;
         }
         .item-post-type-container{
             color:$gray;

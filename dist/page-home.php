@@ -45,14 +45,15 @@ $(window).ready( function (event) {
             display:"block",
             position:"absolute",
             left:"50%",
-            bottom:squareWidth/2+"px",
+            bottom:-squareWidth+"px",
             width:squareWidth+"px",
             height:squareWidth+"px",
             "border-left": "solid "+squareWidth/2+"px transparent",
-            "border-bottom": "solid "+squareWidth/2+"px "+color,
+            "border-top": "solid "+squareWidth/2+"px "+color,
             "border-right": "solid "+squareWidth/2+"px transparent",
-
-            transform:" translate(-"+halfTriangleWidth+"px,"+halfTriangleWidth+"px) rotate(-45deg)",
+            padding:0,
+            "z-index":10
+            // transform:" translate(-13px, 74px) ",
         });
 
         $($itm).append($aitm);

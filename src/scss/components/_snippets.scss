@@ -12,7 +12,7 @@
 @mixin hero-item{
     
     //we want this element to break out, 
-    width:100vw !important;
+    width:100% !important;
     max-width: none;
     //but in order for the contained elements to adjust to the grid, 
     //we need to apply the container class to the children.
@@ -26,4 +26,15 @@
 
     margin-left:0px;
     margin-right:0px;
+}
+
+
+@mixin remove-list-style(){
+    margin: 0;
+    padding: unset;
+    list-style-type: none;
+    list-style-image: none;
+    li {
+        display: inline;
+    }
 }

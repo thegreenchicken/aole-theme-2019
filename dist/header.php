@@ -10,6 +10,7 @@ require_once("custom-functions.php"); // For logic needed on multiple pages (e.g
 <head>
 	<?php
 	wp_enqueue_script('styling-general', get_template_directory_uri() . '/js/styling-general.js', array('jquery'), 1.1, true);
+	// wp_enqueue_script('ellipsis', get_template_directory_uri() . '/js/ellipsis.js', array('jquery'), 1.1, true);
 	?>
 
 	<link rel="stylesheet" type="text/css" href="<?php echo get_stylesheet_uri(); ?>" />

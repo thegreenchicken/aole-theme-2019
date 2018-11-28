@@ -42,4 +42,15 @@ wp_enqueue_script('tagClassifyPosts', get_template_directory_uri() . '/js/tagCla
             <p><?php the_tags();?></p>
         </div>
     </div>
+    <?php
+    if (get_field('more_contents')) {
+        ?>
+        <div class="section-container section-post-container">
+            <?php
+            echo get_field('more_contents');
+            ?>
+        </div>
+        <?php
+    }
+    ?>
 <?php endwhile;?>

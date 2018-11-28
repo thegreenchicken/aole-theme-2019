@@ -5,6 +5,10 @@ include locate_template("customizer/index.php");
 
 $fullWPpath = '/Users/taipala2/Documents/OneDrive - Aalto-yliopisto/Web Projects/htdocs/wordpress';
 
+//add featured image to pages too
+add_theme_support('post-thumbnails', array('post', 'page'));
+
+
 // require_once( 'library/cleanup.php' );
 
 /** Register all navigation menus */

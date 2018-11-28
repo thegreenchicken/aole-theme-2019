@@ -110,17 +110,31 @@ $item-spacing: 20px;
                 
                 border: solid 3px #433A3F;
                 display: block;
-                height: 182px;
+                // height: 182px;
                 overflow: hidden;
 
                 img {
                     width: 100%;
                 }
-                
+                .ellip-line {
+                    display: inline-block;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    word-wrap: normal;
+                }
+
+                .ellip,
+                .ellip-line {
+                    position: relative;
+                    overflow: hidden;
+                    max-width: 100%;
+                }
                 .post-title-container{
                     font-weight: 1em;
                     color: black;
                     size: 15px;
+                    height: 3.8rem;
+                    padding: 0px 8px;
                     // padding:10px;
                 }
             }

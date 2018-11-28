@@ -48,8 +48,9 @@ this is the context where this part should be invoked:
 					echo "}";
 				?></div>
 				<a class="item-paragraph-container" href="<?php echo get_the_permalink($pilot->ID);?>">
-
-					<img src="<?php echo get_pilot_image_url($pilot->ID, 'medium'); ?>" />
+					<div class="post-image-container">
+						<img src="<?php echo get_pilot_image_url($pilot->ID, 'medium'); ?>" />
+					</div>
 					<div class="post-title-container">
 						<?php echo $pilot->post_title; ?>
 					</div>
