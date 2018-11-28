@@ -1,5 +1,5 @@
 /**
-these are page specific rules for the pages which 
+these are page specific rules for the pages which
 contain a list of items of a certain post type and
 a static page. in other words, the "news", "events",
 "pilots","home", "jobs", "about"
@@ -13,12 +13,12 @@ body.page{
             @extend .col-sm-4;
         }
     }
-    
+
     .section-post-header-container{
         @include hero-item();
         margin-top:0;
         background-color: $yellow;
-        
+
         .item-post-title-container{
             @extend .container;
             >h2{
@@ -51,13 +51,14 @@ body.page{
                 position: absolute;
                 right: 0px;
                 height: 100%;
+                width: unset;
             }
         }
         .item-post-thumbnail-container{
             border: solid 3px white;
         }
-        
-        
+
+
     }
 
     //this should actually go in the calendar plugin ting... or remove it altoghether.
@@ -91,4 +92,3 @@ body.page{
         }
     }
 }
-

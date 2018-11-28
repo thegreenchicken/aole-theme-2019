@@ -1,16 +1,49 @@
 body.home{
+    .button-more{
+        color:$red;
+        margin-top: 5rem;
+        display: block;
+        text-align: center;
+        &::after{
+            content:" →"
+        }
+    }
+    h2{
+      color: $gray;
+      text-transform: none;
+    }
+
     .section-container.section-more-about-container{
         @include hero-item();
         background-color:$blue;
-        
+
         &>*{
             @extend .container;
         }
         blockquote{
             font-family: $heading-font-family;
-            font-size: 2rem;	
+            font-size: 2rem;
             font-weight: bold;
             line-height: 3rem;
+        }
+    }
+    .section-events-showcase-container{
+        @include hero-item();
+        text-align:center;
+        background-color: $blackish;
+        img,.timezone,.hours{
+            display: none;
+        }
+        .item-title-container,.item-date-container{
+            color:white;
+            display:block;
+        }
+        .item-title-container{
+            font-size: 2.3em;
+            font-weight: bold;
+        }
+        .item-date-container{
+            font-size: 1.3em;
         }
     }
 }

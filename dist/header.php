@@ -1,4 +1,4 @@
- <?php if(is_user_logged_in()) { ?> <!-- template part: <?php echo dirname(__FILE__).'/'.basename(__FILE__);  ?> --> <?php } ?> 
+ <?php if(is_user_logged_in()) { ?> <!-- template part: <?php echo dirname(__FILE__).'/'.basename(__FILE__);  ?> --> <?php } ?>
 
 <?php
 
@@ -51,7 +51,7 @@ require_once("custom-functions.php"); // For logic needed on multiple pages (e.g
 						})});
 						</script>
 </head>
-<?php 
+<?php
 //get the requested page name, to add it as class in the main container.
 try{
 	$current_page = sanitize_post($GLOBALS['wp_the_query']->get_queried_object());
@@ -62,7 +62,7 @@ try{
 }
 
 ?>
-<body <?php body_class(); ?>>	
+<body <?php body_class(); ?>>
 	<div class="main-container main-<?php echo $slug ?>-container">
 
 		<!-- Google Tag Manager (noscript) -->
@@ -79,8 +79,19 @@ try{
 				</a>
 			</div>
 			<div class="title-container">
-				<span class="site-mobile-title title-bar-title">	
-					<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a>
+				<span class="site-mobile-title title-bar-title">
+          <?php
+          //display customized header html if it has been set. Display the default otherwise
+          $mod=get_theme_mod('customizer_test');
+      		if($mod['logo_html']){
+      			echo $mod['logo_html'];
+      		}else{
+            ?>
+            <img class="aalto-logo" src="<?php echo get_field('AOLE_logo_normal_color', 'option');?>" />
+  					<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a>
+            <?php
+          }
+          ?>
 				</span>
 			</div>
 			<nav class="main-menu-container" role="navigation">
@@ -89,7 +100,7 @@ try{
 		</header>
 
 		<?php
-		
+
 			if( is_single() && !is_singular(array("pilot", "event", "jobs")) && !(in_category(["news", "awards", "blog"], get_post()))) {
 				global $wp_query;
 				$wp_query->set_404();

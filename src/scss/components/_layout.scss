@@ -9,7 +9,7 @@ body{
 }
 
 .main-container {
-    /* 
+    /*
     main-container wraps all the page contents
     */
     width: 100%;
@@ -20,11 +20,15 @@ body{
 
     // padding-left: 15px;
     // padding-right: 15px;
-    
+
     // display: inline-block;
     /*dev settings:*/
     background-color: white;
     // overflow: hidden; //this disables stickies
+    .section-container{
+      .post-thumbnail{
+        width:100%;
+        
+      }
+    }
 }
-
-

@@ -1,8 +1,8 @@
 <?php
 function themeslug_customize_register($wp_customize)
 {
-    //everything you need to know is here: 
-    //https: //developer.wordpress.org/themes/customize-api/customizer-objects/
+    //everything you need to know is here:
+    //https://developer.wordpress.org/themes/customize-api/customizer-objects/
 
     //customizer_test section
 
@@ -50,6 +50,21 @@ function themeslug_customize_register($wp_customize)
                 'input_attrs' => array(
                 ),
             ));
+        $wp_customize->add_setting('customizer_test[logo_html]', array(
+            'type' => 'theme_mod',
+            'capability' => 'manage_options',
+        ));
+
+          $wp_customize->add_control('customizer_test[logo_html]', array(
+              'type' => 'textarea',
+              'priority' => 1, // Within the section.
+              'section' => 'customizer_test', // Required, core or custom.
+              'label' => __('code'),
+              'description' => __('Write html for the id page'),
+              'input_attrs' => array(),
+          ));
+
+
 
 
 
