@@ -2,9 +2,81 @@
     @extend .container;
     height:87px;
     text-align: justify;
+    padding-top: 27px;
+    //
+    // img.logo {
+    //   width: 142px;
+    //   position: absolute;
+    //   top: 0px;
+    // }
+
     .main-menu-container {
-        
         float: right;
+        margin-left: 3em;
+
+        //active: when the collapsed menu is being displayed
+        &.collapsed.active{
+          &:before {
+            content: ">>";
+            float: right;
+          }
+          &>*{
+            width: 100%;
+            transition:0.2s;
+            // left:0;
+            // display: block;
+            pointer-events:all;
+            opacity:1;
+          }
+        }
+        //collapsed: when the screen is small enough to tweak the menu
+        &.collapsed{
+            position:relative;
+            width: 100vw;
+
+            &:before {
+               content: "Menu";
+               float: right;
+            }
+
+
+            &>*{
+                z-index: 1200;
+                transition:0.2s;
+                background-color: white;
+                width: 0;
+                // display:none;
+                pointer-events:none;
+                opacity:0;
+
+                height: 100vh;
+
+                overflow-x: none;
+                overflow-y: auto;
+
+                position:absolute;
+
+                margin:-$padding;
+                padding:$padding;
+
+                right: 0;
+                top: 3rem;
+
+
+                // display:none;
+
+                ul>li{
+                    // margin: 5vh 2vw;
+                    font-size: 10vw;
+                    font-weight: 1;
+                    text-transform: capitalize;
+                    display: block;
+                    width:100%;
+                }
+
+            }
+
+        }
     }
     .title-container{
         display:inline-block;

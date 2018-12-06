@@ -1,4 +1,6 @@
 <?php
+
+
 include locate_template("customizer/index.php");
 
 /** Various clean up functions */
@@ -421,15 +423,15 @@ function update_custom_terms($post_id) {
   }
 
     /*
-    * Grab the post title and slug to use as the new 
+    * Grab the post title and slug to use as the new
     * or updated term name and slug
     */
     $term_title = get_the_title($post_id);
     $term_slug = get_post( $post_id )->post_name;
 
     /*
-    * Check if a corresponding term already exists by comparing 
-    * the post ID to all existing term descriptions. 
+    * Check if a corresponding term already exists by comparing
+    * the post ID to all existing term descriptions.
     */
     $existing_terms = get_terms('theme_group', array(
     	'hide_empty' => false
@@ -448,8 +450,8 @@ function update_custom_terms($post_id) {
     	}
     }
 
-    /* 
-    * If we didn't find a match above, this is a new post, 
+    /*
+    * If we didn't find a match above, this is a new post,
     * so create a new term.
     */
     wp_insert_term($term_title, 'theme_group', array(
@@ -463,15 +465,15 @@ function update_custom_terms($post_id) {
 add_action('save_post', 'update_custom_terms');
 
 
-add_image_size( 'square-large', 300, 300, true); // name, width, height, crop 
+add_image_size( 'square-large', 300, 300, true); // name, width, height, crop
 
-add_image_size( 'pilot-showcase', 430, 190, true); // name, width, height, crop 
+add_image_size( 'pilot-showcase', 430, 190, true); // name, width, height, crop
 
-add_image_size( 'single-pilot-banner', 1200, 500, true); // name, width, height, crop 
+add_image_size( 'single-pilot-banner', 1200, 500, true); // name, width, height, crop
 
-add_image_size( 'feed-thumbnail', 500, 180, true); // name, width, height, crop 
+add_image_size( 'feed-thumbnail', 500, 180, true); // name, width, height, crop
 
-add_image_size( 'event-thumbnail', 790, 270, true); // name, width, height, crop 
+add_image_size( 'event-thumbnail', 790, 270, true); // name, width, height, crop
 
 
 // Custom excerpt for feed posts on front page //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -479,10 +481,10 @@ add_image_size( 'event-thumbnail', 790, 270, true); // name, width, height, crop
 
 function wpse_allowedtags() {
     // Add custom tags to this string
-    return '<script>,<style>,<br>,<em>,<i>,<ul>,<ol>,<li>,<a>,<p>,<img>,<video>,<audio>'; 
+    return '<script>,<style>,<br>,<em>,<i>,<ul>,<ol>,<li>,<a>,<p>,<img>,<video>,<audio>';
 }
 
-if ( ! function_exists( 'wpse_custom_wp_trim_excerpt' ) ) : 
+if ( ! function_exists( 'wpse_custom_wp_trim_excerpt' ) ) :
 
     function wpse_custom_wp_trim_excerpt($wpse_excerpt) {
         global $post;
@@ -497,7 +499,7 @@ if ( ! function_exists( 'wpse_custom_wp_trim_excerpt' ) ) :
 
             //Set the excerpt word count and only break after sentence is complete.
             $excerpt_word_count = 75;
-            $excerpt_length = apply_filters('excerpt_length', $excerpt_word_count); 
+            $excerpt_length = apply_filters('excerpt_length', $excerpt_word_count);
             $tokens = array();
             $excerptOutput = '';
             $count = 0;
@@ -505,9 +507,9 @@ if ( ! function_exists( 'wpse_custom_wp_trim_excerpt' ) ) :
                 // Divide the string into tokens; HTML tags, or words, followed by any whitespace
             preg_match_all('/(<[^>]+>|[^<>\s]+)\s*/u', $wpse_excerpt, $tokens);
 
-            foreach ($tokens[0] as $token) { 
+            foreach ($tokens[0] as $token) {
 
-                if ($count >= $excerpt_word_count && preg_match('/[\,\;\?\.\!]\s*$/uS', $token)) { 
+                if ($count >= $excerpt_word_count && preg_match('/[\,\;\?\.\!]\s*$/uS', $token)) {
                     // Limit reached, continue until , ; ? . or ! occur at the end
                     $excerptOutput .= trim($token);
                     break;
@@ -522,8 +524,8 @@ if ( ! function_exists( 'wpse_custom_wp_trim_excerpt' ) ) :
 
             $wpse_excerpt = trim(force_balance_tags($excerptOutput));
 
-            $excerpt_end = ' <a class="read-more-link" href="'. esc_url( get_permalink() ) . '">Read more...</a>'; 
-            $excerpt_more = apply_filters('excerpt_more', ' ' . $excerpt_end); 
+            $excerpt_end = ' <a class="read-more-link" href="'. esc_url( get_permalink() ) . '">Read more...</a>';
+            $excerpt_more = apply_filters('excerpt_more', ' ' . $excerpt_end);
 
                 //$pos = strrpos($wpse_excerpt, '</');
                 //if ($pos !== false)
@@ -533,13 +535,13 @@ if ( ! function_exists( 'wpse_custom_wp_trim_excerpt' ) ) :
                 // After the content
             $wpse_excerpt .= $excerpt_end; /*Add read more in new paragraph */
 
-            return $wpse_excerpt;   
+            return $wpse_excerpt;
 
         }
         return apply_filters('wpse_custom_wp_trim_excerpt', $wpse_excerpt, $raw_excerpt);
     }
 
-    endif; 
+    endif;
 
     remove_filter('get_the_excerpt', 'wp_trim_excerpt');
     add_filter('get_the_excerpt', 'wpse_custom_wp_trim_excerpt');
@@ -547,9 +549,9 @@ if ( ! function_exists( 'wpse_custom_wp_trim_excerpt' ) ) :
 
 //Get the excerpt with ID:
 //Source: https://wordpress.stackexchange.com/a/12503
-    
+
     function get_the_excerpt_by_id($post_id) {
-      global $post;  
+      global $post;
       $save_post = $post;
       $post = get_post($post_id);
       $output = get_the_excerpt();
@@ -562,7 +564,7 @@ if ( ! function_exists( 'wpse_custom_wp_trim_excerpt' ) ) :
       $content_arr = get_extended($post->post_content);
       return apply_filters('the_content', $content_arr['main']);
   }
-  
+
   function get_all_event_info($em_event) {
     $event_information = [];
     $post_id = $em_event->post_id;
@@ -618,8 +620,8 @@ function add_theme_settings_page(){
         'capability'    => 'edit_theme_settings',
         'redirect'      => false
         ));
-    
-}  
+
+}
 }
 
 
@@ -686,8 +688,3 @@ function wp_maintenance_mode(){
     }
 }
 //add_action('get_header', 'wp_maintenance_mode');
-
-
-
-
-

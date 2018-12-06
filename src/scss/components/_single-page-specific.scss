@@ -41,12 +41,17 @@ body.page{
     .section-post-container{
         @extend .container;
         @extend .row;
+
         .item-post-thumbnail-container,.item-calendar-container{
-            @include side-thing();
-            // display: inline-block;
+            @extend .col-sm-4;
+            @extend .col-xs-6;
+            position: relative;
+            overflow: hidden;
+            //specially useful for the calendar element:
+            min-width:207px;
+
             top: -100px;
-            // width:100px;
-            // height: 200px;
+
             img{
                 position: absolute;
                 right: 0px;

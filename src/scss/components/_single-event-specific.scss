@@ -2,63 +2,78 @@
 targeted to post of pilot type-
 */
 body.single-event{
-        
-    
+
+
     .section-post-header-container{
-        
-        .item-date-container{
-            position: relative;
-            font-family: $heading-font-family;
-            line-height:4em;
-            width: 100%;
-            text-align: center;
-            .wrap{
-                @extend .col-sm-2;
-                position: absolute;
-                right:0px;
-                border:solid 3px black;
-                background-color: white;
-                padding: 2rem 0;
-                span{
-                    display:block;
-                }
-                .weekday{
-                    font-size:1.2rem;
-                }
-                .monthday{
-                    font-size:5rem;
-                }
-                .month{
-                    font-size: 2.4em;
-                    text-transform: uppercase;
-                }
+        // @extend
+      .item-date-container{
+        @extend .col-xs-2;
+        font-family: $heading-font-family;
+        line-height:4em;
+        text-align: center;
+        float:right;
+        overflow:hidden;
+        z-index:2;
+        position:relative;
+
+        border:solid 3px black;
+        background-color: white;
+        padding: 2rem 0;
+        span{
+            display:block;
+        }
+        @media (max-width:$screen-sm){
+          line-height: 2rem;
+        }
+        .weekday{
+            font-size:1.2rem;
+            @media (max-width:$screen-md){
+              font-size: 1rem;
+            }
+            @media (max-width:$screen-sm){
+              font-size:0.6rem;
             }
         }
-        
-        &>*{
-            @extend .col-sm-8;
+        .monthday{
+            font-size:5rem;
+            @media (max-width:$screen-sm){
+              font-size:2.5rem;
+            }
         }
-
-        ul{
-            list-style-type: none;
-            list-style-image: none;
+        .month{
+            font-size: 2.4em;
             text-transform: uppercase;
-            color: grey;
-            font-size: .85em;
+            @media (max-width:$screen-sm){
+              font-size:1.2rem;
+            }
         }
 
-        // position: relative;
-        .item-title-container{
-            font-size: 2.3em;
-            margin-bottom: 0.5em;
-        }
-        .items-categories-wrapper{
-            min-height: 9em;
-        }
-        .item-post-type-container{
-            color:$gray;
-        }
-        
+      }
+
+      &>.item-post-data-container{
+          @extend .col-xs-9;
+      }
+
+      ul{
+          list-style-type: none;
+          list-style-image: none;
+          text-transform: uppercase;
+          color: grey;
+          font-size: .85em;
+      }
+
+      // position: relative;
+      .item-title-container{
+          font-size: 2.3em;
+          margin-bottom: 0.5em;
+      }
+      .items-categories-wrapper{
+          min-height: 4em;
+      }
+      .item-post-type-container{
+          color:$gray;
+      }
+
     }
     .section-post-thumbnail-container{
         max-height: 600px;
@@ -71,7 +86,7 @@ body.single-event{
         //in this case, containing "prev" and "next" links;
         .items-wrapper{
             @extend .row;
-            
+
             a{
                 @extend .col-sm-6;
                 span{
@@ -101,5 +116,5 @@ body.single-event{
             width: 100%;
         }
     }
-    
+
 }

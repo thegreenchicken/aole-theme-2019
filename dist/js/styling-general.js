@@ -44,8 +44,8 @@ var stylingGeneralJs = new (function () {
     }
 
 
- 
-    
+
+
     this.ellipsis = function (props) {
         // $('.overflow').ellipsis();
         // $('.one-line').ellipsis({ lines: 1 });
@@ -53,7 +53,7 @@ var stylingGeneralJs = new (function () {
         // $('.box--responsive').ellipsis({ responsive: true });
         $(props.selector).ellipsis(props);
     }
-    
+
 
     this.update = function () {
         self.makeSquare.update();
@@ -67,6 +67,39 @@ stylingGeneralJs.makeSquare("body.page .item-post-thumbnail-container, .square")
 stylingGeneralJs.ellipsis({selector:".post-title-container", responsive: true, lines:2 });
 
 document.addEventListener("DOMContentLoaded", function (event) {
+    //this bit ensures that the page doesn't change size while images are getting DOMContentLoaded/
+    //this removes the classic annoyance of scrolling to the desired part,
+    //and then having the scroll shift because the pictures are growing after loading ended...
+    //I had trouble finishing it because I cannot get the image size that would result after loading while it is loading
+    // $("img").each(function(){
+    //   var pregetSize=false;
+    //   var sizeAttr=$(this).attr("src");
+    //
+    //   if(sizeAttr){
+    //     var wpSizeIndicators = sizeAttr.match(/(\d{1,4})x(\d{1,4})\.\w{1,4}$/);
+    //     if(wpSizeIndicators){
+    //       pregetSize={
+    //         w:parseInt(wpSizeIndicators[1]),
+    //         h:parseInt(wpSizeIndicators[2]),
+    //         ratio:sizeRatio,
+    //       }
+    //     }
+    //   }
+    //   if(pregetSize){
+    //     console.log("add placeholder",pregetSize);
+    //     var placeholder=$(
+    //       '<div class="loading-picture-placeholder">'
+    //       +'</div>'
+    //     );
+    //     placeholder.css({
+    //       position:'relative',
+    //       width:pregetSize.w,
+    //       height:pregetSize.h,
+    //     });
+    //     $(this).before(placeholder);
+    //   }
+    //   console.log(pregetSize);
+    // });
 
     function throttle(func, wait, options) {
         var context, args, result;
@@ -147,7 +180,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
     //deconoise items come to appear later, hence the wait.
     var pinterval = setInterval(function () {
         //these take longer to appear...
-        $(".item-calendar-container,body.page .item-post-thumbnail-container, .parallax").each(function () {
+        $(".parallax").each(function () {
             var zlevel = -0.1;
             var $zindex = parseFloat($(this).attr("parallax-z"));
             if ($zindex) {

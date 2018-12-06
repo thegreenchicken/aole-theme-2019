@@ -1,6 +1,6 @@
 
 
- <?php if(is_user_logged_in()) { ?> <!-- template part: <?php echo dirname(__FILE__).'/'.basename(__FILE__);  ?> --> <?php } ?> 
+ <?php if(is_user_logged_in()) { ?> <!-- template part: <?php echo dirname(__FILE__).'/'.basename(__FILE__);  ?> --> <?php } ?>
 <?php
 /*
 
@@ -14,12 +14,16 @@ this is the context where this part should be invoked:
 
 	<?php
 	//$pilot contains a post object with all the required properties.
-	//The easiest way: 
-	
+	//The easiest way:
+
 	$pilots = get_pilots("", "4");
 	foreach($pilots as $pilot):
 */
+
+wp_enqueue_script('pilots-list', get_template_directory_uri() . '/js/pilots-list.js', array('jquery'), 1.1, true);
+
 ?>
+
 			<div class='item-pilot-container classifiable-item'>
 				<div style="display:none" class="classifiable-attributes"><?php
 					$generatorTags=["random","generated","tags","because","posts","don't","have","metadata","lalala","cooltag"];
@@ -56,5 +60,5 @@ this is the context where this part should be invoked:
 					</div>
 
 				</a>
-				
+
 			</div>

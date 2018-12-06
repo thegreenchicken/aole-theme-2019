@@ -4,10 +4,15 @@ function themeslug_customize_register($wp_customize)
     //everything you need to know is here:
     //https://developer.wordpress.org/themes/customize-api/customizer-objects/
 
-    //customizer_test section
+    //aole_2019_settings section
+    //
 
-    $wp_customize->add_section('customizer_test', array(
-        'title' => __( 'Customizer test' ),
+
+
+
+
+    $wp_customize->add_section('aole_2019_header_settings', array(
+        'title' => __( 'A!ole 2019 theme settings' ),
         'description' => __( 'Add custom CSS here' ),
         'panel' => '', // Not typically needed.
         'priority' => 160,
@@ -15,54 +20,64 @@ function themeslug_customize_register($wp_customize)
         'theme_supports' => '', // Rarely needed.
     ) );
 
-        $wp_customize->add_setting('customizer_test[color]', array(
-            'type' => 'theme_mod',
-            'capability' => 'manage_options',
-            'default' => '#ff2525',
-            'sanitize_callback' => 'sanitize_hex_color',
-        ));
+      $wp_customize->add_setting('aole_2019_header_settings[logo_html]', array(
+          'type' => 'theme_mod',
+          'capability' => 'manage_options',
+      ));
 
-            $wp_customize->add_control('customizer_test[color]', array(
-                'type' => 'date',
-                'priority' => 1, // Within the section.
-                'section' => 'customizer_test', // Required, core or custom.
-                'label' => __('Date'),
-                'description' => __('This is a date control with a red border.'),
-                'input_attrs' => array(
-                    'class' => 'my-custom-class-for-js',
-                    'style' => 'border: 1px solid #900',
-                    'placeholder' => __('mm/dd/yyyy'),
-                ),
-                'active_callback' => 'is_front_page',
-            ));
-
-        $wp_customize->add_setting('customizer_test[custom_js]', array(
-            'type' => 'theme_mod',
-            'capability' => 'manage_options',
-        ));
-
-            $wp_customize->add_control('customizer_test[custom_js]', array(
-                'type' => 'textarea',
-                'priority' => 2, // Within the section.
-                'section' => 'customizer_test', // Required, core or custom.
-                'label' => __('code'),
-                'description' => __('This is a textaera'),
-                'input_attrs' => array(
-                ),
-            ));
-        $wp_customize->add_setting('customizer_test[logo_html]', array(
-            'type' => 'theme_mod',
-            'capability' => 'manage_options',
-        ));
-
-          $wp_customize->add_control('customizer_test[logo_html]', array(
+          $wp_customize->add_control('aole_2019_header_settings[logo_html]', array(
               'type' => 'textarea',
               'priority' => 1, // Within the section.
-              'section' => 'customizer_test', // Required, core or custom.
-              'label' => __('code'),
-              'description' => __('Write html for the id page'),
+              'section' => 'aole_2019_header_settings', // Required, core or custom.
+              'label' => __('Main menu logo'),
+              'description' => __('Type the logotype code that goes in the main menu'),
               'input_attrs' => array(),
           ));
+        $wp_customize->add_setting('aole_2019_header_settings[logo_image]', array(
+            'type' => 'theme_mod',
+            'capability' => 'manage_options',
+        ));
+
+          $wp_customize->add_control( new WP_Customize_Image_Control( $wp_customize, 'aole_2019_header_settings[logo_image]', array(
+            'label' => __( 'Alternatively, select a picture to use as header', '_sj' ),
+            'priority' => 2, // Within the section.
+
+            'section' => 'aole_2019_header_settings'
+          ) ) );
+
+        $wp_customize->add_setting('aole_2019_header_settings[image_style]', array(
+            'type' => 'theme_mod',
+            'capability' => 'manage_options',
+        ));
+
+            $wp_customize->add_control('aole_2019_header_settings[image_style]', array(
+                'type' => 'text',
+                'priority' => 3, // Within the section.
+                'section' => 'aole_2019_header_settings', // Required, core or custom.
+                'label' => __('Image style'),
+                'placeholder' => __('top:0px; width:130px;'),
+                'description' => __('(only applicable to header image) type the inline-styles for the logo. <br> example: top:0px; width:130px;'),
+                'input_attrs' => array(),
+            ));
+
+
+        $wp_customize->add_setting('aole_2019_header_settings[header_type]', array(
+            'type' => 'theme_mod',
+            'capability' => 'manage_options',
+        ));
+          $wp_customize->add_control( 'aole_2019_header_settings[header_type]', array(
+              'label'      => __( 'Header logo: use html code or picture?' ),
+              'section'    => 'aole_2019_header_settings',
+              'settings'   => 'aole_2019_header_settings[header_type]',
+              'type'       => 'radio',
+              'priority' => 4, // Within the section.
+
+              'choices'    => array(
+                  'false' => 'fallback (default)',
+                  'logo_image' => 'picture',
+                  'logo_html' => 'code',
+                ),
+          ) );
 
 
 

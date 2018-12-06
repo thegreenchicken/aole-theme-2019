@@ -1,5 +1,5 @@
 /**
-this file contains the properties of some of the list items such as 
+this file contains the properties of some of the list items such as
 individual posts in a posts list, and their wrappers.
 
 */
@@ -14,14 +14,14 @@ $item-spacing: 20px;
     .section-container{
         margin-top:2em;
     }
-    
+
     .item-side-data-container{
         @include side-thing();
         position:sticky;
         top:50px;
     }
 
-    
+
     .section-footer-container {
         $is-full-width:false;
 
@@ -66,7 +66,7 @@ $item-spacing: 20px;
             }
         }
         a{
-        
+            text-decoration: none;
             border-bottom: solid 1px $link-color;
             &:hover{
                 color: $link-color;
@@ -78,24 +78,28 @@ $item-spacing: 20px;
 
     .section-container{
         @extend .container;
-        
+
     }
 
 
     .items-pilots-wrapper {
         @extend .row;
-        
+
         margin-top: $item-spacing;
-        
+
         .item-pilot-container {
             $borderpx:3;
 
             @extend .col-sm-3;
             // @extend .col-sm-4;
-            @extend .col-xs-6;
+            @extend .col-xs-12;
 
             overflow: hidden;
             display: inline-block;
+            //with the float:left that comes with col elements, there will be white gaps if an element of the previous line is just one pixel taller than the rest. The pictures in the list are so.
+            //the other possibility of fixing this is by using a js code, but probably it is more efficient this way:
+            float:none;
+            margin:-3px;
 
             padding: $item-spacing;
             margin: -$borderpx;
@@ -107,14 +111,23 @@ $item-spacing: 20px;
 
             .item-paragraph-container{
                 border: solid #{$borderpx}+px $blackish;
-                
+
                 border: solid 3px #433A3F;
                 display: block;
                 // height: 182px;
                 overflow: hidden;
 
-                img {
+                .post-image-container{
+
+                  //prevents the infuriating content jumping while pictures are loading.
+                  @media (max-width:$screen-xs-max){
+                    height: 50vw;
+                    overflow:hidden;
+                  }
+
+                  img {
                     width: 100%;
+                  }
                 }
                 .ellip-line {
                     display: inline-block;
@@ -141,5 +154,3 @@ $item-spacing: 20px;
         }
     }
 }
-
-

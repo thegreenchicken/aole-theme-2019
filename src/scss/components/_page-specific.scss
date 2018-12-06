@@ -13,14 +13,14 @@
 @mixin fully-wide-item(){
     $my-breakpoint: $screen-sm;
     $my-margin:10px;
-    
+
 
     border: solid 3px $font-color;
     position: relative;
     overflow: hidden;
     height: 200px;
     margin: 55px auto;
-    
+
     >div,>span{
         color: $font-color;
         text-decoration:none;
@@ -34,12 +34,12 @@
         margin:0;
         // margin-top: -3%;
         // transition: margin-top 2s;
-        
+
         img{
-            // width:100%;
+            width:100%;
             // height:100%;
-            min-height: 100%;
-            min-width: 100%;
+            // min-height: 100%;
+            // min-width: 100%;
         }
         @media (max-width: $my-breakpoint) {
             position: relative;
@@ -55,7 +55,7 @@
             // margin-top: 0px;
             // transition: margin-top 2s;
         }
-        
+
         .item-title-container{
             text-decoration: underline;
         }
@@ -76,8 +76,8 @@
                 @media (max-width: $my-breakpoint) {
                     position: relative;
                 }
-            }     
-        } 
+            }
+        }
     }
 }
 
@@ -115,7 +115,7 @@
 
 
     .item-calendar-container{
-        //I would 
+        //I would
         // @extend .item-post-thumbnail-container;
         //but for some reason it doesn't allow me to override border color & height
         // @include side-thing();
@@ -134,7 +134,7 @@
             position: relative;
             display: inline-block;
         }
-    }   
+    }
     .event-section-container{
         .event-facilitator-list{
             @include remove-list-style();
@@ -145,7 +145,7 @@
 }
 
 .main-pilots-container{
-    
+
 }
 .single-pilot{
     .item-side-data-container{

@@ -9,7 +9,8 @@ require_once("custom-functions.php"); // For logic needed on multiple pages (e.g
 <html class="no-js" <?php language_attributes(); ?> >
 <head>
 	<?php
-	wp_enqueue_script('styling-general', get_template_directory_uri() . '/js/styling-general.js', array('jquery'), 1.1, true);
+  wp_enqueue_script('styling-general', get_template_directory_uri() . '/js/styling-general.js', array('jquery'), 1.1, true);
+	wp_enqueue_script('responsive-menu', get_template_directory_uri() . '/js/responsive-menu.js', array('jquery'), 1.1, true);
 	// wp_enqueue_script('ellipsis', get_template_directory_uri() . '/js/ellipsis.js', array('jquery'), 1.1, true);
 	?>
 
@@ -73,21 +74,23 @@ try{
 		<!-- End Google Tag Manager (noscript) -->
 
 		<header class="header-container" role="banner">
-			<div class="logo-container">
-				<a href="http://www.aalto.fi/en/">
-					<img class="aalto-logo" src="<?php echo get_field('aalto_logo_small_white', 'option');?>" />
-				</a>
-			</div>
 			<div class="title-container">
 				<span class="site-mobile-title title-bar-title">
           <?php
           //display customized header html if it has been set. Display the default otherwise
-          $mod=get_theme_mod('customizer_test');
-      		if($mod['logo_html']){
-      			echo $mod['logo_html'];
+          $mod=get_theme_mod('aole_2019_header_settings');
+      		if($mod[ $mod['header_type'] ]){
+            if($mod['header_type']=="logo_image"){
+                echo '<img class="logo" src="'
+                          .$mod[ $mod['header_type'] ]
+                          .'" style="'
+                          .$mod['image_style']
+                          .'"/>';
+            }else{
+      			    echo $mod[ $mod['header_type'] ];
+             }
       		}else{
             ?>
-            <img class="aalto-logo" src="<?php echo get_field('AOLE_logo_normal_color', 'option');?>" />
   					<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a>
             <?php
           }
