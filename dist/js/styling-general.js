@@ -183,11 +183,15 @@ document.addEventListener("DOMContentLoaded", function (event) {
         $(".parallax").each(function () {
             var zlevel = -0.1;
             var $zindex = parseFloat($(this).attr("parallax-z"));
-            if ($zindex) {
-                // console.log($zindex );
-                zlevel = $zindex;
+            //if z-index is user-specified at 0, don't apply effect
+            if($zindex !== 0){
+              //if is not undefined, use that value
+              if ($zindex ) {
+                  // console.log($zindex );
+                  zlevel = $zindex;
+              }
+              new ParallaxItem($(this), zlevel);
             }
-            new ParallaxItem($(this), zlevel);
             clearInterval(pinterval);
         });
     }, 200);

@@ -9,8 +9,6 @@ This insert contains the page content part, to be inserted in the body of any pa
 ?>
 
 <?php
-// wp_enqueue_script('decoNoise', get_template_directory_uri() . '/js/decoNoise.js', array('jquery'), 1.1, true);
-
 ?>
 
 <script>

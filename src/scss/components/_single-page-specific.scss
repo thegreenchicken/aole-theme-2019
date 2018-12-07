@@ -18,9 +18,20 @@ body.page{
         @include hero-item();
         margin-top:0;
         background-color: $yellow;
-
+        position:relative;
+        overflow: hidden;
+        .deco-noise-picture{
+          position:absolute;
+          // z-index: 1;
+          top:0px;
+          left:0px;
+          width:100%;
+        }
         .item-post-title-container{
+
             @extend .container;
+            position: relative;
+            z-index: 2;
             >h2{
                 font-size: 0.9rem;
                 font-weight: 100;

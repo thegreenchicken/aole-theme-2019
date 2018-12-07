@@ -8,7 +8,8 @@ import fonts
 */
 @import url('https://fonts.googleapis.com/css?family=Poppins:700,800|Raleway:500,500i,700');
 /* Containers */
-$arbitrary-box-ratio: 1.61803399;
+
+$header-menu-height: 87px;
 
 $content-box-width: 900px;
 
@@ -31,9 +32,9 @@ $blue:#2B90CF;
 $blue-dark: #00639E;
 $blue-light: #6BC0FF;
 
-$background: white; 
+$background: white;
 $primary-color: $blue;
-$secondary-color: $red; 
+$secondary-color: $red;
 $accent-color: $yellow;
 $alternate-background: $blackish;
 $alternate-color: $blue-dark;
@@ -80,7 +81,7 @@ $h5: 0.6rem;
     font-size:$h1;
     margin:0;
     margin-bottom: $heading-margin-bottom;
-    
+
 }
 @mixin title2() {
     @include title1();
@@ -148,7 +149,7 @@ $button-text-transform: none;
 $accent-button-background: $secondary-color;
 $accent-button-color: #ffffff;
 $accent-button-color-hover: #ffffff;
- 
+
 // Muted Buttons
 $muted-border: 1px solid $accent-color;
 $muted-border-hover: 1px solid darken($accent-color, 30%);
@@ -157,8 +158,8 @@ $muted-background-hover: transparent;
 $muted-color: darken($accent-color, 50%);
 $muted-color-hover: darken($accent-color, 50%);
 
-// Round Buttons   
-$round-buttons: 40px; 
+// Round Buttons
+$round-buttons: 40px;
 
 /* Forms */
 
@@ -168,8 +169,8 @@ $input-background: transparent;
 $placeholder: darken($accent-color, 20%);
 $form-border: 1px solid $border-color;
 $form-border-hover: 1px solid darken($border-color, 10%);
-$form-border-focus: 1px solid $link-color; 
- 
+$form-border-focus: 1px solid $link-color;
+
 /* Tables */
 
 $stripes: #f8f8f8;
@@ -181,4 +182,4 @@ $code-color: $font-color;
 $code-size: 14px;
 $code-family: Menlo, monospace;
 $code-background: transparent;
-$code-borders: $borders;   
+$code-borders: $borders;

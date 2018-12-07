@@ -11,8 +11,6 @@ console.log(vars);
 This insert contains the page content part, to be inserted in the body of any page.
 
  */
-// wp_enqueue_script('decoNoise', get_template_directory_uri() . '/js/decoNoise.js', array('jquery'), 1.1, true);
-
 ?>
 
 <?php while (have_posts()): the_post();?>

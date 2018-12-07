@@ -8,14 +8,20 @@ document.addEventListener("DOMContentLoaded", function (event) {
     console.log("decoNoise.js");
     var imgels = [];
     var imgstr = '<img class="deco-noise">';
-    var piclist = [
-        vars.templateUrl+"/res-noise-pics/path1.png",
-        vars.templateUrl+"/res-noise-pics/path2.png",
-        vars.templateUrl+"/res-noise-pics/path3.png",
-        vars.templateUrl+"/res-noise-pics/path4.png",
-        vars.templateUrl+"/res-noise-pics/path5.png",
-        vars.templateUrl+"/res-noise-pics/path6.png",
-    ];
+
+    var piclist = vars.decoNoise.pictures;
+
+    if(!piclist[0]){
+      piclist=[
+          vars.templateUrl+"/res-noise-pics/path1.png",
+          vars.templateUrl+"/res-noise-pics/path2.png",
+          vars.templateUrl+"/res-noise-pics/path3.png",
+          vars.templateUrl+"/res-noise-pics/path4.png",
+          vars.templateUrl+"/res-noise-pics/path5.png",
+          vars.templateUrl+"/res-noise-pics/path6.png",
+      ]
+    }
+    var userDefinedZIndex=vars.decoNoise.zindex;
     var NoiseEl = function ($appendto) {
         imgels.push(this);
         var nimg = $(imgstr)
@@ -28,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
             y: Math.random() - 0.5
         }
         nimg.addClass("parallax");
-        nimg.attr("parallax-z",-(0.1 + Math.random()/2 ) );
+        nimg.attr("parallax-z",((0.1 + Math.random()/2 ) * userDefinedZIndex) );
         nimg.attr("src", piclist[Math.floor(Math.random() * piclist.length)]);
         nimg.attr("onerror", "hideThis(this)" );
 
@@ -55,7 +61,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
     $(".section-post-header-container, .deco-noise").each(function () {
         console.log(this);
 
-        $(this).css({ 
+        $(this).css({
             position: "relative",
             overflow: "hidden"
         });

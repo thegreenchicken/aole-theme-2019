@@ -1,12 +1,10 @@
- <?php if(is_user_logged_in()) { ?> <!-- template part: <?php echo dirname(__FILE__).'/'.basename(__FILE__);  ?> --> <?php } ?> 
+ <?php if(is_user_logged_in()) { ?> <!-- template part: <?php echo dirname(__FILE__).'/'.basename(__FILE__);  ?> --> <?php } ?>
 
 <?php
 /*
 This insert contains the page content part, to be inserted in the body of any page.
 
  */
-// wp_enqueue_script('decoNoise', get_template_directory_uri() . '/js/decoNoise.js', array('jquery'), 1.1, true);
-
 ?>
 
 <?php while (have_posts()): the_post();?>
@@ -95,7 +93,7 @@ This insert contains the page content part, to be inserted in the body of any pa
                     }
                 }
             ?>
-            
+
             <?php edit_post_link('Edit', '<span class="edit-link">', '</span>');?>
         </div>
     </div>
@@ -103,19 +101,19 @@ This insert contains the page content part, to be inserted in the body of any pa
     <div class="section-container section-after-pilot-container">
         Idea part, make it a page
     </div>
-    
+
     <?php if(is_user_logged_in()&&false){ ?>
         <div class="section container section-dev-container">
             <h2>Fields:</h2>
             <textarea style="width:100%; height:300px">
                 <?php print_r( get_fields() ) ?>
             </textarea>
-                
+
             <h2>Post:</h2>
             <textarea style="width:100%; height:300px">
                 <?php print_r( get_post() ) ?>
             </textarea>
         </div>
     <?php } ?>
-    
+
 <?php endwhile;?>
