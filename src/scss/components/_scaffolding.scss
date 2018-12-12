@@ -91,12 +91,17 @@ h5 {
 a {
     color: $link-color;
     text-decoration: $link-decoration;
+
+    // border-bottom: solid 1px $link-hover-color;
+
     &:hover,
     &:active,
     &:focus {
         color: $link-hover-color;
         text-decoration: $link-hover-decoration;
         // color: $text-color;
+        // border-bottom: none;
+
 
     }
 }

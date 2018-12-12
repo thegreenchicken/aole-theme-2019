@@ -60,7 +60,7 @@ $(window).ready( function (event) {
     }
 
     console.log("arrowettes.js");
-    $(".section-container:not(:last)").each(function(){
+    $(".section-container:not(:last,:first)").each(function(){
         new Arrowette($(this));
     });
 });
@@ -81,8 +81,16 @@ while (have_posts()): the_post();
       echo $customStyle;
       echo '</style>';
     }
+    if (get_field('callout')) {
+      ?>
+      <div class="section-container section-callout-container" >
+        <?php
+        the_field('callout');
+        ?>
+      </div>
+      <?php
+    }
     ?>
-
     <div class="section-container section-post-header-container" style="<?php
       if (get_field('color')) {
           echo 'background-color: ';
@@ -90,7 +98,20 @@ while (have_posts()): the_post();
           echo ";";
       }
       ?> position:relative; overflow:hidden;">
+
+      <?php
+      if (get_field('subscribe')) {
+        ?>
+        <div class="item-container item-subscribe-container" role="main">
+          <?php echo the_field('subscribe'); ?>
+        </div>
+        <?php
+      }
+      ?>
+
       <?php echo get_field('featured_header'); ?>
+
+
     </div>
 
 

@@ -104,10 +104,6 @@ This insert contains the page content part, to be inserted in the body of any pa
         </div>
     </div>
 
-    <div class="section-container section-after-pilot-container">
-        Idea part, make it a page
-    </div>
-
     <?php if(is_user_logged_in()&&false){ ?>
         <div class="section container section-dev-container">
             <h2>Fields:</h2>

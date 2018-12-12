@@ -17,11 +17,12 @@ wp_enqueue_script('tagClassifyPosts', get_template_directory_uri() . '/js/tagCla
 <?php while (have_posts()): the_post();?>
     <?php
     $extra_fields=get_fields();
+    // print_r($extra_fields);
     ?>
     <div class="section-container section-post-header-container" style="<?php
-                        if (get_field('color')){
+                        if ($extra_fields['color']){
                             echo "background-color: ";
-                            the_field( 'color' );
+                            $extra_fields['color'];
                             echo ";";
                         }
                     ?>" role="main">
@@ -61,13 +62,17 @@ wp_enqueue_script('tagClassifyPosts', get_template_directory_uri() . '/js/tagCla
     ?>
 
     <?php
+    unset($extra_fields['color']);
+    unset($extra_fields['subtitle']);
     foreach($extra_fields as $name => $field){
-      ?>
-      <div class="section-container section-<?php echo $name; ?>-container">
-        <h2><?php echo $name; ?></h2>
-          <?php echo $field; ?>
-      </div>
-      <?php
+      if($field){
+        ?>
+        <div class="section-container section-<?php echo $name; ?>-container">
+          <!-- <h2><?php echo $name; ?></h2> -->
+            <?php echo $field; ?>
+        </div>
+        <?php
+      }
     }
     ?>
 <?php endwhile;?>

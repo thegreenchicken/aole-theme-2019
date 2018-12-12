@@ -475,7 +475,7 @@ add_image_size( 'feed-thumbnail', 500, 180, true); // name, width, height, crop
 add_image_size( 'event-thumbnail', 790, 270, true); // name, width, height, crop
 
 
-// Custom excerpt for feed posts on front page //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Custom excerpt for feed posts on front page
 // Source: https://stackoverflow.com/a/24160854
 
 function wpse_allowedtags() {
@@ -610,19 +610,19 @@ function get_post_image_url($post_id, $image_size){
 
 // Add a custom ACF menu to edit the footer
 
-function add_theme_settings_page(){
-  if( function_exists('acf_add_options_page') ) {
-
-    acf_add_options_page(array(
-        'page_title'    => 'Theme General Settings',
-        'menu_title'    => 'Theme Settings',
-        'menu_slug'     => 'theme-general-settings',
-        'capability'    => 'edit_theme_settings',
-        'redirect'      => false
-        ));
-
-}
-}
+// function add_theme_settings_page(){
+//   if( function_exists('acf_add_options_page') ) {
+//
+//     acf_add_options_page(array(
+//         'page_title'    => 'Theme General Settings',
+//         'menu_title'    => 'Theme Settings',
+//         'menu_slug'     => 'theme-general-settings',
+//         'capability'    => 'edit_theme_settings',
+//         'redirect'      => false
+//         ));
+//
+// }
+// }
 
 
 // Enable ACF PRO even in the WP-signup page
@@ -688,17 +688,9 @@ function wp_maintenance_mode(){
     }
 }
 //add_action('get_header', 'wp_maintenance_mode');
-
-//prevent tinymce removing content
-//not working
-// function override_mce_options($initArray) {
-// 	$opts = '*[*]';
-//   echo'<pre style="display:block; position:relative;">';
-//   print_r($initArray);
-//   echo"</pre>";
-//
-// 	$initArray['valid_elements'] = $opts;
-// 	$initArray['extended_valid_elements'] = $opts;
-// 	return $initArray;
-// }
-// add_filter('tiny_mce_before_init', 'override_mce_options');
+function override_mce_options($initArray) {
+    $opts = '*[*]';
+    $initArray['valid_elements'] = $opts;
+    $initArray['extended_valid_elements'] = $opts;
+    return $initArray;
+} add_filter('tiny_mce_before_init', 'override_mce_options');
