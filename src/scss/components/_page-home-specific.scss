@@ -4,28 +4,43 @@ body.home{
         margin-top: 5rem;
         display: block;
         text-align: center;
+        transition: margin-left 0.5s;
         &::after{
             content:" →"
+        }
+        &:hover{
+          margin-left: 36px;
+          transition: margin-left 0.5s;
         }
     }
     h2{
       color: $gray;
       text-transform: none;
     }
-
+    // .items-news-wrapper{
+    //   .item-author-container,.item-title-container,.item-author-container{
+    //     padding:10px;
+    //   }
+    // }
+    // p{
+    //   @extend .col-sm-8;
+    // }
     .section-container.section-more-about-container{
         @include hero-item();
         background-color:$blue;
 
-        &>*{
-            @extend .container;
-        }
+        // &>*{
+        //     @extend .container;
+        // }
         blockquote{
             font-family: $heading-font-family;
             font-size: 2rem;
             font-weight: bold;
             line-height: 3rem;
         }
+    }
+    .items-pilots-wrapper{
+      margin-top:85px;
     }
     .section-events-showcase-container{
         @include hero-item();
@@ -44,6 +59,16 @@ body.home{
         }
         .item-date-container{
             font-size: 1.3em;
+        }
+        a:hover>*{
+          text-decoration:underline;
+          margin-left:10px;
+        }
+    }
+    .section-pilots-list-container{
+        .item-before-container,.item-after-container{
+          @include center-pushed-text(8);
+          float:none;
         }
     }
 }

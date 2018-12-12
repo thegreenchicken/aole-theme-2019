@@ -20,7 +20,8 @@ var stylingGeneralJs = new (function () {
 
     var self = this;
 
-    this.makeSquare = function (selectorString) {
+    this.makeSquare = function (props) {
+        var selectorString=props.selector;
         if (selectorString !== undefined) {
             squareElementsSelector = selectorString;
             $squareElements = $(squareElementsSelector);
@@ -29,7 +30,8 @@ var stylingGeneralJs = new (function () {
         return squareElementsSelector;
     }
 
-    this.makeSquare.add = function (selector) {
+    this.makeSquare.add = function (props) {
+        var selector=props.selector;
         squareElementsSelector += ", " + selector;
         $squareElements = $(squareElementsSelector);
         console.log("scripting the height of ", $squareElements);
@@ -41,6 +43,66 @@ var stylingGeneralJs = new (function () {
             $(this).css("height", $(this).width());
             // $(this).attr("
         });
+    }
+    var $fillElements=false;
+    var fillSelector=false;
+    this.fill=function(props){
+      fillSelector=props.selector;
+      self.fill.update();
+    }
+
+
+    this.fill.update=function(){
+      if(!fillSelector)return;
+      // console.log("fupdate");
+      if(!$fillElements){
+        $fillElements=$(fillSelector);
+        $fillElements.each(function(){
+          $(this).on("load",function(){
+            var $this=$(this);
+            $this.attr("ready","true");
+            $this.css({width:"initial",height:"initial"});
+            var imgW = parseInt($this.width());
+            var imgH = parseInt($this.height());
+            myRatio=(imgW/imgH);
+            $this.attr("data-original-ratio",myRatio);
+            $this.attr("data-original-width",imgW);
+            $this.attr("data-original-height",imgH);
+
+            self.fill.update();
+          });
+        });
+        console.log("apply fill to ",$fillElements);
+      }
+      $fillElements.each(function(){
+          var $this=$(this);
+          var refH = $this.parent().height();
+          var refW = $this.parent().width();
+
+          var refRatio = refW/refH;
+          if(!refRatio) return;
+
+          var myRatio=parseFloat($this.attr("data-original-ratio"));
+
+          if(myRatio){
+            if ( myRatio < refRatio ) {
+              $(this).removeClass("full-height");
+              $(this).addClass("full-width");
+              // $this.css({
+              //   width:refH*myRatio+"px",
+              //   height:refH+"px"
+              // });
+            } else {
+              $(this).removeClass("full-width");
+              $(this).addClass("full-height");
+              // $this.css({
+              //   width:refW*myRatio+"px",
+              //   height:refW+"px"
+              // });
+            }
+          }
+
+      })
     }
 
 
@@ -54,18 +116,18 @@ var stylingGeneralJs = new (function () {
         $(props.selector).ellipsis(props);
     }
 
-
     this.update = function () {
         self.makeSquare.update();
         // self.ellipsis.update();
+        self.fill.update();
     }
 
     return this;
 });
 
-stylingGeneralJs.makeSquare("body.page .item-post-thumbnail-container, .square");
+stylingGeneralJs.makeSquare({selector:"body.page .item-post-thumbnail-container, .items-team_members-wrapper .image-container, .square"});
 stylingGeneralJs.ellipsis({selector:".post-title-container", responsive: true, lines:2 });
-
+stylingGeneralJs.fill({selector:".items-team_members-wrapper .image-container img, .fill"});
 document.addEventListener("DOMContentLoaded", function (event) {
     //this bit ensures that the page doesn't change size while images are getting DOMContentLoaded/
     //this removes the classic annoyance of scrolling to the desired part,

@@ -38,8 +38,12 @@ $secondary-color: $red;
 $accent-color: $yellow;
 $alternate-background: $blackish;
 $alternate-color: $blue-dark;
-$link-color: black;
+
+$link-color: inherit;
 $link-hover-color: $blue-light;
+$link-decoration: none;
+$link-hover-decoration: none;
+
 $highlight: $yellow;
 $error: $red;
 //bq=blockquote

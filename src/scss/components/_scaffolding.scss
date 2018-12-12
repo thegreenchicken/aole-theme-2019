@@ -90,12 +90,12 @@ h5 {
 // Link styling
 a {
     color: $link-color;
-    text-decoration: none;
+    text-decoration: $link-decoration;
     &:hover,
     &:active,
     &:focus {
         color: $link-hover-color;
-        text-decoration: underline;
+        text-decoration: $link-hover-decoration;
         // color: $text-color;
 
     }
@@ -181,7 +181,7 @@ dd {
     margin-bottom: .5rem;
 }
 
-// Full container 
+// Full container
 .full-container {
     max-width: 100%;
     padding: 0 1rem;
@@ -226,4 +226,16 @@ dd {
     padding: 0.2rem 2rem;
     text-transform: uppercase;
     text-align: center;
+    transition: opacity 0.05s,transform 0.05s;
+    &:hover{
+      opacity:0.7;
+      transform:translateY(2px);
+      transition: opacity 0.05s,transform 0.05s;
+    }
+}
+.tag {
+    border: solid 1px;
+    margin: 2px;
+    padding: 1px 9px;
+    display: inline-block;
 }

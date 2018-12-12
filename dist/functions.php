@@ -51,7 +51,6 @@ if (!function_exists('write_log')) {
     }
 }
 
-
 ///////Custom post types start
 
 
@@ -584,7 +583,8 @@ if ( ! function_exists( 'wpse_custom_wp_trim_excerpt' ) ) :
 }
 
 // Get the event image URL
-
+//TODO:remove this function that is superseeded by get_post_image_url.
+//to customize fallback images I could extract the post_type slug
 function get_event_image_url($event_id, $image_size){
 // use default picture if event doesn't have a featured image
     $thumb_url = "";
@@ -598,12 +598,12 @@ function get_event_image_url($event_id, $image_size){
 
 }
 
-function get_pilot_image_url($pilot_id, $image_size){
+function get_post_image_url($post_id, $image_size){
     $thumb_url = "";
-    if (has_post_thumbnail($pilot_id)){
-        $thumb_url = get_the_post_thumbnail_url($pilot_id, $image_size);
+    if (has_post_thumbnail($post_id)){
+        $thumb_url = get_the_post_thumbnail_url($post_id, $image_size);
     } else {
-        $thumb_url = get_stylesheet_directory_uri()."/assets/images/default_pilot.png";
+        $thumb_url = get_stylesheet_directory_uri()."/assets/images/default.png";
     }
     return $thumb_url;
 }
@@ -688,3 +688,17 @@ function wp_maintenance_mode(){
     }
 }
 //add_action('get_header', 'wp_maintenance_mode');
+
+//prevent tinymce removing content
+//not working
+// function override_mce_options($initArray) {
+// 	$opts = '*[*]';
+//   echo'<pre style="display:block; position:relative;">';
+//   print_r($initArray);
+//   echo"</pre>";
+//
+// 	$initArray['valid_elements'] = $opts;
+// 	$initArray['extended_valid_elements'] = $opts;
+// 	return $initArray;
+// }
+// add_filter('tiny_mce_before_init', 'override_mce_options');

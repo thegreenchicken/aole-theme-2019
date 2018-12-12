@@ -24,7 +24,7 @@ wp_enqueue_script('pilots-list', get_template_directory_uri() . '/js/pilots-list
 
 ?>
 
-			<div class='item-pilot-container classifiable-item'>
+			<div class='item-container item-pilot-container classifiable-item'>
 				<div style="display:none" class="classifiable-attributes"><?php
 					$generatorTags=["random","generated","tags","because","posts","don't","have","metadata","lalala","cooltag"];
 					echo "{";
@@ -53,7 +53,7 @@ wp_enqueue_script('pilots-list', get_template_directory_uri() . '/js/pilots-list
 				?></div>
 				<a class="item-paragraph-container" href="<?php echo get_the_permalink($pilot->ID);?>">
 					<div class="post-image-container">
-						<img src="<?php echo get_pilot_image_url($pilot->ID, 'medium'); ?>" />
+						<img src="<?php echo get_post_image_url($pilot->ID, 'medium'); ?>" />
 					</div>
 					<div class="post-title-container">
 						<?php echo $pilot->post_title; ?>

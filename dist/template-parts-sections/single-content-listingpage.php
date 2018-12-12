@@ -15,6 +15,9 @@ wp_enqueue_script('tagClassifyPosts', get_template_directory_uri() . '/js/tagCla
 
 ?>
 <?php while (have_posts()): the_post();?>
+    <?php
+    $extra_fields=get_fields();
+    ?>
     <div class="section-container section-post-header-container" style="<?php
                         if (get_field('color')){
                             echo "background-color: ";
@@ -44,15 +47,27 @@ wp_enqueue_script('tagClassifyPosts', get_template_directory_uri() . '/js/tagCla
             <p><?php the_tags();?></p>
         </div>
     </div>
+
     <?php
-    if (get_field('more_contents')) {
-        ?>
-        <div class="section-container section-post-container">
-            <?php
-            echo get_field('more_contents');
-            ?>
-        </div>
-        <?php
+    $team_members=$extra_fields['team_members'];
+    if($team_members){
+      include locate_template('includes/lister-team_members.php');
+    }
+
+    $team_members=$extra_fields['core_team_members'];
+    if($team_members){
+      include locate_template('includes/lister-team_members.php');
+    }
+    ?>
+
+    <?php
+    foreach($extra_fields as $name => $field){
+      ?>
+      <div class="section-container section-<?php echo $name; ?>-container">
+        <h2><?php echo $name; ?></h2>
+          <?php echo $field; ?>
+      </div>
+      <?php
     }
     ?>
 <?php endwhile;?>

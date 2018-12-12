@@ -60,7 +60,7 @@ $(window).ready( function (event) {
     }
 
     console.log("arrowettes.js");
-    $(".section-container").each(function(){
+    $(".section-container:not(:last)").each(function(){
         new Arrowette($(this));
     });
 });
@@ -74,6 +74,13 @@ console.log(vars);
 <?php
 while (have_posts()): the_post();
     $post = get_post();
+
+    $customStyle = get_field('custom_style');
+    if($customStyle){
+      echo '<style>';
+      echo $customStyle;
+      echo '</style>';
+    }
     ?>
 
     <div class="section-container section-post-header-container" style="<?php
@@ -82,13 +89,17 @@ while (have_posts()): the_post();
           the_field('color');
           echo ";";
       }
-      ?>" position:relative; overflow:hidden;">
+      ?> position:relative; overflow:hidden;">
       <?php echo get_field('featured_header'); ?>
     </div>
 
 
     <div class="section-container section-post-content-container" role="main">
-        <?php the_content();?>
+
+        <?php
+        the_content();
+
+        ?>
     </div>
 
 
@@ -115,7 +126,7 @@ while (have_posts()): the_post();
 
         ?>
         </div>
-        <a class="button-more">Go to all events</a>
+        <a href="events" class="button-more">Go to all events</a>
     </div>
 
 
@@ -123,11 +134,13 @@ while (have_posts()): the_post();
 
       <?php
       $section = get_field('pilots_showcase_section');
-
+      //select a list of pilots. This var is used in the upcoming included template part.
       $pilots = $section['showcased_pilots'];
-      $append_before = '<h2 class="pilots-title"><!-- get_field(pilots_showcase_section)[pilots_title] -->' . $section['pilots_title'] . '</h2>';
-      $append_before .= '<p class="pilots-subtitle"><!-- get_field(pilots_showcase_section)[pilots_subtitle] -->' . $section['pilots_subtitle'] . '</h2>';
-      $append_after = '<a class="button-more">See full pilots list</a>';
+      // print_r($section);
+      $append_before = '<h2 class="pilots-title"><!-- get_field(pilots_showcase_section)[title] -->' . $section['title'] . '</h2>';
+      $append_before .= '<p class="pilots-description"><!-- get_field(pilots_showcase_section)[text_body] -->' . $section['text_body'] . '</p>';
+      $append_before .= '<p class="pilots-subtitle"><!-- get_field(pilots_showcase_section)[pilots_subtitle] -->' . $section['pilots_subtitle'] . '</p>';
+      $append_after = '<a href="pilots" class="button-more">See full pilots list</a>';
       //$append_before & after are appended in the following included template part:
       include locate_template('includes/lister-pilots.php');
 
@@ -144,13 +157,14 @@ while (have_posts()): the_post();
             $section = get_field('news_showcase_section');
 
             $append_before = '<h2 class="news-title"><!-- get_field(news_showcase_section)[news_title] -->' . $section['news_title'] . '</h2>';
-            $append_before .= '<p class="news-subtitle"><!-- get_field(news_showcase_section)[news_subtitle] -->' . $section['news_subtitle'] . '</h2>';
+            $append_before .= '<p class="news-subtitle"><!-- get_field(news_showcase_section)[news_subtitle] -->' . $section['news_subtitle'] . '</p>';
             echo $append_before;
 
             $args = array(
                 'category_name' => 'News',
                 'posts_per_page' => 3,
             );
+
             $posts = get_posts($args);
 
             foreach ($posts as $post):
@@ -163,7 +177,7 @@ while (have_posts()): the_post();
             wp_reset_postdata();
             ?>
         </div>
-        <a class="button-more">More news</a>
+        <a href="news" class="button-more">More news</a>
 
     </div>
 
@@ -192,7 +206,7 @@ while (have_posts()): the_post();
     }
     ?>
 
-    <?php if (is_user_logged_in()) {?>
+    <?php /*if (is_user_logged_in()) {?>
       <div class="section-container section-dev-container">
       <h2>Fields:</h2>
       <textarea style="width:100%; height:800px">
@@ -204,7 +218,7 @@ while (have_posts()): the_post();
       <?php print_r($post)?>
       </textarea>
       </div>
-    <?php }?>
+    <?php }*/?>
 
 
 			    <?php

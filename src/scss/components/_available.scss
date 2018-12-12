@@ -1,0 +1,15 @@
+.white-framed{
+    overflow: hidden;
+    border: solid 3px white;
+}
+.text-section{
+  @include center-pushed-text(8);
+}
+.full-width{
+  width:100% !important;
+  height:auto !important;
+}
+.full-height{
+  width:auto !important;
+  height:100% !important;
+}

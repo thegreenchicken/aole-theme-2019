@@ -24,15 +24,11 @@ This insert contains the page content part, to be inserted in the body of any pa
             </span>
         <?php } ?>
         <div class="item-tags-container">
-            <span class="tag">Test tag</span>
-            <span class="tag">Test tag a</span>
-            <span class="tag">Test tag b</span>
-            <span class="tag">Test tag c</span>
-            <span class="tag">Test tag d</span>
             <?php
-                $echo = get_field('tags');
-                if ($echo) {
-                    print_r($echo);
+                $tags = get_the_tags();
+                // print_r($tags);
+                foreach ($tags as $key => $tag) {
+                  echo '<span class="tag tag-'.$tag->slug.'">'.$tag->name.'</span>';
                 }
             ?>
         </div>

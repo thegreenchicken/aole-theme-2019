@@ -1,0 +1,19 @@
+.section-container{
+  .items-wrapper.items-team_members-wrapper{
+    @extend .row;
+    .item-container{
+      @extend .col-xs-6;
+      @extend .col-sm-4;
+      @extend .col-lg-3;
+      .image-container{
+        overflow:hidden;
+        width:100%;
+        background-color: #80808033;
+        img{
+          // max-width: 100%;
+        }
+      }
+    }
+    // background-color: yellow;
+  }
+}

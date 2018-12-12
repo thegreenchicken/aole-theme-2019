@@ -44,3 +44,7 @@
         display: inline;
     }
 }
+@mixin center-pushed-text($n){
+  @extend .col-sm-#{$n};
+  @extend .col-sm-push-#{(12 - $n) / 2};
+}

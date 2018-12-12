@@ -81,11 +81,11 @@ try{
           $mod=get_theme_mod('aole_2019_header_settings');
       		if($mod[ $mod['header_type'] ]){
             if($mod['header_type']=="logo_image"){
-                echo '<img class="logo" src="'
+                echo '<a href="'.esc_url( home_url( '/' ) ).'"><img class="logo" src="'
                           .$mod[ $mod['header_type'] ]
                           .'" style="'
                           .$mod['image_style']
-                          .'"/>';
+                          .'"/></a>';
             }else{
       			    echo $mod[ $mod['header_type'] ];
              }

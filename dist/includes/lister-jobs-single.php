@@ -1,5 +1,5 @@
 
-<?php if(is_user_logged_in()) { ?> <!-- template part: <?php echo dirname(__FILE__).'/'.basename(__FILE__);  ?> --> <?php } ?> 
+<?php if(is_user_logged_in()) { ?> <!-- template part: <?php echo dirname(__FILE__).'/'.basename(__FILE__);  ?> --> <?php } ?>
 <?php
 /*
 
@@ -12,24 +12,24 @@ this is the context where this part should be invoked:
 	<div class="items-wrapper items-jobs-wrapper">
 
 	<?php
-	
-	postdata must have been set, this include operates using the standard template tags.
-	this either happens naturally at an index page, or it can be set by using `setup_postdata($post);` 
 
-	//The easiest way: 
-	
+	postdata must have been set, this include operates using the standard template tags.
+	this either happens naturally at an index page, or it can be set by using `setup_postdata($post);`
+
+	//The easiest way:
+
     $args = array( 'category_name'=> 'jobs' );
     $posts = get_posts($args);
-    
+
     foreach ($posts as $post) :
         //it could work without using setup_postdata, in which case the different attributes would be accessed using $post -> <attribute>
 		setup_postdata($post);
 		include locate_template('includes/lister-jobs-single.php');
 
 */
-?>			
+?>
 			<a href="<?php echo get_permalink(); ?>">
-				<div class="item-container item-jobs-container">
+				<div class="item-container item-job-container">
 					<div class="item-image-container">
 						<?php the_post_thumbnail(); ?>
 					</div>

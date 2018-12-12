@@ -106,13 +106,14 @@
                 ?>
             </span>
             <span class="event-ispublic">
-                <?php if ($event["event"]->custom_fields["only_for_pilots"] == 1) { echo "Event for pilots"; } else { echo "Public event"; }; ?> 
+                <?php if (get_field("only_for_pilots") == 1) { echo "Event for pilots"; } else { echo "Public event"; }; ?>
             </span>
-          	<a class="button singn-up-button" href="<?php echo $event["event"]->custom_fields["registration_link"]; ?>">Sugn up here</a>
+            <?php if(get_field("registration_link")){ ?>
+               <a class="button singn-up-button" href="<?php echo get_field("registration_link"); ?>">Sign up here</a>
+            <?php } ?>
 
             <span class="ical-export">
               <a href="<?php echo do_shortcode("[event post_id='".$event["post"]->ID."']#_EVENTICALURL[/event]");?>">Export calendar event</a>
-
             </span>
         </div>
         <div class="item-post-content-container">

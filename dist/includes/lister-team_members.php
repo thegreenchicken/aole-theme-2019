@@ -5,12 +5,12 @@
 <?php
 
 /*
-used to embed a short list of pilots in another post.
+used to embed a short list of team_members in another post.
 
  */
 
 ?>
-<div class="section-container section-pilots-list-container">
+<div class="section-container section-team_members-list-container">
   <?php
   if($append_before){
     ?>
@@ -22,11 +22,11 @@ used to embed a short list of pilots in another post.
   	<?php
   }
 	?>
-	<div class="items-wrapper items-pilots-wrapper classifiable-container">
+	<div class="items-wrapper items-team_members-wrapper classifiable-container">
 		<?php
-		foreach ($pilots as $pilot):
+		foreach ($team_members as $team_member):
 
-		include locate_template('includes/lister-pilot.php');
+		include locate_template('includes/lister-team_member.php');
 
 		endforeach;
 		wp_reset_postdata();
