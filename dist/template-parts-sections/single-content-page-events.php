@@ -1,5 +1,5 @@
 
- <?php if(is_user_logged_in()) { ?> <!-- template part: <?php echo dirname(__FILE__).'/'.basename(__FILE__);  ?> --> <?php } ?> 
+ <?php if(is_user_logged_in()) { ?> <!-- template part: <?php echo dirname(__FILE__).'/'.basename(__FILE__);  ?> --> <?php } ?>
 <script>
 vars={templateUrl:"<?php
     echo get_template_directory_uri();
@@ -11,19 +11,21 @@ console.log(vars);
 This insert contains the page content part, to be inserted in the body of any page.
 
  */
-wp_enqueue_script('decoNoise', get_template_directory_uri() . '/js/decoNoise.js', array('jquery'), 1.1, true);
 wp_enqueue_script('tagClassifyPosts', get_template_directory_uri() . '/js/tagClassifyPosts.js', array('jquery'), 1.1, true);
 
 
 ?>
 <?php while (have_posts()): the_post();?>
-    <div class="section-container section-post-header-container" style="<?php 
+    <div class="section-container section-post-header-container" style="<?php
                         if (get_field('color')){
                             echo "background-color: ";
                             the_field( 'color' );
                             echo ";";
                         }
                     ?>" role="main">
+        <?php
+        include locate_template("includes/deco-noise-selector.php");
+        ?>
         <div class="item-post-title-container">
             <h2 class="entry-title"><?php the_title(); ?></h2>
             <p>

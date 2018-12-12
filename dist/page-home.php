@@ -127,27 +127,32 @@ while (have_posts()): the_post();
     <div class="section-container section-events-showcase-container">
         <div class="items-wrapper items-future-events-wrapper">
 
-        <?php
+          <?php
 
-        $section = get_field('events_showcase_section');
+          $section = get_field('events_showcase_section');
 
-        $append_before = '<h2 class="events-title"><!-- get_field(events_showcase_section)[events_title] -->' . $section['events_title'] . '</h2>';
-        $append_before .= '<p class="events-subtitle"><!-- get_field(events_showcase_section)[events_subtitle] -->' . $section['events_subtitle'] . '</h2>';
-        echo $append_before;
+          $append_before = '<h2 class="events-title"><!-- get_field(events_showcase_section)[events_title] -->' . $section['events_title'] . '</h2>';
+          $append_before .= '<p class="events-subtitle"><!-- get_field(events_showcase_section)[events_subtitle] -->' . $section['events_subtitle'] . '</h2>';
 
-        $future_events = EM_Events::get(array(
+          $future_events = EM_Events::get(array(
             "scope" => "future",
             "limit" => 3,
             // "orderby" => "event_start_date"
-        ));
+          ));
+          if(! empty($future_events)){
+            echo $append_before;
 
-        foreach ($future_events as $ne => $event) {
-            include locate_template('includes/lister-events-single.php');
-        }
 
-        ?>
+            foreach ($future_events as $ne => $event) {
+                include locate_template('includes/lister-events-single.php');
+            }
+            ?>
+            <a href="events" class="button-more">Go to all events</a>
+            <?php
+          }
+
+          ?>
         </div>
-        <a href="events" class="button-more">Go to all events</a>
     </div>
 
 

@@ -10,6 +10,23 @@ This insert contains the page content part, to be inserted in the body of any pa
 <?php while (have_posts()):the_post();
 
   $extra_fields=get_fields();
+  function the_next_field($specify){
+      global $extra_fields;
+      reset($extra_fields);
+      if($specify){
+        $key=$specify;
+        // echo  "specify";
+      }else{
+        $key = current($extra_fields);
+        echo($key);
+      }
+      $fo = get_field_object( $key );
+      //
+      unset($extra_fields[$key]);
+      // print_r($fo);
+      return $fo;
+  }
+
   ?>
     <div class="section-container section-post-header-container">
         <p class="item-post-type-container"><?php ?></p>
@@ -17,6 +34,8 @@ This insert contains the page content part, to be inserted in the body of any pa
         <?php
 
         $echo = $extra_fields['subtitle'];
+        unset($extra_fields['subtitle']);
+
         if ($echo) {
             ?>
             <span class="item-subtitle-container">
@@ -55,16 +74,17 @@ This insert contains the page content part, to be inserted in the body of any pa
                 );
 
                 foreach ($displayfields as $title => $fieldSlug) {
-                    if ($extra_fields[$fieldSlug]) {
-                        echo '<div class="item-' . $fieldSlug . '-field-container">';
-                        echo '  <h2 class="title">' . $title . '</h2>';
-                        echo '  <p class="content">';
-                        echo $extra_fields[$fieldSlug];
-                        echo '  </p>';
-                        echo '</div>';
-                    }
-                    //just so that it doesn't appear again.
-                    unset($extra_fields[$fieldSlug]);
+                  $fo=the_next_field($fieldSlug);
+                  if ($extra_fields[$fieldSlug]) {
+                      echo '<div class="item-' . $fieldSlug . '-field-container">';
+                      echo '  <h2 class="title">' . $title . '</h2>';
+                      echo '  <p class="content">';
+                      echo $fo->value;//$extra_fields[$fieldSlug];
+                      echo '  </p>';
+                      echo '</div>';
+                  }
+                  //just so that it doesn't appear again.
+                  // unset($extra_fields[$fieldSlug]);
                 }
                 ?>
         </div>
@@ -72,9 +92,18 @@ This insert contains the page content part, to be inserted in the body of any pa
           <?php
           //some post types may not be using the post content field. In that case, let's take the first content field available
           $contentDisplay= the_content();
+
+          unset($extra_fields['color']);
+          unset($extra_fields['header-background-picture']);
+
+
           if(empty($contentDisplay)){
-            $contentDisplay=$extra_fields['description'];
-            unset($extra_fields['description']);
+            // $contentDisplay=current($extra_fields);//['description'];
+            //
+            // unset($extra_fields['description']);
+            $fo=the_next_field("description");
+            echo "<h2>".$fo[label]."</h2>";
+            $contentDisplay=$fo[value];
           }
           echo $contentDisplay;
           ?>
@@ -86,16 +115,12 @@ This insert contains the page content part, to be inserted in the body of any pa
     (some fields are removed because they are not meant to appear as content.)
     -->
     <?php
-    unset($extra_fields['color']);
-    unset($extra_fields['subtitle']);
-    unset($extra_fields['side-data']);
-    unset($extra_fields['header-background-picture']);
-    foreach($extra_fields as $slug => $field){
+
+    foreach($extra_fields as $name => $field){
       if($field && is_string($field)){
-        $fo=get_field_object($slug);
         ?>
-        <div class="section-container section-<?php echo $slug; ?>-container">
-          <h2><?php echo $fo[label] ?></h2>
+        <div class="section-container section-<?php echo $name; ?>-container">
+          <h2><?php echo $name; ?></h2>
             <?php echo $field; ?>
         </div>
         <?php
@@ -103,25 +128,12 @@ This insert contains the page content part, to be inserted in the body of any pa
     }
     ?>
 
-    <?php if(is_user_logged_in()&&false){ ?>
-        <div class="section container section-dev-container">
-            <h2>Fields:</h2>
-            <textarea style="width:100%; height:300px">
-                <?php print_r( $extra_fields ) ?>
-            </textarea>
-
-            <h2>Post:</h2>
-            <textarea style="width:100%; height:300px">
-                <?php print_r( get_post() ) ?>
-            </textarea>
-        </div>
-    <?php } ?>
     <div class="section-container section-after-post-container">
         <div class="items-wrapper items-other-posts-wrapper">
           <?php
           // get_adjacent_post($in_same_cat = false, $excluded_categories = '', $previous = true)
-          $post_prev=( get_adjacent_post(true,'',true) );
-          $post_next=( get_adjacent_post(true,'',false) );
+          $post_prev=( get_adjacent_post(false,'',true) );
+          $post_next=( get_adjacent_post(false,'',false) );
 
           // if($is_object($post)) {
           //     $previous_post_permalink = get_permalink($post->ID);

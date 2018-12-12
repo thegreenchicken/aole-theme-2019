@@ -5,7 +5,8 @@ $p=0;
 
 $wp_customize->add_section($section_name, array(
     'title' => __('deco-noise settings'),
-    'description' => __('settings for the coloured decorations at the top of the listing pages'),
+    'description' => __('Settings for the coloured decorations at the top of the listing pages.\
+    These settings can be overriden in a single page by defining a "header-background-picture" custom field on any of the pages.'),
     'panel' => '', // Not typically needed.
     'priority' => 160,
     'capability' => 'edit_theme_options',

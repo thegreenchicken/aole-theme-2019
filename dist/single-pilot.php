@@ -6,7 +6,7 @@ get_header(); ?>
 <?php
 get_template_part('template-parts-sections/single-content');
 
-$pilots = get_pilots("", "4");
+// $pilots = get_pilots("", "4");
 ?>
 
 <?php
@@ -18,7 +18,7 @@ $pilots = get_posts(
 );
 $append_before = '<h2 class="pilots-title"><!-- get_field(pilots_showcase_section)[pilots_title] -->' . $section['pilots_title'] . '</h2>';
 $append_before .= '<p class="pilots-subtitle"><!-- get_field(pilots_showcase_section)[pilots_subtitle] -->' . $section['pilots_subtitle'] . '</h2>';
-$append_after = '<a class="button-more">See full pilots list</a>';
+$append_after = '<a href="pilots" class="button-more">See full pilots list</a>';
 //$append_before & after are appended in the following included template part:
 include locate_template('includes/lister-pilots.php');
 

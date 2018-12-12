@@ -8,6 +8,7 @@ include locate_template("customizer/index.php");
 $fullWPpath = '/Users/taipala2/Documents/OneDrive - Aalto-yliopisto/Web Projects/htdocs/wordpress';
 
 //add featured image to pages too
+add_theme_support('post-thumbnails');
 add_theme_support('post-thumbnails', array('post', 'page'));
 
 
@@ -159,7 +160,7 @@ function cptui_register_my_cpts() {
         "hierarchical" => false,
         "rewrite" => array( "slug" => "team_members", "with_front" => true ),
         "query_var" => true,
-        "supports" => array( "title", "thumbnail" ),
+        'supports' => array('title', 'editor', 'thumbnail')
         );
 
     register_post_type( "team_members", $args );
@@ -582,26 +583,15 @@ if ( ! function_exists( 'wpse_custom_wp_trim_excerpt' ) ) :
     return $event_information;
 }
 
-// Get the event image URL
-//TODO:remove this function that is superseeded by get_post_image_url.
-//to customize fallback images I could extract the post_type slug
-function get_event_image_url($event_id, $image_size){
-// use default picture if event doesn't have a featured image
+// Get the event image URL with fallback default picture
+
+function get_post_thumbnail_url_or_fallback($post_id, $image_size, $fallback){
     $thumb_url = "";
-    if (has_post_thumbnail($event_id)){
-        $thumb_url = get_the_post_thumbnail_url($event_id, $image_size);
-    } else {
-        $thumb_url = get_stylesheet_directory_uri()."/assets/images/default_event.png";
-    }
 
-    return $thumb_url;
-
-}
-
-function get_post_image_url($post_id, $image_size){
-    $thumb_url = "";
     if (has_post_thumbnail($post_id)){
         $thumb_url = get_the_post_thumbnail_url($post_id, $image_size);
+    } else if($fallback){
+        $thumb_url = get_stylesheet_directory_uri()."/assets/images/default-".$fallback.".png";
     } else {
         $thumb_url = get_stylesheet_directory_uri()."/assets/images/default.png";
     }
@@ -688,9 +678,8 @@ function wp_maintenance_mode(){
     }
 }
 //add_action('get_header', 'wp_maintenance_mode');
-function override_mce_options($initArray) {
-    $opts = '*[*]';
-    $initArray['valid_elements'] = $opts;
-    $initArray['extended_valid_elements'] = $opts;
-    return $initArray;
-} add_filter('tiny_mce_before_init', 'override_mce_options');
+// function my_format_TinyMCE( $in ) {
+// 	$in['keep_styles'] = true;
+// 	return $in;
+// }
+// add_filter( 'tiny_mce_before_init', 'my_format_TinyMCE' );

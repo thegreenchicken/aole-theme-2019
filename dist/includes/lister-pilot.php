@@ -53,7 +53,7 @@ wp_enqueue_script('pilots-list', get_template_directory_uri() . '/js/pilots-list
 				?></div>
 				<a class="item-paragraph-container" href="<?php echo get_the_permalink($pilot->ID);?>">
 					<div class="post-image-container">
-						<img src="<?php echo get_post_image_url($pilot->ID, 'medium'); ?>" />
+						<img src="<?php echo get_post_thumbnail_url_or_fallback($pilot->ID, 'medium'); ?>" />
 					</div>
 					<div class="post-title-container">
 						<?php echo $pilot->post_title; ?>

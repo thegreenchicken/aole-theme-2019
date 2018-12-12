@@ -36,7 +36,7 @@ get_header();
 	// $past_events = create_event_array($past_events);
 	// "< display name >" => $< contents >
 
-	$event_scope = array("Upcoming"=>$future_events,"Past"=>$past_events);
+	$event_scope = array("upcoming"=>$future_events,"past"=>$past_events);
 ?>
 
 

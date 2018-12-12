@@ -24,9 +24,11 @@ this is the context where this part should be invoked:
 ?>
 
 			<div class='item-container item-team_member-container'>
-				<a class="item-paragraph-container" href="<?php echo get_the_permalink($team_member->ID);?>">
+				<!-- <a class="item-paragraph-container" href="<?php echo get_the_permalink($team_member->ID);?>"> -->
 					<div class="post-image-container image-container">
-						<img src="<?php echo get_post_image_url($team_member->ID, 'medium'); ?>" />
+
+						<img src="<?php echo get_post_thumbnail_url_or_fallback($team_member->ID, 'medium', "team_member"); ?>" />
+
 					</div>
 					<div class="post-title-container">
 						<?php echo $team_member->post_title; ?>
@@ -37,6 +39,6 @@ this is the context where this part should be invoked:
             -->
 					</div>
 
-				</a>
+				<!-- </a> -->
 
 			</div>

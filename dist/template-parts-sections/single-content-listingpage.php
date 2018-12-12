@@ -26,6 +26,7 @@ wp_enqueue_script('tagClassifyPosts', get_template_directory_uri() . '/js/tagCla
                             echo ";";
                         }
                     ?>" role="main">
+      
         <?php
         include locate_template("includes/deco-noise-selector.php");
         ?>
@@ -65,7 +66,7 @@ wp_enqueue_script('tagClassifyPosts', get_template_directory_uri() . '/js/tagCla
     unset($extra_fields['color']);
     unset($extra_fields['subtitle']);
     foreach($extra_fields as $name => $field){
-      if($field){
+      if($field && is_string($field)){
         ?>
         <div class="section-container section-<?php echo $name; ?>-container">
           <!-- <h2><?php echo $name; ?></h2> -->

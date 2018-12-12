@@ -1,5 +1,5 @@
 
-<?php if(is_user_logged_in()) { ?> <!-- template part: <?php echo dirname(__FILE__).'/'.basename(__FILE__);  ?> --> <?php } ?> 
+<?php if(is_user_logged_in()) { ?> <!-- template part: <?php echo dirname(__FILE__).'/'.basename(__FILE__);  ?> --> <?php } ?>
 <?php
 /*
 
@@ -13,8 +13,8 @@ this is the context where this part should be invoked:
 
 	<?php
 	//$event contains an eventsmanager post object with all the required properties.
-	//The easiest way: 
-	
+	//The easiest way:
+
     $event = EM_Events::get(array("scope" => "future"));
 
 */
@@ -23,9 +23,7 @@ this is the context where this part should be invoked:
         <a href="<?php echo $event->guid ?>">
             <div class="item-container item-events-container">
                 <div class="item-image-container">
-                    <?php if(get_event_image_url($event->post_id)){ ?>
-                        <img src="<?php echo get_event_image_url($event->post_id, 'event-thumbnail');?>">
-                    <?php } ?>
+                        <img src="<?php echo get_post_thumbnail_url_or_fallback($event->post_id, 'event-thumbnail', 'event');?>">
                 </div>
                 <?php
                     //date string to date object
@@ -39,8 +37,8 @@ this is the context where this part should be invoked:
                         ?>
                     </span>
                     <span class="calendar-day">
-                        <?php 
-                        // echo $event->event_start_date 
+                        <?php
+                        // echo $event->event_start_date
                         echo $date->format('d M');
                         ?>
                     </span>
@@ -48,7 +46,7 @@ this is the context where this part should be invoked:
                         <?php echo $event->event_timezone ?>
                     </span>
                     <span class="hours">
-                        <?php echo $event->event_start_time ?> - 
+                        <?php echo $event->event_start_time ?> -
                         <?php echo $event->event_end_time ?>
                     </span>
                 </div>

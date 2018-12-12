@@ -2,8 +2,6 @@
 targeted to post of pilot type-
 */
 body.single-event{
-
-
     .section-post-header-container{
         // @extend
       .item-date-container{
@@ -82,19 +80,7 @@ body.single-event{
             width:100%;
         }
     }
-    .section-after-post-container{
-        //in this case, containing "prev" and "next" links;
-        .items-wrapper{
-            @extend .row;
 
-            a{
-                @extend .col-sm-6;
-                span{
-                    display:block;
-                }
-            }
-        }
-    }
 
     .item-side-data-container{
         border:solid 3px $blackish;
@@ -116,5 +102,6 @@ body.single-event{
             width: 100%;
         }
     }
+    
 
 }

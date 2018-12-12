@@ -119,8 +119,15 @@
                 }
             }
         }
-        .items-past-events-wrapper.item-events-container{
-            transform: rotate(180deg);
+        &.items-past-events-wrapper {
+          .item-container{
+            opacity:0.5;
+            transition:opacity 0.2s;
+            &:hover{
+              opacity: 1;
+              transition:opacity 0.2s;
+            }
+          }
         }
     }
 

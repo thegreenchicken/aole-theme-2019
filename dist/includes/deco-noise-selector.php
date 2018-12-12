@@ -4,7 +4,17 @@
 $mod = get_theme_mod('deco_noise');
 $availImages=Array();
 
-if ($mod['header_type'] == 'false') {
+if ($extra_fields['header-background-picture']){
+    // echo "background-color: ";
+    echo '<img src="'.$extra_fields['header-background-picture'].'" class="deco-noise-picture parallax" parallax-z="'
+    .$mod['parallax']
+    .'" src="'
+    .$availImages [array_rand($availImages)]
+    .'" style="'
+    .$mod['image_style']
+    .'"/>';
+    // echo ";";
+}else if ($mod['header_type'] == 'false') {
 
 }else{
 

@@ -17,10 +17,11 @@
 @import "components/scaffolding";
 @import "components/section-specific";
 @import "components/section-main-menu";
-@import "components/single-page-specific";
-@import "components/single-pilot-specific";
-@import "components/single-event-specific";
+@import "components/single/page";
+@import "components/single/pilot";
+@import "components/single/event";
 @import "components/page-specific";
-@import "components/page-home-specific";
-@import "components/list-team_members";
+@import "components/single/page-home";
+@import "components/single/post";
+@import "components/postlists/team_members";
 @import "components/available";

@@ -117,7 +117,7 @@
             </span>
         </div>
         <div class="item-post-content-container">
-            <p class="item-content-container">'
+            <p class="item-content-container">
                 <?php echo $eventManagerData->post_content; ?>
             </p>
 
