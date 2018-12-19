@@ -1,6 +1,11 @@
 'use strict'
-var categorizer={};
+
+if(!categorizer){
+  window.categorizer={};
+}
+
 document.addEventListener("DOMContentLoaded", function (event) {
+
     console.log("categorizer.js");
 
     var ClassifiedContainer=function($item){
@@ -174,6 +179,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
           if(state)self.appear();
           else self.disappear();
         }
+        // if(categorizer.initial.hideTags){}
     }
     ClassifiedItem.list = [];
     ClassifiedItem.each=function(cb){

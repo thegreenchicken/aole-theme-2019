@@ -82,7 +82,6 @@ $item-spacing: 20px;
     }
 
     .section-post-container{
-      overflow: hidden;
       .item-post-content-container{
           @include side-thing-counterpart();
           // img{
@@ -97,5 +96,5 @@ $item-spacing: 20px;
     }
 
 
-  
+
 }
