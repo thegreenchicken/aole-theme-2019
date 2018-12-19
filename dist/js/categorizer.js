@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
       var items=this.classifiedItems=[];
       var $selectionMenu=$('<div class="classifier-menu"></div>');
       var $catSelectionMenu=$('<div class="category-menu"></div>');
-      var $tagSelectionMenu=$('<div class="tag-menu"></div>');
+      var $tagSelectionMenu=$('<div class="tag-menu"><p></p></div>');
 
       var self=this;
       var attributes=this.attributes={};
@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
       var categoryButton$=[];
       this.updateDom=function(){
         for(var category in attributes){
-          var $categoryButton= $(`<div class="tag" data-category="${category}">${category}</div>`);
+          var $categoryButton= $(`<div class="tag" data-category="${category}">${category} </div>`);
           categoryButton$.push($categoryButton);
           $catSelectionMenu.append($categoryButton);
           $categoryButton.on("click",function(){
@@ -30,12 +30,21 @@ document.addEventListener("DOMContentLoaded", function (event) {
                 tb.fadeOut();
               }
             }
+
+            for(var cb of categoryButton$){
+              cb.removeClass("active");
+            }
+            $(this).addClass("active");
           });
+
+
 
           console.log("C",attributes[category]);
           for(var tag of attributes[category]){
             console.log("t");
-            var $tagButton= $(`<div class="tag" data-category="${category}" data-item="${tag}">${tag}</div>`);
+            var count = (self.monofilter(category,tag)).length;
+
+            var $tagButton= $(`<div class="tag" data-category="${category}" data-item="${tag}">${tag} <span class="count">${count}<span></div>`);
             $tagSelectionMenu.append($tagButton);
             tagButton$.push($tagButton);
 
@@ -43,7 +52,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
               var category=$(this).attr('data-category');
               var tag=$(this).attr('data-item');
               console.log("tagfilter",category,tag);
-              self.monofilter(category,tag);
+              self.monofilter(category,tag,function(res){
+                console.log("cb",res);
+                this.setAppearState(res.match);
+              });
               for(var tb of tagButton$){
                 tb.removeClass("active");
               }
@@ -57,40 +69,40 @@ document.addEventListener("DOMContentLoaded", function (event) {
         // console.log("appenced");'s
       }
       /*example: filter([[hairdos,"waves"],[random:"tag a"]]) */
-      this.andFilter=function(catValuePairs){
+      var sf=function(catValuePairs,cb,bool){
         var ln=0;
+        var ret=[];
         for(var pair of catValuePairs){
           var category=pair[0];
           var tag=pair[1];
           for(var item of items){
-            //if first iteration, appeared state of items is ignored
-            //otherwise, non-matching items are ignored, because
-            // we are calculating an intersection of the filter criteria
-            // console.log("Category",category,"tag",tag,item.isAppeared);
-            if(ln==0 || item.isAppeared )
-              item.appearIf(category,tag);
+            //depending on state of "bool" this becomes either an additive or a intersective filter function
+            if(ln==0 || bool==item.isAppeared ){
+              if( item.matches(category,tag) ){
+                ret.push(item);
+                if(cb) cb.call(item,{item:item,match:[category,tag]});
+              }else{
+                if(cb) cb.call(item,{item:item,match:false});
+              }
+            }
+
           }
           ln++;
         }
+        return ret;
+      }
+      this.andFilter=function(catValuePairs,cb){
+        return sf(catValuePairs,cb,true);
       }
       // not used for now, and untested, but just to illustrate the function.
       //if there are way too many items in the future, this could be used to
       //find possts based in more than one criteria.
-      this.orFilter=function(catValuePairs){
-        var ln=0;
-        for(var tagCategory in catValuePairs){
-          for(var itmno in items){
-            //if first iteration, appeared state of items is ignored
-            //otherwise, already matching items are ignored, because
-            // we are calculating an additive of the filter criteria
-            if(ln==0 || !items[itmno].isAppeared )
-              items[itmno].appearIf(tagCategory,catValuePairs[tagCategory]);
-          }
-          ln++;
-        }
+      this.orFilter=function(catValuePairs,cb){
+        return sf(catValuePairs,cb,false);
       }
-      this.monofilter=function(tagCategory,catValue){
-        self.andFilter([[tagCategory,catValue]]);
+
+      this.monofilter=function(tagCategory,catValue,cb){
+        return self.andFilter([[tagCategory,catValue]],cb);
       }
 
       $item.find(".classifiable-item").each(function(){
@@ -104,6 +116,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
           }
         }
       });
+
       this.updateDom();
 
     }
@@ -138,16 +151,20 @@ document.addEventListener("DOMContentLoaded", function (event) {
             self.isAppeared=false;
             $item.css("display","none");
         }
-        this.appearIf=function(categoryHas,val){
+        this.matches=function(categoryHas,val){
           if(self.attributes[categoryHas]){
             if(self.attributes[categoryHas].indexOf(val)!==-1)
-                self.appear();
+              return (true);
             else
-                self.disappear();
+              return (false);
           }else{
             //didn't even have the category
-            self.disappear();
+            return (false);
           }
+        }
+        this.setAppearState=function(state){
+          if(state)self.appear();
+          else self.disappear();
         }
     }
     ClassifiedItem.list = [];
