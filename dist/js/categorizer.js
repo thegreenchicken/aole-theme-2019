@@ -1,38 +1,50 @@
-/*
-later move these functions into annonymity, to prevent scope contamination
-*/
-function selectTag(tagCategory,tagValue){
-
-}
+'use strict'
+var categorizer={};
 document.addEventListener("DOMContentLoaded", function (event) {
     console.log("categorizer.js");
 
-    selectTag=function(tagCategory,tagValue){
-        ClassifiedItem.each(function(classifiedItem){
-          this.appearIf(tagCategory,tagValue);
-        });
-    }
     var ClassifiedContainer=function($item){
       var items=this.classifiedItems=[];
       var $selectionMenu=$('<div class="classifier-menu"></div>');
+      var $catSelectionMenu=$('<div class="category-menu"></div>');
+      var $tagSelectionMenu=$('<div class="tag-menu"></div>');
+
       var self=this;
       var attributes=this.attributes={};
-      var tagButtons=[];
+      var tagButton$=[];
+      var categoryButton$=[];
       this.updateDom=function(){
         for(var category in attributes){
+          var $categoryButton= $(`<div class="tag" data-category="${category}">${category}</div>`);
+          categoryButton$.push($categoryButton);
+          $catSelectionMenu.append($categoryButton);
+          $categoryButton.on("click",function(){
+            var category=$(this).attr('data-category');
+            // console.log("categoryfilter",category,tag);
+
+            for(var tb of tagButton$){
+              var tbcat=tb.attr("data-category");
+              if(category==tbcat){
+                tb.fadeIn();
+              }else{
+                tb.fadeOut();
+              }
+            }
+          });
+
           console.log("C",attributes[category]);
           for(var tag of attributes[category]){
             console.log("t");
-            var btn= $(`<div class="tag" data-category="${category}" data-item="${tag}">${tag}</div>`);
-            $selectionMenu.append(btn);
-            tagButtons.push(btn);
+            var $tagButton= $(`<div class="tag" data-category="${category}" data-item="${tag}">${tag}</div>`);
+            $tagSelectionMenu.append($tagButton);
+            tagButton$.push($tagButton);
 
-            btn.on("click",function(){
+            $tagButton.on("click",function(){
               var category=$(this).attr('data-category');
               var tag=$(this).attr('data-item');
-              console.log("monofilter",category,tag);
+              console.log("tagfilter",category,tag);
               self.monofilter(category,tag);
-              for(var tb of tagButtons){
+              for(var tb of tagButton$){
                 tb.removeClass("active");
               }
               $(this).addClass("active");
@@ -40,6 +52,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
           }
         }
         $item.prepend($selectionMenu);
+        $selectionMenu.append($catSelectionMenu);
+        $selectionMenu.append($tagSelectionMenu);
+        // console.log("appenced");'s
       }
       /*example: filter([[hairdos,"waves"],[random:"tag a"]]) */
       this.andFilter=function(catValuePairs){
@@ -51,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
             //if first iteration, appeared state of items is ignored
             //otherwise, non-matching items are ignored, because
             // we are calculating an intersection of the filter criteria
-            console.log("Category",category,"tag",tag,item.isAppeared);
+            // console.log("Category",category,"tag",tag,item.isAppeared);
             if(ln==0 || item.isAppeared )
               item.appearIf(category,tag);
           }
@@ -100,13 +115,13 @@ document.addEventListener("DOMContentLoaded", function (event) {
         this.isAppeared=true;
         this.attributes = {};
         $item.find(".classifiable-attributes").each(function () {
-          $attrList=$(this);
+          var $attrList=$(this);
           var name=$attrList.attr("name");
           // console.log(name);
 
           var thisList = self.attributes[name] = [];
           $attrList.find('li').each(function(){
-            $li=$(this);
+            var $li=$(this);
             var txt=$li.text();
             if(txt) thisList.push( txt.toLowerCase() );
           });
