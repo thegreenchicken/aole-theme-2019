@@ -25,31 +25,71 @@ wp_enqueue_script('pilots-list', get_template_directory_uri() . '/js/pilots-list
 ?>
 
 			<div class='item-container item-pilot-container classifiable-item'>
-				<ul style="display:none" class="classifiable-attributes" name="random">
+				<ul style="display:none" class="classifiable-attributes" name="random animals">
           <?php
-					$generatorTags=["random","generated","tags","because","posts","don't","have","metadata","lalala","cooltag"];
+					$generatorTags=["cow","horse","duck","rinoceros","hipopotamus","giraffe","swan"];
 					for ($n = 0; $n < 7; $n++) {
 						echo '<li name="tag">'. $generatorTags[ rand(0, count($generatorTags)-1 )] . "</li>";
 					}
           ?>
         </ul>
-        <ul style="display:none" class="classifiable-attributes" name="hairdos">
+        <ul style="display:none" class="classifiable-attributes" name="random colors">
           <?php
-					$generatorTags = ["afro","asymmetric cut","beehive","bangs","beach waves","big hair","blow out","Bouffant","bowl cut","Braid","brus cut","bun","bunches","burr"];
+					$generatorTags = ["red","green","blue","crimsom","gray","purple","orange","sepia","magenta","cyan","white","indigo"];
           for ($n = 0; $n < 7; $n++) {
 						echo '<li name="tag">'. $generatorTags[ rand(0, count($generatorTags)-1 )] . "</li>";
 					}
 
 		      ?>
         </ul>
+        <ul style="display:none" class="classifiable-attributes" name="random numbers">
+          <?php
+					$generatorTags = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17];
+          for ($n = 0; $n < 7; $n++) {
+						echo '<li name="tag">'. $generatorTags[ rand(0, count($generatorTags)-1 )] . "</li>";
+					}
+
+		      ?>
+        </ul>
+
+        <ul style="display:none" class="classifiable-attributes" name="theme group" slug="theme_group">
+          <?php
+					$terms = wp_get_post_terms($pilot->ID,"theme_group");
+          // print_r($terms);
+          foreach ($terms as $key=>$term) {
+						echo '<li key="'.$key.'" name="'.$term->name.'" slug="'.$term->slug.'">'.$term->name.'</li>';
+					}
+
+		      ?>
+        </ul>
+
+        <ul style="display:none" class="classifiable-attributes" name="post tags" slug="post_tag">
+          <?php
+					$terms = wp_get_post_terms($pilot->ID,"post_tag");
+          // print_r($terms);
+          foreach ($terms as $key=>$term) {
+						echo '<li key="'.$key.'" name="'.$term->name.'" slug="'.$term->slug.'">'.$term->name.'</li>';
+					}
+
+		      ?>
+        </ul>
+
   			<a class="item-paragraph-container" href="<?php echo get_the_permalink($pilot->ID);?>">
   				<div class="post-image-container">
   					<img src="<?php echo get_post_thumbnail_url_or_fallback($pilot->ID, 'medium'); ?>" />
   				</div>
   				<div class="post-title-container">
-  					<?php echo $pilot->post_title; ?>
+  					<?php
+            echo $pilot->post_title;
+            ?>
   				</div>
-
+          <!--
+          <?php
+          print_r($pilot);
+          print_r("-----------");
+          print_r(  wp_get_post_terms($pilot->ID,"post_tag") );
+          ?>
+          -->
   			</a>
 
 			</div>

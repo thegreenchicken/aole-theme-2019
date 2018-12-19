@@ -108,6 +108,7 @@ function cptui_register_my_cpts() {
         "rewrite" => array( "slug" => "pilot", "with_front" => true ),
         "query_var" => true,
         "supports" => array( "title", "thumbnail", "author"),
+        'taxonomies' => array('post_tag')
         );
 
     register_post_type( "pilot", $args );
@@ -216,7 +217,7 @@ function cptui_register_my_cpts() {
         "rewrite" => array( "slug" => "quotes", "with_front" => true ),
         "query_var" => true,
         "supports" => array( "title" ),
-        "taxonomies" => array( "theme_group" ),
+        "taxonomies" => array( "theme_group"),
         );
 
     register_post_type( "quotes", $args );

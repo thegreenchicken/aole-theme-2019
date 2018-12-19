@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
       var categoryButton$=[];
       this.updateDom=function(){
         for(var category in attributes){
-          var $categoryButton= $(`<div class="tag" data-category="${category}">${category} </div>`);
+          var $categoryButton= $(`<a href="#${category}" class="tag" data-category="${category}">${category} </a>`);
           categoryButton$.push($categoryButton);
           $catSelectionMenu.append($categoryButton);
           $categoryButton.on("click",function(){
@@ -25,9 +25,11 @@ document.addEventListener("DOMContentLoaded", function (event) {
             for(var tb of tagButton$){
               var tbcat=tb.attr("data-category");
               if(category==tbcat){
-                tb.fadeIn();
+                tb.removeClass("disappear");
+                tb.addClass("undisappear");
               }else{
-                tb.fadeOut();
+                tb.addClass("disappear");
+                tb.removeClass("undisappear");
               }
             }
 
@@ -44,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
             console.log("t");
             var count = (self.monofilter(category,tag)).length;
 
-            var $tagButton= $(`<div class="tag" data-category="${category}" data-item="${tag}">${tag} <span class="count">${count}<span></div>`);
+            var $tagButton= $(`<a href="#${category}/${tag}" class="tag" data-category="${category}" data-item="${tag}">${tag} <span class="count">${count}<span></a>`);
             $tagSelectionMenu.append($tagButton);
             tagButton$.push($tagButton);
 
@@ -144,12 +146,18 @@ document.addEventListener("DOMContentLoaded", function (event) {
         this.appear=function(){
             // $item.fadeIn();
             self.isAppeared=true;
-            $item.css("display","");
+            // $item.css("display","");
+            $item.removeClass("disappear");
+            $item.addClass("undisappear");
+
         }
         this.disappear=function(){
             // $item.fadeOut();
             self.isAppeared=false;
-            $item.css("display","none");
+            // $item.css("display","none");
+            $item.addClass("disappear");
+            $item.removeClass("undisappear");
+
         }
         this.matches=function(categoryHas,val){
           if(self.attributes[categoryHas]){

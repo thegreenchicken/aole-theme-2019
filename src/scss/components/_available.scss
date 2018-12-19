@@ -19,3 +19,19 @@
 .alignleft{
   float:left;
 }
+.disappear{
+  opacity: 0;
+  width: 0px;
+  display: none !important;
+  transition: 1s;
+}
+.tag {
+    border: solid 1px;
+    margin: 2px;
+    padding: 1px 9px;
+    display: inline-block;
+}
+.tag.active {
+  background-color:$blue;
+  color:white;
+}
