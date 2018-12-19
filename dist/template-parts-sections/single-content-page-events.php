@@ -11,7 +11,7 @@ console.log(vars);
 This insert contains the page content part, to be inserted in the body of any page.
 
  */
-wp_enqueue_script('tagClassifyPosts', get_template_directory_uri() . '/js/tagClassifyPosts.js', array('jquery'), 1.1, true);
+// wp_enqueue_script('tagClassifyPosts', get_template_directory_uri() . '/js/tagClassifyPosts.js', array('jquery'), 1.1, true);
 
 
 ?>

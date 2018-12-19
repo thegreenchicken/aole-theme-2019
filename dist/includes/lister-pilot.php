@@ -25,40 +25,31 @@ wp_enqueue_script('pilots-list', get_template_directory_uri() . '/js/pilots-list
 ?>
 
 			<div class='item-container item-pilot-container classifiable-item'>
-				<div style="display:none" class="classifiable-attributes"><?php
+				<ul style="display:none" class="classifiable-attributes" name="random">
+          <?php
 					$generatorTags=["random","generated","tags","because","posts","don't","have","metadata","lalala","cooltag"];
-					echo "{";
-					echo "\"tags\":[";
 					for ($n = 0; $n < 7; $n++) {
-						echo "\"" . $generatorTags[ rand(0, count($generatorTags)-1 )] . "\"";
-						if ($n !== 6 ) {
-							echo ",";
-						}
-
+						echo '<li name="tag">'. $generatorTags[ rand(0, count($generatorTags)-1 )] . "</li>";
 					}
-					echo "],";
+          ?>
+        </ul>
+        <ul style="display:none" class="classifiable-attributes" name="hairdos">
+          <?php
 					$generatorTags = ["afro","asymmetric cut","beehive","bangs","beach waves","big hair","blow out","Bouffant","bowl cut","Braid","brus cut","bun","bunches","burr"];
-
-					echo "\"hairdo styles\":[";
-					for ($n = 0; $n < 7; $n++) {
-						echo "\"" . $generatorTags[ rand(0, count($generatorTags)-1 )] . "\"";
-						if ($n !== 6 ) {
-							echo ",";
-						}
-
+          for ($n = 0; $n < 7; $n++) {
+						echo '<li name="tag">'. $generatorTags[ rand(0, count($generatorTags)-1 )] . "</li>";
 					}
-					echo "]";
 
-					echo "}";
-				?></div>
-				<a class="item-paragraph-container" href="<?php echo get_the_permalink($pilot->ID);?>">
-					<div class="post-image-container">
-						<img src="<?php echo get_post_thumbnail_url_or_fallback($pilot->ID, 'medium'); ?>" />
-					</div>
-					<div class="post-title-container">
-						<?php echo $pilot->post_title; ?>
-					</div>
+		      ?>
+        </ul>
+  			<a class="item-paragraph-container" href="<?php echo get_the_permalink($pilot->ID);?>">
+  				<div class="post-image-container">
+  					<img src="<?php echo get_post_thumbnail_url_or_fallback($pilot->ID, 'medium'); ?>" />
+  				</div>
+  				<div class="post-title-container">
+  					<?php echo $pilot->post_title; ?>
+  				</div>
 
-				</a>
+  			</a>
 
 			</div>
