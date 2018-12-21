@@ -23,11 +23,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
     }
 
 
+    var ClassifButton=function(myClassifier,category,tag,$el){
 
-    console.log("categorizer.js");
-    var CategoryButton=function(myClassifier,category){
-      var $el= $(`<a href="#${category}" class="tag" data-category="${category}">${category} </a>`);
-      CategoryButton.list.push($el);
       this.appendTo=function($to){
         return $to.append($el);
       }
@@ -38,63 +35,47 @@ document.addEventListener("DOMContentLoaded", function (event) {
         return $el.attr(str);
       }
       myClassifier.onAfterFilterAndDisplay(function(filterEvent){
-        if(filterEvent.category==category){
+        if(filterEvent.category==category && (filterEvent.tag==tag || tag==false)){
           $el.addClass("active");
         }else{
           $el.removeClass("active");
         }
+        //we don't want category buttons to dissappear, hence this if.
+        if(tag){
+          if(filterEvent.category==category){
+            $el.addClass("undisappear");
+            $el.removeClass("disappear");
+          }else{
+            $el.addClass("disappear");
+            $el.removeClass("undisappear");
+          }
+        }
       });
+
       $el.on("click",function(){
         var activeState=$el.hasClass("active");
-        var tag=false;
         //opposite of activestate because it only becomes active if it is active and vice-versa.
         myClassifier.filterAndDisplay((!activeState)?category:false,tag);
+
       });
+
       return this;
     }
-    CategoryButton.list=[];
+    console.log("categorizer.js");
+    var CategoryButton=function(myClassifier,category){
+      var $el= $(`<a href="#${category}" class="tag" data-category="${category}">${category} </a>`);
+      ClassifButton.call(this,myClassifier,category,false,$el);
+      return this;
+    }
+
 
     var TagButton=function(myClassifier,category,tag){
       var count = (myClassifier.monofilter(category,tag)).length;
       var $el= $(`<a href="#${category}/${tag}" class="tag" data-category="${category}" data-item="${tag}">${tag} <span class="count">${count}<span></a>`);
-      TagButton.list.push($el);
-      this.appendTo=function($to){
-        return $to.append($el);
-      }
-      this.removeClass=function(string){
-        return $el.removeClass(string);
-      }
-      this.attr=function(str){
-        return $el.attr(str);
-      }
-      myClassifier.onAfterFilterAndDisplay(function(filterEvent){
-
-
-        if(filterEvent.category==category && filterEvent.tag==tag){
-          $el.addClass("active");
-        }else{
-          $el.removeClass("active");
-        }
-        if(filterEvent.category==category){
-          $el.addClass("undisappear");
-          $el.removeClass("disappear");
-        }else{
-          $el.addClass("disappear");
-          $el.removeClass("undisappear");
-
-        }
-      });
-
-      $el.on("click",function(){
-        var activeState=$el.hasClass("active");
-        //opposite of activestate because it only becomes active if it is active and vice-versa.
-        myClassifier.filterAndDisplay((!activeState)?category:false,tag);
-
-      });
-
+      ClassifButton.call(this,myClassifier,category,tag,$el);
       return this;
     }
-    TagButton.list=[];
+
 
     var ClassifiedContainer=function($item){
 
@@ -174,17 +155,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
           }
         }
 
-        for(var cb of CategoryButton.list){
-          cb.removeClass("active");
-        }
-
-
-
-
 
         self.updateDom();
 
-        for(cb of _afterFilterAndDisplayCallback){
+        for(var cb of _afterFilterAndDisplayCallback){
           cb({category:category,tag:tag});
         }
       }
