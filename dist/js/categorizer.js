@@ -29,62 +29,26 @@ document.addEventListener("DOMContentLoaded", function (event) {
       var $el= $(`<a href="#${category}" class="tag" data-category="${category}">${category} </a>`);
       CategoryButton.list.push($el);
       this.appendTo=function($to){
-        $to.append($el);
+        return $to.append($el);
       }
       this.removeClass=function(string){
-        $el.removeClass(string);
+        return $el.removeClass(string);
       }
+      this.attr=function(str){
+        return $el.attr(str);
+      }
+      myClassifier.onAfterFilterAndDisplay(function(filterEvent){
+        if(filterEvent.category==category){
+          $el.addClass("active");
+        }else{
+          $el.removeClass("active");
+        }
+      });
       $el.on("click",function(){
-        //this makes toggling possible.
-        var activeState=$(this).hasClass("active");
-
-        var category=$(this).attr('data-category');
-
-        //appear and disappear tag buttons depending on their pertinence to this tag category
-        for(var tb of TagButton.list){
-          var tbcat=tb.attr("data-category");
-          if(category==tbcat || activeState){
-            tb.removeClass("disappear");
-            tb.addClass("undisappear");
-          }else{
-            tb.addClass("disappear");
-            tb.removeClass("undisappear");
-          }
-        }
-
-        //each tag has a category, if the user presses one of these categories,
-        //the items get sorted according to their tag on that selected category.
-        //sort items by their tags in this category of $tagSelectionMenu
-        var sortedByTagsOfCategory={};
-        var appendLast=[];
-
-        myClassifier.monofilter(category,false,function(res){
-          console.log("category",category,res);
-          var itags=res.item.attributes[category];
-
-          if(itags[0]){
-            if(!sortedByTagsOfCategory[itags[0]]) sortedByTagsOfCategory[itags[0]]=[];
-            sortedByTagsOfCategory[itags[0]].push(res.item);
-          }else{
-            appendLast.push(res.item);
-          }
-
-          res.item.detach();
-        });
-        sortedByTagsOfCategory["others"]=appendLast;
-
-        $(".classifiable-container .item-categorizer-tag-title").remove();
-        for(var tag in sortedByTagsOfCategory){
-          $(".classifiable-container").append('<h3 class="item-categorizer-tag-title">'+tag+'</h3>');
-          for(var item of sortedByTagsOfCategory[tag]){
-            item.reattach();
-          }
-        }
-
-        for(var cb of CategoryButton.list){
-          cb.removeClass("active");
-        }
-        if(!activeState) $(this).addClass("active");
+        var activeState=$el.hasClass("active");
+        var tag=false;
+        //opposite of activestate because it only becomes active if it is active and vice-versa.
+        myClassifier.filterAndDisplay((!activeState)?category:false,tag);
       });
       return this;
     }
@@ -103,31 +67,29 @@ document.addEventListener("DOMContentLoaded", function (event) {
       this.attr=function(str){
         return $el.attr(str);
       }
+      myClassifier.onAfterFilterAndDisplay(function(filterEvent){
 
-      console.log("t");
 
+        if(filterEvent.category==category && filterEvent.tag==tag){
+          $el.addClass("active");
+        }else{
+          $el.removeClass("active");
+        }
+        if(filterEvent.category==category){
+          $el.addClass("undisappear");
+          $el.removeClass("disappear");
+        }else{
+          $el.addClass("disappear");
+          $el.removeClass("undisappear");
 
+        }
+      });
 
       $el.on("click",function(){
-        //this makes toggle possible
         var activeState=$el.hasClass("active");
+        //opposite of activestate because it only becomes active if it is active and vice-versa.
+        myClassifier.filterAndDisplay((!activeState)?category:false,tag);
 
-        var category=$el.attr('data-category');
-        var tag=$el.attr('data-item');
-
-        console.log("tagfilter",category,tag);
-        //hide or unhide items according to their pertinenece to the selected tag and category.
-
-        myClassifier.monofilter(category,tag,function(res){
-          console.log("cb",res);
-          this.setAppearState(res.match || activeState);
-        });
-        for(var tb of TagButton.list){
-          tb.removeClass("active");
-        }
-        if(!activeState)
-          $(this).addClass("active");
-        myClassifier.updateDom();
       });
 
       return this;
@@ -135,6 +97,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
     TagButton.list=[];
 
     var ClassifiedContainer=function($item){
+
       var items=this.classifiedItems=[];
       var $selectionMenu=$('<div class="classifier-menu"></div>');
       var $catSelectionMenu=$('<div class="category-menu"></div>');
@@ -142,11 +105,89 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
       var self=this;
       var attributes=this.attributes={};
-      // var tagButton$=[];
+
       var categoryButtons=[];
 
 
       var categorizerAppended=false;
+
+      var _afterFilterAndDisplayCallback=[];
+      this.onAfterFilterAndDisplay=function(cb){
+        if(typeof cb == 'function'){
+          _afterFilterAndDisplayCallback.push(cb);
+        }
+      }
+      this.filterAndDisplay=function(category,tag){
+
+        //------------------------------------------------------
+        // self.monofilter(category,tag,function(res){
+        //   //"this" is the classifiableItem
+        //   this.setAppearState(res.match);
+        // });
+        //------------------------------------------------------
+
+
+
+        //each tag has a category, if the user presses one of these categories,
+        //the items get sorted according to their tag on that selected category.
+        //sort items by their tags in this category of $tagSelectionMenu
+        var sortedByTagsOfCategory={};
+        var appendLast=[];
+
+        self.monofilter(category,tag,function(res){
+          //// NOTE: "this" is a classifiableItem (=res.item)
+          // console.log("category",category,res);
+          var itags=res.item.attributes[category];
+          if(res.match){
+            if(itags?itags[0]:false){
+              //make the item appear under other title than the selected tag, if possible
+              //in this way, its belonging to other tags is expressed
+              var stag=itags[0];
+              if(stag===tag){
+                if(itags[1]){
+                  stag=itags[1];
+                }
+              }
+              //add it to the array for later sort of the item DOM element
+              if(!sortedByTagsOfCategory[stag]) sortedByTagsOfCategory[stag]=[];
+              sortedByTagsOfCategory[stag].push(this);
+            }else{
+              //add it under the "others" title
+              appendLast.push(this);
+            }
+          }
+
+          this.setAppearState(res.match);
+
+          this.detach();
+        });
+
+        sortedByTagsOfCategory["others"]=appendLast;
+
+        $(".classifiable-container .item-categorizer-tag-title").remove();
+        for(var dispTag in sortedByTagsOfCategory){
+          console.log(dispTag,":",sortedByTagsOfCategory[dispTag]);
+          if(sortedByTagsOfCategory[dispTag].length)
+            $(".classifiable-container").append('<h3 class="item-categorizer-tag-title">'+dispTag+'</h3>');
+          for(var item of sortedByTagsOfCategory[dispTag]){
+            item.reattach();
+          }
+        }
+
+        for(var cb of CategoryButton.list){
+          cb.removeClass("active");
+        }
+
+
+
+
+
+        self.updateDom();
+
+        for(cb of _afterFilterAndDisplayCallback){
+          cb({category:category,tag:tag});
+        }
+      }
       this.updateDom=function(){
         if(! categorizerAppended){
 
@@ -215,9 +256,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
           }
         }
       });
-
       this.updateDom();
-
     }
     var ClassifiedItem = function ($item) {
         // console.log("classified item",$item);
@@ -237,12 +276,11 @@ document.addEventListener("DOMContentLoaded", function (event) {
             var txt=$li.text();
             if(txt) thisList.push( txt.toLowerCase() );
           });
-          console.log(thisList);
+          // console.log(thisList);
 
         });
         var $reattach=$item.parent();
         this.detach=function(){
-          $reattach=$item.parent();
           $item.detach();
         }
         this.reattach=function(){
@@ -265,23 +303,24 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
         }
         this.matches=function(categoryHas,val){
-          if(self.attributes[categoryHas]){
+          if(categoryHas===false){
+            return true;
+          }else if(self.attributes[categoryHas]){
             if(val===false){
               return true;
             }else if(self.attributes[categoryHas].indexOf(val)!==-1)
-              return (true);
+              return true
             else
-              return (false);
+              return false;
           }else{
-            //didn't even have the category
-            return (false);
+            //didn't even have matching category
+            return false;
           }
         }
         this.setAppearState=function(state){
           if(state)self.appear();
           else self.disappear();
         }
-        // if(categorizer.initial.hideTags){}
     }
     ClassifiedItem.list = [];
     ClassifiedItem.each=function(cb){
@@ -295,7 +334,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
     });
 
     if(urlRequestedSelection){
-      
+
     }
 
 
