@@ -7,6 +7,11 @@ vars={templateUrl:"<?php
 console.log(vars);
 </script>
 <?php
+  //activate this to make the tag filtering to be animated.
+	// wp_enqueue_script( 'masonry' );
+	// wp_enqueue_script( 'masonry-init', get_template_directory_uri().'/js/masonry-init.js', array( 'masonry' ), null, true );
+
+
 wp_enqueue_script('tagClassifyPosts', get_template_directory_uri() . '/js/categorizer.js', array('jquery'), 1.1, true);
 
 ?>

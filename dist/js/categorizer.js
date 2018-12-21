@@ -1,12 +1,138 @@
 'use strict'
 
-if(!categorizer){
+if(!window.categorizer){
   window.categorizer={};
 }
 
 document.addEventListener("DOMContentLoaded", function (event) {
+    //get the after-hash data to apply the filter accordingly.
+    var urlRequestedSelection=decodeURIComponent( window.location.hash ).replace(/^\#/,"").split("/");
+    if(!urlRequestedSelection[0]) urlRequestedSelection=false;
+
+    var itemSelector=".item-container";
+    var wrapperSelector='.items-wrapper';
+    var useMasonry=$().masonry!=undefined;
+    // var masonry=
+    var updateMasonry=function(){}
+    if(useMasonry) updateMasonry=function(){
+      $(wrapperSelector).masonry({
+        itemSelector: itemSelector+", .classifier-menu",
+        columnWidth: itemSelector+":not(.disappear)",
+        // percentPosition: true
+      })
+    }
+
+
 
     console.log("categorizer.js");
+    var CategoryButton=function(myClassifier,category){
+      var $el= $(`<a href="#${category}" class="tag" data-category="${category}">${category} </a>`);
+      CategoryButton.list.push($el);
+      this.appendTo=function($to){
+        $to.append($el);
+      }
+      this.removeClass=function(string){
+        $el.removeClass(string);
+      }
+      $el.on("click",function(){
+        //this makes toggling possible.
+        var activeState=$(this).hasClass("active");
+
+        var category=$(this).attr('data-category');
+
+        //appear and disappear tag buttons depending on their pertinence to this tag category
+        for(var tb of TagButton.list){
+          var tbcat=tb.attr("data-category");
+          if(category==tbcat || activeState){
+            tb.removeClass("disappear");
+            tb.addClass("undisappear");
+          }else{
+            tb.addClass("disappear");
+            tb.removeClass("undisappear");
+          }
+        }
+
+        //each tag has a category, if the user presses one of these categories,
+        //the items get sorted according to their tag on that selected category.
+        //sort items by their tags in this category of $tagSelectionMenu
+        var sortedByTagsOfCategory={};
+        var appendLast=[];
+
+        myClassifier.monofilter(category,false,function(res){
+          console.log("category",category,res);
+          var itags=res.item.attributes[category];
+
+          if(itags[0]){
+            if(!sortedByTagsOfCategory[itags[0]]) sortedByTagsOfCategory[itags[0]]=[];
+            sortedByTagsOfCategory[itags[0]].push(res.item);
+          }else{
+            appendLast.push(res.item);
+          }
+
+          res.item.detach();
+        });
+        sortedByTagsOfCategory["others"]=appendLast;
+
+        $(".classifiable-container .item-categorizer-tag-title").remove();
+        for(var tag in sortedByTagsOfCategory){
+          $(".classifiable-container").append('<h3 class="item-categorizer-tag-title">'+tag+'</h3>');
+          for(var item of sortedByTagsOfCategory[tag]){
+            item.reattach();
+          }
+        }
+
+        for(var cb of CategoryButton.list){
+          cb.removeClass("active");
+        }
+        if(!activeState) $(this).addClass("active");
+      });
+      return this;
+    }
+    CategoryButton.list=[];
+
+    var TagButton=function(myClassifier,category,tag){
+      var count = (myClassifier.monofilter(category,tag)).length;
+      var $el= $(`<a href="#${category}/${tag}" class="tag" data-category="${category}" data-item="${tag}">${tag} <span class="count">${count}<span></a>`);
+      TagButton.list.push($el);
+      this.appendTo=function($to){
+        return $to.append($el);
+      }
+      this.removeClass=function(string){
+        return $el.removeClass(string);
+      }
+      this.attr=function(str){
+        return $el.attr(str);
+      }
+
+      console.log("t");
+
+
+
+      $el.on("click",function(){
+        //this makes toggle possible
+        var activeState=$el.hasClass("active");
+
+        var category=$el.attr('data-category');
+        var tag=$el.attr('data-item');
+
+        console.log("tagfilter",category,tag);
+        //hide or unhide items according to their pertinenece to the selected tag and category.
+
+        myClassifier.monofilter(category,tag,function(res){
+          console.log("cb",res);
+          this.setAppearState(res.match || activeState);
+        });
+        for(var tb of TagButton.list){
+          tb.removeClass("active");
+        }
+        if(!activeState)
+          $(this).addClass("active");
+        myClassifier.updateDom();
+      });
+
+      return this;
+    }
+    TagButton.list=[];
 
     var ClassifiedContainer=function($item){
       var items=this.classifiedItems=[];
@@ -16,64 +142,30 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
       var self=this;
       var attributes=this.attributes={};
-      var tagButton$=[];
-      var categoryButton$=[];
+      // var tagButton$=[];
+      var categoryButtons=[];
+
+
+      var categorizerAppended=false;
       this.updateDom=function(){
-        for(var category in attributes){
-          var $categoryButton= $(`<a href="#${category}" class="tag" data-category="${category}">${category} </a>`);
-          categoryButton$.push($categoryButton);
-          $catSelectionMenu.append($categoryButton);
-          $categoryButton.on("click",function(){
-            var category=$(this).attr('data-category');
-            // console.log("categoryfilter",category,tag);
+        if(! categorizerAppended){
 
-            for(var tb of tagButton$){
-              var tbcat=tb.attr("data-category");
-              if(category==tbcat){
-                tb.removeClass("disappear");
-                tb.addClass("undisappear");
-              }else{
-                tb.addClass("disappear");
-                tb.removeClass("undisappear");
-              }
+          for(var category in attributes){
+            new CategoryButton(self,category).appendTo($catSelectionMenu);
+
+            // console.log("C",attributes[category]);
+            for(var tag of attributes[category]){
+              new TagButton(self,category,tag).appendTo($tagSelectionMenu);
+
             }
-
-            for(var cb of categoryButton$){
-              cb.removeClass("active");
-            }
-            $(this).addClass("active");
-          });
-
-
-
-          console.log("C",attributes[category]);
-          for(var tag of attributes[category]){
-            console.log("t");
-            var count = (self.monofilter(category,tag)).length;
-
-            var $tagButton= $(`<a href="#${category}/${tag}" class="tag" data-category="${category}" data-item="${tag}">${tag} <span class="count">${count}<span></a>`);
-            $tagSelectionMenu.append($tagButton);
-            tagButton$.push($tagButton);
-
-            $tagButton.on("click",function(){
-              var category=$(this).attr('data-category');
-              var tag=$(this).attr('data-item');
-              console.log("tagfilter",category,tag);
-              self.monofilter(category,tag,function(res){
-                console.log("cb",res);
-                this.setAppearState(res.match);
-              });
-              for(var tb of tagButton$){
-                tb.removeClass("active");
-              }
-              $(this).addClass("active");
-            });
           }
+          $item.prepend($selectionMenu);
+          $selectionMenu.append($catSelectionMenu);
+          $selectionMenu.append($tagSelectionMenu);
+          // console.log("appenced");'s
+          categorizerAppended=true;
         }
-        $item.prepend($selectionMenu);
-        $selectionMenu.append($catSelectionMenu);
-        $selectionMenu.append($tagSelectionMenu);
-        // console.log("appenced");'s
+        if(useMasonry) updateMasonry();
       }
       /*example: filter([[hairdos,"waves"],[random:"tag a"]]) */
       var sf=function(catValuePairs,cb,bool){
@@ -148,6 +240,14 @@ document.addEventListener("DOMContentLoaded", function (event) {
           console.log(thisList);
 
         });
+        var $reattach=$item.parent();
+        this.detach=function(){
+          $reattach=$item.parent();
+          $item.detach();
+        }
+        this.reattach=function(){
+          $item.appendTo($reattach);
+        }
         this.appear=function(){
             // $item.fadeIn();
             self.isAppeared=true;
@@ -166,7 +266,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
         }
         this.matches=function(categoryHas,val){
           if(self.attributes[categoryHas]){
-            if(self.attributes[categoryHas].indexOf(val)!==-1)
+            if(val===false){
+              return true;
+            }else if(self.attributes[categoryHas].indexOf(val)!==-1)
               return (true);
             else
               return (false);
@@ -191,6 +293,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
     $(".classifiable-container").each(function () {
         new ClassifiedContainer($(this));
     });
+
+    if(urlRequestedSelection){
+      
+    }
 
 
 });
