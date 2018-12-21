@@ -3,14 +3,19 @@
 if(!window.categorizer){
   window.categorizer={};
 }
-
+function getHash(){}
 document.addEventListener("DOMContentLoaded", function (event) {
+    console.log("classifier.js");
     //get the after-hash data to apply the filter accordingly.
-    var urlRequestedSelection=decodeURIComponent( window.location.hash ).replace(/^\#/,"").split("/");
+    getHash=function(){
+      return decodeURIComponent( window.location.hash ).replace(/^\#/,"").split("/").map(function(a){ return (a=="false"?false:a) });
+    }
+    var urlRequestedSelection=getHash();
     if(!urlRequestedSelection[0]) urlRequestedSelection=false;
 
-    var itemSelector=".item-container";
-    var wrapperSelector='.items-wrapper';
+    var itemSelector=".classifiable-item";
+    var wrapperSelector=".classifiable-container";
+    var itemDataContainerSelector=".classifiable-attributes";
     var useMasonry=$().masonry!=undefined;
     // var masonry=
     var updateMasonry=function(){}
@@ -52,19 +57,20 @@ document.addEventListener("DOMContentLoaded", function (event) {
         }
       });
 
-      $el.on("click",function(){
-        var activeState=$el.hasClass("active");
-        //opposite of activestate because it only becomes active if it is active and vice-versa.
-        myClassifier.filterAndDisplay((!activeState)?category:false,tag);
 
-      });
 
       return this;
     }
-    console.log("categorizer.js");
     var CategoryButton=function(myClassifier,category){
       var $el= $(`<a href="#${category}" class="tag" data-category="${category}">${category} </a>`);
       ClassifButton.call(this,myClassifier,category,false,$el);
+      //these events have the added advantage of allowing the unselection of the item by clicking it again.
+      //I decided not to use these, to use the haschange event instead, so that the user can use the browser history.
+      // $el.on("click",function(){
+      //   var activeState=$el.hasClass("active");
+      //   //opposite of activestate because it only becomes active if it is active and vice-versa.
+      //   myClassifier.filterAndDisplay((!activeState)?category:false,tag);
+      // });
       return this;
     }
 
@@ -73,6 +79,13 @@ document.addEventListener("DOMContentLoaded", function (event) {
       var count = (myClassifier.monofilter(category,tag)).length;
       var $el= $(`<a href="#${category}/${tag}" class="tag" data-category="${category}" data-item="${tag}">${tag} <span class="count">${count}<span></a>`);
       ClassifButton.call(this,myClassifier,category,tag,$el);
+      //these events have the added advantage of allowing the unselection of the item by clicking it again.
+      //I decided not to use these, to use the haschange event instead, so that the user can use the browser history.
+      // $el.on("click",function(){
+      //   var activeState=$el.hasClass("active");
+      //   //opposite of activestate because it only becomes active if it is active and vice-versa.
+      //   myClassifier.filterAndDisplay(category,(!activeState)?tag:false);
+      // });
       return this;
     }
 
@@ -99,15 +112,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
         }
       }
       this.filterAndDisplay=function(category,tag){
-
-        //------------------------------------------------------
-        // self.monofilter(category,tag,function(res){
-        //   //"this" is the classifiableItem
-        //   this.setAppearState(res.match);
-        // });
-        //------------------------------------------------------
-
-
 
         //each tag has a category, if the user presses one of these categories,
         //the items get sorted according to their tag on that selected category.
@@ -143,13 +147,13 @@ document.addEventListener("DOMContentLoaded", function (event) {
           this.detach();
         });
 
-        sortedByTagsOfCategory["others"]=appendLast;
+        sortedByTagsOfCategory[category?"Without "+category:"Others"]=appendLast;
 
-        $(".classifiable-container .item-categorizer-tag-title").remove();
+        $(wrapperSelector+" .item-categorizer-tag-title").remove();
         for(var dispTag in sortedByTagsOfCategory){
           console.log(dispTag,":",sortedByTagsOfCategory[dispTag]);
           if(sortedByTagsOfCategory[dispTag].length)
-            $(".classifiable-container").append('<h3 class="item-categorizer-tag-title">'+dispTag+'</h3>');
+            $(wrapperSelector).append('<h3 class="item-categorizer-tag-title">'+dispTag+'</h3>');
           for(var item of sortedByTagsOfCategory[dispTag]){
             item.reattach();
           }
@@ -219,7 +223,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
         return self.andFilter([[tagCategory,catValue]],cb);
       }
 
-      $item.find(".classifiable-item").each(function(){
+      $item.find(itemSelector).each(function(){
         var nci=new ClassifiedItem($(this));
         items.push( nci );
         for(var cat in nci.attributes){
@@ -231,6 +235,16 @@ document.addEventListener("DOMContentLoaded", function (event) {
         }
       });
       this.updateDom();
+
+
+      if(urlRequestedSelection){
+        this.filterAndDisplay(urlRequestedSelection[0],urlRequestedSelection[1]||false);
+      }
+
+      window.onhashchange = function() {
+        urlRequestedSelection=getHash();
+        self.filterAndDisplay(urlRequestedSelection[0],urlRequestedSelection[1]||false);
+      }
     }
     var ClassifiedItem = function ($item) {
         // console.log("classified item",$item);
@@ -239,7 +253,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
         var self = this;
         this.isAppeared=true;
         this.attributes = {};
-        $item.find(".classifiable-attributes").each(function () {
+        $item.find(itemDataContainerSelector).each(function () {
           var $attrList=$(this);
           var name=$attrList.attr("name");
           // console.log(name);
@@ -303,13 +317,11 @@ document.addEventListener("DOMContentLoaded", function (event) {
         }
     }
 
-    $(".classifiable-container").each(function () {
+    $(wrapperSelector).each(function () {
         new ClassifiedContainer($(this));
     });
 
-    if(urlRequestedSelection){
 
-    }
 
 
 });
