@@ -1,23 +1,34 @@
+/*
+This script takes data from a set of html items, and classifies it, allowing the user to navigate using this information as filtering criteria.
+this is used in the pilots page, and is what makes the tag-based filtering possible.
+*/
+
 'use strict'
 
-if(!window.categorizer){
-  window.categorizer={};
-}
-function getHash(){}
+//to make a shared variable between global scope and the annonymous function.
+// if(!window.categorizer){
+//   window.categorizer={};
+// }
+//annonymous call
 document.addEventListener("DOMContentLoaded", function (event) {
     console.log("classifier.js");
-    //get the after-hash data to apply the filter accordingly.
-    getHash=function(){
+    //get the after-hash data to apply the filter accordingly. (the part of the url that comes after the "#" character.
+    function getHash=function(){
       return decodeURIComponent( window.location.hash ).replace(/^\#/,"").split("/").map(function(a){ return (a=="false"?false:a) });
     }
     var urlRequestedSelection=getHash();
     if(!urlRequestedSelection[0]) urlRequestedSelection=false;
 
-    var itemSelector=".classifiable-item";
+    //assign a function to each html element.
+    //what item to select as a container of classifiable items.
     var wrapperSelector=".classifiable-container";
+    //what item is defined as a visible "item" to be filtered
+    var itemSelector=".classifiable-item";
+    //what item is defined as the container of the item's classifiable attributes
     var itemDataContainerSelector=".classifiable-attributes";
+    //whether masonry plugin is loaded. note: it makes the processing a lot slower.
     var useMasonry=$().masonry!=undefined;
-    // var masonry=
+
     var updateMasonry=function(){}
     if(useMasonry) updateMasonry=function(){
       $(wrapperSelector).masonry({
@@ -27,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
       })
     }
 
-
+    //a visible filtering button element, with it's data
     var ClassifButton=function(myClassifier,category,tag,$el){
 
       this.appendTo=function($to){
@@ -61,6 +72,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
       return this;
     }
+
+    //extend the ClassifButton into categories and tag buttons.
+
     var CategoryButton=function(myClassifier,category){
       var $el= $(`<a href="#${category}" class="tag" data-category="${category}">${category} </a>`);
       ClassifButton.call(this,myClassifier,category,false,$el);
@@ -73,8 +87,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
       // });
       return this;
     }
-
-
     var TagButton=function(myClassifier,category,tag){
       var count = (myClassifier.monofilter(category,tag)).length;
       var $el= $(`<a href="#${category}/${tag}" class="tag" data-category="${category}" data-item="${tag}">${tag} <span class="count">${count}<span></a>`);
@@ -89,9 +101,8 @@ document.addEventListener("DOMContentLoaded", function (event) {
       return this;
     }
 
-
+    //representation in the code of a classifiable-items container. It contains reference to all DOM elements and also their data as variables.
     var ClassifiedContainer=function($item){
-
       var items=this.classifiedItems=[];
       var $selectionMenu=$('<div class="classifier-menu"></div>');
       var $catSelectionMenu=$('<div class="category-menu"></div>');
@@ -246,6 +257,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
         self.filterAndDisplay(urlRequestedSelection[0],urlRequestedSelection[1]||false);
       }
     }
+    //representation of a classified item that has data and can appear or dissappear.
     var ClassifiedItem = function ($item) {
         // console.log("classified item",$item);
         if (!ClassifiedItem.list) ClassifiedItem.list = [];
@@ -316,7 +328,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
           cb.call(ClassifiedItem.list[itmno],ClassifiedItem.list[itmno],itmno);
         }
     }
-
+    //apply
     $(wrapperSelector).each(function () {
         new ClassifiedContainer($(this));
     });

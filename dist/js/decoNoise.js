@@ -1,17 +1,24 @@
+/*
+this script generates by random a decorative pattern for the listing-page headers.
+its effect is visible, for example, in the pilots page if the decorative header has been set to generative.
+
+*/
+
 function hideThis(domel){
     console.log(domel);
     domel.style.display = 'none';
     console.log('hiding an image because its link was broken', domel);
-
 }
 document.addEventListener("DOMContentLoaded", function (event) {
     console.log("decoNoise.js");
     var imgels = [];
     var imgstr = '<img class="deco-noise">';
-
+    //this code relies in "vars.decoNoise.pictures" being set to the url of pictures, which would be set if it has beeen configured in the wp customizer
     var piclist = vars.decoNoise.pictures;
-
+    //fall back to default deco-noise pictures.
     if(!piclist[0]){
+
+      // this code relies in "vars.templateUrl" being set to the url of this template, so that it can reach the pictures.
       piclist=[
           vars.templateUrl+"/assets/deconoise/path1.png",
           vars.templateUrl+"/assets/deconoise/path2.png",

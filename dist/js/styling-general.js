@@ -1,3 +1,6 @@
+/*
+this script contains various styling features, such as the constrained proportion pictures, parallax effects, ellipsis of text, etc.
+*/
 var stylingGeneralJs = new (function () {
 
     /*!

@@ -1,4 +1,6 @@
-
+/*
+this script causes the main menu to switch between mobile and desktop versions. The disctinction however, is done by screen width.
+*/
 document.addEventListener("DOMContentLoaded", function (event) {
   var mouse={}
   var $mainMenu=$(".main-menu-container");
