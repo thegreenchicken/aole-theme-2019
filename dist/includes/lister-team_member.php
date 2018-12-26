@@ -23,6 +23,13 @@ this is the context where this part should be invoked:
 
 ?>
 
+<!--
+<?php
+$team_member->custom_fields = get_fields($team_member->ID);
+// print_r($team_member);
+?>
+-->
+
 			<div class='item-container item-team_member-container'>
 				<!-- <a class="item-paragraph-container" href="<?php echo get_the_permalink($team_member->ID);?>"> -->
 					<div class="post-image-container image-container">
@@ -30,15 +37,34 @@ this is the context where this part should be invoked:
 						<img src="<?php echo get_post_thumbnail_url_or_fallback($team_member->ID, 'medium', "team_member"); ?>" />
 
 					</div>
-					<div class="post-title-container">
+          <span class="post-title-container">
 						<?php echo $team_member->post_title; ?>
-            <!--
-            <?php
-            print_r($team_member);
+					</span>
+          <span class="member-title-container">
+						<?php echo $team_member->custom_fields["title"]; ?>
+					</span>
+          <span class="contact-info-container">
+						<?php
+            //make it a tiny bit less likely that the email gets collected by spambots
+            echo str_ireplace('@',"&#64;",
+                  str_ireplace('.',"&#46;",$team_member->custom_fields["contact_info"])
+            );
             ?>
-            -->
-					</div>
-
-				<!-- </a> -->
+					</span>
+          <span class="items-wrapper items-social-media-wrapper">
+						<?php
+            foreach($team_member->custom_fields["social_media"] as $k=>$item){
+              $item=$item['social_media_link'];
+              // print_r($item);
+              echo '<a href="'
+                .$item['url']
+                .'" target="'
+                .$item['target']
+                .'" class="item-container item-social-media-link-container">'
+                .$item['title']
+                .'</a>';
+            }
+            ?>
+					</span>
 
 			</div>

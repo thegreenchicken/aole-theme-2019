@@ -144,7 +144,7 @@ while (have_posts()): the_post();
 
 
             foreach ($future_events as $ne => $event) {
-                include locate_template('includes/lister-events-single.php');
+                include locate_template('includes/lister-event.php');
             }
             ?>
             <a href="events" class="button-more">Go to all events</a>
@@ -196,7 +196,7 @@ while (have_posts()): the_post();
             foreach ($posts as $post):
                 //it could work without using setup_postdata, in which case the different attributes would be accessed using $post -> <attribute>
                 setup_postdata($post);
-                include locate_template('includes/lister-news-single.php');
+                include locate_template('includes/lister-new.php');
 
             endforeach;
 

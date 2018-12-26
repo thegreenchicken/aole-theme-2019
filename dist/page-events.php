@@ -61,7 +61,7 @@ get_header();
 					// print_r($event);
 					// echo '</pre>';
 
-					include locate_template('includes/lister-events-single.php');
+					include locate_template('includes/lister-event.php');
 
 				}
 				?>
@@ -74,79 +74,6 @@ get_header();
 
 
 	<?php get_footer();
-
-	/*extracted:
-
-
-					<div class="item-container item-<?php echo $scopeName; ?>-event-container">
-						<div class="item-date-container">
-							<?php
-							echo format_event_date($event["event"]->event_start_date,$event["event"]->event_end_date);
-							echo " | ";
-							echo substr($event["event"]->event_start_time, 0, -3)."-".substr($event["event"]->event_end_time, 0, -3);
-							echo "<br><br>";
-							echo $event["event"]->location->name;
-							if ($event["event"]->location->name != $event["event"]->location->location_address) {
-								echo "<br><br>".$event["event"]->location->location_address;
-							}
-							echo ", ".$event["event"]->location->location_town;
-							?>
-						</div>
-						<div class="item-image-container">
-							<a href="<?php echo $event["event"]->the_permalink; ?>">
-								<img class="event-thumbnail" src="<?php
-									echo get_event_image_url($event["event"]->post_id, 'event-thumbnail');
-								?>" />
-							</a>
-						</div>
-						<div class="item-facilitators-container">
-							<ul class="event-facilitator-list">
-								<?php
-									foreach($event["event"]->custom_fields["facilitators"] as $field){
-										echo "<li>".$field["facilitator"]."</li>";
-									}
-								?>
-							</ul>
-						</div>
-						<div class="item-title-container">
-							<a class="event-title" href="<?php echo $event["event"]->the_permalink; ?>">
-								<?php echo $event["event"]->event_name; ?>
-							</a>
-						</div>
-						<div class="item-time-container">
-							<span class="date">
-								<?php
-									echo format_event_date($event["event"]->event_start_date,$event["event"]->event_end_date);
-								?>
-							</span>
-							<span class="time">
-								<?php
-									echo substr($event["event"]->event_start_time, 0, -3)."-".substr($event["event"]->event_end_time, 0, -3);
-								?>
-							</span>
-							<ul class="categories">
-								<?php
-									foreach($event["event"]->event_categories as $cat){
-										echo "<li>".$cat->name."</li>";
-									}
-								?>
-							</ul>
-							<div class="item-location-container">
-								<?php echo $event["event"]->location->name;
-								if ($event["event"]->location->name != $event["event"]->location->location_address) {
-									echo "<br>".$event["event"]->location->location_address;
-								}
-								echo ", ".$event["event"]->location->location_town; ?>
-							</div>
-							<!-- Only for pilots? -->
-							<div class="event-for-pilots"><?php if ($event["event"]->custom_fields["only_for_pilots"] == 1) { echo "Event for pilots"; } else { echo "Public event"; }; ?> </div>
-							<!-- Export event to iCal -->
-							<div class="export-event-to-ical">
-								<a href="<?php echo do_shortcode("[event post_id='".$event["post"]->ID."']#_EVENTICALURL[/event]");?>">Export to iCal</a>
-							</div>
-						</div>
-					</div>
-					*/
 ?>
 <script>
   document.addEventListener("DOMContentLoaded", function (event) {

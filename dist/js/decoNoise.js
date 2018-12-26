@@ -13,12 +13,12 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
     if(!piclist[0]){
       piclist=[
-          vars.templateUrl+"/res-noise-pics/path1.png",
-          vars.templateUrl+"/res-noise-pics/path2.png",
-          vars.templateUrl+"/res-noise-pics/path3.png",
-          vars.templateUrl+"/res-noise-pics/path4.png",
-          vars.templateUrl+"/res-noise-pics/path5.png",
-          vars.templateUrl+"/res-noise-pics/path6.png",
+          vars.templateUrl+"/assets/deconoise/path1.png",
+          vars.templateUrl+"/assets/deconoise/path2.png",
+          vars.templateUrl+"/assets/deconoise/path3.png",
+          vars.templateUrl+"/assets/deconoise/path4.png",
+          vars.templateUrl+"/assets/deconoise/path5.png",
+          vars.templateUrl+"/assets/deconoise/path6.png",
       ]
     }
     var userDefinedZIndex=vars.decoNoise.zindex;

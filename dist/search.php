@@ -7,26 +7,41 @@
  */
 
 get_header(); ?>
- <?php if(is_user_logged_in()) { ?> <!-- template part: <?php echo dirname(__FILE__).'/'.basename(__FILE__);  ?> --> <?php } ?> 
+ <?php if(is_user_logged_in()) { ?> <!-- template part: <?php echo dirname(__FILE__).'/'.basename(__FILE__);  ?> --> <?php } ?>
 
-<div class="main-wrap" role="main">
+<div class="section-container section-results-list-container" role="main">
 
-
-<article <?php post_class('main-content') ?> id="search-results">
 	<header>
-	    <h1 class="entry-title">Search Results for <?php echo get_search_query(); ?>"</h1>
+	    <h1 class="entry-title">Search Results for "<?php echo get_search_query(); ?>"</h1>
 	</header>
 
-	<?php if ( have_posts() ) : ?>
+  <?php if ( have_posts() ) : ?>
 
-		<?php while ( have_posts() ) : the_post(); ?>
-			<?php get_template_part( 'template-parts/content', get_post_format() ); ?>
-		<?php endwhile; ?>
+    <div class="items-wrapper items-results-wrapper">
+    	<?php while ( have_posts() ) : the_post(); ?>
+        <div class="item-container item-result-container">
 
+          <?php if(has_post_thumbnail()){?>
+            <div class="item-thumbnail-container">
+              <?php the_post_thumbnail(); ?>
+            </div>
+          <?php } ?>
+
+          <span class="item-title-container">
+            <?php the_title(); ?>
+          </span>
+
+          <span class="item-excerpt-container">
+            <?php the_excerpt(); ?>
+          </span>
+        </div>
+    	<?php endwhile; ?>
+    </div>
 		<?php else : ?>
-			<?php get_template_part( 'template-parts/content', 'none' ); ?>
-
-	<?php endif; ?>
+    <blockquote>
+      Sorry, your search returned no results.
+    </blockquote>
+  <?php endif; ?>
 
 
 
@@ -34,11 +49,10 @@ get_header(); ?>
 			<div class="post-previous"><?php next_posts_link( __( '&larr; Older posts', 'foundationpress' ) ); ?></div>
 			<div class="post-next"><?php previous_posts_link( __( 'Newer posts &rarr;', 'foundationpress' ) ); ?></div>
 		</nav>
+</div>
 
-</article>
 
 <?php get_sidebar(); ?>
 
-</div>
 
 <?php get_footer();

@@ -1,13 +1,13 @@
 
-<div class="section-container section-news-container">	
+<div class="section-container section-news-container">
 	<div class="items-wrapper items-news-wrapper classifiable-container">
-		<?php 
+		<?php
 		$args = array( 'post_type' => 'jobs' );
-		
+
         $posts = get_posts($args);
 		foreach ($posts as $post) : setup_postdata($post);
-			include locate_template('includes/lister-jobs-single.php');
-		endforeach; 
+			include locate_template('includes/lister-job.php');
+		endforeach;
 		wp_reset_postdata();
 		?>
 	</div>

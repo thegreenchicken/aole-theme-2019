@@ -6,7 +6,6 @@ get_header(); ?>
 <?php
 get_template_part('template-parts-sections/single-content');
 
-// $pilots = get_pilots("", "4");
 ?>
 
 <?php

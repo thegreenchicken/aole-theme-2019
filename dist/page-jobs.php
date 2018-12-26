@@ -4,7 +4,23 @@ get_header();?>
 <!-- template part: <?php echo basename(__FILE__); ?> -->
 
 <?php get_template_part('template-parts-sections/single-content-listingpage');?>
-<?php get_template_part('template-parts-postlists/jobs-lister');?>
+
+<div class="section-container section-news-container">
+	<div class="items-wrapper items-news-wrapper classifiable-container">
+		<?php
+		$args = array( 'post_type' => 'jobs' );
+
+    $posts = get_posts($args);
+		foreach ($posts as $post) : setup_postdata($post);
+			include locate_template('includes/lister-job.php');
+		endforeach;
+		// wp_reset_postdata();
+		?>
+	</div>
+
+
+</div>
+
 
 <?php get_sidebar();?>
 <?php get_footer();
@@ -23,17 +39,17 @@ get_header();?>
 
 				</div>
 				<article class="jobs-article-content">
-					<?php 
+					<?php
 					$related_pilots = get_field("related_pilot");
 
 					if ($related_pilots):
-						foreach ($related_pilots as $pilot):	
+						foreach ($related_pilots as $pilot):
 							?>
-						<span class="the-author">	
-							<i>Related pilot(s):</i><br>					
+						<span class="the-author">
+							<i>Related pilot(s):</i><br>
 							<a href="<?php echo get_permalink($pilot->ID); ?>"><?php echo $pilot->post_title; ?></a>
 						</span>
-						<?php 
+						<?php
 						endforeach;
 						endif; ?>
 						<h3><a href="<?php echo get_permalink(); ?>"><?php the_title(); ?></a></h3>

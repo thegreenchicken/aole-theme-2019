@@ -3,7 +3,7 @@
 if (!function_exists('aole_scripts')):
     function aole_scripts()
 {
-	
+
         // Enqueue the main Stylesheet.
         //wp_enqueue_style('main-stylesheet', get_template_directory_uri() . '/assets/stylesheets/foundation.css', array(), '2.9.3', 'all');
 

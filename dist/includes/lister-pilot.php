@@ -16,7 +16,11 @@ this is the context where this part should be invoked:
 	//$pilot contains a post object with all the required properties.
 	//The easiest way:
 
-	$pilots = get_pilots("", "4");
+  $pilots = get_posts(
+      array('showposts' => 4,
+          'post_type' => 'pilot',
+      )
+  );
 	foreach($pilots as $pilot):
 */
 
@@ -25,7 +29,7 @@ wp_enqueue_script('pilots-list', get_template_directory_uri() . '/js/pilots-list
 ?>
 
 			<div class='item-container item-pilot-container classifiable-item'>
-				
+
 
         <ul style="display:none" class="classifiable-attributes" name="theme group" slug="theme_group">
           <?php

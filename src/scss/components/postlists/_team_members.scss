@@ -1,10 +1,30 @@
 .section-container{
   .items-wrapper.items-team_members-wrapper{
     @extend .row;
-    .item-container{
+    &>.item-container{
       @extend .col-xs-6;
       @extend .col-sm-4;
       @extend .col-lg-3;
+
+      height: 444px;
+
+      &>*, a.item-social-media-link-container{
+        display:block;
+      }
+      .member-title-container,
+      .contact-info-container,
+      .item-social-media-link-container{
+        font-style: italic;
+      }
+      .contact-info-container:before{
+        @extend .glyphicon-envelope;
+      }
+      // .item-social-media-link-container{
+      //   @extend .glyphicon-link;
+      // }
+
+
+
       .image-container{
         overflow:hidden;
         width:100%;

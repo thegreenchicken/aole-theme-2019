@@ -24,7 +24,7 @@ this is the context where this part should be invoked:
     foreach ($posts as $post) :
         //it could work without using setup_postdata, in which case the different attributes would be accessed using $post -> <attribute>
 		setup_postdata($post);
-		include locate_template('includes/lister-jobs-single.php');
+		include locate_template('includes/lister-jobs.php');
 
 */
 ?>

@@ -1,9 +1,6 @@
  <?php if(is_user_logged_in()) { ?> <!-- template part: <?php echo dirname(__FILE__).'/'.basename(__FILE__);  ?> --> <?php } ?>
 
-<?php
 
-require_once("custom-functions.php"); // For logic needed on multiple pages (e.g. fetching posts of a certain category / taxonomy)
-?>
 
 <!doctype html>
 <html class="no-js" <?php language_attributes(); ?> >

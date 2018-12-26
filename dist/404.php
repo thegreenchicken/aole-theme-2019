@@ -1,9 +1,10 @@
 <?php
 get_header(); ?>
 
- <?php if(is_user_logged_in()) { ?> <!-- template part: <?php echo dirname(__FILE__).'/'.basename(__FILE__);  ?> --> <?php } ?> 
+ <?php if(is_user_logged_in()) { ?> <!-- template part: <?php echo dirname(__FILE__).'/'.basename(__FILE__);  ?> --> <?php } ?>
 
-<div class="main-wrap" role="main">
+
+<div class="section-container section-content-container">
 	<article <?php post_class('main-content') ?> id="post-<?php the_ID(); ?>">
 		<header>
 			<h2 class="entry-title">Yikes! No such page exists.</h2>
