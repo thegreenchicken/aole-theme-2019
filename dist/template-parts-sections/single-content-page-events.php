@@ -27,7 +27,7 @@ This insert contains the page content part, to be inserted in the body of any pa
         include locate_template("includes/deco-noise-selector.php");
         ?>
         <div class="item-post-title-container">
-            <h2 class="entry-title"><?php the_title(); ?></h2>
+            <h1 class="entry-title"><?php the_title(); ?></h1>
             <p>
                 <?php if (get_field('subtitle')){the_field( 'subtitle' ); }?>
             </p>

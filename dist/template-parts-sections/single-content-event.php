@@ -24,7 +24,7 @@
 
         <div class="item-post-data-container">
           <p class="item-post-type-container">Event</p>
-          <h2 class="item-title-container"><?php the_title(); ?></h2>
+          <h1 class="item-title-container"><?php the_title(); ?></h1>
           <?php
           $facilitators=get_field('facilitators');
           if ($facilitators) {
@@ -213,12 +213,12 @@
                 <?php print_r( get_fields() ) ?>
             </textarea>
 
-            <h2>Post:</h2>
+            <h3>Post:</h3>
             <textarea style="width:100%; height:300px">
                 <?php print_r( get_post() ) ?>
             </textarea>
 
-            <h2>Event:</h2>
+            <h3>Event:</h3>
             <textarea style="width:100%; height:300px">
                 <?php
                 if (class_exists('EM_Events')) {

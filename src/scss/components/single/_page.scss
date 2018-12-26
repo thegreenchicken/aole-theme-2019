@@ -32,7 +32,7 @@ body.page{
             @extend .container;
             position: relative;
             z-index: 2;
-            >h2{
+            >h1{
                 font-size: 0.9rem;
                 font-weight: 100;
                 color:white;
@@ -61,7 +61,7 @@ body.page{
             //specially useful for the calendar element:
             min-width:207px;
 
-            top: -100px;
+            top: -150px;
 
             img{
                 position: absolute;

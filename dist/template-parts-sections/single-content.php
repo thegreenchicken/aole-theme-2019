@@ -13,7 +13,7 @@ This insert contains the page content part, to be inserted in the body of any pa
   ?>
     <div class="section-container section-post-header-container">
         <p class="item-post-type-container"><?php ?></p>
-        <h2 class="item-title-container"><?php the_title(); ?></h2>
+        <h1 class="item-title-container"><?php the_title(); ?></h1>
         <?php
 
         $echo = $extra_fields['subtitle'];

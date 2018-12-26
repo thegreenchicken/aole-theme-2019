@@ -6,9 +6,7 @@ get_header(); ?>
 
 <div class="section-container section-content-container">
 	<article <?php post_class('main-content') ?> id="post-<?php the_ID(); ?>">
-		<header>
-			<h2 class="entry-title">Yikes! No such page exists.</h2>
-		</header>
+		<h1 class="entry-title">Yikes! No such page exists.</h1>
 		<div class="entry-content">
 			<div class="error">
 				<p class="bottom">

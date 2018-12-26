@@ -1,7 +1,13 @@
+
+$item-spacing: 15px;
+
 .section-container .items-pilots-wrapper {
     @extend .row;
 
     margin-top: $item-spacing;
+
+    left: -$item-spacing;
+    position: relative;
 
     .classifier-menu{
       .count {
@@ -22,6 +28,9 @@
 
       }
     }
+    &>*{
+      padding:$item-spacing;
+    }
     .item-pilot-container {
         $borderpx:3;
 
@@ -34,10 +43,8 @@
         //with the float:left that comes with col elements, there will be white gaps if an element of the previous line is just one pixel taller than the rest. The pictures in the list are so.
         //the other possibility of fixing this is by using a js code, but probably it is more efficient this way:
         float:none;
-        margin:-3px;
 
         padding: $item-spacing;
-        margin: -$borderpx;
 
         // background-color: #999;
         *{

@@ -13,7 +13,7 @@ this is used in the pilots page, and is what makes the tag-based filtering possi
 document.addEventListener("DOMContentLoaded", function (event) {
     console.log("classifier.js");
     //get the after-hash data to apply the filter accordingly. (the part of the url that comes after the "#" character.
-    function getHash=function(){
+    function getHash(){
       return decodeURIComponent( window.location.hash ).replace(/^\#/,"").split("/").map(function(a){ return (a=="false"?false:a) });
     }
     var urlRequestedSelection=getHash();
@@ -164,7 +164,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
         for(var dispTag in sortedByTagsOfCategory){
           console.log(dispTag,":",sortedByTagsOfCategory[dispTag]);
           if(sortedByTagsOfCategory[dispTag].length)
-            $(wrapperSelector).append('<h3 class="item-categorizer-tag-title">'+dispTag+'</h3>');
+            $(wrapperSelector).append('<h2 class="item-categorizer-tag-title">'+dispTag+'</h2>');
           for(var item of sortedByTagsOfCategory[dispTag]){
             item.reattach();
           }

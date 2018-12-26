@@ -32,7 +32,7 @@ wp_enqueue_script('tagClassifyPosts', get_template_directory_uri() . '/js/classi
         include locate_template("includes/deco-noise-selector.php");
         ?>
         <div class="item-post-title-container">
-            <h2 class="entry-title"><?php the_title(); ?></h2>
+            <h1 class="entry-title"><?php the_title(); ?></h1>
             <p>
                 <?php if (get_field('subtitle')){the_field( 'subtitle' ); }?>
             </p>

@@ -24,7 +24,7 @@ copy the `./dist` folder from this repository into the `./wp-content/themes` dir
 
 get familiarized with wordpress template hierarchy: https://developer.wordpress.org/themes/basics/template-hierarchy/
 
-* There is a readme file on each folder describing the file functions on each file.
+* There is a readme file on each folder describing the file functions on each file. Othewise, descriptions may be provided in the files themselves.
 * When you are logged in, the files responsible for each part of the page are displayed as html comments, so that it is easier to identify where to make changes.
 
 ### CSS (SCSS)

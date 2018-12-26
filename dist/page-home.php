@@ -131,8 +131,8 @@ while (have_posts()): the_post();
 
           $section = get_field('events_showcase_section');
 
-          $append_before = '<h2 class="events-title"><!-- get_field(events_showcase_section)[events_title] -->' . $section['events_title'] . '</h2>';
-          $append_before .= '<p class="events-subtitle"><!-- get_field(events_showcase_section)[events_subtitle] -->' . $section['events_subtitle'] . '</h2>';
+          $append_before = '<h2 class="events-title">'.get_field(events_showcase_section)[events_title].$section['events_title'] . '</h2>';
+          $append_before .= '<p class="events-subtitle">'.get_field(events_showcase_section)[events_subtitle].$section['events_subtitle'] . '</h2>';
 
           $future_events = EM_Events::get(array(
             "scope" => "future",
