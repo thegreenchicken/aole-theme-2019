@@ -40,9 +40,6 @@ $item-spacing: 15px;
 
         overflow: hidden;
         display: inline-block;
-        //with the float:left that comes with col elements, there will be white gaps if an element of the previous line is just one pixel taller than the rest. The pictures in the list are so.
-        //the other possibility of fixing this is by using a js code, but probably it is more efficient this way:
-        float:none;
 
         padding: $item-spacing;
 

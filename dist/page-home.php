@@ -23,6 +23,7 @@ $(window).ready( function (event) {
     var squareWidth=50;
     var halfTriangleWidth=squareWidth*Math.sqrt(1);
     function Arrowette($itm) {
+        console.log("arrowette script, inline at page-home.php");
         var color=$itm.css("background-color");
         $itm.css("position","relative");
         $itm.css("overflow","none");
@@ -97,7 +98,7 @@ while (have_posts()): the_post();
           the_field('color');
           echo ";";
       }
-      ?> position:relative; overflow:hidden;">
+      ?> position:relative; overflow:hidden; ">
 
       <?php
       if (get_field('subscribe')) {
@@ -109,7 +110,13 @@ while (have_posts()): the_post();
       }
       ?>
 
-      <?php echo get_field('featured_header'); ?>
+      <?php
+
+      // echo get_field('featured_header');
+
+      include locate_template('assets/d3Animation/index.php');
+
+      ?>
 
 
     </div>

@@ -11,6 +11,7 @@ function hideThis(domel){
 }
 document.addEventListener("DOMContentLoaded", function (event) {
     console.log("decoNoise.js");
+    var selectors=".section-events-showcase-container, .section-post-header-container, .deco-noise"
     var imgels = [];
     var imgstr = '<img class="deco-noise">';
     //this code relies in "vars.decoNoise.pictures" being set to the url of pictures, which would be set if it has beeen configured in the wp customizer
@@ -65,7 +66,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
         this.frame();
         return this;
     }
-    $(".section-post-header-container, .deco-noise").each(function () {
+    $(selectors).each(function () {
         console.log(this);
 
         $(this).css({

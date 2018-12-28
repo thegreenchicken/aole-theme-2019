@@ -29,7 +29,7 @@ get familiarized with wordpress template hierarchy: https://developer.wordpress.
 
 ### CSS (SCSS)
 
-having node js installed, cd to the root of this project (same directory as this readme) and run `npm install`. After this, get the scss to auto-compile using the `npm run sass` command.
+having node js installed, cd to the root of this project (same directory as this readme) and run `npm install`. After this, get the scss to auto-compile using the `npm run dev` command.
 * The stylesheets are compiled from the contents inside the src folder, into the dist/css folder.
 * it is possible to add compilation of js files into this pipeline. This has not been necessary so far.
 * There are online SCSS compiler plugins for wordpress. These may be useful for everyday changes, but keep in mind that keeping the git repository updated may be important.
