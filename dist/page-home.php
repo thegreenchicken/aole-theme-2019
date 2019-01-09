@@ -52,7 +52,7 @@ $(window).ready( function (event) {
             "border-top": "solid "+squareWidth/2+"px "+color,
             "border-right": "solid "+squareWidth/2+"px transparent",
             padding:0,
-            "z-index":10
+            "z-index":1
             // transform:" translate(-13px, 74px) ",
         });
 
@@ -99,25 +99,24 @@ while (have_posts()): the_post();
           echo ";";
       }
       ?> position:relative; overflow:hidden; ">
+      <div class="items-wrapper items-header-wrapper">
 
-      <?php
-      if (get_field('subscribe')) {
-        ?>
-        <div class="item-container item-subscribe-container" role="main">
-          <?php echo the_field('subscribe'); ?>
-        </div>
         <?php
-      }
-      ?>
-
-      <?php
-
-      // echo get_field('featured_header');
-
-      include locate_template('assets/d3Animation/index.php');
-
-      ?>
-
+        if (get_field('subscribe')) {
+          ?>
+          <div class="item-container item-subscribe-container" role="main">
+            <?php echo the_field('subscribe'); ?>
+          </div>
+          <?php
+        }
+        ?>
+        <div class="item-container item-post-title-container" role="main">
+          <?php
+          echo get_field('featured_header');
+          // include locate_template('assets/d3Animation/index.php');
+          ?>
+        </div>
+      </div>
 
     </div>
 
@@ -132,14 +131,13 @@ while (have_posts()): the_post();
 
 
     <div class="section-container section-events-showcase-container">
+        <h2 class="events-title">
+          'Upcoming events'<?php get_field(events_showcase_section)[events_title].$section['events_title']?>
+        </h2>
+
         <div class="items-wrapper items-future-events-wrapper">
-
           <?php
-
           $section = get_field('events_showcase_section');
-
-          $append_before = '<h2 class="events-title">'.get_field(events_showcase_section)[events_title].$section['events_title'] . '</h2>';
-          $append_before .= '<p class="events-subtitle">'.get_field(events_showcase_section)[events_subtitle].$section['events_subtitle'] . '</h2>';
 
           $future_events = EM_Events::get(array(
             "scope" => "future",
@@ -149,17 +147,17 @@ while (have_posts()): the_post();
           if(! empty($future_events)){
             echo $append_before;
 
-
             foreach ($future_events as $ne => $event) {
                 include locate_template('includes/lister-event.php');
             }
             ?>
-            <a href="events" class="button-more">Go to all events</a>
+
             <?php
           }
 
           ?>
         </div>
+        <a href="events" class="button-more">Go to all events</a>
     </div>
 
 
@@ -184,12 +182,12 @@ while (have_posts()): the_post();
     </div>
 
     <div class="section-container section-news-container section-news-showcase-container">
+      <h2 class="news-title">'latest news'<?php $section['news_title'] ?></h2>
         <div class="items-wrapper items-news-wrapper">
             <?php
 
             $section = get_field('news_showcase_section');
 
-            $append_before = '<h2 class="news-title"><!-- get_field(news_showcase_section)[news_title] -->' . $section['news_title'] . '</h2>';
             $append_before .= '<p class="news-subtitle"><!-- get_field(news_showcase_section)[news_subtitle] -->' . $section['news_subtitle'] . '</p>';
             echo $append_before;
 

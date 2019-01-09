@@ -128,7 +128,9 @@ var stylingGeneralJs = new (function () {
     return this;
 });
 
-stylingGeneralJs.makeSquare({selector:"body.page .item-post-thumbnail-container, .items-team_members-wrapper .image-container, .square"});
+stylingGeneralJs.makeSquare({
+  selector:"body.page .item-post-thumbnail-container, .items-team_members-wrapper .image-container, .square, .items-pilots-wrapper  .item-paragraph-container"
+});
 stylingGeneralJs.ellipsis({selector:".post-title-container", responsive: true, lines:2 });
 stylingGeneralJs.fill({selector:".items-team_members-wrapper .image-container img, .fill"});
 document.addEventListener("DOMContentLoaded", function (event) {

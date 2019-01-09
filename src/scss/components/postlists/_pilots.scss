@@ -8,7 +8,10 @@ $item-spacing: 15px;
 
     left: -$item-spacing;
     position: relative;
-
+    .item-categorizer-tag-title {
+      display: inline-block;
+      width: 100%;
+    }
     .classifier-menu{
       .count {
         font-size: 0.8em;

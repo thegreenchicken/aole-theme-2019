@@ -3,78 +3,88 @@
     height:$header-menu-height;
     text-align: justify;
     padding-top: 27px;
-    //
-    // img.logo {
-    //   width: 142px;
-    //   position: absolute;
-    //   top: 0px;
-    // }
+    max-width: none;
+    position: sticky;
+    top: 0px;
+
+    z-index: 100;
+    background: white;
+    width: 100%;
+    border-bottom: 1px #1f1f1f;
+
+    &.sticky-scrolled{
+      // height:50px;
+    }
 
     .main-menu-container {
         float: right;
         margin-left: 3em;
 
-        //active: when the collapsed menu is being displayed
-        &.collapsed.active{
-          &:before {
-            content: ">>";
-            float: right;
-          }
-          &>*{
-            width: 100vw;
-            transition:0.2s;
-            // left:0;
-            // display: block;
-            pointer-events:all;
-            opacity:1;
-          }
-        }
-        //collapsed: when the screen is small enough to tweak the menu
-        &.collapsed{
-            &:before {
-               content: "Menu";
-               float: right;
-            }
 
-
-            &>*{
-                z-index: 1200;
-                transition:0.2s;
-                background-color: white;
-                // display:none;
-                pointer-events:none;
-                opacity:0;
-                width: 0;
-
-                // height: 100vh;
-
-                overflow-x: none;
-                overflow-y: auto;
-
-                position:absolute;
-
-                margin:-$padding;
-                padding:$padding;
-
-                top: $header-menu-height + 17;
-                right:0;
-
-
-                // display:none;
-
-                ul>li{
-                    // margin: 5vh 2vw;
-                    font-size: 10vw;
-                    font-weight: 1;
-                    text-transform: capitalize;
-                    display: block;
-                    width:100%;
-                }
-
-            }
-
-        }
     }
+
+    //active: when the collapsed menu is being displayed
+    &.collapsed.active .main-menu-container{
+      &:before {
+        content: ">>";
+        float: right;
+      }
+      &>*{
+        width: 100vw;
+        transition:0.2s;
+        // left:0;
+        // display: block;
+        pointer-events:all;
+        opacity:1;
+      }
+    }
+    //collapsed: when the screen is small enough to tweak the menu
+    &.collapsed .main-menu-container{
+        &:before {
+           content: "\e236";//"hamburger"
+           float: right;
+        }
+
+
+        &>*{
+            z-index: 1200;
+            transition:0.2s;
+            background-color: white;
+            // display:none;
+            pointer-events:none;
+            opacity:0;
+            width: 0;
+
+            // height: 100vh;
+
+            overflow-x: none;
+            overflow-y: auto;
+
+            position:absolute;
+
+            margin:-$padding;
+            padding:$padding;
+
+            top: $header-menu-height + 17;
+            right:0;
+
+
+            // display:none;
+
+            ul>li{
+                // margin: 5vh 2vw;
+                font-size: 10vw;
+                font-weight: 1;
+                text-transform: capitalize;
+                display: block;
+                width:100%;
+            }
+
+        }
+
+    }
+
+
     .title-container{
         display:inline-block;
     }

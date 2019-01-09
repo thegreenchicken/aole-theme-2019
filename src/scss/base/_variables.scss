@@ -9,7 +9,7 @@ import fonts
 @import url('https://fonts.googleapis.com/css?family=Poppins:800|Raleway:500,500i,700');
 /* Containers */
 
-$header-menu-height: 87px;
+$header-menu-height: 100px;
 
 $content-box-width: 900px;
 
@@ -51,6 +51,9 @@ $error: $red;
 
 /* Typography */
 
+html {
+    font-size: 18px;
+}
 // Body font
 $font-size: 1rem;
 $body-font-size: 1rem;
@@ -72,7 +75,7 @@ $heading-margin-bottom: 1em;
 
 // Heading font size
 $h1: 2.25rem;
-$h2: 1.3rem;
+$h2: 1.16rem;
 $h3: 1rem;
 $h4: 0.8rem;
 $h5: 0.6rem;
@@ -85,24 +88,19 @@ $h5: 0.6rem;
     font-size:$h1;
     margin:0;
     margin-bottom: $heading-margin-bottom;
-
 }
+
 @mixin title2() {
-    @include title1();
-    text-transform: uppercase;
+    color: #969696;
     font-size:$h2;
 }
 @mixin title3() {
-    @include title2();
-    text-transform: none;
     font-size:$h3;
 }
 @mixin title4() {
-    @include title3();
     font-size:$h4;
 }
 @mixin title5() {
-    @include title4();
     font-size:$h5;
 }
 @mixin subtitle() {

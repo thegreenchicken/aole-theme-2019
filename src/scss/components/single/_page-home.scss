@@ -2,7 +2,7 @@ body.home{
   .section-container
   .button-more{
       color:$red;
-      margin-top: 5rem;
+      margin-top: 3rem;
       display: block;
       text-align: center;
       transition: margin-left 0.5s;
@@ -13,10 +13,6 @@ body.home{
         margin-left: 36px;
         transition: margin-left 0.5s;
       }
-  }
-  h2{
-    color: $gray;
-    text-transform: none;
   }
   .section-callout-container {
       background-color: black;
@@ -29,26 +25,34 @@ body.home{
       max-width: unset;
   }
   .section-post-header-container{
+    min-height: 626px;
+    .items-header-wrapper{
+      @extend .container;
+      @extend .row;
+      .item-subscribe-container{
+          @extend .col-sm-4;
+          // @extend .col-sm-push-8;
+          font-size: 0.72rem;
+          float: right;
+          border: solid 3px black;
+          background-color: white;
+          color: black;
+          text-transform: none;
+          position: relative;
+          top: -69px;
+          z-index: 2;
+          margin-left: 53px;
+          padding: 20px;
+          h1,h2{
+            color:black;
+            text-transform: none;
+          }
+      }
+    }
     h2{
       text-transform: uppercase;
     }
-    .item-subscribe-container{
-        @extend .col-sm-4;
-        float: right;
-        border: solid 3px black;
-        background-color: white;
-        color: black;
-        text-transform: none;
-        position: relative;
-        top: -69px;
-        z-index: 2;
-        margin-left: 53px;
-        padding: 20px;
-        h1,h2{
-          color:black;
-          text-transform: none;
-        }
-    }
+
   }
   // .items-news-wrapper{
   //   .item-author-container,.item-title-container,.item-author-container{
@@ -81,6 +85,7 @@ body.home{
       @include hero-item();
       text-align:center;
       background-color: $blackish;
+      padding-top: 87px;
       img,.timezone,.hours{
           display: none;
       }
@@ -89,21 +94,32 @@ body.home{
           display:block;
       }
       .item-title-container{
-          font-size: 2.3em;
+          font-size: 1.7rem;
           font-weight: bold;
       }
       .item-date-container{
-          font-size: 1.3em;
+          font-size: 1rem;
       }
       a:hover>*{
         text-decoration:underline;
         margin-left:10px;
       }
+      .items-wrapper{
+        margin-top: 99px;
+        padding-bottom: 18px;
+      }
+  }
+  .section-news-showcase-container {
+    text-align: center;
+    .items-wrapper{
+      text-align: initial;
+    }
   }
   .section-pilots-list-container{
-      .item-before-container,.item-after-container{
-        @include center-pushed-text(8);
-        float:none;
-      }
+    top: 46px;
+    .item-before-container,.item-after-container{
+      @include center-pushed-text(8);
+      float:none;
+    }
   }
 }

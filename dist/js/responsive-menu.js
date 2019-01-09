@@ -3,9 +3,9 @@ this script causes the main menu to switch between mobile and desktop versions. 
 */
 document.addEventListener("DOMContentLoaded", function (event) {
   var mouse={}
-  var $mainMenu=$(".main-menu-container");
+  var $mainMenu=$(".header-container");//.main-menu-container"
   var isCollapsed=false;
-  function updateFn(){
+  function sizeUpdateFn(){
     if($(window).width() < 550){
       if(!isCollapsed){
         isCollapsed=true;
@@ -24,11 +24,21 @@ document.addEventListener("DOMContentLoaded", function (event) {
       }
     }
   }
-  $(window).on("resize", updateFn);
+  $(document).on("scroll", function (event) {
+      var doc = document.documentElement;
+      var top = (window.pageYOffset || doc.scrollTop) - (doc.clientTop || 0);
+      if (top > 10) {
+        $mainMenu.addClass("sticky-scrolled");
+      } else {
+        $mainMenu.removeClass("sticky-scrolled");
+      }
+  });
+
+  $(window).on("resize", sizeUpdateFn);
   $mainMenu.on("click",function(){
     $mainMenu.toggleClass("active");
   });
   $mainMenu.on("drag",console.log);
-  updateFn();
+  sizeUpdateFn();
 
 });
