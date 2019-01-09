@@ -8,6 +8,10 @@ console.log(vars);
 </script>
 <?php
 /*
+
+this template part is just like "single-content-listingpage" only that in the case of events,
+we need to have a calendar element.
+
 This insert contains the page content part, to be inserted in the body of any page.
 
  */
