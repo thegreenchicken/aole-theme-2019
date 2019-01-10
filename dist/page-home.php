@@ -113,7 +113,7 @@ while (have_posts()): the_post();
         <div class="item-container item-post-title-container" role="main">
           <?php
           echo get_field('featured_header');
-          // include locate_template('assets/d3Animation/index.php');
+          include locate_template('assets/d3Animation/index.php');
           ?>
         </div>
       </div>
@@ -129,8 +129,15 @@ while (have_posts()): the_post();
         ?>
     </div>
 
-
     <div class="section-container section-events-showcase-container">
+      <?php
+      $future_events = EM_Events::get(array(
+        "scope" => "future",
+        "limit" => 3,
+        // "orderby" => "event_start_date"
+      ));
+      if(! empty($future_events)){
+        ?>
         <h2 class="events-title">
           'Upcoming events'<?php get_field(events_showcase_section)[events_title].$section['events_title']?>
         </h2>
@@ -139,12 +146,7 @@ while (have_posts()): the_post();
           <?php
           $section = get_field('events_showcase_section');
 
-          $future_events = EM_Events::get(array(
-            "scope" => "future",
-            "limit" => 3,
-            // "orderby" => "event_start_date"
-          ));
-          if(! empty($future_events)){
+
             echo $append_before;
 
             foreach ($future_events as $ne => $event) {
@@ -152,14 +154,14 @@ while (have_posts()): the_post();
             }
             ?>
 
-            <?php
-          }
 
-          ?>
         </div>
         <a href="events" class="button-more">Go to all events</a>
-    </div>
+        <?php
+      }
 
+      ?>
+    </div>
 
     <div class="section-container section-pilots-showcase-container">
 

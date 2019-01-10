@@ -99,17 +99,19 @@ document.addEventListener("DOMContentLoaded", function(event) {
                     return height / 2 + Math.sin(angle * i) * (outerring / 2 + (innerring) * logooutersizeglobal / 5);
                 })
                 .attr('class', 'school')
-                .attr("font-family", "Poppins")
-                .attr("font-size", '1vw')
+                // .attr("font-family", "Poppins")
+                .attr("font-size", '1rem')
                 .attr("fill", "white")
+                .attr("opacity", "0.5")
                 .attr("text-anchor", "middle");
 
             svg.append("text")
                 .attr("class", "date")
-                .attr("font-family", "Poppins")
-                .attr("font-size", '1vw')
-                .attr('font-weight', '700')
-                .attr("fill", "#ffffff")
+                // .attr("font-family", "Poppins")
+                .attr("font-size", '1rem')
+                // .attr('font-weight', '700')
+                .attr("fill", "white")
+                .attr("opacity", "0.5")
                 .attr("x", width / 2)
                 .attr("y", height / 2 + 10)
                 .attr("text-anchor", "middle");

@@ -14,17 +14,19 @@
 
     &.sticky-scrolled{
       // height:50px;
+      border-bottom: solid 1px #f1f1f1;
     }
-
+    $main-menu-container-top: ($header-menu-height/2) - 18;
     .main-menu-container {
-        float: right;
-        margin-left: 3em;
-
-
+      // margin-left: 3em;
+      position: absolute;
+      right: 0px;
+      top: $main-menu-container-top;
     }
 
     //active: when the collapsed menu is being displayed
     &.collapsed.active .main-menu-container{
+      // cursor:pointer;
       &:before {
         content: ">>";
         float: right;
@@ -40,47 +42,65 @@
     }
     //collapsed: when the screen is small enough to tweak the menu
     &.collapsed .main-menu-container{
-        &:before {
-           content: "\e236";//"hamburger"
-           float: right;
-        }
+      cursor:pointer;
+      &:before {
+        // font-family: "Glyphicons Halflings";
+        // content: "\e236";//"hamburger"
+        content: "| | |";
+        font-size: 28px;
+        top: -7px;
+        position: relative;
+        right: 22px;
+        //background: url("http://www.gentleface.com/i/free_toolbar_icons_16x16_black.png") 0 0 no-repeat;
+        // div{
+         // display:inline;
+         // width:32px;
+         // height:32px;
+         // &>div{
+         //   width: 35px;
+         //   height: 5px;
+         //   background-color: black;
+         //   margin: 6px 0;
+         // }
+         // }
+      }
 
 
-        &>*{
-            z-index: 1200;
-            transition:0.2s;
-            background-color: white;
-            // display:none;
-            pointer-events:none;
-            opacity:0;
-            width: 0;
+      &>*{
+          z-index: 1200;
+          transition:0.2s;
+          background-color: white;
+          // display:none;
+          pointer-events:none;
+          opacity:0;
+          width: 0;
 
-            // height: 100vh;
+          // height: 100vh;
 
-            overflow-x: none;
-            overflow-y: auto;
+          overflow-x: none;
+          overflow-y: auto;
 
-            position:absolute;
+          position:absolute;
 
-            margin:-$padding;
-            padding:$padding;
+          margin:-$padding;
+          padding:$padding;
 
-            top: $header-menu-height + 17;
-            right:0;
+          top: $header-menu-height - $main-menu-container-top;
+          right:0;
 
 
-            // display:none;
+          // display:none;
 
-            ul>li{
-                // margin: 5vh 2vw;
-                font-size: 10vw;
-                font-weight: 1;
-                text-transform: capitalize;
-                display: block;
-                width:100%;
-            }
+          ul>li{
+              // margin: 5vh 2vw;
+              font-size: 10vw;
+              font-weight: 1;
+              text-transform: capitalize;
+              display: block;
+              width:100%;
+          }
 
-        }
+      }
 
     }
 

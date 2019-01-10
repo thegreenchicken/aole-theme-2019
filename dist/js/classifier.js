@@ -161,10 +161,15 @@ document.addEventListener("DOMContentLoaded", function (event) {
         sortedByTagsOfCategory[category?"Without "+category:"Others"]=appendLast;
 
         $(wrapperSelector+" .item-categorizer-tag-title").remove();
+        $(wrapperSelector+" .item-categorizer-hr").remove();
+        let n=0;
         for(var dispTag in sortedByTagsOfCategory){
           console.log(dispTag,":",sortedByTagsOfCategory[dispTag]);
-          if(sortedByTagsOfCategory[dispTag].length)
+          if(sortedByTagsOfCategory[dispTag].length){
+            if(n>0) $(wrapperSelector).append('<hr class="item-categorizer-hr"/>');
+            n++;
             $(wrapperSelector).append('<h2 class="item-categorizer-tag-title">'+dispTag+'</h2>');
+          }
           for(var item of sortedByTagsOfCategory[dispTag]){
             item.reattach();
           }

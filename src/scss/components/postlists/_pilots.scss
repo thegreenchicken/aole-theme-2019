@@ -9,8 +9,17 @@ $item-spacing: 15px;
     left: -$item-spacing;
     position: relative;
     .item-categorizer-tag-title {
+      @include title1();
+      font-size: 1.58rem;
       display: inline-block;
       width: 100%;
+      margin-top: 55px;
+    }
+    hr{
+      // margin-bottom: 44px;
+      margin-top: 72px;
+      width:100%;
+      display:inline-block;
     }
     .classifier-menu{
       .count {
@@ -37,7 +46,8 @@ $item-spacing: 15px;
     .item-pilot-container {
         $borderpx:3;
 
-        @extend .col-sm-3;
+        @extend .col-lg-3;
+        @extend .col-sm-6;
         // @extend .col-sm-4;
         @extend .col-xs-12;
 

@@ -228,11 +228,12 @@ dd {
     color: white;
     display: inline-block;
     border: none;
-    padding: 0.2em 2em;
+    padding: 0.6em 2em;
     font-size: 1em;
     text-transform: uppercase;
     text-align: center;
     margin: 3px;
+    font-weight: 600;
     // transition: transform 0.05s;
     &:hover{
       // opacity:0.7;
