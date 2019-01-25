@@ -396,6 +396,11 @@ function cptui_register_my_taxes() {
         "show_in_quick_edit" => false,
         );
     register_taxonomy( "quote_category", array( "quotes" ), $args );
+
+    //and of course that EM manager has a arbitrarily dedicated function to recover the normal tag taxonomy.
+    register_taxonomy_for_object_type('post_tag',EM_POST_TYPE_EVENT);
+    register_taxonomy_for_object_type('post_tag','event-recurring');
+
 }
 
 add_action( 'init', 'cptui_register_my_taxes' );

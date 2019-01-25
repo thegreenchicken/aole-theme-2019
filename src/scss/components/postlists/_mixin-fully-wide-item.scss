@@ -1,0 +1,54 @@
+
+@mixin fully-wide-item($my-margin){
+    $my-breakpoint: $screen-sm;
+
+
+    border: solid 3px $font-color;
+    position: relative;
+    overflow: hidden;
+    margin: 45px auto;
+
+    >div,>span{
+        // color: $font-color;
+        text-decoration:none;
+        margin: $my-margin;
+    }
+
+    .item-image-container{
+        width: 66%;
+        height: 100%;
+        float: right;
+
+        margin: 0;
+        margin-bottom: -8px;
+        // margin-top: -3%;
+        // transition: margin-top 2s;
+        margin-left: $my-margin;
+        img{
+            width:100%;
+            // height:100%;
+            // min-height: 100%;
+            // min-width: 100%;
+        }
+        @media (max-width: $my-breakpoint) {
+            position: relative;
+            width: 100%;
+            margin:0px;
+
+        }
+    }
+    @media (max-width: $my-breakpoint) {
+        height:auto;
+    }
+    // &:hover{
+    //     .item-image-container{
+    //         opacity: 0.87;
+    //         // margin-top: 0px;
+    //         // transition: margin-top 2s;
+    //     }
+    //
+    //     // .item-title-container{
+    //     //     text-decoration: underline;
+    //     // }
+    // }
+}

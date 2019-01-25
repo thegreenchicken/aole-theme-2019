@@ -17,6 +17,7 @@ get_header(); ?>
        <span class="item-subtitle-container">
          <?php echo $extra_fields['subtitle']; ?>
        </span>
+       <span class="item-author-container"><?php echo get_the_author(); ?></span>
        <div class="item-tags-container">
          <?php
          $tags = get_the_tags();
@@ -122,14 +123,15 @@ get_header(); ?>
        if($post_prev){
          ?>
          <a href="<?php echo $post_prev->guid ?>" class="previous-post-link">
-             <span class="link-head"> &lt; previous <?php echo $post_prev -> post_type ?> </span>
-             <span class="title">
-                 <?php
-                 echo (new DateTime($post_prev -> event_start_date)) -> format('d M');
-                 echo ": ";
-                 echo $post_prev -> post_title;
-                 ?>
-             </span>
+            <span class="post-arrow post-prev-arrow"> &lt;</span>
+            <span class="link-head">previous <?php echo $post_prev -> post_type ?> </span>
+            <span class="title">
+               <?php
+               echo (new DateTime($post_prev -> event_start_date)) -> format('d M');
+               echo ": ";
+               echo $post_prev -> post_title;
+               ?>
+            </span>
          </a>
 
          <?php
@@ -138,14 +140,15 @@ get_header(); ?>
 
 
        if($post_next){
-         ?>
-         <a href="<?php echo $post_next->guid ?>" class="next-post-link">
-             <span class="link-head"> next <?php echo $post_next-> post_type ?> &gt; </span>
-             <span class="title">
-                 <?php
-                 echo $post_next->post_title;
-                 ?>
-             </span>
+        ?>
+        <a href="<?php echo $post_next->guid ?>" class="next-post-link">
+            <span class="post-arrow post-next-arrow">&gt;</span>
+            <span class="link-head"> next <?php echo $post_next-> post_type ?> </span>
+            <span class="title">
+               <?php
+               echo $post_next->post_title;
+               ?>
+            </span>
          </a>
          <?php
        }

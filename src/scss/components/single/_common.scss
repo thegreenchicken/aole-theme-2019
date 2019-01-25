@@ -1,0 +1,29 @@
+
+.item-post-type-container{
+  color: #969696;
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: none;
+  font-family: $font-family;
+}
+.item-author-container{
+  text-transform: uppercase;
+  color: $gray-dark;
+  font-size: .85em;
+}
+.items-wrapper.items-other-posts-wrapper{
+  .post-arrow{
+    height: 9rem;
+    width: 40px;
+    font-size: 1.5rem;
+    padding-right: 15px;
+    color: gray;
+
+    &.post-next-arrow{
+      float: right;
+    }
+    &.post-prev-arrow{
+      float:left;
+    }
+  }
+}

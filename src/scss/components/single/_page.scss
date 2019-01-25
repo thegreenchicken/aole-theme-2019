@@ -52,7 +52,7 @@ body.page{
     .section-post-container{
         @extend .container;
         @extend .row;
-
+        // position: relative;
         .item-post-thumbnail-container,.item-calendar-container{
             @extend .col-sm-4;
             @extend .col-xs-6;
@@ -61,8 +61,11 @@ body.page{
             //specially useful for the calendar element:
             min-width:207px;
 
-            top: -150px;
-
+            margin-top: -150px;
+            margin-bottom: 40px;
+            
+            padding-left: 0px;
+            // position: absolute;
             img{
                 position: absolute;
                 right: 0px;
@@ -77,34 +80,4 @@ body.page{
 
     }
 
-    //this should actually go in the calendar plugin ting... or remove it altoghether.
-    .event-calendar{
-        //active cal buttons
-        width: 226px;
-        right: 0px;
-        td.eventful a, td.eventful-today a {
-
-            background-color: #FD7E29;
-            display: block;
-            border-radius: 50%;
-            width: 25px;
-            height: 25px;
-            color: white;
-
-        }
-
-        td.eventless *, td.eventless-today * {
-            display: block;
-            border-radius: 50%;
-            width: 25px;
-            height: 25px;
-        }
-
-        .em-calendar * {
-            font-weight: 100;
-        }
-        td{
-            border:none;
-        }
-    }
 }

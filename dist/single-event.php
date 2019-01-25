@@ -12,6 +12,7 @@ get_header(); ?>
   <?php while (have_posts()): the_post();?>
       <div class="section-container section-post-header-container">
           <?php
+
           /* event posts have three facets in this context:
               * standard wp_post data
                   * acquired through normal wp_ functions
@@ -37,7 +38,7 @@ get_header(); ?>
             $facilitators=get_field('facilitators');
             if ($facilitators) {
                 ?>
-                <ul class="item-facilitators-container">
+                <ul class="item-facilitators-container item-author-container">
                     <?php
                     foreach($facilitators as $num => $item){
                         echo '<li>'.$item['facilitator'].'</li>';
@@ -63,6 +64,15 @@ get_header(); ?>
                             ?>
                 </span>
             <?php } ?>
+            <div class="item-tags-container">
+              <?php
+              $tags = get_the_tags();
+              // print_r($tags);
+              foreach ($tags as $key => $tag) {
+                echo '<span class="tag tag-'.$tag->slug.'">'.$tag->name.'</span>';
+              }
+              ?>
+            </div>
           </div>
           <div class="item-date-container">
             <span class="weekday"><?php echo $date->format('l'); ?></span>
@@ -120,7 +130,7 @@ get_header(); ?>
                  <a class="button singn-up-button" href="<?php echo get_field("registration_link"); ?>">Sign up here</a>
               <?php } ?>
 
-              <span class="ical-export">
+              <span class="ical-export-button ">
                 <a href="<?php echo do_shortcode("[event post_id='".$event["post"]->ID."']#_EVENTICALURL[/event]");?>">Export calendar event</a>
               </span>
           </div>
@@ -142,7 +152,7 @@ get_header(); ?>
               the documentation of eventmanager is barely existing to the date I wrote this.
               The following bunch of code is all just to get the next and previous event links
               */
-              $verbose=false;
+              // $verbose=true;
               $other_events = EM_Events::get( array("scope"=>"all") );//,"orderby"=>"event_start_date"
 
               if($verbose){ echo "<pre>"; }
@@ -178,7 +188,8 @@ get_header(); ?>
               if($event_prev){
                 ?>
                 <a href="<?php echo $event_prev->guid ?>" class="previous-post-link">
-                    <span class="link-head"> &lt; previous event </span>
+                    <span class="post-arrow post-prev-arrow"> &lt;</span>
+                    <span class="link-head"> previous event </span>
                     <span class="title">
                         <?php
                         echo (new DateTime($event_prev -> event_start_date)) -> format('d M');
@@ -196,7 +207,8 @@ get_header(); ?>
               if($event_next){
                 ?>
                 <a href="<?php echo $event_next->guid ?>" class="next-post-link">
-                    <span class="link-head"> next event &gt; </span>
+                    <span class="post-arrow post-next-arrow"> &gt;</span>
+                    <span class="link-head"> next event </span>
                     <span class="title">
                         <?php
                         echo (new DateTime($event_next -> event_start_date)) -> format('d M');

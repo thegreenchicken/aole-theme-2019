@@ -5,7 +5,8 @@ body.single-event{
     .section-post-header-container{
         // @extend
       .item-date-container{
-        @extend .col-xs-2;
+        @extend .col-sm-2;
+        @extend .col-xs-3;
         font-family: $heading-font-family;
         line-height:4em;
         text-align: center;
@@ -20,7 +21,10 @@ body.single-event{
         span{
             display:block;
         }
-        @media (max-width:$screen-sm){
+
+        $tiny-breakpoint: 430px;
+
+        @media (max-width:$tiny-breakpoint){
           line-height: 2rem;
         }
         .weekday{
@@ -28,20 +32,20 @@ body.single-event{
             @media (max-width:$screen-md){
               font-size: 1rem;
             }
-            @media (max-width:$screen-sm){
+            @media (max-width:$tiny-breakpoint){
               font-size:0.6rem;
             }
         }
         .monthday{
             font-size:5rem;
-            @media (max-width:$screen-sm){
+            @media (max-width:$tiny-breakpoint){
               font-size:2.5rem;
             }
         }
         .month{
             font-size: 2.4em;
             text-transform: uppercase;
-            @media (max-width:$screen-sm){
+            @media (max-width:$tiny-breakpoint){
               font-size:1.2rem;
             }
         }
@@ -52,12 +56,13 @@ body.single-event{
           @extend .col-xs-9;
       }
 
-      ul{
+      .item-facilitators-container{
           list-style-type: none;
           list-style-image: none;
-          text-transform: uppercase;
-          color: grey;
-          font-size: .85em;
+          padding-left: 0px;
+          li{
+            padding-left: 0px;
+          }
       }
 
       // position: relative;
@@ -102,6 +107,6 @@ body.single-event{
             width: 100%;
         }
     }
-    
+
 
 }

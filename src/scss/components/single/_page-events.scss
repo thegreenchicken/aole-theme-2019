@@ -1,0 +1,41 @@
+
+.main-events-container{
+    .em-calendar-wrapper, table.em-calendar{
+      width:100%;
+    }
+    table.em-calendar thead{
+      height: 4rem;
+      td {
+        border-bottom: solid 1rem transparent;
+        border-top: solid 2rem transparent;
+      }
+    }
+
+    .em-calendar-wrapper{
+        //active cal buttons
+        width: 226px;
+        right: 0px;
+        table.em-calendar{
+          td.eventful, td.eventful-today {
+            a{
+              color: black;
+            }
+            background-color: $gray-light;
+          }
+
+          td.eventless , td.eventless-today {
+            background-color: transparent;
+          }
+          td.eventful-today, td.eventless-today{
+            border:solid 1px black;
+          }
+
+          .em-calendar * {
+              font-weight: 100;
+          }
+          td{
+              border:none;
+          }
+        }
+    }
+  }

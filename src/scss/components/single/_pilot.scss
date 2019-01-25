@@ -1,7 +1,15 @@
 /**
 targeted to post of pilot type-
 */
+
+
+
+
 body.single-pilot{
+    .item-side-data-container{
+      // @include side-thing();
+      border:solid 3px $blue;
+    }
     .tag {
 
         background-color: $blue;//actually it was #2D8FCE;
@@ -17,11 +25,27 @@ body.single-pilot{
         font-size: 2.3em;
         margin-bottom: 0.5em;
     }
-    
     .item-subtitle-container{
-        font-size: 1.4em;
+        font-size: 1.3em;
     }
-    .item-post-type-container{
-        color:$gray;
+    h2{
+      @extend .item-post-type-container;
+    }
+    hr{
+      padding-bottom: 40px;
+    }
+    .item-post-content-container{
+      h2{
+        @include title1();
+        font-size: 1.28rem;
+      }
+    }
+    .item-side-data-container{
+      padding-top: 24px;
+      padding-bottom: 24px;
+      h2{
+        color: $blue;
+        font-size: 1.05rem;
+      }
     }
 }

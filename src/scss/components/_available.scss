@@ -35,3 +35,20 @@
   background-color:$blue;
   color:white;
 }
+
+.button-list{
+    color:$red;
+    margin-top: 3rem;
+    display: block;
+    transition: margin-left 0.5s;
+    font-weight: 600;
+    // @extend .glyphicon-arrow-right;
+    &:hover{
+      margin-left: 36px;
+      transition: margin-left 0.5s;
+    }
+}
+.ical-export-button{
+  margin-top:1.7rem;
+  margin-bottom:1.7rem;
+}

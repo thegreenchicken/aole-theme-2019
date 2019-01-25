@@ -5,20 +5,12 @@ body.home{
 
   .section-container
   .button-more{
-      color:$red;
-      margin-top: 3rem;
-      display: block;
-      text-align: center;
-      transition: margin-left 0.5s;
-      font-weight: 600;
+      @extend .button-list;
       // @extend .glyphicon-arrow-right;
       &::after{
         content:" >";
       }
-      &:hover{
-        margin-left: 36px;
-        transition: margin-left 0.5s;
-      }
+      text-align: center;
   }
   .section-callout-container {
       background-color: black;
