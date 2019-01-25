@@ -12,6 +12,7 @@
 
 // Components
 @import "components/snippets";
+@import "components/mixin-fully-wide-item";
 @import "components/helpers";
 @import "components/layout";
 @import "components/scaffolding";
@@ -25,7 +26,6 @@
 @import "components/single/page-home";
 @import "components/single/post";
 @import "components/postlists/team_members";
-@import "components/postlists/mixin-fully-wide-item";
 @import "components/postlists/pilots";
 @import "components/postlists/events";
 @import "components/postlists/news";

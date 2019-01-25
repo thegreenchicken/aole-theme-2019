@@ -18,7 +18,10 @@ this is the context where this part should be invoked:
     $event = EM_Events::get(array("scope" => "future"));
 
 */
+include_once locate_template('./includes/lister-event-remove-seconds.php');
+
 ?>
+
 
         <a href="<?php echo $event->guid ?>">
             <div class="item-container item-events-container">
@@ -46,8 +49,8 @@ this is the context where this part should be invoked:
                         <?php echo $event->event_timezone ?>
                     </span>
                     <span class="hours">
-                        <?php echo $event->event_start_time ?> -
-                        <?php echo $event->event_end_time ?>
+                        <?php echo string_remove_seconds($event->event_start_time) ?> -
+                        <?php echo string_remove_seconds($event->event_start_time) ?>
                     </span>
                 </div>
                 <div class="item-title-container">

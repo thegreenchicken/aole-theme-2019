@@ -18,6 +18,8 @@ body.single-event{
         border:solid 3px black;
         background-color: white;
         padding: 2rem 0;
+        padding-top: 28px;
+        
         span{
             display:block;
         }
@@ -82,7 +84,9 @@ body.single-event{
         max-height: 600px;
         overflow: hidden;
         .post-thumbnail{
-            width:100%;
+            // width:100%;
+            min-height: 100%;
+            min-width: 100%;
         }
     }
 

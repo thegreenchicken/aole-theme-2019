@@ -93,17 +93,17 @@ get_header(); ?>
               </h2>
               <span class="start_date">
                   <?php
-                  echo $eventManagerData->start_date;
+                    echo $date->format('l, d M');
                   ?>
               </span>
-              <span class="start_time">
+              <?php
+              include_once locate_template('./includes/lister-event-remove-seconds.php');
+              ?>
+              <span class="time">
                   <?php
-                  echo $eventManagerData->start_time;
-                  ?>
-              </span>
-              <span class="end_time">
-                  <?php
-                  echo $eventManagerData->end_time;
+                  echo string_remove_seconds($eventManagerData->start_time);
+                  ?> - <?php
+                  echo string_remove_seconds($eventManagerData->end_time);
                   ?>
               </span>
               <span class="location-name">
