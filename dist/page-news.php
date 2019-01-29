@@ -9,7 +9,7 @@ get_header(); ?>
 	<div class="items-wrapper items-news-wrapper classifiable-container">
 		<?php
 
-		$args = array( 'category_name'=> 'News' );
+		$args = array( 'category_name'=> 'News', 'posts_per_page' => -1 );
 		$posts = get_posts($args);
 
 		foreach ($posts as $post) :

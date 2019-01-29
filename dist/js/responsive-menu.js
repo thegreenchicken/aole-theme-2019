@@ -3,7 +3,7 @@ this script causes the main menu to switch between mobile and desktop versions. 
 */
 document.addEventListener("DOMContentLoaded", function (event) {
   var mouse={}
-  var $mainMenu=$(".header-container");//.main-menu-container"
+  var $mainMenu=$("header.section-header-container");//.main-menu-container"
   var isCollapsed=false;
   function sizeUpdateFn(){
     if($(window).width() < 550){

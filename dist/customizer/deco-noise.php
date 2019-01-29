@@ -53,51 +53,25 @@ $wp_customize->add_control($section_name . '[parallax]', array(
     'priority' => $p++,
 ));
 
-
-$wp_customize->add_setting($section_name . '[image-0]', array(
+$how_many_pictures=5;
+for ($picnum=0; $picnum < $how_many_pictures; $picnum++) {
+  // code...
+  $wp_customize->add_setting($section_name . '[image-'.$picnum.']', array(
     'type' => 'theme_mod',
     'capability' => 'manage_options',
-));
+  ));
 
-$wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, $section_name . '[image-0]', array(
+  $wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, $section_name . '[image-'.$picnum.']', array(
     'label' => __('Picture overlay selection', '_sj'),
     'priority' => $p++,
 
     'section' => $section_name,
-)));
+  )));
+}
 
-$wp_customize->add_setting($section_name . '[image-1]', array(
-    'type' => 'theme_mod',
-    'capability' => 'manage_options',
-));
 
-$wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, $section_name . '[image-1]', array(
-    'label' => __('Picture overlay selection', '_sj'),
-    'priority' => $p++,
-    'section' => $section_name,
-)));
-$wp_customize->add_setting($section_name . '[image-2]', array(
-    'type' => 'theme_mod',
-    'capability' => 'manage_options',
-));
 
-$wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, $section_name . '[image-2]', array(
-    'label' => __('Picture overlay selection', '_sj'),
-    'priority' => $p++,
-    'section' => $section_name,
-)));
 
-$wp_customize->add_setting($section_name . '[image-3]', array(
-    'type' => 'theme_mod',
-    'capability' => 'manage_options',
-));
-
-$wp_customize->add_control(new WP_Customize_Image_Control($wp_customize, $section_name . '[image-3]', array(
-    'label' => __('Picture overlay selection', '_sj'),
-    'priority' => $p++,
-
-    'section' => $section_name,
-)));
 
 $wp_customize->add_setting($section_name . '[image_style]', array(
     'type' => 'theme_mod',

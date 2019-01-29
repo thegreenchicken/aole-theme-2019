@@ -50,7 +50,7 @@ include_once locate_template('./includes/lister-event-remove-seconds.php');
                     </span>
                     <span class="hours">
                         <?php echo string_remove_seconds($event->event_start_time) ?> -
-                        <?php echo string_remove_seconds($event->event_start_time) ?>
+                        <?php echo string_remove_seconds($event->event_end_time) ?>
                     </span>
                 </div>
                 <div class="item-title-container">

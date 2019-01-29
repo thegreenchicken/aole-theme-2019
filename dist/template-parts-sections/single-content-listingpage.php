@@ -23,7 +23,7 @@ wp_enqueue_script('tagClassifyPosts', get_template_directory_uri() . '/js/classi
     <div class="section-container section-post-header-container" style="<?php
                         if ($extra_fields['color']){
                             echo "background-color: ";
-                            $extra_fields['color'];
+                            echo $extra_fields['color'];
                             echo ";";
                         }
                     ?>" role="main">
@@ -33,7 +33,7 @@ wp_enqueue_script('tagClassifyPosts', get_template_directory_uri() . '/js/classi
         ?>
         <div class="item-post-title-container">
             <h1 class="entry-title"><?php the_title(); ?></h1>
-            <p>
+            <p class="subtitle-container">
                 <?php if (get_field('subtitle')){the_field( 'subtitle' ); }?>
             </p>
         </div>
@@ -57,8 +57,10 @@ wp_enqueue_script('tagClassifyPosts', get_template_directory_uri() . '/js/classi
       include locate_template('includes/lister-team_members.php');
     }
 
+    //TODO: about page has attained too many unique specifications, it might need to go into single-page-about.php
     $team_members=$extra_fields['core_team_members'];
     if($team_members){
+      $append_before='<hr/><h2>People</h2><h1>Meet our core team</h1>';
       include locate_template('includes/lister-team_members.php');
     }
     ?>

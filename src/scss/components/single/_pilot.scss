@@ -8,19 +8,19 @@ targeted to post of pilot type-
 body.single-pilot{
     .item-side-data-container{
       // @include side-thing();
-      border:solid 3px $blue;
+      border:solid 3px transparent;//$blue;
     }
-    .tag {
-
-        background-color: $blue;//actually it was #2D8FCE;
-        display: inline-block;
-        padding: 12px;
-        line-height: 0.3em;
-        font-size: 0.9em;
-        color: white;
-        margin: 3px;
-        text-transform: capitalize;
-    }
+    // .tag {
+    //
+    //     background-color: $blue;//actually it was #2D8FCE;
+    //     display: inline-block;
+    //     padding: 12px;
+    //     line-height: 0.3em;
+    //     font-size: 0.9em;
+    //     color: white;
+    //     margin: 3px;
+    //     text-transform: capitalize;
+    // }
     .item-title-container{
         font-size: 2.3em;
         margin-bottom: 0.5em;

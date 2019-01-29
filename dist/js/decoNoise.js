@@ -31,40 +31,55 @@ document.addEventListener("DOMContentLoaded", function (event) {
     }
     var userDefinedZIndex=vars.decoNoise.zindex;
     var NoiseEl = function ($appendto) {
-        imgels.push(this);
-        var nimg = $(imgstr)
-        var pos = {
-            x: (Math.random() * 100),
-            y: (Math.random() * 100)
-        }
-        var speed = {
-            x: Math.random() - 0.5,
-            y: Math.random() - 0.5
-        }
-        nimg.addClass("parallax");
-        nimg.attr("parallax-z",((0.1 + Math.random()/2 ) * userDefinedZIndex) );
-        nimg.attr("src", piclist[Math.floor(Math.random() * piclist.length)]);
-        nimg.attr("onerror", "hideThis(this)" );
+      var n=imgels.length;
+      imgels.push(this);
+      var nimg = $(imgstr)
+      var pos = {
+          x: (Math.random() * 100),
+          y: (Math.random() * 100)
+      }
+      var speed = {
+          x: Math.random() - 0.5,
+          y: Math.random() - 0.5
+      }
+      nimg.addClass("parallax");
+      nimg.attr("parallax-z",((0.1 + Math.random()/2 ) * userDefinedZIndex) );
 
-        nimg.css({
-            // width: "100px",
-            // height: "100px",
-            // border: "solid 1px red",
-            position: "absolute",
-            display: "block",
-            width: (Math.random() * 50 + 50) + "px"
-        });
-        $appendto.prepend(nimg);
-        this.frame = function () {
-            pos.x += speed.x;
-            pos.y += speed.y;
-            nimg.css("left", pos.x + "%");
-            nimg.css("top", pos.y + "%");
-            nimg.css("mix-blend-mode","overlay");
-        }
+      //for random selection: replace "n" with Math.floor(Math.random() * piclist.length)
+      nimg.attr("src", piclist[n%piclist.length]);
 
-        this.frame();
-        return this;
+      nimg.attr("onerror", "hideThis(this)" );
+
+      // nimg.appendTo($("body"));
+      // var originalSize={
+      //   width:nimg.width(),
+      //   height:nimg.css("width")
+      // }
+      // nimg.detach();
+
+      // console.log(originalSize);
+
+      nimg.css({
+          // width: "100px",
+          // height: "100px",
+          // border: "solid 1px red",
+          position: "absolute",
+          display: "block",
+          // width: (originalSize.width * ( 0.5 + Math.random() ) ) + "px"
+      });
+
+      $appendto.prepend(nimg);
+
+      this.frame = function () {
+          pos.x += speed.x;
+          pos.y += speed.y;
+          nimg.css("left", pos.x + "%");
+          nimg.css("top", pos.y + "%");
+          // nimg.css("mix-blend-mode","overlay");
+      }
+
+      this.frame();
+      return this;
     }
     $(selectors).each(function () {
         console.log(this);
@@ -77,7 +92,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
         //     position: "relative"
         // });
 
-        for (var a = 0; a < 4; a++) {
+        for (var a = 0; a < 5; a++) {
             new NoiseEl($(this));
         }
     });

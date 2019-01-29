@@ -163,13 +163,27 @@ document.addEventListener("DOMContentLoaded", function (event) {
         $(wrapperSelector+" .item-categorizer-tag-title").remove();
         $(wrapperSelector+" .item-categorizer-hr").remove();
         let n=0;
+
         for(var dispTag in sortedByTagsOfCategory){
           console.log(dispTag,":",sortedByTagsOfCategory[dispTag]);
+
           if(sortedByTagsOfCategory[dispTag].length){
-            if(n>0) $(wrapperSelector).append('<hr class="item-categorizer-hr"/>');
+            //if only a category (taxonomy type) was selected, display a title per each tag (taxonomy).
+            //if a category and a tag is selectd, do not display those titles, because it becomes a bit confusing to the user.
+            //
+            if(tag){
+              //a tag was  selected, hence display only the title for that selected tag.
+              if(n == 0){
+                $(wrapperSelector).append('<h2 class="item-categorizer-tag-title">'+tag+'</h2>');
+              }
+            }else{
+              //a tag was not selected, hence display one title per each tag of that category.
+              if(n>0) $(wrapperSelector).append('<hr class="item-categorizer-hr"/>');
+              $(wrapperSelector).append('<h2 class="item-categorizer-tag-title">'+dispTag+'</h2>');
+            }
             n++;
-            $(wrapperSelector).append('<h2 class="item-categorizer-tag-title">'+dispTag+'</h2>');
           }
+
           for(var item of sortedByTagsOfCategory[dispTag]){
             item.reattach();
           }

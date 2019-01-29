@@ -53,16 +53,23 @@
         // }
       }
     }
-
+    .time-scope-title{
+      // font-family: $heading-font-family;
+      // color: black;
+      // text-transform: uppercase;
+      // font-size: 1.9rem;
+      @extend h1;
+    }
     .items-wrapper{
       .item-events-container{
           @include fully-wide-item(25px);
           .item-title-container{
               font-weight: 900;
+              font-size: 1.25rem;
           }
           .item-date-container{
               .hours{
-                  font-size: 0.8em;
+                  font-size: 1.18em;
               }
               .timezone{
                   display: none;
@@ -70,12 +77,13 @@
               .calendar-day{
                 font-family: $heading-font-family;
                   display: block;
-                  font-size: 2em;
+                  font-size: 2.9em;
+                  line-height: 2.4rem;
                   text-transform: uppercase;
                   font-weight: 1000;
               }
               .weekday{
-                  font-size: 0.8em;
+                  font-size: 1.18em;
                   display: block;
                   padding-top:22px;
               }

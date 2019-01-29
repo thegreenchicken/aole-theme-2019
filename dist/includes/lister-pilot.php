@@ -42,10 +42,19 @@ wp_enqueue_script('pilots-list', get_template_directory_uri() . '/js/pilots-list
 		      ?>
         </ul>
 
-        <ul style="display:none" class="classifiable-attributes" name="post tags" slug="post_tag">
+        <ul style="display:none" class="classifiable-attributes" name="years" slug="year">
           <?php
-					$terms = wp_get_post_terms($pilot->ID,"post_tag");
-          // print_r($terms);
+					$terms = wp_get_post_terms($pilot->ID,"year");
+          foreach ($terms as $key=>$term) {
+						echo '<li key="'.$key.'" name="'.$term->name.'" slug="'.$term->slug.'">'.$term->name.'</li>';
+					}
+
+		      ?>
+        </ul>
+
+        <ul style="display:none" class="classifiable-attributes" name="school" slug="school">
+          <?php
+					$terms = wp_get_post_terms($pilot->ID,"school");
           foreach ($terms as $key=>$term) {
 						echo '<li key="'.$key.'" name="'.$term->name.'" slug="'.$term->slug.'">'.$term->name.'</li>';
 					}

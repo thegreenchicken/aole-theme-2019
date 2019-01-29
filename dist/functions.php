@@ -1,5 +1,20 @@
 <?php
 
+function maintenace_mode() {
+
+      if ( !is_user_logged_in() ) {
+        // include(locate_template('maintenance'));
+        wp_die('
+
+        <h1>Aalto Online Learning</h1>
+        <p>We are currently renovating the website. Come back soon to see it tomorrow!</p>
+        ');
+        // die();
+      }
+
+}
+add_action('get_header', 'maintenace_mode');
+
 
 include locate_template("customizer/index.php");
 
@@ -108,7 +123,7 @@ function cptui_register_my_cpts() {
         "rewrite" => array( "slug" => "pilot", "with_front" => true ),
         "query_var" => true,
         "supports" => array( "title", "thumbnail", "author"),
-        'taxonomies' => array('post_tag')
+        'taxonomies' => array('post_tag','theme_group','year','school')
         );
 
     register_post_type( "pilot", $args );
@@ -369,6 +384,76 @@ function cptui_register_my_taxes() {
             )
         );
     register_taxonomy( "theme_group", array( "pilot" ), $args );
+
+
+    /**
+    * taxonomy: year
+    */
+    $labels = array(
+        "name" => __( "Years", "" ),
+        "singular_name" => __( "Year", "" ),
+        );
+
+    $args = array(
+        "label" => __( "Years", "" ),
+        "labels" => $labels,
+        "public" => true,
+        "hierarchical" => false,
+        "label" => "Years",
+        "show_ui" => true,
+        "show_in_menu" => true,
+        "show_in_nav_menus" => true,
+        "query_var" => true,
+        "rewrite" => array( 'slug' => 'year', 'with_front' => true, ),
+        "show_admin_column" => false,
+        "show_in_rest" => false,
+        "rest_base" => "",
+        "show_in_quick_edit" => false,
+        'capabilities' => array(
+            'manage_terms' => 'manage_post_tags',
+            'edit_terms' => 'edit_post_tags',
+            'delete_terms' => 'delete_post_tags',
+            'assign_terms' => 'assign_post_tags',
+            )
+        );
+    register_taxonomy( "year", array( "pilot" ), $args );
+
+
+    /**
+    * taxonomy: school
+    */
+
+    $labels = array(
+        "name" => __( "Schools", "" ),
+        "singular_name" => __( "School", "" ),
+        );
+
+    $args = array(
+        "label" => __( "schools", "" ),
+        "labels" => $labels,
+        "public" => true,
+        "hierarchical" => false,
+        "label" => "Schools",
+        "show_ui" => true,
+        "show_in_menu" => true,
+        "show_in_nav_menus" => true,
+        "query_var" => true,
+        "rewrite" => array( 'slug' => 'school', 'with_front' => true, ),
+        "show_admin_column" => false,
+        "show_in_rest" => false,
+        "rest_base" => "",
+        "show_in_quick_edit" => false,
+        'capabilities' => array(
+            'manage_terms' => 'manage_post_tags',
+            'edit_terms' => 'edit_post_tags',
+            'delete_terms' => 'delete_post_tags',
+            'assign_terms' => 'assign_post_tags',
+            )
+        );
+    register_taxonomy( "school", array( "pilot" ), $args );
+
+
+
 
     /**
      * Taxonomy: Quote Categories.

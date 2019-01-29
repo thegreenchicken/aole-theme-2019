@@ -70,33 +70,35 @@ try{
 		</noscript>
 		<!-- End Google Tag Manager (noscript) -->
 
-		<header class="header-container" role="banner">
-			<div class="title-container">
-				<span class="site-mobile-title title-bar-title">
-          <?php
-          //display customized header html if it has been set. Display the default otherwise
-          $mod=get_theme_mod('aole_2019_header_settings');
-      		if($mod[ $mod['header_type'] ]){
-            if($mod['header_type']=="logo_image"){
-                echo '<a href="'.esc_url( home_url( '/' ) ).'"><img class="logo" src="'
-                          .$mod[ $mod['header_type'] ]
-                          .'" style="'
-                          .$mod['image_style']
-                          .'"/></a>';
-            }else{
-      			    echo $mod[ $mod['header_type'] ];
-             }
-      		}else{
-            ?>
-  					<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a>
+		<header class="section-container section-header-container" role="banner">
+      <div class="item-container item-header-container">
+  			<div class="title-container">
+  				<span class="site-mobile-title title-bar-title">
             <?php
-          }
-          ?>
-				</span>
-			</div>
-			<nav class="main-menu-container" role="navigation">
-				<?php wp_nav_menu(); ?>
-			</nav>
+            //display customized header html if it has been set. Display the default otherwise
+            $mod=get_theme_mod('aole_2019_header_settings');
+        		if($mod[ $mod['header_type'] ]){
+              if($mod['header_type']=="logo_image"){
+                  echo '<a href="'.esc_url( home_url( '/' ) ).'"><img class="logo" src="'
+                            .$mod[ $mod['header_type'] ]
+                            .'" style="'
+                            .$mod['image_style']
+                            .'"/></a>';
+              }else{
+        			    echo $mod[ $mod['header_type'] ];
+               }
+        		}else{
+              ?>
+    					<a href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a>
+              <?php
+            }
+            ?>
+  				</span>
+  			</div>
+  			<nav class="main-menu-container" role="navigation">
+  				<?php wp_nav_menu(); ?>
+  			</nav>
+      </div>
 		</header>
 
 		<?php
@@ -108,3 +110,12 @@ try{
 				get_template_part( '404' );
 				exit();
 			}
+
+      ?>
+      <pre>
+
+        <?php
+
+        // print_r($wp_query);
+        ?>
+      </pre>

@@ -91,7 +91,7 @@ get_header(); ?>
               <h2 class="post_title">
                   <?php the_title(); ?>
               </h2>
-              <span class="start_date">
+              <span class="event-coordinates start_date">
                   <?php
                     echo $date->format('l, d M');
                   ?>
@@ -99,14 +99,14 @@ get_header(); ?>
               <?php
               include_once locate_template('./includes/lister-event-remove-seconds.php');
               ?>
-              <span class="time">
+              <span class="event-coordinates time">
                   <?php
                   echo string_remove_seconds($eventManagerData->start_time);
                   ?> - <?php
                   echo string_remove_seconds($eventManagerData->end_time);
                   ?>
               </span>
-              <span class="location-name">
+              <span class="event-coordinates location-name">
                   <?php
                   // print_r($eventManagerData->location);
                   if($eventManagerData->location){
@@ -115,7 +115,7 @@ get_header(); ?>
                       }
                   ?>
               </span>
-              <span class="location-address">
+              <span class="event-coordinates location-address">
                   <?php
                       if($eventManagerData->location->location_address){
                           echo $eventManagerData->location->location_address;
@@ -123,7 +123,7 @@ get_header(); ?>
                   }
                   ?>
               </span>
-              <span class="event-ispublic">
+              <span class="event-coordinates event-ispublic">
                   <?php if (get_field("only_for_pilots") == 1) { echo "Event for pilots"; } else { echo "Public event"; }; ?>
               </span>
               <?php if(get_field("registration_link")){ ?>
@@ -143,86 +143,86 @@ get_header(); ?>
           </div>
       </div>
 
-
       <div class="section-container section-after-post-container">
-          <div class="items-wrapper items-other-posts-wrapper">
-              <?php
+        <hr/>
+        <div class="items-wrapper items-other-posts-wrapper">
+            <?php
 
-              /*
-              the documentation of eventmanager is barely existing to the date I wrote this.
-              The following bunch of code is all just to get the next and previous event links
-              */
-              // $verbose=true;
-              $other_events = EM_Events::get( array("scope"=>"all") );//,"orderby"=>"event_start_date"
+            /*
+            the documentation of eventmanager is barely existing to the date I wrote this.
+            The following bunch of code is all just to get the next and previous event links
+            */
+            // $verbose=true;
+            $other_events = EM_Events::get( array("scope"=>"all") );//,"orderby"=>"event_start_date"
 
-              if($verbose){ echo "<pre>"; }
+            if($verbose){ echo "<pre>"; }
 
-              $currentEventId=$eventManagerData->event_id;
+            $currentEventId=$eventManagerData->event_id;
 
-              $currentEventArrayIndex=null;
-              $event_next=false;
-              $event_prev=false;
+            $currentEventArrayIndex=null;
+            $event_next=false;
+            $event_prev=false;
 
-              foreach($other_events as $index => $other_event){
+            foreach($other_events as $index => $other_event){
+              if($verbose){
+                echo $other_event -> event_id . " - ";
+                echo $other_event -> post_title .  " - ";
+                echo  ( new DateTime($other_event->event_start_date) ) -> format('d M') . "\n";
+              }
+              if($other_event -> event_id == $currentEventId){
+                $currentEventArrayIndex=$index;
+
+
+                $event_next = $other_events[$index+1];
+                $event_prev = $other_events[$index-1];
                 if($verbose){
-                  echo $other_event -> event_id . " - ";
-                  echo $other_event -> post_title .  " - ";
-                  echo  ( new DateTime($other_event->event_start_date) ) -> format('d M') . "\n";
+                  echo $other_event -> event_id . " -- CURRENT!\n";
+                  echo "    " . $event_next -> event_id . ": next \n";
+                  echo "    " . $event_prev -> event_id . ": prev \n";
                 }
-                if($other_event -> event_id == $currentEventId){
-                  $currentEventArrayIndex=$index;
 
-
-                  $event_next = $other_events[$index+1];
-                  $event_prev = $other_events[$index-1];
-                  if($verbose){
-                    echo $other_event -> event_id . " -- CURRENT!\n";
-                    echo "    " . $event_next -> event_id . ": next \n";
-                    echo "    " . $event_prev -> event_id . ": prev \n";
-                  }
-
-                  break;
-                }
+                break;
               }
+            }
 
-              if($event_prev){
-                ?>
-                <a href="<?php echo $event_prev->guid ?>" class="previous-post-link">
-                    <span class="post-arrow post-prev-arrow"> &lt;</span>
-                    <span class="link-head"> previous event </span>
-                    <span class="title">
-                        <?php
-                        echo (new DateTime($event_prev -> event_start_date)) -> format('d M');
-                        echo ": ";
-                        echo $event_prev -> post_title;
-                        ?>
-                    </span>
-                </a>
-
-                <?php
-              }
-              $other_event = $other_events[$currentEventArrayIndex+1];
-
-
-              if($event_next){
-                ?>
-                <a href="<?php echo $event_next->guid ?>" class="next-post-link">
-                    <span class="post-arrow post-next-arrow"> &gt;</span>
-                    <span class="link-head"> next event </span>
-                    <span class="title">
-                        <?php
-                        echo (new DateTime($event_next -> event_start_date)) -> format('d M');
-
-                        echo ": ";
-                        echo $event_next->post_title;
-                        ?>
-                    </span>
-                </a>
-                <?php
-              }
-
+            if($event_prev){
               ?>
-          </div>
+              <a href="<?php echo $event_prev->guid ?>" class="previous-post-link">
+                  <span class="post-arrow post-prev-arrow"> &lt;</span>
+                  <span class="link-head"> previous event </span>
+                  <span class="title">
+                      <?php
+                      echo (new DateTime($event_prev -> event_start_date)) -> format('d M');
+                      echo ": ";
+                      echo $event_prev -> post_title;
+                      ?>
+                  </span>
+              </a>
+
+              <?php
+            }
+            $other_event = $other_events[$currentEventArrayIndex+1];
+
+
+            if($event_next){
+              ?>
+              <a href="<?php echo $event_next->guid ?>" class="next-post-link">
+                  <span class="post-arrow post-next-arrow"> &gt;</span>
+                  <span class="link-head"> next event </span>
+                  <span class="title">
+                      <?php
+                      echo (new DateTime($event_next -> event_start_date)) -> format('d M');
+
+                      echo ": ";
+                      echo $event_next->post_title;
+                      ?>
+                  </span>
+              </a>
+              <?php
+            }
+
+            ?>
+        </div>
       </div>
 
 

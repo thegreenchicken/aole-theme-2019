@@ -17,9 +17,9 @@ body.single-event{
 
         border:solid 3px black;
         background-color: white;
-        padding: 2rem 0;
+        padding: 2.7rem 0;
         padding-top: 28px;
-        
+
         span{
             display:block;
         }
@@ -31,6 +31,7 @@ body.single-event{
         }
         .weekday{
             font-size:1.2rem;
+            font-family: $font-family;
             @media (max-width:$screen-md){
               font-size: 1rem;
             }
@@ -40,12 +41,13 @@ body.single-event{
         }
         .monthday{
             font-size:5rem;
+            line-height: 3rem;
             @media (max-width:$tiny-breakpoint){
               font-size:2.5rem;
             }
         }
         .month{
-            font-size: 2.4em;
+            font-size: 3.125rem;
             text-transform: uppercase;
             @media (max-width:$tiny-breakpoint){
               font-size:1.2rem;
@@ -93,8 +95,9 @@ body.single-event{
 
     .item-side-data-container{
         border:solid 3px $blackish;
-        span{
-            display:block;
+        .event-coordinates{
+          display:block;
+          line-height: 1.8rem;
         }
         h2{
             font-size:1.2em;
@@ -110,7 +113,10 @@ body.single-event{
         .button{
             width: 100%;
         }
+        .ical-export-button{
+          margin-top:53px;
+        }
     }
-
+    
 
 }

@@ -26,10 +26,11 @@
   transition: 1s;
 }
 .tag {
-    border: solid 1px;
-    margin: 2px;
-    padding: 1px 9px;
-    display: inline-block;
+  color:black;
+  border: solid 1px;
+  margin: 2px;
+  padding: 1px 9px;
+  display: inline-block;
 }
 .tag.active {
   background-color:$blue;
@@ -51,4 +52,10 @@
 .ical-export-button{
   margin-top:1.7rem;
   margin-bottom:1.7rem;
+  display:block;
+}
+hr{
+  display:block;
+  margin-top:100px;
+  margin-bottom:100px;
 }

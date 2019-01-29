@@ -15,7 +15,7 @@ var stylingGeneralJs = new (function () {
      * adds a class to the last 'allowed' line of text so you can apply
      * text-overflow: ellipsis;
      */
-    (function (a) { if (typeof define === "function" && define.amd) { define(["jquery"], a) } else { a(jQuery) } }(function (d) { var c = "ellipsis", b = '<span style="white-space: nowrap;">', e = { lines: "auto", ellipClass: "ellip", responsive: false }; function a(h, q) { var m = this, w = 0, g = [], k, p, i, f, j, n, s; m.$cont = d(h); m.opts = d.extend({}, e, q); function o() { m.text = m.$cont.text(); m.opts.ellipLineClass = m.opts.ellipClass + "-line"; m.$el = d('<span class="' + m.opts.ellipClass + '" />'); m.$el.text(m.text); m.$cont.empty().append(m.$el); t() } function t() { if (typeof m.opts.lines === "number" && m.opts.lines < 2) { m.$el.addClass(m.opts.ellipLineClass); return } n = m.$cont.height(); if (m.opts.lines === "auto" && m.$el.prop("scrollHeight") <= n) { return } if (!k) { return } s = d.trim(m.text).split(/\s+/); m.$el.html(b + s.join("</span> " + b) + "</span>"); m.$el.find("span").each(k); if (p != null) { u(p) } } function u(x) { s[x] = '<span class="' + m.opts.ellipLineClass + '">' + s[x]; s.push("</span>"); m.$el.html(s.join(" ")) } if (m.opts.lines === "auto") { var r = function (y, A) { var x = d(A), z = x.position().top; j = j || x.height(); if (z === f) { g[w].push(x) } else { f = z; w += 1; g[w] = [x] } if (z + j > n) { p = y - g[w - 1].length; return false } }; k = r } if (typeof m.opts.lines === "number" && m.opts.lines > 1) { var l = function (y, A) { var x = d(A), z = x.position().top; if (z !== f) { f = z; w += 1 } if (w === m.opts.lines) { p = y; return false } }; k = l } if (m.opts.responsive) { var v = function () { g = []; w = 0; f = null; p = null; m.$el.html(m.text); clearTimeout(i); i = setTimeout(t, 100) }; d(window).on("resize." + c, v) } o() } d.fn[c] = function (f) { return this.each(function () { try { d(this).data(c, (new a(this, f))) } catch (g) { if (window.console) { console.error(c + ": " + g) } } }) } }));
+    // (function (a) { if (typeof define === "function" && define.amd) { define(["jquery"], a) } else { a(jQuery) } }(function (d) { var c = "ellipsis", b = '<span style="white-space: nowrap;">', e = { lines: "auto", ellipClass: "ellip", responsive: false }; function a(h, q) { var m = this, w = 0, g = [], k, p, i, f, j, n, s; m.$cont = d(h); m.opts = d.extend({}, e, q); function o() { m.text = m.$cont.text(); m.opts.ellipLineClass = m.opts.ellipClass + "-line"; m.$el = d('<span class="' + m.opts.ellipClass + '" />'); m.$el.text(m.text); m.$cont.empty().append(m.$el); t() } function t() { if (typeof m.opts.lines === "number" && m.opts.lines < 2) { m.$el.addClass(m.opts.ellipLineClass); return } n = m.$cont.height(); if (m.opts.lines === "auto" && m.$el.prop("scrollHeight") <= n) { return } if (!k) { return } s = d.trim(m.text).split(/\s+/); m.$el.html(b + s.join("</span> " + b) + "</span>"); m.$el.find("span").each(k); if (p != null) { u(p) } } function u(x) { s[x] = '<span class="' + m.opts.ellipLineClass + '">' + s[x]; s.push("</span>"); m.$el.html(s.join(" ")) } if (m.opts.lines === "auto") { var r = function (y, A) { var x = d(A), z = x.position().top; j = j || x.height(); if (z === f) { g[w].push(x) } else { f = z; w += 1; g[w] = [x] } if (z + j > n) { p = y - g[w - 1].length; return false } }; k = r } if (typeof m.opts.lines === "number" && m.opts.lines > 1) { var l = function (y, A) { var x = d(A), z = x.position().top; if (z !== f) { f = z; w += 1 } if (w === m.opts.lines) { p = y; return false } }; k = l } if (m.opts.responsive) { var v = function () { g = []; w = 0; f = null; p = null; m.$el.html(m.text); clearTimeout(i); i = setTimeout(t, 100) }; d(window).on("resize." + c, v) } o() } d.fn[c] = function (f) { return this.each(function () { try { d(this).data(c, (new a(this, f))) } catch (g) { if (window.console) { console.error(c + ": " + g) } } }) } }));
 
 
     var squareElementsSelector = null;
@@ -33,17 +33,18 @@ var stylingGeneralJs = new (function () {
         return squareElementsSelector;
     }
 
-    this.makeSquare.add = function (props) {
-        var selector=props.selector;
-        squareElementsSelector += ", " + selector;
-        $squareElements = $(squareElementsSelector);
-        console.log("scripting the height of ", $squareElements);
-    }
+    // this.makeSquare.add = function (props) {
+    //     var selector=props.selector;
+    //     squareElementsSelector += ", " + selector;
+    //     $squareElements = $(squareElementsSelector);
+    //     console.log("scripting the height of ", $squareElements);
+    // }
 
     this.makeSquare.update = function () {
         $squareElements.each(function () {
             // console.log(this);
-            $(this).css("height", $(this).width());
+            // $(this).css("height", $(this).width());
+            $(this).css("height", $(this).css("width"));
             // $(this).attr("
         });
     }
@@ -111,13 +112,13 @@ var stylingGeneralJs = new (function () {
 
 
 
-    this.ellipsis = function (props) {
-        // $('.overflow').ellipsis();
-        // $('.one-line').ellipsis({ lines: 1 });
-        // $('.two-lines').ellipsis({ lines: 2 });
-        // $('.box--responsive').ellipsis({ responsive: true });
-        $(props.selector).ellipsis(props);
-    }
+    // this.ellipsis = function (props) {
+    //     // $('.overflow').ellipsis();
+    //     // $('.one-line').ellipsis({ lines: 1 });
+    //     // $('.two-lines').ellipsis({ lines: 2 });
+    //     // $('.box--responsive').ellipsis({ responsive: true });
+    //     $(props.selector).ellipsis(props);
+    // }
 
     this.update = function () {
         self.makeSquare.update();
@@ -129,10 +130,17 @@ var stylingGeneralJs = new (function () {
 });
 
 stylingGeneralJs.makeSquare({
-  selector:"body.page .item-post-thumbnail-container, .items-team_members-wrapper .image-container, .square, .items-pilots-wrapper  .item-paragraph-container"
+  selector:"body.page .item-post-thumbnail-container,"
+              +".items-team_members-wrapper .image-container,"
+              +".square,"
+              +".items-pilots-wrapper .item-paragraph-container"
 });
-stylingGeneralJs.ellipsis({selector:".post-title-container", responsive: true, lines:2 });
-stylingGeneralJs.fill({selector:".items-team_members-wrapper .image-container img, .fill"});
+// stylingGeneralJs.ellipsis({selector:".post-title-container", responsive: true, lines:2 });
+
+stylingGeneralJs.fill({selector:".items-team_members-wrapper .image-container img,"
+                                      +".body.page .section-post-container .item-post-thumbnail-container img, body.page .section-post-container .item-calendar-container img,"
+                                      +".fill"});
+
 document.addEventListener("DOMContentLoaded", function (event) {
     //this bit ensures that the page doesn't change size while images are getting DOMContentLoaded/
     //this removes the classic annoyance of scrolling to the desired part,

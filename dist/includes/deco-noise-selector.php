@@ -17,11 +17,21 @@ if ($extra_fields['header-background-picture']){
 }else if ($mod['header_type'] == 'false') {
 
 }else{
-
-  for($a=0; $a<4; $a++){
+  if($mod['image_style']){
+    ?>
+    <style>
+    img.deco-noise{
+      <?php echo $mod['image_style']; ?>
+    }
+    </style>
+    <?php
+  }
+  $a=0;
+  while($mod['image-'.$a]){
     if($mod['image-'.$a]){
       array_push($availImages,$mod['image-'.$a]);
     }
+    $a++;
   }
 
   if ($mod['header_type'] == 'script') {

@@ -28,7 +28,7 @@ $desktop: $medium;
 $red: #E84351;
 $yellow: #F9BF1D;
 $blackish: #433A3F;
-$blue:#2B90CF;
+$blue:#3291CD;
 $blue-dark: #00639E;
 $blue-light: #6BC0FF;
 
@@ -39,8 +39,8 @@ $accent-color: $yellow;
 $alternate-background: $blackish;
 $alternate-color: $blue-dark;
 
-$link-color: $blackish;
-$link-hover-color: $blue-light;
+$link-color: $blue;
+$link-hover-color: $blue;
 $link-decoration: none;
 $link-hover-decoration: none;
 
@@ -74,7 +74,7 @@ $heading-line-height: 1em;
 $heading-margin-bottom: 1em;
 
 // Heading font size
-$h1: 2.25rem;
+$h1: 1.44rem;//2.25rem;
 $h2: 1.16rem;
 $h3: 1rem;
 $h4: 0.8rem;

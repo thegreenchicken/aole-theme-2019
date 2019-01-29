@@ -5,8 +5,25 @@ get_header(); ?>
 
 <?php while (have_posts()):the_post();
 
- $extra_fields=get_fields();
- ?>
+  $extra_fields=get_fields();
+
+  function printCustomFields($displayfields/*[$title=>$fieldSlug]*/){
+    global $extra_fields;
+    foreach ($displayfields as $title => $fieldSlug) {
+      if ($extra_fields[$fieldSlug]) {
+         echo '<div class="item-' . $fieldSlug . '-field-container">';
+         echo '  <h2 class="field-title">' . $title . '</h2>';
+         echo '  <p class="content">';
+         echo $extra_fields[$fieldSlug];
+         echo '  </p>';
+         echo '</div>';
+      }
+      //just so that it doesn't appear again.
+      unset($extra_fields[$fieldSlug]);
+    }
+   }
+
+   ?>
    <div class="section-container section-post-header-container">
        <p class="item-post-type-container">Pilot case</p>
        <h1 class="item-title-container"><?php the_title(); ?></h1>
@@ -16,10 +33,27 @@ get_header(); ?>
        <div class="item-tags-container">
            <?php
            $tags = get_the_tags();
+           $years = get_the_terms( $post , 'year');
+           $school = get_the_terms( $post , 'school');
+
+
            // print_r($tags);
            foreach ($tags as $key => $tag) {
              echo '<span class="tag tag-'.$tag->slug.'">'.$tag->name.'</span>';
            }
+           foreach ($years as $key => $year) {
+             echo '<span class="tag year year-'.$year->slug.'">'.$year->name.'</span>';
+           }
+           foreach ($schools as $key => $school) {
+             echo '<span class="tag school school-'.$school->slug.'">'.$school->name.'</span>';
+           }
+
+           $tags = get_the_tags();
+           // print_r($tags);
+           foreach ($tags as $key => $tag) {
+             echo '<span class="tag tag-'.$tag->slug.'">'.$tag->name.'</span>';
+           }
+
            ?>
        </div>
        <?php if(has_post_thumbnail()){ ?>
@@ -32,38 +66,32 @@ get_header(); ?>
        <div class="item-side-data-container">
          <!--add a "side-data" field to the post to make it appear here-->
            <?php
-               $displayfields = array(
-                   "Pilot leader" => "people",
-                   "School" => "school",
-                   "Reach" => "reach",
-                   "Timeline" => "timeline",
-                   "More info" => "side-data",
-               );
-
-               foreach ($displayfields as $title => $fieldSlug) {
-                   if ($extra_fields[$fieldSlug]) {
-                       echo '<div class="item-' . $fieldSlug . '-field-container">';
-                       echo '  <h2 class="field-title">' . $title . '</h2>';
-                       echo '  <p class="content">';
-                       echo $extra_fields[$fieldSlug];
-                       echo '  </p>';
-                       echo '</div>';
-                   }
-                   //just so that it doesn't appear again.
-                   unset($extra_fields[$fieldSlug]);
-               }
-               ?>
+             printCustomFields(array(
+                 "Pilot leader" => "pilot_leader",
+                 "School" => "school",
+                 "Reach" => "reach",
+                 "Timeline" => "timeline",
+             ));
+           ?>
        </div>
        <div class="item-post-content-container">
-         <h2>Overview</h2>
+         <!--//use field name, rename it to overview (currently looks like description-->
+         <!--
+         tools, exists but rename it as "plaftorm and tools"
+         pedagogical methods, exists. rename it to "pedagogical methods"
+         involved courses, doesnt exist
+         people, exists.
+
+
+          -->
          <?php
          //some post types may not be using the post content field. In that case, let's take the first content field available
          $contentDisplay= the_content();
-         if(empty($contentDisplay)){
-           $contentDisplay=$extra_fields['description'];
-           unset($extra_fields['description']);
+         if(!empty($contentDisplay)){
+           ?>
+           <?php
+           echo $contentDisplay;
          }
-         echo $contentDisplay;
          ?>
          <?php edit_post_link('Edit', '<span class="edit-link">', '</span>');?>
        <!--
@@ -75,15 +103,16 @@ get_header(); ?>
        unset($extra_fields['subtitle']);
        unset($extra_fields['side-data']);
        unset($extra_fields['header-background-picture']);
+
+       $remaining_fields=array();
+
        foreach($extra_fields as $slug => $field){
          if($field && is_string($field)){
            $fo=get_field_object($slug);
-           ?>
-             <h2><?php echo $fo[label] ?></h2>
-               <?php echo $field; ?>
-           <?php
+           $remaining_fields[$fo['label']]=$slug;
          }
        }
+       printCustomFields($remaining_fields);
        ?>
      </div>
    </div>
@@ -152,7 +181,6 @@ get_header(); ?>
       </div>
    </div>
 
-
 <?php endwhile;?>
 
 <?php
@@ -191,8 +219,8 @@ $append_after = null;
   $append = get_page_by_path('pilots-after-content');
   print_r($append->post_content);
   ?>
-</div>
 
+</div>
 <?php get_sidebar(); ?>
 
 <?php get_footer();

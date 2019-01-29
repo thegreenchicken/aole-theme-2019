@@ -8,6 +8,8 @@ $item-spacing: 15px;
 
     left: -$item-spacing;
     position: relative;
+    display: inline-block;
+
     .item-categorizer-tag-title {
       @include title1();
       font-size: 1.58rem;
@@ -55,6 +57,10 @@ $item-spacing: 15px;
         display: inline-block;
 
         padding: $item-spacing;
+
+        // @media (min-width: $screen-lg-min) {
+        //   height: 243px;
+        // }
 
         // background-color: #999;
         *{

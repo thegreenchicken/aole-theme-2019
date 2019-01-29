@@ -1,108 +1,68 @@
-.header-container{
+header.section-container.section-header-container{
+
+  height:$header-menu-height;
+  // padding-top: 27px;
+  position: sticky;
+  top: 0px;
+  z-index: 100;
+  background-color: white;
+
+  margin:0px;
+  text-align: center;
+
+  width:100vw;
+  max-width: unset !important;
+
+  &.sticky-scrolled{
+    //when the view has been scrolled, and it "sticks"
+    border-bottom: solid 1px #f1f1f1;
+  }
+
+  .item-header-container{
     @extend .container;
-    height:$header-menu-height;
+
     text-align: justify;
-    padding-top: 27px;
-    max-width: none;
-    position: sticky;
-    top: 0px;
-
-    z-index: 100;
-    background: white;
-    width: 100%;
+    // width: 100%;
     border-bottom: 1px #1f1f1f;
+    position:relative;
 
-    &.sticky-scrolled{
-      // height:50px;
-      border-bottom: solid 1px #f1f1f1;
-    }
-    $main-menu-container-top: ($header-menu-height/2) - 18;
+
+    // $main-menu-container-top: ($header-menu-height/2) - 18;
     .main-menu-container {
       // margin-left: 3em;
       position: absolute;
       right: 0px;
-      top: $main-menu-container-top;
-    }
-
-    //active: when the collapsed menu is being displayed
-    &.collapsed.active .main-menu-container{
-      // cursor:pointer;
-      &:before {
-        content: ">>";
-        float: right;
-      }
-      &>*{
-        width: 100vw;
-        transition:0.2s;
-        // left:0;
-        // display: block;
-        pointer-events:all;
-        opacity:1;
-      }
-    }
-    //collapsed: when the screen is small enough to tweak the menu
-    &.collapsed .main-menu-container{
-      cursor:pointer;
-      &:before {
-        // font-family: "Glyphicons Halflings";
-        // content: "\e236";//"hamburger"
-        content: "| | |";
-        font-size: 28px;
-        top: -7px;
+      top: 0.5rem;
+      ul.menu-navigation>li{
         position: relative;
-        right: 22px;
-        //background: url("http://www.gentleface.com/i/free_toolbar_icons_16x16_black.png") 0 0 no-repeat;
-        // div{
-         // display:inline;
-         // width:32px;
-         // height:32px;
-         // &>div{
-         //   width: 35px;
-         //   height: 5px;
-         //   background-color: black;
-         //   margin: 6px 0;
-         // }
-         // }
-      }
-
-
-      &>*{
-          z-index: 1200;
-          transition:0.2s;
+        &>ul.sub-menu{
+          position:absolute !important;
+        }
+        ul.sub-menu{
+          display: block;
           background-color: white;
-          // display:none;
-          pointer-events:none;
-          opacity:0;
-          width: 0;
-
-          // height: 100vh;
-
-          overflow-x: none;
-          overflow-y: auto;
-
-          position:absolute;
-
-          margin:-$padding;
-          padding:$padding;
-
-          top: $header-menu-height - $main-menu-container-top;
-          right:0;
-
-
-          // display:none;
-
-          ul>li{
-              // margin: 5vh 2vw;
-              font-size: 10vw;
-              font-weight: 1;
-              text-transform: capitalize;
-              display: block;
-              width:100%;
+          top: -100vh;
+          // transition: top 1s;
+          position:relative;
+          padding: 6px;
+          li{
+            display:block;
+            padding:6px;
+            border-left: solid 1px;
           }
-
+        }
       }
 
+      ul>li:hover{
+          ul.sub-menu{
+            top:0px;
+            transition: top 1s;
+            // display:block;
+          }
+      }
     }
+
+
 
 
     .title-container{
@@ -125,11 +85,100 @@
                 padding: 7px;
             }
             a:hover{
-                text-decoration: underline;
+                // text-decoration: underline;
+                color:$blue;
             }
             a:active{
-                text-decoration: underline;
+                // text-decoration: underline;
+                color:$blue;
             }
         }
     }
+  }
+
+
+  //active: when the collapsed menu is being displayed
+  &.collapsed.active .main-menu-container{
+    // cursor:pointer;
+    &:before {
+      content: ">>";
+      float: right;
+    }
+    &>*{
+      width: 100vw;
+      height: 100vh;
+      transition:0.2s;
+      // left:0;
+      // display: block;
+      pointer-events:all;
+      opacity:1;
+    }
+  }
+  //collapsed: when the screen is small enough to tweak the menu
+  &.collapsed .main-menu-container{
+    cursor:pointer;
+    cursor: pointer;
+    top: -0.5rem;
+
+    &:before {
+      // font-family: "Glyphicons Halflings";
+      // content: "\e236";//"hamburger"
+      content: "| | |";
+      font-size: 28px;
+      // top: -7px;
+      // position: relative;
+      right: 22px;
+      //background: url("http://www.gentleface.com/i/free_toolbar_icons_16x16_black.png") 0 0 no-repeat;
+      // div{
+       // display:inline;
+       // width:32px;
+       // height:32px;
+       // &>div{
+       //   width: 35px;
+       //   height: 5px;
+       //   background-color: black;
+       //   margin: 6px 0;
+       // }
+       // }
+    }
+
+
+    &>*{
+        z-index: 1200;
+        transition:0.2s;
+        background-color: white;
+
+        pointer-events:none;
+        opacity:0;
+        width: 0;
+
+        position: fixed;
+        top: $header-menu-height;
+
+        overflow-x: none;
+        overflow-y: auto;
+
+        // position:absolute;
+
+        margin:0px;
+        padding:$padding;
+
+        top: $header-menu-height;// - $main-menu-container-top;
+        right:0;
+
+
+        // display:none;
+
+        ul>li{
+            // margin: 5vh 2vw;
+            font-size: 10vw;
+            font-weight: 1;
+            text-transform: capitalize;
+            display: block;
+            width:100%;
+        }
+
+    }
+
+  }
 }

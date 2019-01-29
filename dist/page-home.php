@@ -100,7 +100,19 @@ while (have_posts()): the_post();
       }
       ?> position:relative; overflow:hidden; ">
       <div class="items-wrapper items-header-wrapper">
-
+        <?php
+        if (get_field('subtitle')){
+          ?>
+          <div class="item-container item-post-title-container">
+            <p class="subtitle-container">
+                <?php
+                the_field( 'subtitle' );
+                ?>
+            </p>
+          </div>
+          <?php
+          }
+          ?>
         <?php
         if (get_field('subscribe')) {
           ?>
@@ -129,39 +141,47 @@ while (have_posts()): the_post();
         ?>
     </div>
 
-    <div class="section-container section-events-showcase-container">
-      <?php
-      $future_events = EM_Events::get(array(
-        "scope" => "future",
-        "limit" => 3,
-        // "orderby" => "event_start_date"
-      ));
-      if(! empty($future_events)){
-        ?>
-        <h2 class="events-title">
-          'Upcoming events'<?php get_field(events_showcase_section)[events_title].$section['events_title']?>
-        </h2>
-
-        <div class="items-wrapper items-future-events-wrapper">
-          <?php
-          $section = get_field('events_showcase_section');
-
-
-            echo $append_before;
-
-            foreach ($future_events as $ne => $event) {
-                include locate_template('includes/lister-event.php');
-            }
-            ?>
-
-
-        </div>
-        <a href="events" class="button-more">Go to all events</a>
-        <?php
-      }
-
+    <?php
+    $future_events = EM_Events::get(array(
+      "scope" => "future",
+      "limit" => 3,
+      // "orderby" => "event_start_date"
+    ));
+    if(! empty($future_events)){
       ?>
-    </div>
+      <div class="section-container section-events-showcase-container">
+          <h2 class="events-title">
+            'Upcoming events'<?php get_field(events_showcase_section)[events_title].$section['events_title']?>
+          </h2>
+
+          <div class="items-wrapper items-future-events-wrapper">
+            <?php
+            $section = get_field('events_showcase_section');
+
+
+              echo $append_before;
+
+              foreach ($future_events as $ne => $event) {
+                  include locate_template('includes/lister-event.php');
+              }
+              ?>
+
+
+          </div>
+          <a href="events" class="button-more">Go to all events</a>
+      </div>
+      <?php
+    }else if(get_field("no_events")){
+      ?>
+      <div class="section-container section-events-showcase-container">
+          <?php
+          echo get_field("no_events");
+          ?>
+      </div>
+      <?php
+    }
+
+    ?>
 
     <div class="section-container section-pilots-showcase-container">
 
@@ -169,10 +189,12 @@ while (have_posts()): the_post();
       $section = get_field('pilots_showcase_section');
       //select a list of pilots. This var is used in the upcoming included template part.
       $pilots = $section['showcased_pilots'];
-      // print_r($section);
+      ?>
+      <!--<?php print_r($section); ?>-->
+      <?php
       $append_before = '<h2 class="pilots-title"><!-- get_field(pilots_showcase_section)[title] -->' . $section['title'] . '</h2>';
-      $append_before .= '<p class="pilots-description"><!-- get_field(pilots_showcase_section)[text_body] -->' . $section['text_body'] . '</p>';
-      $append_before .= '<p class="pilots-subtitle"><!-- get_field(pilots_showcase_section)[pilots_subtitle] -->' . $section['pilots_subtitle'] . '</p>';
+      $append_before .= '<span class="pilots-description"><!-- get_field(pilots_showcase_section)[text_body] -->' . $section['text_body'] . '</span>';
+      $append_before .= '<span class="pilots-subtitle"><!-- get_field(pilots_showcase_section)[pilots_subtitle] -->' . $section['pilots_subtitle'] . '</span>';
       $append_after = '<a href="pilots" class="button-more">See full pilots list</a>';
       //$append_before & after are appended in the following included template part:
       include locate_template('includes/lister-pilots.php');
@@ -184,7 +206,7 @@ while (have_posts()): the_post();
     </div>
 
     <div class="section-container section-news-container section-news-showcase-container">
-      <h2 class="news-title">'latest news'<?php $section['news_title'] ?></h2>
+      <h2 class="news-title"><?php echo get_field('news_title') ?></h2>
         <div class="items-wrapper items-news-wrapper">
             <?php
 
