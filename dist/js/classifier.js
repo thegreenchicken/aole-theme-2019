@@ -40,7 +40,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
     //a visible filtering button element, with it's data
     var ClassifButton=function(myClassifier,category,tag,$el){
-
       this.appendTo=function($to){
         return $to.append($el);
       }
@@ -56,7 +55,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
         }else{
           $el.removeClass("active");
         }
-        //we don't want category buttons to dissappear, hence this if.
+        //we don't want category buttons to disappear, hence this if.
         if(tag){
           if(filterEvent.category==category){
             $el.addClass("undisappear");
@@ -67,9 +66,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
           }
         }
       });
-
-
-
       return this;
     }
 
@@ -78,26 +74,14 @@ document.addEventListener("DOMContentLoaded", function (event) {
     var CategoryButton=function(myClassifier,category){
       var $el= $(`<a href="#${category}" class="tag" data-category="${category}">${category} </a>`);
       ClassifButton.call(this,myClassifier,category,false,$el);
-      //these events have the added advantage of allowing the unselection of the item by clicking it again.
-      //I decided not to use these, to use the haschange event instead, so that the user can use the browser history.
-      // $el.on("click",function(){
-      //   var activeState=$el.hasClass("active");
-      //   //opposite of activestate because it only becomes active if it is active and vice-versa.
-      //   myClassifier.filterAndDisplay((!activeState)?category:false,tag);
-      // });
       return this;
     }
+
     var TagButton=function(myClassifier,category,tag){
-      var count = (myClassifier.monofilter(category,tag)).length;
+      var myList=ClassifiedItem.sortedList[category][tag];
+      var count = (myList?myList:[]).length;
       var $el= $(`<a href="#${category}/${tag}" class="tag" data-category="${category}" data-item="${tag}">${tag} <span class="count">${count}<span></a>`);
       ClassifButton.call(this,myClassifier,category,tag,$el);
-      //these events have the added advantage of allowing the unselection of the item by clicking it again.
-      //I decided not to use these, to use the haschange event instead, so that the user can use the browser history.
-      // $el.on("click",function(){
-      //   var activeState=$el.hasClass("active");
-      //   //opposite of activestate because it only becomes active if it is active and vice-versa.
-      //   myClassifier.filterAndDisplay(category,(!activeState)?tag:false);
-      // });
       return this;
     }
 
@@ -109,7 +93,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
       var $tagSelectionMenu=$('<div class="tag-menu"><p></p></div>');
 
       var self=this;
-      var attributes=this.attributes={};
 
       var categoryButtons=[];
 
@@ -123,72 +106,52 @@ document.addEventListener("DOMContentLoaded", function (event) {
         }
       }
       this.filterAndDisplay=function(category,tag){
+        console.log("filter and display call",category,tag);
 
-        //each tag has a category, if the user presses one of these categories,
-        //the items get sorted according to their tag on that selected category.
-        //sort items by their tags in this category of $tagSelectionMenu
-        var sortedByTagsOfCategory={};
-        var appendLast=[];
+        function list(filteredSelection){
+          //remove everything
+          ClassifiedItem.each(function(){
+            this.disappear();
+          });
+          $(wrapperSelector+" .item-categorizer-tag-title").remove();
+          $(wrapperSelector+" .item-categorizer-hr").remove();
 
-        self.monofilter(category,tag,function(res){
-          //// NOTE: "this" is a classifiableItem (=res.item)
-          // console.log("category",category,res);
-          var itags=res.item.attributes[category];
-          if(res.match){
-            if(itags?itags[0]:false){
-              //make the item appear under other title than the selected tag, if possible
-              //in this way, its belonging to other tags is expressed
-              var stag=itags[0];
-              if(stag===tag){
-                if(itags[1]){
-                  stag=itags[1];
-                }
-              }
-              //add it to the array for later sort of the item DOM element
-              if(!sortedByTagsOfCategory[stag]) sortedByTagsOfCategory[stag]=[];
-              sortedByTagsOfCategory[stag].push(this);
-            }else{
-              //add it under the "others" title
-              appendLast.push(this);
-            }
-          }
-
-          this.setAppearState(res.match);
-
-          this.detach();
-        });
-
-        sortedByTagsOfCategory[category?"Without "+category:"Others"]=appendLast;
-
-        $(wrapperSelector+" .item-categorizer-tag-title").remove();
-        $(wrapperSelector+" .item-categorizer-hr").remove();
-        let n=0;
-
-        for(var dispTag in sortedByTagsOfCategory){
-          console.log(dispTag,":",sortedByTagsOfCategory[dispTag]);
-
-          if(sortedByTagsOfCategory[dispTag].length){
-            //if only a category (taxonomy type) was selected, display a title per each tag (taxonomy).
-            //if a category and a tag is selectd, do not display those titles, because it becomes a bit confusing to the user.
-            //
-            if(tag){
-              //a tag was  selected, hence display only the title for that selected tag.
-              if(n == 0){
-                $(wrapperSelector).append('<h2 class="item-categorizer-tag-title">'+tag+'</h2>');
-              }
-            }else{
-              //a tag was not selected, hence display one title per each tag of that category.
-              if(n>0) $(wrapperSelector).append('<hr class="item-categorizer-hr"/>');
-              $(wrapperSelector).append('<h2 class="item-categorizer-tag-title">'+dispTag+'</h2>');
+          //make the stuff we want to appear
+          var n=0;
+          for(var tag in filteredSelection){
+            if(n>0) $(wrapperSelector).append('<hr class="item-categorizer-hr"/>');
+            $(wrapperSelector).append('<h2 class="item-categorizer-tag-title">'+tag+'</h2>');
+            //items without that category will be missing
+            for(var item of filteredSelection[tag]){
+              item.attachNonExclusive();
             }
             n++;
           }
-
-          for(var item of sortedByTagsOfCategory[dispTag]){
-            item.reattach();
-          }
         }
+        //each tag has a category, if the user presses one of these categories,
+        //the items get sorted according to their tag on that selected category.
+        //sort items by their tags in this category of $tagSelectionMenu
+        var filteredSelection={};
+        if(category && tag){
+          console.log("select by tag");
+          filteredSelection[tag]=ClassifiedItem.sortedList[category][tag];
+          list(filteredSelection);
+        }else if(category){
+          console.log("select by category");
+          filteredSelection=ClassifiedItem.sortedList[category];
+          list(filteredSelection);
+        }else{
+          console.log("select nothing");
 
+          $(wrapperSelector+" .item-categorizer-tag-title").remove();
+          $(wrapperSelector+" .item-categorizer-hr").remove();
+          // filteredSelection=ClassifiedItem.sortedList;
+          // item.attachNonExclusive();
+          ClassifiedItem.each(function(){
+            this.detach();
+            this.reattach();
+          });
+        }
 
         self.updateDom();
 
@@ -198,12 +161,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
       }
       this.updateDom=function(){
         if(! categorizerAppended){
-
-          for(var category in attributes){
+          for(var category in ClassifiedItem.sortedList){
             new CategoryButton(self,category).appendTo($catSelectionMenu);
-
-            // console.log("C",attributes[category]);
-            for(var tag of attributes[category]){
+            for(var tag in ClassifiedItem.sortedList[category]){
               new TagButton(self,category,tag).appendTo($tagSelectionMenu);
 
             }
@@ -216,111 +176,88 @@ document.addEventListener("DOMContentLoaded", function (event) {
         }
         if(useMasonry) updateMasonry();
       }
-      /*example: filter([[hairdos,"waves"],[random:"tag a"]]) */
-      var sf=function(catValuePairs,cb,bool){
-        var ln=0;
-        var ret=[];
-        for(var pair of catValuePairs){
-          var category=pair[0];
-          var tag=pair[1];
-          for(var item of items){
-            //depending on state of "bool" this becomes either an additive or a intersective filter function
-            if(ln==0 || bool==item.isAppeared ){
-              if( item.matches(category,tag) ){
-                ret.push(item);
-                if(cb) cb.call(item,{item:item,match:[category,tag]});
-              }else{
-                if(cb) cb.call(item,{item:item,match:false});
-              }
-            }
-
-          }
-          ln++;
-        }
-        return ret;
-      }
-      this.andFilter=function(catValuePairs,cb){
-        return sf(catValuePairs,cb,true);
-      }
-      // not used for now, and untested, but just to illustrate the function.
-      //if there are way too many items in the future, this could be used to
-      //find possts based in more than one criteria.
-      this.orFilter=function(catValuePairs,cb){
-        return sf(catValuePairs,cb,false);
-      }
-
-      this.monofilter=function(tagCategory,catValue,cb){
-        return self.andFilter([[tagCategory,catValue]],cb);
-      }
 
       $item.find(itemSelector).each(function(){
         var nci=new ClassifiedItem($(this));
-        items.push( nci );
-        for(var cat in nci.attributes){
-          if(!self.attributes[cat]) self.attributes[cat]=[];
-          var taglist=nci.attributes[cat];
-          for(var tag of taglist){
-            if(self.attributes[cat].indexOf(tag)==-1) self.attributes[cat].push(tag);
-          }
-        }
       });
+
       this.updateDom();
 
 
       if(urlRequestedSelection){
-        this.filterAndDisplay(urlRequestedSelection[0],urlRequestedSelection[1]||false);
+        this.filterAndDisplay(urlRequestedSelection[0]||false,urlRequestedSelection[1]||false);
       }
 
       window.onhashchange = function() {
         urlRequestedSelection=getHash();
-        self.filterAndDisplay(urlRequestedSelection[0],urlRequestedSelection[1]||false);
+        self.filterAndDisplay(urlRequestedSelection[0]||false,urlRequestedSelection[1]||false);
       }
     }
-    //representation of a classified item that has data and can appear or dissappear.
+
+    //representation of a classified item that has data and can appear or disappear.
     var ClassifiedItem = function ($item) {
         // console.log("classified item",$item);
         if (!ClassifiedItem.list) ClassifiedItem.list = [];
+        if (!ClassifiedItem.sortedList) ClassifiedItem.sortedList = {};
+
         ClassifiedItem.list.push(this);
+
         var self = this;
         this.isAppeared=true;
         this.attributes = {};
+
+        var item$=[$item];
+
+        var $reattach=$item.parent();
+
         $item.find(itemDataContainerSelector).each(function () {
           var $attrList=$(this);
+
           var name=$attrList.attr("name");
-          // console.log(name);
 
           var thisList = self.attributes[name] = [];
+          if(! ClassifiedItem.sortedList[name] ) ClassifiedItem.sortedList[name]={};
+
           $attrList.find('li').each(function(){
             var $li=$(this);
             var txt=$li.text();
-            if(txt) thisList.push( txt.toLowerCase() );
+            if(txt){
+              txt = txt.toLowerCase();
+              thisList.push( txt );
+              if(! ClassifiedItem.sortedList[name][txt] ) ClassifiedItem.sortedList[name][txt]=[];
+              ClassifiedItem.sortedList[name][txt].push(self);
+            }
           });
-          // console.log(thisList);
-
         });
-        var $reattach=$item.parent();
+
+        // console.log(ClassifiedItem.sortedList);
+
         this.detach=function(){
-          $item.detach();
+          for(var $i of item$){
+            $i.detach();
+          }
         }
+
         this.reattach=function(){
           $item.appendTo($reattach);
         }
-        this.appear=function(){
-            // $item.fadeIn();
-            self.isAppeared=true;
-            // $item.css("display","");
-            $item.removeClass("disappear");
-            $item.addClass("undisappear");
 
+        this.attachNonExclusive=function($where){
+          if(!$where) $where=$reattach;
+          //check whether $ is in use (present in DOM)
+          for(var $i of item$){
+            if(!$i.parent().length){
+              $i.appendTo($where);
+              return;
+            }
+          }
+          //if all the $el's were in use, create a new one.
+          // console.log("attach additional",$item)
+          var $ni=$item.clone();
+          item$.push($ni);
+          $ni.appendTo($where);
         }
-        this.disappear=function(){
-            // $item.fadeOut();
-            self.isAppeared=false;
-            // $item.css("display","none");
-            $item.addClass("disappear");
-            $item.removeClass("undisappear");
 
-        }
         this.matches=function(categoryHas,val){
           if(categoryHas===false){
             return true;
@@ -335,6 +272,23 @@ document.addEventListener("DOMContentLoaded", function (event) {
             //didn't even have matching category
             return false;
           }
+        }
+
+        this.appear=function(){
+            // $item.fadeIn();
+            self.isAppeared=true;
+            // $item.css("display","");
+            // item$.map(function(a){ a.removeClass("disappear") } );
+            item$.map(function(a){ a.appendTo($reattach) } );
+
+        }
+        this.disappear=function(){
+            // $item.fadeOut();
+            self.isAppeared=false;
+            // $item.css("display","none");
+            // item$.map(function(a){ a.addClass("disappear") } );
+            item$.map(function(a){ a.detach() } );
+
         }
         this.setAppearState=function(state){
           if(state)self.appear();
