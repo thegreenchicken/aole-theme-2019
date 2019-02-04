@@ -108,13 +108,15 @@ document.addEventListener("DOMContentLoaded", function (event) {
       this.filterAndDisplay=function(category,tag){
         console.log("filter and display call",category,tag);
 
+        //remove everything
+        ClassifiedItem.each(function(){
+          this.disappear();
+        });
+
+        $(wrapperSelector+" .item-categorizer-tag-title").remove();
+        $(wrapperSelector+" .item-categorizer-hr").remove();
+        
         function list(filteredSelection){
-          //remove everything
-          ClassifiedItem.each(function(){
-            this.disappear();
-          });
-          $(wrapperSelector+" .item-categorizer-tag-title").remove();
-          $(wrapperSelector+" .item-categorizer-hr").remove();
 
           //make the stuff we want to appear
           var n=0;
@@ -127,6 +129,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
             }
             n++;
           }
+
         }
         //each tag has a category, if the user presses one of these categories,
         //the items get sorted according to their tag on that selected category.
@@ -139,6 +142,21 @@ document.addEventListener("DOMContentLoaded", function (event) {
         }else if(category){
           console.log("select by category");
           filteredSelection=ClassifiedItem.sortedList[category];
+
+          list(filteredSelection);
+
+          /*
+          now find those items that don't have a category. It's counter-logic,
+          but it helps the content editors to know which items need to be filled.
+          */
+          filteredSelection={};
+          var othersIndex="without "+category;
+          filteredSelection[othersIndex]=[];
+          ClassifiedItem.each(function(){
+            if(!this.isAppeared){
+              filteredSelection[othersIndex].push(this);
+            }
+          });
           list(filteredSelection);
         }else{
           console.log("select nothing");
@@ -233,16 +251,20 @@ document.addEventListener("DOMContentLoaded", function (event) {
         // console.log(ClassifiedItem.sortedList);
 
         this.detach=function(){
+          self.isAppeared=false;
+
           for(var $i of item$){
             $i.detach();
           }
         }
 
         this.reattach=function(){
+          self.isAppeared=true;
           $item.appendTo($reattach);
         }
 
         this.attachNonExclusive=function($where){
+          self.isAppeared=true;
           if(!$where) $where=$reattach;
           //check whether $ is in use (present in DOM)
           for(var $i of item$){
