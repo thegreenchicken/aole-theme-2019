@@ -1,5 +1,5 @@
 <?php
-
+// define( 'WP_DEBUG', true );
 function maintenace_mode() {
 
       if ( !is_user_logged_in() ) {
@@ -13,7 +13,7 @@ function maintenace_mode() {
       }
 
 }
-add_action('get_header', 'maintenace_mode');
+// add_action('get_header', 'maintenace_mode');
 
 
 include locate_template("customizer/index.php");

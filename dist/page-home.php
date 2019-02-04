@@ -125,8 +125,9 @@ while (have_posts()): the_post();
         <div class="item-container item-post-title-container" role="main">
           <?php
           echo get_field('featured_header');
-          include locate_template('assets/d3Animation/index.php');
           ?>
+          <!-- <iframe src="http://onlinelearning.aalto.fi<?php echo locate_template('assets/d3Animation/index.php'); ?>"></iframe> -->
+
         </div>
       </div>
 

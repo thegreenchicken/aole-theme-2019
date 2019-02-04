@@ -31,9 +31,6 @@ body.single-pilot{
     h2{
       @extend .item-post-type-container;
     }
-    hr{
-      padding-bottom: 40px;
-    }
     .item-post-content-container{
       h2{
         @include title1();

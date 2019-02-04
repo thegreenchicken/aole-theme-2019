@@ -117,101 +117,83 @@ get_header(); ?>
      </div>
    </div>
 
-   <?php if(is_user_logged_in()&&false){ ?>
-       <div class="section container section-dev-container">
-           <h2>Fields:</h2>
-           <textarea style="width:100%; height:300px">
-               <?php print_r( $extra_fields ) ?>
-           </textarea>
+  <?php if(is_user_logged_in()&&false){ ?>
+     <div class="section container section-dev-container">
+         <h2>Fields:</h2>
+         <textarea style="width:100%; height:300px">
+             <?php print_r( $extra_fields ) ?>
+         </textarea>
 
-           <h2>Post:</h2>
-           <textarea style="width:100%; height:300px">
-               <?php print_r( get_post() ) ?>
-           </textarea>
-       </div>
-   <?php } ?>
-   <div class="section-container section-after-post-container">
-     <hr/>
-     <h2>More pilots</h2>
+         <h2>Post:</h2>
+         <textarea style="width:100%; height:300px">
+             <?php print_r( get_post() ) ?>
+         </textarea>
+     </div>
+  <?php } ?>
+  <div class="items-wrapper items-other-posts-wrapper">
+    <?php
+    $pilots = array();
+    $current_post = $post;
+    /*
+    acquiring next and previous post here is programmed a bit oddly; this is
+    because as far as I know, there can only be one global $post to which the
+    setup_postdata function can refer to. This means that we cannot evaluate
+    whether there are sufficient next and previous posts available before
+    actually trying to get them.
+    The lightest way of getting the four available contiguous posts I thought,
+    is to get four previous posts, and then two additional next posts. In case
+    there aren't two next posts available, it will use prev posts to fill that
+    gap in order to always offer four contiguous posts. There is always a waste
+    of two queries except when viewing the last post.
+    */
+    // echo "<ul>";
+    $i=0;
+    //get four previous posts
+    for($i = 0; $i < 4; $i++){
+      $post = get_previous_post();
+      if($post){
+        setup_postdata($post);
+        array_unshift($pilots,$post);
+        // echo("<li>prev:get".$post->post_title);
+      }else{
+        // echo "<li>prev:none";
+        break;
+      }
+    }
+    wp_reset_postdata();
+    //get next two posts if there were enough previous posts, get more if
+    // there were less than enough.
+    // echo("<li>next, from 0 to".(max(2,4-$i)));
+    for($j=0; $j < max(2,4-$i); $j++){
+      $post = get_next_post();
+      setup_postdata($post);
+      array_push($pilots,$post);
 
-       <div class="items-wrapper items-other-posts-wrapper">
-         <?php
-         // get_adjacent_post($in_same_cat = false, $excluded_categories = '', $previous = true)
-         $post_prev=( get_adjacent_post(true,'',true) );
-         $post_next=( get_adjacent_post(true,'',false) );
+      // echo("<li>next[".$j."]:get".$post->post_title);
+      if(!$post){ break; }
+    }
 
-         // if($is_object($post)) {
-         //     $previous_post_permalink = get_permalink($post->ID);
-         //     echo $previous_post_permalink;
-         // }
-         ?>
-         <?php
-         if($post_prev){
-           ?>
-           <a href="<?php echo $post_prev->guid ?>" class="previous-post-link">
-               <span class="link-head"> &lt; previous <?php echo $post_prev -> post_type ?> </span>
-               <span class="title">
-                   <?php
-                   echo (new DateTime($post_prev -> event_start_date)) -> format('d M');
-                   echo ": ";
-                   echo $post_prev -> post_title;
-                   ?>
-               </span>
-           </a>
+    //get only the last four posts in the list
+    $pilots=array_slice($pilots,-4);
 
-           <?php
-         }
-         $other_event = $other_events[$currentEventArrayIndex+1];
+    wp_reset_postdata();
+    // echo "</ul>";
 
 
-         if($post_next){
-           ?>
-           <a href="<?php echo $post_next->guid ?>" class="next-post-link">
-               <span class="link-head"> next <?php echo $post_next-> post_type ?> &gt; </span>
-               <span class="title">
-                   <?php
-                   echo $post_next->post_title;
-                   ?>
-               </span>
-           </a>
-           <?php
-         }
+    $append_before = '<hr/><h2>More pilots</h2>';
+    $append_before .= '<p class="pilots-subtitle"><!-- get_field(pilots_showcase_section)[pilots_subtitle] -->' . $section['pilots_subtitle'] . '</h2>';
+    $append_after = '<a href="'.get_site_url().'/pilots" class="button-list">< Back to pilots list</a>';
+    //$append_before & after are appended in the following included template part:
+    include locate_template('includes/lister-pilots.php');
 
-         ?>
-      </div>
-   </div>
+    $append_before = null;
+    $append_after = null;
+    ?>
+ </div>
+
 
 <?php endwhile;?>
 
-<?php
-//TODO: improve this query to have relation to the current pilot listing. It can be manual, or automatic
-$pilots = array();
-/*get_posts(
-    array('showposts' => 4,
-        'post_type' => 'pilot',
-    )
-);*/
-//get adjacent posts
-global $post;
-$current_post = $post; // remember the current post
-//TODO: get two previous and two next posts. The complicated part of that, is to take the edge cases into consideration
-for($i = 1; $i <= 4; $i++){
-  $post = get_previous_post(); // this uses $post->ID
-  setup_postdata($post);
-  array_push($pilots,$post);
-}
-
-$post = $current_post; // restore
-
-$append_before = '<h2 class="pilots-title"><!-- get_field(pilots_showcase_section)[pilots_title] -->' . $section['pilots_title'] . '</h2>';
-$append_before .= '<p class="pilots-subtitle"><!-- get_field(pilots_showcase_section)[pilots_subtitle] -->' . $section['pilots_subtitle'] . '</h2>';
-$append_after = '<a href="pilots" class="button-list">< Back to pilots list</a>';
-//$append_before & after are appended in the following included template part:
-include locate_template('includes/lister-pilots.php');
-
-$append_before = null;
-$append_after = null;
-?>
 
 <div class="section-container section-pilot-after-content-container">
   <hr/>
@@ -219,7 +201,6 @@ $append_after = null;
   $append = get_page_by_path('pilots-after-content');
   print_r($append->post_content);
   ?>
-
 </div>
 <?php get_sidebar(); ?>
 
