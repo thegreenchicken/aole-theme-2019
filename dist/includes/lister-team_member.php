@@ -34,7 +34,7 @@ $team_member->custom_fields = get_fields($team_member->ID);
 				<!-- <a class="item-paragraph-container" href="<?php echo get_the_permalink($team_member->ID);?>"> -->
 					<div class="post-image-container image-container">
 
-						<img src="<?php echo get_post_thumbnail_url_or_fallback($team_member->ID, 'medium', "team_member"); ?>" />
+						<img src="<?php echo get_post_thumbnail_url_or_fallback($team_member->ID, 'large', "team_member"); ?>" />
 
 					</div>
           <span class="post-title-container">

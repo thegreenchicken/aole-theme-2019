@@ -7,9 +7,7 @@
 
 				$footer = get_page_by_path('footer');
 
-				print_r($footer->post_content);
-
-
+				echo($footer->post_content);
 
 				?>
 

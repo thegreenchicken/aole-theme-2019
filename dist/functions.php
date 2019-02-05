@@ -674,20 +674,7 @@ if ( ! function_exists( 'wpse_custom_wp_trim_excerpt' ) ) :
     return $event_information;
 }
 
-// Get the event image URL with fallback default picture
 
-function get_post_thumbnail_url_or_fallback($post_id, $image_size, $fallback){
-    $thumb_url = "";
-
-    if (has_post_thumbnail($post_id)){
-        $thumb_url = get_the_post_thumbnail_url($post_id, $image_size);
-    } else if($fallback){
-        $thumb_url = get_stylesheet_directory_uri()."/assets/images/default-".$fallback.".png";
-    } else {
-        $thumb_url = get_stylesheet_directory_uri()."/assets/images/default.png";
-    }
-    return $thumb_url;
-}
 
 // Add a custom ACF menu to edit the footer
 

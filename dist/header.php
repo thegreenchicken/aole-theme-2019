@@ -6,6 +6,7 @@
 <html class="no-js" <?php language_attributes(); ?> >
 <head>
 	<?php
+  include_once (locate_template('includes/get_post_thumbnail_url_or_fallback.php'));
   wp_enqueue_script('styling-general', get_template_directory_uri() . '/js/styling-general.js', array('jquery'), 1.1, true);
 	wp_enqueue_script('responsive-menu', get_template_directory_uri() . '/js/responsive-menu.js', array('jquery'), 1.1, true);
 	// wp_enqueue_script('ellipsis', get_template_directory_uri() . '/js/ellipsis.js', array('jquery'), 1.1, true);

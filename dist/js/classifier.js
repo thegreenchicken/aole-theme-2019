@@ -115,7 +115,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
         $(wrapperSelector+" .item-categorizer-tag-title").remove();
         $(wrapperSelector+" .item-categorizer-hr").remove();
-        
+
         function list(filteredSelection){
 
           //make the stuff we want to appear
@@ -123,7 +123,6 @@ document.addEventListener("DOMContentLoaded", function (event) {
           for(var tag in filteredSelection){
             if(n>0) $(wrapperSelector).append('<hr class="item-categorizer-hr"/>');
             $(wrapperSelector).append('<h2 class="item-categorizer-tag-title">'+tag+'</h2>');
-            //items without that category will be missing
             for(var item of filteredSelection[tag]){
               item.attachNonExclusive();
             }
@@ -157,7 +156,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
               filteredSelection[othersIndex].push(this);
             }
           });
-          list(filteredSelection);
+          if(filteredSelection[othersIndex].length){
+            list(filteredSelection);
+          }
+
         }else{
           console.log("select nothing");
 

@@ -1,7 +1,9 @@
 header.section-container.section-header-container{
 
   height:$header-menu-height;
+  transition: 0.5s;
   // padding-top: 27px;
+  position: -webkit-sticky;
   position: sticky;
   top: 0px;
   z-index: 100;
@@ -16,6 +18,17 @@ header.section-container.section-header-container{
   &.sticky-scrolled{
     //when the view has been scrolled, and it "sticks"
     border-bottom: solid 1px #f1f1f1;
+
+    height: 79px;
+    transition: 0.5s;
+    top: -32px;
+
+    .item-header-container img.logo{
+      height: 43px;
+      transition: 0.5s;
+
+      margin-top: 2px;
+    }
   }
 
   .item-header-container{
@@ -26,7 +39,12 @@ header.section-container.section-header-container{
     border-bottom: 1px #1f1f1f;
     position:relative;
 
+    img.logo{
+      height: 58px;
+      transition: 0.5s;
 
+      margin-top:-5px;
+    }
     // $main-menu-container-top: ($header-menu-height/2) - 18;
     .main-menu-container {
       // margin-left: 3em;

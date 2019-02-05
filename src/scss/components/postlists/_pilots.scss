@@ -78,10 +78,10 @@ $item-spacing: 15px;
             .post-image-container{
 
               //prevents the infuriating content jumping while pictures are loading.
-              @media (max-width:$screen-xs-max){
-                height: 50vw;
-                overflow:hidden;
-              }
+              // @media (max-width:$screen-xs-max){
+                // height: 50vw;
+                // overflow:hidden;
+              // }
 
               img {
                 width: 100%;

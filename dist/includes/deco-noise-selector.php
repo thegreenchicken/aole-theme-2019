@@ -3,7 +3,8 @@
 
 $mod = get_theme_mod('deco_noise');
 $availImages=Array();
-
+$extra_fields=get_fields();
+echo "<!--deco-noise selector-->";
 if ($extra_fields['header-background-picture']){
     // echo "background-color: ";
     echo '<img src="'.$extra_fields['header-background-picture'].'" class="deco-noise-picture parallax" parallax-z="'

@@ -64,7 +64,7 @@
       .item-events-container{
           @include fully-wide-item(25px);
           .item-title-container{
-              font-weight: 900;
+              font-weight: 800;
               font-size: 1.25rem;
           }
           .item-date-container{
@@ -80,7 +80,7 @@
                   font-size: 2.9em;
                   line-height: 2.4rem;
                   text-transform: uppercase;
-                  font-weight: 1000;
+                  font-weight: 800;
               }
               .weekday{
                   font-size: 1.18em;

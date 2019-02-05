@@ -27,7 +27,12 @@
 
     padding: 0 .5rem;
     color:white;
-    padding-top: 189px;
+
+    padding-top: 60px;
+    @media (min-width:$screen-sm-min){
+      padding-top: 189px;
+    }
+
     padding-bottom: 97px;
     margin-bottom: 60px;
 

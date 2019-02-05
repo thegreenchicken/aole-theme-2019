@@ -61,7 +61,7 @@ $(window).ready( function (event) {
     }
 
     console.log("arrowettes.js");
-    $(".section-container:not(:last,:first)").each(function(){
+    $(".section-container:not(:last,.section-post-header-container,.section-callout-container,.section-header-container)").each(function(){
         new Arrowette($(this));
     });
 });
@@ -99,6 +99,12 @@ while (have_posts()): the_post();
           echo ";";
       }
       ?> position:relative; overflow:hidden; ">
+
+      <?php
+      include locate_template("includes/deco-noise-selector.php");
+      ?>
+
+      
       <div class="items-wrapper items-header-wrapper">
         <?php
         if (get_field('subtitle')){
@@ -111,8 +117,16 @@ while (have_posts()): the_post();
             </p>
           </div>
           <?php
-          }
+        }
+        ?>
+
+        <div class="item-container item-post-title-container" role="main">
+          <?php
+          echo get_field('featured_header');
           ?>
+          <!-- <iframe src="http://onlinelearning.aalto.fi<?php echo locate_template('assets/d3Animation/index.php'); ?>"></iframe> -->
+
+        </div>
         <?php
         if (get_field('subscribe')) {
           ?>
@@ -122,13 +136,6 @@ while (have_posts()): the_post();
           <?php
         }
         ?>
-        <div class="item-container item-post-title-container" role="main">
-          <?php
-          echo get_field('featured_header');
-          ?>
-          <!-- <iframe src="http://onlinelearning.aalto.fi<?php echo locate_template('assets/d3Animation/index.php'); ?>"></iframe> -->
-
-        </div>
       </div>
 
     </div>
@@ -151,9 +158,7 @@ while (have_posts()): the_post();
     if(! empty($future_events)){
       ?>
       <div class="section-container section-events-showcase-container">
-          <h2 class="events-title">
-            'Upcoming events'<?php get_field(events_showcase_section)[events_title].$section['events_title']?>
-          </h2>
+          <h2 class="events-title"><?php echo get_field('events_title') ?></h2>
 
           <div class="items-wrapper items-future-events-wrapper">
             <?php

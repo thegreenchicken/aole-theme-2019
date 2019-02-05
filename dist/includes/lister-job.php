@@ -31,7 +31,7 @@ this is the context where this part should be invoked:
 			<a href="<?php echo get_permalink(); ?>">
 				<div class="item-container item-job-container">
 					<div class="item-image-container">
-						<?php the_post_thumbnail(); ?>
+						<img src="<?php echo get_post_thumbnail_url_or_fallback($event->post_id, 'event-thumbnail', 'job');?>">
 					</div>
 					<div class="item-title-container">
 						<?php the_title(); ?>

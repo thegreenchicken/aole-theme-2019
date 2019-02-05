@@ -8,7 +8,12 @@ get_header();
 ?>
  <?php if(is_user_logged_in()) { ?> <!-- template part: <?php echo dirname(__FILE__).'/'.basename(__FILE__);  ?> --> <?php } ?>
 
-<?php get_template_part('template-parts-sections/single-content-page-events'); ?>
+<?php
+
+get_template_part('template-parts-sections/single-content-page-events');
+wp_enqueue_script('post-list-fix-image-height', get_template_directory_uri() . '/js/post-list-fix-image-height.js', array('jquery'), 1.1, true);
+
+?>
 
 
 <?php

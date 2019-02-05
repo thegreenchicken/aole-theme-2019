@@ -28,22 +28,27 @@ body.page{
           width:100%;
         }
         .item-post-title-container{
-
             @extend .container;
             position: relative;
             z-index: 2;
+            color:#FFF;
             >h1{
-                font-size: 0.9rem;
-                font-weight: 100;
-                color:white;
-                font-family: $font-family;
+              font-size: 1rem;
+              font-weight: bold;
+              text-transform: none;
+              font-family: $font-family;
+              color:inherit;
             }
             >p{
-                font-size: 3.4rem;
-                line-height: 1em;
-                font-weight: 800;
-                font-family: $heading-font-family;
-                text-transform: uppercase;
+              @media (max-width:$screen-sm-min){
+                font-size: 2.4rem;
+              }
+              font-size: 3.4rem;
+              line-height: 1em;
+              font-weight: 800;
+              font-family: $heading-font-family;
+              text-transform: uppercase;
+              color:inherit;
             }
         }
     }

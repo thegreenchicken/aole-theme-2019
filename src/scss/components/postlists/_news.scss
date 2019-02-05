@@ -16,13 +16,19 @@
         .item-news-container{
             @include fully-wide-item(40px);
             height: 250px;
-            // img{
-            //   margin-top:-50px;
-            // }
+
             .item-image-container{
               img{
-                width:100%;
+                min-width:100%;
                 height:auto;
+                min-height: 100%;
+              }
+              @media (max-width: $my-breakpoint) {
+                &>img{
+                  margin-top:0;
+                  width:100%;
+                }
+
               }
             }
             .item-author-container{
@@ -32,11 +38,7 @@
                 position: absolute;
                 bottom:0px;
                 @media (max-width: $my-breakpoint) {
-                    position: relative;
-                    &>img{
-                      margin-top:0;
-                    }
-
+                  position: relative;
                 }
             }
         }
