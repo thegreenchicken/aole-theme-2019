@@ -103,31 +103,27 @@
 
 
     .item-calendar-container{
-        //I would
-        // @extend .item-post-thumbnail-container;
-        //but for some reason it doesn't allow me to override border color & height
-        // @include side-thing();
-        // top: -100px;
-
-        // cursor:pointer;
-        border: solid 3px black;
-        background-color: white;
-        height: auto;
-        text-align: center;
-
-        // a{
-        //     border-bottom:unset;
-        // }
-        .em-calendar-wrapper {
-            position: relative;
-            display: inline-block;
-        }
+      //I would
+      // @extend .item-post-thumbnail-container;
+      //but for some reason it doesn't allow me to override border color & height
+      //see more properties in _page.scss
+      border: solid 3px black;
+      background-color: white;
+      text-align: center;
+      min-width: 260px !important;
+      // a{
+      //     border-bottom:unset;
+      // }
+      .em-calendar-wrapper {
+          position: relative;
+          display: inline-block;
+      }
     }
     .event-section-container{
-        .event-facilitator-list{
-            @include remove-list-style();
-            @include subtitle();
-        }
+      .event-facilitator-list{
+          @include remove-list-style();
+          @include subtitle();
+      }
     }
 
   }
