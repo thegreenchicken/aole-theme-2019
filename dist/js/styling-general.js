@@ -17,6 +17,16 @@ var stylingGeneralJs = new (function () {
      */
     // (function (a) { if (typeof define === "function" && define.amd) { define(["jquery"], a) } else { a(jQuery) } }(function (d) { var c = "ellipsis", b = '<span style="white-space: nowrap;">', e = { lines: "auto", ellipClass: "ellip", responsive: false }; function a(h, q) { var m = this, w = 0, g = [], k, p, i, f, j, n, s; m.$cont = d(h); m.opts = d.extend({}, e, q); function o() { m.text = m.$cont.text(); m.opts.ellipLineClass = m.opts.ellipClass + "-line"; m.$el = d('<span class="' + m.opts.ellipClass + '" />'); m.$el.text(m.text); m.$cont.empty().append(m.$el); t() } function t() { if (typeof m.opts.lines === "number" && m.opts.lines < 2) { m.$el.addClass(m.opts.ellipLineClass); return } n = m.$cont.height(); if (m.opts.lines === "auto" && m.$el.prop("scrollHeight") <= n) { return } if (!k) { return } s = d.trim(m.text).split(/\s+/); m.$el.html(b + s.join("</span> " + b) + "</span>"); m.$el.find("span").each(k); if (p != null) { u(p) } } function u(x) { s[x] = '<span class="' + m.opts.ellipLineClass + '">' + s[x]; s.push("</span>"); m.$el.html(s.join(" ")) } if (m.opts.lines === "auto") { var r = function (y, A) { var x = d(A), z = x.position().top; j = j || x.height(); if (z === f) { g[w].push(x) } else { f = z; w += 1; g[w] = [x] } if (z + j > n) { p = y - g[w - 1].length; return false } }; k = r } if (typeof m.opts.lines === "number" && m.opts.lines > 1) { var l = function (y, A) { var x = d(A), z = x.position().top; if (z !== f) { f = z; w += 1 } if (w === m.opts.lines) { p = y; return false } }; k = l } if (m.opts.responsive) { var v = function () { g = []; w = 0; f = null; p = null; m.$el.html(m.text); clearTimeout(i); i = setTimeout(t, 100) }; d(window).on("resize." + c, v) } o() } d.fn[c] = function (f) { return this.each(function () { try { d(this).data(c, (new a(this, f))) } catch (g) { if (window.console) { console.error(c + ": " + g) } } }) } }));
 
+    function IsImageOk(img) {
+      //source: https://i.canthack.it/detecting-broken-images-js.html
+        if (!img.complete) {
+            return false;
+        }
+        if (typeof img.naturalWidth != "undefined" && img.naturalWidth == 0) {
+            return false;
+        }
+        return true;
+    }
 
     var squareElementsSelector = null;
     var $squareElements = false;
@@ -61,21 +71,37 @@ var stylingGeneralJs = new (function () {
       // console.log("fupdate");
       if(!$fillElements){
         $fillElements=$(fillSelector);
-        $fillElements.each(function(){
-          $(this).on("load",function(){
-            var $this=$(this);
-            $this.attr("ready","true");
-            $this.css({width:"initial",height:"initial"});
-            var imgW = parseInt($this.width());
-            var imgH = parseInt($this.height());
-            myRatio=(imgW/imgH);
-            $this.attr("data-original-ratio",myRatio);
-            $this.attr("data-original-width",imgW);
-            $this.attr("data-original-height",imgH);
 
-            self.fill.update();
-          });
+        function updateFillElement($el){
+          $el.css({width:"initial",height:"initial"});
+          var imgW = parseInt($el.width());
+          var imgH = parseInt($el.height());
+          myRatio=(imgW/imgH);
+          $el.attr("data-original-ratio",myRatio);
+          $el.attr("data-original-width",imgW);
+          $el.attr("data-original-height",imgH);
+        }
+        $fillElements.each(function(){
+          //two possible cases:
+          //the picture was already loaded to this point, or not.
+          //if loaded, we want it to apply the effect right away ("loaded" listener
+          //won't be triggered again. If not, we want to set a trigger for when
+          //it loads.
+          //there is no native way to know whether the picture has loaded or not, thus IsImageOk()
+          var $this=$(this);
+          if(IsImageOk(this)){
+            updateFillElement($(this));
+            $this.attr("ready","true");
+          }else{
+            $(this).on("load",function(){
+              $this.attr("ready","true");
+              updateFillElement($(this));
+              self.fill.update();
+            });
+          }
         });
+        self.fill.update();
+
         console.log("apply fill to ",$fillElements);
       }
       $fillElements.each(function(){

@@ -45,8 +45,8 @@ This insert contains the page content part, to be inserted in the body of any pa
 
             <div class="item-calendar-container">
                 <?php echo do_shortcode("[events_calendar long_events=1 full=0 month=".date('n')."]"); ?>
-                <br>
-                <a class="ical-export-button ical-all-events-link" href=<?php echo site_url( "/events.ics", $scheme ); ?>> iCal - export all events </a>
+                <!-- <br>
+                <a class="ical-export-button ical-all-events-link" href=<?php //echo site_url( "/events.ics", $scheme ); ?>> iCal - export all events </a> -->
 
             </div>
 

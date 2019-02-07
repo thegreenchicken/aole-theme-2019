@@ -12,8 +12,6 @@ console.log(vars);
 	// wp_enqueue_script( 'masonry-init', get_template_directory_uri().'/js/masonry-init.js', array( 'masonry' ), null, true );
 
 
-wp_enqueue_script('tagClassifyPosts', get_template_directory_uri() . '/js/classifier.js', array('jquery'), 1.1, true);
-
 ?>
 <?php while (have_posts()): the_post();?>
     <?php

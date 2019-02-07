@@ -52,7 +52,8 @@ $error: $red;
 /* Typography */
 
 html {
-    font-size: 18px;
+    //got ignored:
+    // font-size: 18px;
 }
 // Body font
 $font-size: 1rem;
@@ -89,26 +90,32 @@ $h5: 0.6rem;
     text-transform: uppercase;
     margin:0;
     margin-bottom: $heading-margin-bottom;
+    overflow-wrap: break-word;
 }
 
 @mixin title2() {
     color: #969696;
     font-size:$h2;
+    overflow-wrap: break-word;
 }
 @mixin title3() {
     font-size:$h3;
+    overflow-wrap: break-word;
 }
 @mixin title4() {
     font-size:$h4;
+    overflow-wrap: break-word;
 }
 @mixin title5() {
     font-size:$h5;
+    overflow-wrap: break-word;
 }
 @mixin subtitle() {
     /*subtitle mixin*/
     font-size: 1.5rem;
     opacity: 0.7;
     font-weight: 600;
+    overflow-wrap: break-word;
 }
 
 // // Mobile heading font size

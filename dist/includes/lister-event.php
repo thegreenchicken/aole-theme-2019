@@ -18,7 +18,7 @@ this is the context where this part should be invoked:
     $event = EM_Events::get(array("scope" => "future"));
 
 */
-include_once locate_template('./includes/lister-event-remove-seconds.php');
+include_once locate_template('./includes/date-string-remove-seconds.php');
 
 ?>
 

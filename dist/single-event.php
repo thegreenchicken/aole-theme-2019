@@ -97,7 +97,7 @@ get_header(); ?>
                   ?>
               </span>
               <?php
-              include_once locate_template('./includes/lister-event-remove-seconds.php');
+              include_once locate_template('./includes/date-string-remove-seconds.php');
               ?>
               <span class="event-coordinates time">
                   <?php
@@ -130,16 +130,22 @@ get_header(); ?>
                  <a class="button singn-up-button" href="<?php echo get_field("registration_link"); ?>">Sign up here</a>
               <?php } ?>
 
-              <span class="ical-export-button ">
-                <a href="<?php echo do_shortcode("[event post_id='".$event["post"]->ID."']#_EVENTICALURL[/event]");?>">Export calendar event</a>
-              </span>
+              <!-- <span class="ical-export-button ">
+                <a href="<?php //echo do_shortcode("[event post_id='".$event["post"]->ID."']#_EVENTICALURL[/event]");?>">Export calendar event</a>
+              </span> -->
+              <br>
           </div>
           <div class="item-post-content-container">
-              <p class="item-content-container">
+            <?php
+            if($eventManagerData->post_content){
+              ?>
+              <span class="item-content-container">
                   <?php echo $eventManagerData->post_content; ?>
-              </p>
-
-              <?php edit_post_link('Edit', '<span class="edit-link">', '</span>');?>
+              </span>
+              <?php
+            }
+            ?>
+            <?php edit_post_link('Edit', '<span class="edit-link">', '</span>');?>
           </div>
       </div>
 

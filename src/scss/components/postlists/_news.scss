@@ -12,9 +12,10 @@
 
 .main-news-container,.main-home-container{
     $my-breakpoint: $screen-sm;
+    $my-margins:40px;
     .items-news-wrapper{
         .item-news-container{
-            @include fully-wide-item(40px);
+            @include fully-wide-item($my-margins);
             height: 250px;
 
             .item-image-container{
@@ -27,6 +28,7 @@
                 &>img{
                   margin-top:0;
                   width:100%;
+                  margin-bottom: $my-margins;
                 }
 
               }
@@ -40,6 +42,7 @@
                 bottom:0px;
                 @media (max-width: $my-breakpoint) {
                   position: relative;
+                  bottom:$my-margins;
                 }
             }
         }

@@ -36,6 +36,7 @@ individual posts in a posts list, and their wrappers.
 
     .item-side-data-container{
         @include side-thing();
+        position: -webkit-sticky;
         position:sticky;
         top:124px;
     }
