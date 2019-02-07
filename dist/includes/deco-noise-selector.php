@@ -6,6 +6,7 @@ $availImages=Array();
 $extra_fields=get_fields();
 echo "<!--deco-noise selector-->";
 if ($extra_fields['header-background-picture']){
+  //header background picture extra field overrides deco-noise
     // echo "background-color: ";
     echo '<img src="'.$extra_fields['header-background-picture'].'" class="deco-noise-picture parallax" parallax-z="'
     .$mod['parallax']

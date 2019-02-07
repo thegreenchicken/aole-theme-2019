@@ -9,7 +9,7 @@ $item-spacing: 15px;
     left: -$item-spacing;
     position: relative;
     display: inline-block;
-    .classifier-menu{
+    .categorizer-menu{
       .tag{
         border:none;
         color:gray;
@@ -43,7 +43,7 @@ $item-spacing: 15px;
       width:100%;
       display:inline-block;
     }
-    .classifier-menu{
+    .categorizer-menu{
       margin-bottom: 3rem;
       .count {
         font-size: 0.8em;

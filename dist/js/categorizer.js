@@ -11,7 +11,7 @@ this is used in the pilots page, and is what makes the tag-based filtering possi
 // }
 //annonymous call
 document.addEventListener("DOMContentLoaded", function (event) {
-    console.log("classifier.js");
+    console.log("categorizer.js");
     //get the after-hash data to apply the filter accordingly. (the part of the url that comes after the "#" character.
     function getHash(){
       return decodeURIComponent( window.location.hash ).replace(/^\#/,"").split("/").map(function(a){ return (a=="false"?false:a) });
@@ -32,14 +32,14 @@ document.addEventListener("DOMContentLoaded", function (event) {
     var updateMasonry=function(){}
     if(useMasonry) updateMasonry=function(){
       $(wrapperSelector).masonry({
-        itemSelector: itemSelector+", .classifier-menu",
+        itemSelector: itemSelector+", .categorizer-menu",
         columnWidth: itemSelector+":not(.disappear)",
         // percentPosition: true
       })
     }
 
     //a visible filtering button element, with it's data
-    var ClassifButton=function(myClassifier,category,tag,$el){
+    var ClassifButton=function(myCategorizer,category,tag,$el){
       this.appendTo=function($to){
         return $to.append($el);
       }
@@ -49,7 +49,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
       this.attr=function(str){
         return $el.attr(str);
       }
-      myClassifier.onAfterFilterAndDisplay(function(filterEvent){
+      myCategorizer.onAfterFilterAndDisplay(function(filterEvent){
         if(filterEvent.category==category && (filterEvent.tag==tag || tag==false)){
           $el.addClass("active");
         }else{
@@ -71,24 +71,24 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
     //extend the ClassifButton into categories and tag buttons.
 
-    var CategoryButton=function(myClassifier,category){
+    var CategoryButton=function(myCategorizer,category){
       var $el= $(`<a href="#${category}" class="tag" data-category="${category}">${category} </a>`);
-      ClassifButton.call(this,myClassifier,category,false,$el);
+      ClassifButton.call(this,myCategorizer,category,false,$el);
       return this;
     }
 
-    var TagButton=function(myClassifier,category,tag){
+    var TagButton=function(myCategorizer,category,tag){
       var myList=ClassifiedItem.sortedList[category][tag];
       var count = (myList?myList:[]).length;
       var $el= $(`<a href="#${category}/${tag}" class="tag" data-category="${category}" data-item="${tag}">${tag} <span class="count">${count}<span></a>`);
-      ClassifButton.call(this,myClassifier,category,tag,$el);
+      ClassifButton.call(this,myCategorizer,category,tag,$el);
       return this;
     }
 
     //representation in the code of a classifiable-items container. It contains reference to all DOM elements and also their data as variables.
     var ClassifiedContainer=function($item){
       var items=this.classifiedItems=[];
-      var $selectionMenu=$('<div class="classifier-menu"></div>');
+      var $selectionMenu=$('<div class="categorizer-menu"></div>');
       var $catSelectionMenu=$('<div class="category-menu"></div>');
       var $tagSelectionMenu=$('<div class="tag-menu"><p></p></div>');
 

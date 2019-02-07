@@ -16,7 +16,7 @@ if($mod['initial_category']){
   <?php
 }
 
-wp_enqueue_script('tagClassifyPosts', get_template_directory_uri() . '/js/classifier.js', array('jquery'), 1.1, true);
+wp_enqueue_script('tagClassifyPosts', get_template_directory_uri() . '/js/categorizer.js', array('jquery'), 1.1, true);
 
 
 ?>
