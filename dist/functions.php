@@ -185,57 +185,57 @@ function cptui_register_my_cpts() {
      * Post Type: Quotes.
      */
 
-    $labels = array(
-        "name" => __( "Quotes", "" ),
-        "singular_name" => __( "Quote", "" ),
-        "menu_name" => __( "Quotes", "" ),
-        "all_items" => __( "All Quotes", "" ),
-        "add_new" => __( "Add new", "" ),
-        "add_new_item" => __( "Add new Quote", "" ),
-        "edit_item" => __( "Edit Quote", "" ),
-        "new_item" => __( "New Quote", "" ),
-        "view_item" => __( "View Quote", "" ),
-        "view_items" => __( "View Quotes", "" ),
-        "search_items" => __( "Search Quote", "" ),
-        "not_found" => __( "No Quotes found", "" ),
-        "not_found_in_trash" => __( "No Quotes found in Trash", "" ),
-        "parent_item_colon" => __( "Parent Quote:", "" ),
-        "featured_image" => __( "Featured image for this Quote", "" ),
-        "set_featured_image" => __( "Set featured image for this Quote", "" ),
-        "remove_featured_image" => __( "Remove featured image for this Quote", "" ),
-        "use_featured_image" => __( "Use as featured image for this Quote", "" ),
-        "archives" => __( "Quote archives", "" ),
-        "insert_into_item" => __( "Insert into Quote", "" ),
-        "uploaded_to_this_item" => __( "Uplaaded to this Quote", "" ),
-        "filter_items_list" => __( "Filter Quotes list", "" ),
-        "items_list_navigation" => __( "Quotes list navigation", "" ),
-        "items_list" => __( "Quotes list", "" ),
-        "attributes" => __( "Quotes Attributes", "" ),
-        "parent_item_colon" => __( "Parent Quote:", "" ),
-        );
+    // $labels = array(
+    //     "name" => __( "Quotes", "" ),
+    //     "singular_name" => __( "Quote", "" ),
+    //     "menu_name" => __( "Quotes", "" ),
+    //     "all_items" => __( "All Quotes", "" ),
+    //     "add_new" => __( "Add new", "" ),
+    //     "add_new_item" => __( "Add new Quote", "" ),
+    //     "edit_item" => __( "Edit Quote", "" ),
+    //     "new_item" => __( "New Quote", "" ),
+    //     "view_item" => __( "View Quote", "" ),
+    //     "view_items" => __( "View Quotes", "" ),
+    //     "search_items" => __( "Search Quote", "" ),
+    //     "not_found" => __( "No Quotes found", "" ),
+    //     "not_found_in_trash" => __( "No Quotes found in Trash", "" ),
+    //     "parent_item_colon" => __( "Parent Quote:", "" ),
+    //     "featured_image" => __( "Featured image for this Quote", "" ),
+    //     "set_featured_image" => __( "Set featured image for this Quote", "" ),
+    //     "remove_featured_image" => __( "Remove featured image for this Quote", "" ),
+    //     "use_featured_image" => __( "Use as featured image for this Quote", "" ),
+    //     "archives" => __( "Quote archives", "" ),
+    //     "insert_into_item" => __( "Insert into Quote", "" ),
+    //     "uploaded_to_this_item" => __( "Uplaaded to this Quote", "" ),
+    //     "filter_items_list" => __( "Filter Quotes list", "" ),
+    //     "items_list_navigation" => __( "Quotes list navigation", "" ),
+    //     "items_list" => __( "Quotes list", "" ),
+    //     "attributes" => __( "Quotes Attributes", "" ),
+    //     "parent_item_colon" => __( "Parent Quote:", "" ),
+    //     );
 
-    $args = array(
-        "label" => __( "Quotes", "" ),
-        "labels" => $labels,
-        "description" => "Quotes said by other people.",
-        "public" => true,
-        "publicly_queryable" => true,
-        "show_ui" => true,
-        "show_in_rest" => false,
-        "rest_base" => "",
-        "has_archive" => false,
-        "show_in_menu" => true,
-        "exclude_from_search" => true,
-        "capability_type" => "quote",
-        "map_meta_cap" => true,
-        "hierarchical" => false,
-        "rewrite" => array( "slug" => "quotes", "with_front" => true ),
-        "query_var" => true,
-        "supports" => array( "title" ),
-        "taxonomies" => array( "theme_group"),
-        );
-
-    register_post_type( "quotes", $args );
+    // $args = array(
+    //     "label" => __( "Quotes", "" ),
+    //     "labels" => $labels,
+    //     "description" => "Quotes said by other people.",
+    //     "public" => true,
+    //     "publicly_queryable" => true,
+    //     "show_ui" => true,
+    //     "show_in_rest" => false,
+    //     "rest_base" => "",
+    //     "has_archive" => false,
+    //     "show_in_menu" => true,
+    //     "exclude_from_search" => true,
+    //     "capability_type" => "quote",
+    //     "map_meta_cap" => true,
+    //     "hierarchical" => false,
+    //     "rewrite" => array( "slug" => "quotes", "with_front" => true ),
+    //     "query_var" => true,
+    //     "supports" => array( "title" ),
+    //     "taxonomies" => array( "theme_group"),
+    //     );
+    //
+    // register_post_type( "quotes", $args );
 
     /**
      * Post Type: Jobs.
@@ -429,7 +429,7 @@ function cptui_register_my_taxes() {
         );
 
     $args = array(
-        "label" => __( "schools", "" ),
+        "label" => __( "Schools", "" ),
         "labels" => $labels,
         "public" => true,
         "hierarchical" => false,

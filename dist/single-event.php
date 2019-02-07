@@ -93,7 +93,7 @@ get_header(); ?>
               </h2>
               <span class="event-coordinates start_date">
                   <?php
-                    echo $date->format('l, d M');
+                    echo $date->format('l, d M Y');
                   ?>
               </span>
               <?php

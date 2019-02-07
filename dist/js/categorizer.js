@@ -14,7 +14,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
     console.log("categorizer.js");
     //get the after-hash data to apply the filter accordingly. (the part of the url that comes after the "#" character.
     function getHash(){
-      return decodeURIComponent( window.location.hash ).replace(/^\#/,"").split("/").map(function(a){ return (a=="false"?false:a) });
+      return decodeURIComponent( window.location.hash )
+        .replace(/^\#/,"").split("/")
+        .map(function(a){ return (a=="false"?false:a) })
+        .map(function(a){ return a.toLowerCase() });
     }
     var urlRequestedSelection=getHash();
     if(!urlRequestedSelection[0]) urlRequestedSelection=false;
@@ -78,7 +81,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
     }
 
     var TagButton=function(myCategorizer,category,tag){
-      var myList=ClassifiedItem.sortedList[category][tag];
+      var myList=CategorizedItem.sortedList[category][tag];
       var count = (myList?myList:[]).length;
       var $el= $(`<a href="#${category}/${tag}" class="tag" data-category="${category}" data-item="${tag}">${tag} <span class="count">${count}<span></a>`);
       ClassifButton.call(this,myCategorizer,category,tag,$el);
@@ -87,7 +90,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
     //representation in the code of a classifiable-items container. It contains reference to all DOM elements and also their data as variables.
     var ClassifiedContainer=function($item){
-      var items=this.classifiedItems=[];
+      var items=this.CategorizedItems=[];
       var $selectionMenu=$('<div class="categorizer-menu"></div>');
       var $catSelectionMenu=$('<div class="category-menu"></div>');
       var $tagSelectionMenu=$('<div class="tag-menu"><p></p></div>');
@@ -109,7 +112,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
         console.log("filter and display call",category,tag);
 
         //remove everything
-        ClassifiedItem.each(function(){
+        CategorizedItem.each(function(){
           this.disappear();
         });
 
@@ -136,11 +139,16 @@ document.addEventListener("DOMContentLoaded", function (event) {
         var filteredSelection={};
         if(category && tag){
           console.log("select by tag");
-          filteredSelection[tag]=ClassifiedItem.sortedList[category][tag];
+          if(CategorizedItem.sortedList[category]){
+            filteredSelection[tag]=CategorizedItem.sortedList[category][tag];
+          }else{
+            console.warn("could not select by tag, CategorizedItem.sortedList[category] is ",CategorizedItem.sortedList[category]);
+            window.location.hash="";
+          }
           list(filteredSelection);
         }else if(category){
           console.log("select by category");
-          filteredSelection=ClassifiedItem.sortedList[category];
+          filteredSelection=CategorizedItem.sortedList[category];
 
           list(filteredSelection);
 
@@ -151,7 +159,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
           filteredSelection={};
           var othersIndex="without "+category;
           filteredSelection[othersIndex]=[];
-          ClassifiedItem.each(function(){
+          CategorizedItem.each(function(){
             if(!this.isAppeared){
               filteredSelection[othersIndex].push(this);
             }
@@ -165,9 +173,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
 
           $(wrapperSelector+" .item-categorizer-tag-title").remove();
           $(wrapperSelector+" .item-categorizer-hr").remove();
-          // filteredSelection=ClassifiedItem.sortedList;
+          // filteredSelection=CategorizedItem.sortedList;
           // item.attachNonExclusive();
-          ClassifiedItem.each(function(){
+          CategorizedItem.each(function(){
             this.detach();
             this.reattach();
           });
@@ -181,9 +189,9 @@ document.addEventListener("DOMContentLoaded", function (event) {
       }
       this.updateDom=function(){
         if(! categorizerAppended){
-          for(var category in ClassifiedItem.sortedList){
+          for(var category in CategorizedItem.sortedList){
             new CategoryButton(self,category).appendTo($catSelectionMenu);
-            for(var tag in ClassifiedItem.sortedList[category]){
+            for(var tag in CategorizedItem.sortedList[category]){
               new TagButton(self,category,tag).appendTo($tagSelectionMenu);
 
             }
@@ -198,7 +206,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
       }
 
       $item.find(itemSelector).each(function(){
-        var nci=new ClassifiedItem($(this));
+        var nci=new CategorizedItem($(this));
       });
 
       this.updateDom();
@@ -215,12 +223,12 @@ document.addEventListener("DOMContentLoaded", function (event) {
     }
 
     //representation of a classified item that has data and can appear or disappear.
-    var ClassifiedItem = function ($item) {
+    var CategorizedItem = function ($item) {
         // console.log("classified item",$item);
-        if (!ClassifiedItem.list) ClassifiedItem.list = [];
-        if (!ClassifiedItem.sortedList) ClassifiedItem.sortedList = {};
+        if (!CategorizedItem.list) CategorizedItem.list = [];
+        if (!CategorizedItem.sortedList) CategorizedItem.sortedList = {};
 
-        ClassifiedItem.list.push(this);
+        CategorizedItem.list.push(this);
 
         var self = this;
         this.isAppeared=true;
@@ -236,7 +244,7 @@ document.addEventListener("DOMContentLoaded", function (event) {
           var name=$attrList.attr("name");
 
           var thisList = self.attributes[name] = [];
-          if(! ClassifiedItem.sortedList[name] ) ClassifiedItem.sortedList[name]={};
+          if(! CategorizedItem.sortedList[name] ) CategorizedItem.sortedList[name]={};
 
           $attrList.find('li').each(function(){
             var $li=$(this);
@@ -244,13 +252,13 @@ document.addEventListener("DOMContentLoaded", function (event) {
             if(txt){
               txt = txt.toLowerCase();
               thisList.push( txt );
-              if(! ClassifiedItem.sortedList[name][txt] ) ClassifiedItem.sortedList[name][txt]=[];
-              ClassifiedItem.sortedList[name][txt].push(self);
+              if(! CategorizedItem.sortedList[name][txt] ) CategorizedItem.sortedList[name][txt]=[];
+              CategorizedItem.sortedList[name][txt].push(self);
             }
           });
         });
 
-        // console.log(ClassifiedItem.sortedList);
+        // console.log(CategorizedItem.sortedList);
 
         this.detach=function(){
           self.isAppeared=false;
@@ -319,10 +327,10 @@ document.addEventListener("DOMContentLoaded", function (event) {
           else self.disappear();
         }
     }
-    ClassifiedItem.list = [];
-    ClassifiedItem.each=function(cb){
-        for(var itmno in ClassifiedItem.list){
-          cb.call(ClassifiedItem.list[itmno],ClassifiedItem.list[itmno],itmno);
+    CategorizedItem.list = [];
+    CategorizedItem.each=function(cb){
+        for(var itmno in CategorizedItem.list){
+          cb.call(CategorizedItem.list[itmno],CategorizedItem.list[itmno],itmno);
         }
     }
     //apply

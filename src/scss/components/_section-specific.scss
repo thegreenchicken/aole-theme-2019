@@ -9,91 +9,93 @@ individual posts in a posts list, and their wrappers.
 
 
 .main-container{
-
-    .section-container{
-        // margin-top:2em;
-        padding-top: 2em;
-        padding-bottom: 2em;
-        blockquote{
-          color:$yellow;
-          font-weight: 900;
-        }
-        ul{
-          padding-left: 1rem;
-          li{
-
-            padding-left: 1rem;
-          }
-        }
-    }
-
-    .item-tags-container{
-        margin-top:2em;
-    }
-    .item-post-thumbnail-container {
-      margin-top:2em;
-    }
-
-    .item-side-data-container{
-        @include side-thing();
-        position: -webkit-sticky;
-        position:sticky;
-        top:124px;
-    }
-
-
-    .section-footer-container {
-        $is-full-width:false;
-
-        position:relative;
-        z-index:5;
-
-        width: 100%;
-        @if($is-full-width == false){
-            max-width: none;
-        };
-        background-color: $blackish;
-
-        .item-paragraph-container{
-            @if($is-full-width == false){
-                @extend .container;
-            }
-            padding:58px;
-            color: white;
-            overflow: hidden;
-            font-size: 0.8em;
-            h1 {
-                font-size: 1em;
-                color: white;
-                text-transform: none;
-            }
-            h2 {
-                font-size: 0.8em;
-                color: white;
-                text-transform: none;
-            }
-            h3 {
-                font-size: 0.7em;
-                font-weight: 300;
-                color: white;
-                text-transform: none;
-            }
-        }
-    }
-
-    .section-post-container{
-      .item-post-content-container{
-          @include side-thing-counterpart();
-          // img{
-          //     max-width: 100%;
-          // }
+  .classifiable-container .classifiable-attributes{
+    display:none;
+  }
+  .section-container{
+      // margin-top:2em;
+      padding-top: 2em;
+      padding-bottom: 2em;
+      blockquote{
+        color:$yellow;
+        font-weight: 900;
       }
-    }
+      ul{
+        padding-left: 1rem;
+        li{
 
-    .section-container{
-        @extend .container;
+          padding-left: 1rem;
+        }
+      }
+  }
 
+  .item-tags-container{
+      margin-top:2em;
+  }
+  .item-post-thumbnail-container {
+    margin-top:2em;
+  }
+
+  .item-side-data-container{
+      @include side-thing();
+      position: -webkit-sticky;
+      position:sticky;
+      top:124px;
+  }
+
+
+  .section-footer-container {
+      $is-full-width:false;
+
+      position:relative;
+      z-index:5;
+
+      width: 100%;
+      @if($is-full-width == false){
+          max-width: none;
+      };
+      background-color: $blackish;
+
+      .item-paragraph-container{
+          @if($is-full-width == false){
+              @extend .container;
+          }
+          padding:58px;
+          color: white;
+          overflow: hidden;
+          font-size: 0.8em;
+          h1 {
+              font-size: 1em;
+              color: white;
+              text-transform: none;
+          }
+          h2 {
+              font-size: 0.8em;
+              color: white;
+              text-transform: none;
+          }
+          h3 {
+              font-size: 0.7em;
+              font-weight: 300;
+              color: white;
+              text-transform: none;
+          }
+      }
+  }
+
+  .section-post-container{
+    .item-post-content-container{
+        @include side-thing-counterpart();
+        // img{
+        //     max-width: 100%;
+        // }
     }
+  }
+
+  .section-container{
+      @extend .container;
+
+  }
 
 
 

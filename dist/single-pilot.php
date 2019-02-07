@@ -25,28 +25,44 @@ get_header(); ?>
 
    ?>
    <div class="section-container section-post-header-container">
-       <p class="item-post-type-container">Pilot case</p>
-       <h1 class="item-title-container"><?php the_title(); ?></h1>
-       <span class="item-subtitle-container">
+        <p class="item-post-type-container">Pilot case</p>
+        <h1 class="item-title-container"><?php the_title(); ?></h1>
+        <span class="item-subtitle-container">
          <?php echo $extra_fields['subtitle'];?>
-       </span>
-       <div class="item-tags-container">
-           <?php
-           $tags = get_the_tags();
-           $years = get_the_terms( $post , 'year');
-           $school = get_the_terms( $post , 'school');
+        </span>
+        <div class="item-tags-container">
+          <?php
+          // print_r(get_taxonomies(array(
+          //   'public'   => true,
+          //   'object_type' => array('pilot')
+          // )) );
 
 
-           // print_r($tags);
-           foreach ($tags as $key => $tag) {
-             echo '<span class="tag tag-'.$tag->slug.'">'.$tag->name.'</span>';
+          $mod = get_theme_mod('pilots_list_settings');
+          $taxes = Array(
+            "year",
+            "school",
+            'theme_group',
+          );
+          if($mod["cat_tags"]){
+  					$taxes=preg_split("/, */",$mod["cat_tags"]);
+  				}
+          $url=get_site_url()."/pilots";
+
+          //*1 tag links generation
+          foreach($taxes as $term_name=>$term_slug){
+            $term_name = strtolower( get_taxonomy($term_slug)->label );
+            $terms=get_the_terms( $pilot->ID , $term_slug );
+             // print_r($tags);
+             foreach ($terms as $key => $term) {
+               echo '<a href="'
+                 .$url.'#'.$term_name.'/'.$term->name
+                 .'" class="tag '.$tax.'">'//'.$tax->slug.'
+                    .$term->name
+               .'</a>';
+             }
            }
-           foreach ($years as $key => $year) {
-             echo '<span class="tag year year-'.$year->slug.'">'.$year->name.'</span>';
-           }
-           foreach ($schools as $key => $school) {
-             echo '<span class="tag school school-'.$school->slug.'">'.$school->name.'</span>';
-           }
+
 
            $tags = get_the_tags();
            // print_r($tags);
