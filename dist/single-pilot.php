@@ -198,7 +198,7 @@ get_header(); ?>
 
     $append_before = '<hr/><h2>More pilots</h2>';
     $append_before .= '<p class="pilots-subtitle"><!-- get_field(pilots_showcase_section)[pilots_subtitle] -->' . $section['pilots_subtitle'] . '</h2>';
-    $append_after = '<a href="'.get_site_url().'/pilots" class="button-list">< Back to pilots list</a>';
+    $append_after = '<a href="'.get_site_url().'/pilots" class="fa-long-arrow-left button-list"> Back to pilots list</a>';
     //$append_before & after are appended in the following included template part:
     include locate_template('includes/lister-pilots.php');
 

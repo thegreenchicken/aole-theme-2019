@@ -5,7 +5,17 @@ if (!function_exists('aole_scripts')):
 {
 
         // Enqueue the main Stylesheet.
-        //wp_enqueue_style('main-stylesheet', get_template_directory_uri() . '/assets/stylesheets/foundation.css', array(), '2.9.3', 'all');
+        // wp_enqueue_style('glyphicons-eot', get_template_directory_uri() . '/fonts/bootstrap/glyphicons-halflings-regular.eot');
+        // wp_enqueue_style('glyphicons-svg', get_template_directory_uri() . '/fonts/bootstrap/glyphicons-halflings-regular.svg');
+        // wp_enqueue_style('glyphicons-ttf', get_template_directory_uri() . '/fonts/bootstrap/glyphicons-halflings-regular.ttf');
+        // wp_enqueue_style('glyphicons-woff', get_template_directory_uri() . '/fonts/bootstrap/glyphicons-halflings-regular.woff');
+        // wp_enqueue_style('glyphicons-woff2', get_template_directory_uri() . '/fonts/bootstrap/glyphicons-halflings-regular.woff2');
+        wp_enqueue_style('fontawesome-eot', get_template_directory_uri() . '/fonts/bootstrap/fontawesome-webfont.eot');
+        wp_enqueue_style('fontawesome-svg', get_template_directory_uri() . '/fonts/bootstrap/fontawesome-webfont.eot');
+        wp_enqueue_style('fontawesome-ttf', get_template_directory_uri() . '/fonts/bootstrap/fontawesome-webfont.woff2');
+        wp_enqueue_style('fontawesome-woff', get_template_directory_uri() . '/fonts/bootstrap/fontawesome-webfont.woff');
+        wp_enqueue_style('fontawesome-woff2', get_template_directory_uri() . '/fonts/bootstrap/fontawesome-webfont.ttf');
+        wp_enqueue_style('fontawesome-woff2', get_template_directory_uri() . '/fonts/bootstrap/fontawesome-webfont.svg');
 
         // Deregister the jquery version bundled with WordPress.
         wp_deregister_script('jquery');

@@ -19,7 +19,9 @@ body.home{
         @extend .button-list;
         // @extend .glyphicon-arrow-right;
         &::after{
-          content:" >";
+          font-family: "FontAwesome";
+          content:$fa-var-long-arrow-right;
+          margin-left: 10px;
         }
         text-align: center;
     }

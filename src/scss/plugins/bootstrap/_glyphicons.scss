@@ -6,7 +6,9 @@
 // inline element with the appropriate classes, like so:
 //
 // <a href="#"><span class="glyphicon glyphicon-star"></span> Star</a>
-
+@mixin glyph(){
+  font-family: 'Glyphicons Halflings';
+}
 @at-root {
   // Import the fonts
   @font-face {

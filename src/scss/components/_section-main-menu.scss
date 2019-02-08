@@ -15,19 +15,28 @@ header.section-container.section-header-container{
   width:100vw;
   max-width: unset !important;
 
+  $sticky-scrolled-menu-height:47px;
+  $sticky-scrolled-menu-offset:-32px;
   &.sticky-scrolled{
     //when the view has been scrolled, and it "sticks"
     border-bottom: solid 1px #f1f1f1;
 
-    height: 79px;
+    height: $sticky-scrolled-menu-height - $sticky-scrolled-menu-offset;
     transition: 0.5s;
-    top: -32px;
+    top: $sticky-scrolled-menu-offset;
 
     .item-header-container img.logo{
       height: 43px;
       transition: 0.5s;
 
       margin-top: 2px;
+    }
+    /*if the menu is mobile-collapsed, but active and also is smaller due to scrolling,
+    it's offset-top needs to be less to prevent a transparent gap between top-navigation-bar
+    and the menu*/
+    &.collapsed .main-menu-container > *{
+      top: $sticky-scrolled-menu-height;
+      transition: top 0.5s;
     }
   }
 
@@ -119,9 +128,15 @@ header.section-container.section-header-container{
   &.collapsed.active .main-menu-container{
     // cursor:pointer;
     &:before {
-      content: ">>";
+    //   // content: ">>";
+    //   font-family: "Glyphicons Halflings";
+    //   content: "\e258";
+      font-family: 'FontAwesome';
+      content:$fa-var-angle-double-right;
       float: right;
     }
+
+
     &>*{
       width: 100vw;
       height: 100vh;
@@ -138,26 +153,20 @@ header.section-container.section-header-container{
     cursor: pointer;
     top: -0.5rem;
 
+
+
     &:before {
+      font-family: 'FontAwesome';
+      content:$fa-var-bars;
       // font-family: "Glyphicons Halflings";
       // content: "\e236";//"hamburger"
-      content: "| | |";
+      // content: "| | |";
       font-size: 28px;
-      // top: -7px;
-      // position: relative;
       right: 22px;
-      //background: url("http://www.gentleface.com/i/free_toolbar_icons_16x16_black.png") 0 0 no-repeat;
-      // div{
-       // display:inline;
-       // width:32px;
-       // height:32px;
-       // &>div{
-       //   width: 35px;
-       //   height: 5px;
-       //   background-color: black;
-       //   margin: 6px 0;
-       // }
-       // }
+
+      position: absolute;
+      top: 28px;
+      margin-top: -17px;
     }
 
 
@@ -172,6 +181,7 @@ header.section-container.section-header-container{
 
         position: fixed;
         top: $header-menu-height;
+        transition: top 0.5s;
 
         overflow-x: none;
         overflow-y: auto;

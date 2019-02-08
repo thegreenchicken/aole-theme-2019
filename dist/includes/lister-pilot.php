@@ -23,8 +23,6 @@ this is the context where this part should be invoked:
 	foreach($pilots as $pilot):
 */
 
-wp_enqueue_script('pilots-list', get_template_directory_uri() . '/js/pilots-list.js', array('jquery'), 1.1, true);
-
 ?>
 
 			<div class='item-container item-pilot-container classifiable-item'>
