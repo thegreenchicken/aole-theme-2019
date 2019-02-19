@@ -9,7 +9,7 @@ in the history of this theme there is:
 * Aleksi Tapale foundationpress
   * https://github.com/aleksitaipale/aole_2017/tree/master/wp-content/themes/AOLE%202017
 * Blank slate
-* SCSS bootstrap: https://github.com/twbs/bootstrap-sass
+* SCSS bootstrap: https://github.com/twbs/bootstrap-sass (this is why the CSS is so huge!)
 * Primitive
   * https://github.com/taniarascia/primitive "Primitive is a minimalist Sass boilerplate and CSS framework that provides helpful, browser-consistent styling for buttons, forms, tables, lists, and typography."
 

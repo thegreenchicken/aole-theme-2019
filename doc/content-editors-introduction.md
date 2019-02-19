@@ -11,6 +11,8 @@ In order to allow greater editing flexibility, some contents are written in HTML
 
 The disadvantage, however, is the risk of breaking said HTML code, causing the page to appear different than intended. This happens when a content that has advanced HMTL contents is edited using the visual editor. Please be in contact with the person in charge before editing some of the main pages, such as the homepage.
 
+As a content editor, you have all the bootstrap classes available. Search tutorials about Bootstrap to learn. 
+
 If the HTML content of a page becomes broken, it is possible to recover it thanks to Wordpress' version history. When you need to recover something from previous versions of the content, find the "revisions" link at the right of the post editor, as shown in the next picture.
 
 ![How to recover from messing up contents, sometimes](./res/enter-version-history.JPG)
