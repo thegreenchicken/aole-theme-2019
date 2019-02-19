@@ -1,0 +1,82 @@
+body{
+  &.pilot-template-default,
+  &.event-template-default,
+  &.post-template-default{
+    // background-color: orange;
+    .main-container{
+      // background-color: transparent;
+      .section-post-header-container{
+        h2, .item-post-type-container{
+          color: #969696;
+          font-size: 1rem;
+          margin-top: 1rem;
+          font-weight: bold;
+          text-transform: none;
+          font-family: $font-family;
+        }
+        .item-author-container{
+          text-transform: uppercase;
+          color: $gray-dark;
+          font-size: .85em;
+        }
+        .item-title-container{
+            font-size: 2.19rem;
+            line-height: 1.3;
+            margin: 4rem 0 1rem;
+        }
+        .item-subtitle-container{
+            font-size: 1.3em;
+        }
+      }
+      
+      //prevent pictures in posts from getting out of bounds.
+      //this can be overridden by putting the image inside some other element
+      .item-post-content-container{
+        p{
+          font-size: 1rem;
+          line-height: 1.6;
+        }
+        &>img,
+        &>p>img{
+          max-width: 100%;
+          height:auto !important;
+        }
+        blockquote{
+          color:$yellow;
+          font-weight: bold;
+          font-size: 1.3rem;
+          margin-top: 2.5rem;
+          margin-bottom: 2.5rem;
+        }
+        h2{
+          @include title1();
+          font-size: 1.44rem;
+        }
+        h3{
+          @include title1();
+          font-size: 1.06rem;
+          margin-top: 2.5rem;
+          margin-bottom: 1rem;
+        }
+        h4{
+          @include title1();
+          font-size: 0.8rem;
+          margin-top: 2.5rem;
+          margin-bottom: 0.4rem;
+        }
+        h5{
+          font-size: 0.8rem;
+          margin-top: 2rem;
+          margin-bottom: 0.4rem;
+        }
+        h6{
+          font-size: 0.8rem;
+          margin-top: 2rem;
+          margin-bottom: 0.4rem;
+        }
+      }
+    }
+
+
+  }
+}

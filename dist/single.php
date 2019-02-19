@@ -67,7 +67,7 @@ get_header(); ?>
          $contentDisplay=$extra_fields['description'];
          unset($extra_fields['description']);
        }
-       echo $contentDisplay;
+       echo apply_filters('the_content',$contentDisplay);
        ?>
        <?php edit_post_link('Edit', '<span class="edit-link">', '</span>');?>
      </div>
@@ -87,7 +87,7 @@ get_header(); ?>
      ?>
      <div class="section-container section-<?php echo $slug; ?>-container">
        <h2><?php echo $fo[label] ?></h2>
-         <?php echo $field; ?>
+         <?php echo apply_filters('the_content',$field); ?>
      </div>
      <?php
    }
@@ -128,8 +128,6 @@ get_header(); ?>
         <span class="link-head">previous <?php echo $post_prev -> post_type ?> </span>
         <span class="title">
            <?php
-           echo (new DateTime($post_prev -> event_start_date)) -> format('d M');
-           echo ": ";
            echo $post_prev -> post_title;
            ?>
         </span>

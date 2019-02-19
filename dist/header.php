@@ -11,7 +11,7 @@
 	wp_enqueue_script('responsive-menu', get_template_directory_uri() . '/js/responsive-menu.js', array('jquery'), 1.1, true);
 	// wp_enqueue_script('ellipsis', get_template_directory_uri() . '/js/ellipsis.js', array('jquery'), 1.1, true);
 	?>
-
+  <link rel="shortcut icon" type="image/png" href="<?php echo get_template_directory_uri() ?>/assets/icons/favicon.ico"/>
 	<link rel="stylesheet" type="text/css" href="<?php echo get_stylesheet_uri(); ?>" />
 	<link rel="stylesheet" type="text/css" href="<?php echo get_template_directory_uri(); ?>/css/main.css" />
 

@@ -6,8 +6,8 @@
 				<?php
 
 				$footer = get_page_by_path('footer');
-
-				echo($footer->post_content);
+        //apply_filters for the full wp filtering. It proved very annoying.
+				echo(do_shortcode( $footer->post_content ));
 
 				?>
 

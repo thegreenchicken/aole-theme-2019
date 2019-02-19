@@ -1,0 +1,39 @@
+
+  .annotation-frame{
+    border:solid 1px red;
+    position:absolute;
+  }
+  .annotation-frame .annotation-content{
+    position:sticky;
+    top:0px;
+    right:0px;
+    padding:5px;
+    background-color: #FFF9;
+    border:solid 1px;
+    min-height:2rem;
+    cursor:text;
+  }
+  .annotable-container .annotable-menu{
+    position: absolute;
+    top:0px;
+    display:block;
+  }
+  .annotable-container .annotable-menu .menu-item{
+    display:inline-block;
+  }
+  .annotation-resize{
+    cursor:resize;
+    width:10px;
+    height: 10px;
+    bottom:-10px;
+    right:-10px;
+    background-color: #CCCC;
+  }
+  .button.delete{
+    position:absolute;
+    top:0px;
+    right:0px;
+  }
+  .ui-draggable{
+    cursor:move;
+  }

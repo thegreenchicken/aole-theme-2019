@@ -12,15 +12,15 @@
 
 // Components
 @import "components/snippets";
-@import "components/mixin-fully-wide-item";
+@import "components/mixin-default-post-item";
 @import "components/helpers";
 @import "components/layout";
 @import "components/scaffolding";
 @import "components/section-specific";
 @import "components/section-main-menu";
-@import "components/single/common";
 @import "components/single/page";
 @import "components/single/page-events";
+@import "components/single/post_or_custom";
 @import "components/single/pilot";
 @import "components/single/event";
 @import "components/single/page-home";

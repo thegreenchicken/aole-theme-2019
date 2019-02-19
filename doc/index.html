@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+
+  </head>
+  <link id="stylesheet"
+        rel = "stylesheet"
+        type = "text/css"
+        href = "style.css" />
+  <link id="annotable"
+        rel = "stylesheet"
+        type = "text/css"
+        href = "annotable.css" />
+  <body>
+    <div id="menu">
+      <h2>For content editors</h2>
+      <h3>How to edit</h3>
+      <a href="./index.html#operation=md;src=content-editors-introduction.md">
+        Introduction
+      </a>
+      <a href="./index.html#operation=annotate;editable=false;img=footer.png;json=footer.json">
+        footer & menu
+      </a>
+      <a href="./index.html#operation=annotate;editable=false;img=page-about.jpg;json=page-about.json">
+        page-about
+      </a>
+      <a href="./index.html#operation=annotate;editable=false;img=page-events.jpg;json=page-events.json">
+        page-events
+      </a>
+      <a href="./index.html#operation=annotate;editable=false;img=page-home.jpg;json=page-home.json">
+        page-home
+      </a>
+      <a href="./index.html#operation=annotate;editable=false;img=page-news.jpg;json=page-news.json">
+        page-news
+      </a>
+      <a href="./index.html#operation=annotate;editable=false;img=page-pilots.jpg;json=page-pilots.json">
+        page-pilots
+      </a>
+      <a href="./index.html#operation=annotate;editable=false;img=page.png;json=page.json">
+        page
+      </a>
+      <a href="./index.html#operation=annotate;editable=false;img=single-event.png;json=single-event.json">
+        single-event
+      </a>
+      <a href="./index.html#operation=annotate;editable=false;img=single-news.png;json=single-news.json">
+        single-news
+      </a>
+      <a href="./index.html#operation=annotate;editable=false;img=single-pilot.png;json=single-pilot.json">
+        single-pilot
+      </a>
+
+      <h2>For developers</h2>
+      <a href="./index.html#operation=md;src=developers-introduction.md">
+        Introduction
+      </a>
+      <a href="./index.html#operation=md;src=developers-workflow.md">
+        Workflow
+      </a>
+      <a href="./index.html#operation=md;src=developers-editing-css.md">
+        Editing CSS
+      </a>
+
+      <h3>Template parts structure</h3>
+      <a href="./index.html#operation=annotate;editable=false;img=page-about.jpg;json=template-structure-page-about.json">
+        page.php
+      </a>
+      <a href="./index.html#operation=annotate;editable=false;img=page-events.jpg;json=template-structure-page-events.json">
+        postlists
+      </a>
+      <a href="./index.html#operation=annotate;editable=false;img=page-home.jpg;json=template-structure-page-home.json">
+        page-home
+      </a>
+
+    </div>
+    <div id="content">
+    </div>
+  </body>
+  <script src="./js/jquery-3.3.1.min.js"></script>
+  <script src="./js/jquery-ui.min.js"></script>
+  <script src="./js/annotator.js"></script>
+  <script src="./js/showdown.min.js"></script>
+  <script src="./js/mdLoadParser.js"></script>
+  <script>
+
+    function getHash(){
+      var ret={};
+      var n=0;
+      decodeURIComponent( window.location.hash )
+        .replace(/^\#/,"").split(";")
+        .map(function(a){ return (a=="false"?false:a) })
+        .map(function(a){ return a.toLowerCase() })
+        .map(function(a){
+          var s=a.split("=");
+          if(s.length){
+            ret[s[0]]=s[1];
+          }else{
+            ret[n]=a;
+            n++;
+          }
+          return a;
+        });
+      return ret;
+    }
+    function lf() {
+      var hashvars=getHash();
+      console.log(hashvars);
+      if(hashvars.operation=="annotate"){
+        $("#content").html('<img class="annotable"/>');
+        annotator.start(hashvars);
+      }else if(hashvars.operation=="md"){
+        var converter = new showdown.Converter();
+        if(hashvars.src){
+          var xobj = new XMLHttpRequest();
+          xobj.overrideMimeType("text");
+          xobj.open('GET', "./"+hashvars.src, true);
+          xobj.onreadystatechange = function () {
+            if (xobj.readyState == 4 && xobj.status == "200") {
+              $("#content").html('<div class="md-parsed">'+converter.makeHtml(xobj.responseText)+'</div>');
+            }
+          };
+          xobj.send(null);
+        }
+
+      }
+    }
+    window.onhashchange = lf;
+    document.addEventListener("DOMContentLoaded",lf);
+
+  </script>
+</html>

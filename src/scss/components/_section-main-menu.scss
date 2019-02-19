@@ -22,7 +22,7 @@ header.section-container.section-header-container{
     border-bottom: solid 1px #f1f1f1;
 
     height: $sticky-scrolled-menu-height - $sticky-scrolled-menu-offset;
-    transition: 0.5s;
+    transition: height 0.5s;
     top: $sticky-scrolled-menu-offset;
 
     .item-header-container img.logo{
@@ -39,11 +39,10 @@ header.section-container.section-header-container{
       transition: top 0.5s;
     }
   }
-
   .item-header-container{
     @extend .container;
 
-    text-align: justify;
+    text-align: left;
     // width: 100%;
     border-bottom: 1px #1f1f1f;
     position:relative;
@@ -55,78 +54,126 @@ header.section-container.section-header-container{
       margin-top:-5px;
     }
     // $main-menu-container-top: ($header-menu-height/2) - 18;
-    .main-menu-container {
+
+    .title-container{
+      display:inline-block;
+    }
+  }
+  &:not(.collapsed) .item-header-container{
+
+    &>.main-menu-container {
       // margin-left: 3em;
       position: absolute;
       right: 0px;
       top: 0.5rem;
-      ul.menu-navigation>li{
-        position: relative;
-        &>ul.sub-menu{
-          position:absolute !important;
-        }
-        ul.sub-menu{
-          display: block;
-          background-color: white;
-          top: -100vh;
-          // transition: top 1s;
-          position:relative;
-          padding: 6px;
-          li{
-            display:block;
-            padding:6px;
-            border-left: solid 1px;
-          }
-        }
-      }
 
-      ul>li:hover{
-          ul.sub-menu{
+      .menu-navigation-container>ul{
+        //only firt level menu list
+        &>li.menu-item-has-children{
+          //only firt level menu item which has children
+          &:hover{
+            &>ul.sub-menu{
+              //only inmediate child of top-level menu
+              // transition: top 0.3s;
+              top: 1.5rem;
+              ul{
+                //then all the children menu lists
+                top:0px;
+                left:0px;
+
+              }
+            }
+            ul.sub-menu{
+              //immediate & non-immediate child menus
+              &>li>*{
+                color: #969696;
+                line-height: 1em;
+                text-align: left;
+                display: block;
+                color: $gray;
+                &:hover{
+                  color:$blue-light;
+                }
+              }
+            }
+            &:after{
+              top:10px;
+              transition:1s;
+              opacity: 0;
+            }
+
+          }
+          &>ul.sub-menu{
+            left: -2rem;
+          }
+
+          &:after{
+            @include font-awesome();
+            content:$fa-var-angle-down;
+            position:relative;
+            transition:1s;
             top:0px;
-            transition: top 1s;
-            // display:block;
+
           }
+
+        }
       }
-    }
 
+      //any menu list item
+      ul {
+        //menus and sub-menus at any level
+        @include remove-list-style();
+        &>li {
+          //position:relative;//makes the menu appear right under
+          a {
+              color: #000;
+              text-decoration: none;
+              // background: pink;
+              font-size: 0.8em;
+              font-weight: 500;
+              line-height: 16px;
+              padding: 7px;
+          }
+          a:hover{
+              // text-decoration: underline;
+              color:$blue;
+          }
+          a:active{
+              // text-decoration: underline;
+              color:$blue;
+          }
+          &>ul.sub-menu{
+            position: absolute;
+          }
+          ul.sub-menu{
+            width:400px;
+            background-color: white;
+            top: -100vh;
 
+            // transition: top 1s;
+            ul{
+              //sorry for the depth.
+              //this would be a sub-menu which is not directly a child of the main menu
+              //because the direct child of the menu needs not to generate any space,
+              //but the "grand" children do need to make space.
+              position:relative;
+            }
+            padding: 6px;
+            li{
+              display:block;
+              padding:6px;
+              // border-left: solid 2px $blue;
+            }
+          }
 
-
-    .title-container{
-        display:inline-block;
-    }
-    .main-menu-container{
-        ul {
-            @include remove-list-style();
         }
-
-        ul li{
-            //display:inline-block;
-            a {
-                color: #000;
-                text-decoration: none;
-                // background: pink;
-                font-size: 0.8em;
-                font-weight: 500;
-                line-height: 16px;
-                padding: 7px;
-            }
-            a:hover{
-                // text-decoration: underline;
-                color:$blue;
-            }
-            a:active{
-                // text-decoration: underline;
-                color:$blue;
-            }
-        }
+      }
     }
   }
 
 
-  //active: when the collapsed menu is being displayed
   &.collapsed.active .main-menu-container{
-    // cursor:pointer;
+    //active: when the collapsed menu is being displayed
     &:before {
     //   // content: ">>";
     //   font-family: "Glyphicons Halflings";
@@ -136,6 +183,15 @@ header.section-container.section-header-container{
       float: right;
     }
 
+    & > .menu-navigation-container>ul {
+      ul{
+        &>li{
+          //stuff gets clearer and smaller consecutively when getting deeper
+          opacity:0.5;
+          font-size: 0.7em;
+        }
+      }
+    }
 
     &>*{
       width: 100vw;
@@ -165,7 +221,7 @@ header.section-container.section-header-container{
       right: 22px;
 
       position: absolute;
-      top: 28px;
+      top: 18px;
       margin-top: -17px;
     }
 

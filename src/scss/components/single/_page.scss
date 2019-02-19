@@ -81,7 +81,24 @@ body.page{
         .item-post-thumbnail-container{
             border: solid 3px white;
         }
+        .item-post-content-container{
+            &:before{
+              content: "";
+              display: inline-block;
+              font: normal normal normal 14px/1 FontAwesome;
+              font-size: inherit;
+              text-rendering: auto;
+              -webkit-font-smoothing: antialiased;
+              -moz-osx-font-smoothing: grayscale;
+              position: absolute;
 
+              left: -4.3vw;
+              font-size: 3.6vw;
+              opacity: 0.2;
+              text-align: center;
+              margin-left: 0.3vw;
+            }
+        }
 
     }
 

@@ -1,0 +1,29 @@
+
+
+.annotable-container{
+  position:relative;
+}
+.annotation-frame{
+  border:solid 1px;
+  position:absolute;
+  opacity:0;
+}
+.annotation-frame:hover{
+  position:absolute;
+  opacity:1;
+}
+.annotation-frame .annotation-content{
+  display:none;
+}
+.annotation-frame:hover .annotation-content{
+  display: inline-block;
+  position:sticky;
+  top:0px;
+  right:0px;
+  padding:5px;
+  background-color: #FFF;
+  border:solid 1px;
+  min-height:2rem;
+  cursor:text;
+  padding:17px;
+}

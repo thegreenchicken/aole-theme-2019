@@ -16,10 +16,7 @@ individual posts in a posts list, and their wrappers.
       // margin-top:2em;
       padding-top: 2em;
       padding-bottom: 2em;
-      blockquote{
-        color:$yellow;
-        font-weight: 900;
-      }
+
       ul{
         padding-left: 1rem;
         li{
@@ -46,7 +43,7 @@ individual posts in a posts list, and their wrappers.
 
   .section-footer-container {
       $is-full-width:false;
-
+      margin-top:100px;
       position:relative;
       z-index:5;
 
@@ -87,20 +84,6 @@ individual posts in a posts list, and their wrappers.
     .item-post-content-container{
         @include side-thing-counterpart();
 
-        &:before{
-          content: "";
-          display: inline-block;
-          font: normal normal normal 14px/1 FontAwesome;
-          font-size: inherit;
-          text-rendering: auto;
-          -webkit-font-smoothing: antialiased;
-          -moz-osx-font-smoothing: grayscale;
-          position: absolute;
-          left: -5vw;
-          font-size: 6vw;
-          opacity: 0.2;
-          text-align: center;
-        }
         // img{
         //     max-width: 100%;
         // }

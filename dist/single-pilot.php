@@ -13,9 +13,9 @@ get_header(); ?>
       if ($extra_fields[$fieldSlug]) {
          echo '<div class="item-' . $fieldSlug . '-field-container">';
          echo '  <h2 class="field-title">' . $title . '</h2>';
-         echo '  <p class="content">';
-         echo $extra_fields[$fieldSlug];
-         echo '  </p>';
+         // echo '  <p class="content">';
+         echo apply_filters('the_content',$extra_fields[$fieldSlug]);
+         // echo '  </p>';
          echo '</div>';
       }
       //just so that it doesn't appear again.
@@ -32,11 +32,6 @@ get_header(); ?>
         </span>
         <div class="item-tags-container">
           <?php
-          // print_r(get_taxonomies(array(
-          //   'public'   => true,
-          //   'object_type' => array('pilot')
-          // )) );
-
 
           $mod = get_theme_mod('pilots_list_settings');
           $taxes = Array(
@@ -44,6 +39,9 @@ get_header(); ?>
             "school",
             'theme_group',
           );
+
+
+
           if($mod["cat_tags"]){
   					$taxes=preg_split("/, */",$mod["cat_tags"]);
   				}
@@ -53,6 +51,7 @@ get_header(); ?>
           foreach($taxes as $term_name=>$term_slug){
             $term_name = strtolower( get_taxonomy($term_slug)->label );
             $terms=get_the_terms( $pilot->ID , $term_slug );
+
              // print_r($tags);
              foreach ($terms as $key => $term) {
                echo '<a href="'
@@ -82,12 +81,21 @@ get_header(); ?>
        <div class="item-side-data-container">
          <!--add a "side-data" field to the post to make it appear here-->
            <?php
-             printCustomFields(array(
-                 "Pilot leader" => "pilot_leader",
-                 "School" => "school",
-                 "Reach" => "reach",
-                 "Timeline" => "timeline",
-             ));
+           if(!$extra_fields['school']){
+             //inject "schools" custom tax field into the extra fields
+             $cb = function($value) {
+                return $value->name;
+            };
+             // print_r(array_map($cb,get_the_terms( $pilot->ID , "school", "array" )));
+             $extra_fields['school']=implode(", ",array_map($cb,get_the_terms( $pilot->ID , "school", "array" )));
+           }
+           printCustomFields(array(
+               "Pilot leader" => "pilot_leader",
+               "Schools" => "school",
+               "Reach" => "reach",
+               "Timeline" => "timeline",
+           ));
+
            ?>
        </div>
        <div class="item-post-content-container">
@@ -115,25 +123,46 @@ get_header(); ?>
        (some fields are removed because they are not meant to appear as content.)
        -->
        <?php
-       unset($extra_fields['color']);
-       unset($extra_fields['subtitle']);
-       unset($extra_fields['side-data']);
-       unset($extra_fields['header-background-picture']);
 
-       $remaining_fields=array();
+       //if you were to print all the remaining fields:
+       //
+       // except...
+       // unset($extra_fields['color']);
+       // unset($extra_fields['subtitle']);
+       // unset($extra_fields['header-background-picture']);
+       //
+       // $remaining_fields=array();
+       //
+       // foreach($extra_fields as $slug => $field){
+       //   if($field && is_string($field)){
+       //     $fo=get_field_object($slug);
+       //     $remaining_fields[$fo['label']]=$slug;
+       //   }
+       // }
+       // printCustomFields($remaining_fields);
 
-       foreach($extra_fields as $slug => $field){
-         if($field && is_string($field)){
-           $fo=get_field_object($slug);
-           $remaining_fields[$fo['label']]=$slug;
-         }
+       $bodyFields=array();
+       //define which other fields to print and in what order
+       foreach(array(
+         "description",
+         "tools_used",
+         "pedagogical_methods_used",
+         "involved_courses",
+         "links_materials",
+         "reflection",
+         "people") as  $slug){
+           //get the title of each field
+         $fo=get_field_object($slug);
+         $bodyFields[$fo['label']]=$slug;
        }
-       printCustomFields($remaining_fields);
+       //print that list of fields.
+       printCustomFields($bodyFields);
+
        ?>
      </div>
    </div>
 
-  <?php if(is_user_logged_in()&&false){ ?>
+  <?php if(false && is_user_logged_in()){ ?>
      <div class="section container section-dev-container">
          <h2>Fields:</h2>
          <textarea style="width:100%; height:300px">
@@ -182,11 +211,11 @@ get_header(); ?>
     // echo("<li>next, from 0 to".(max(2,4-$i)));
     for($j=0; $j < max(2,4-$i); $j++){
       $post = get_next_post();
+      // echo("<li>next[".$j."]:get".$post->post_title);
+      if(!$post){ break; }
       setup_postdata($post);
       array_push($pilots,$post);
 
-      // echo("<li>next[".$j."]:get".$post->post_title);
-      if(!$post){ break; }
     }
 
     //get only the last four posts in the list

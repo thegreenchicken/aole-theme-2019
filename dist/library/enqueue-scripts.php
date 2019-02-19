@@ -1,4 +1,5 @@
 <?php
+require_once('shortcodes.php');
 
 if (!function_exists('aole_scripts')):
     function aole_scripts()

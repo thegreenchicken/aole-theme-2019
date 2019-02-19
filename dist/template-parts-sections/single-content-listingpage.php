@@ -49,19 +49,6 @@ console.log(vars);
         </div>
     </div>
 
-    <?php
-    $team_members=$extra_fields['team_members'];
-    if($team_members){
-      include locate_template('includes/lister-team_members.php');
-    }
-
-    //TODO: about page has attained too many unique specifications, it might need to go into single-page-about.php
-    $team_members=$extra_fields['core_team_members'];
-    if($team_members){
-      $append_before='<hr/><h2>People</h2><h1>Meet our core team</h1>';
-      include locate_template('includes/lister-team_members.php');
-    }
-    ?>
 
     <?php
     unset($extra_fields['color']);

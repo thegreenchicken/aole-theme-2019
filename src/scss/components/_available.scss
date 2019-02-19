@@ -57,5 +57,18 @@
 hr{
   display:block;
   margin:50px 0;
+}
 
+.button{
+  /*
+  defined @ base/_variables.scss
+  */
+}
+.button.white{
+  background-color: white;
+  color: black;
+  border: solid 2px black;
+  text-transform: none;
+  padding: 0.2em 1.2em;
+  text-decoration:none;
 }

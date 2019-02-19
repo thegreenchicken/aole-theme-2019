@@ -188,9 +188,18 @@ document.addEventListener("DOMContentLoaded", function (event) {
         }
       }
       this.updateDom=function(){
+
         if(! categorizerAppended){
           for(var category in CategorizedItem.sortedList){
             new CategoryButton(self,category).appendTo($catSelectionMenu);
+
+            //sort tags alphabetically (order of categories is determined via customizer)
+            var ordered = {};
+            Object.keys(CategorizedItem.sortedList[category]).sort().forEach(function(key) {
+              ordered[key] = CategorizedItem.sortedList[category][key];
+            });
+            CategorizedItem.sortedList[category]=ordered;
+
             for(var tag in CategorizedItem.sortedList[category]){
               new TagButton(self,category,tag).appendTo($tagSelectionMenu);
 

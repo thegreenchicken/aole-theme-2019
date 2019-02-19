@@ -1,19 +1,66 @@
 
 body.single .section-after-post-container{
-    //in this case, containing "prev" and "next" links;
-    .items-wrapper.items-other-posts-wrapper{
-      @extend .row;
+  //in this case, containing "prev" and "next" links;
+  .items-other-posts-wrapper{
+    @extend .row;
 
-      a{
-        @extend .col-sm-6;
-        span{
-          display:block;
+    a{
+      @extend .col-sm-6;
+      color:black;
+      display:block;
+      position: relative;
+      overflow: hidden;
+      font-weight: bold;
+      // span{
+      //   display:block;
+      // }
+    }
+    .link-head{
+      font-weight: bold;
+      text-transform: capitalize;
+      display: block;
+      color:$gray;
+    }
+    .next-post-link{
+      float:right;
+    }
+    .post-arrow{
+      height: 9rem;
+      width: 40px;
+      font-size: 1.5rem;
+      padding: 0px 15px;
+      color: $gray;
+      font-weight: bold;
+
+      &.post-next-arrow{
+        float: right;
+        color:transparent;
+        &:before {
+          color: $gray;
+          content: "\f054";
+          display: inline-block;
+          font: normal normal normal 14px/1 FontAwesome;
+              font-size: 14px;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+        }
+        @media (max-width:$screen-sm){
+          float:left;
         }
       }
-      .title{
-        color:$font-color;
-        font-size: 1.2em;
-        font-weight: 900;
+      &.post-prev-arrow{
+        float: left;
+        color:transparent;
+        &:before {
+          color: $gray;
+          content: "\f053";
+          display: inline-block;
+          font: normal normal normal 14px/1 FontAwesome;
+              font-size: 14px;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+        }
       }
     }
+  }
 }

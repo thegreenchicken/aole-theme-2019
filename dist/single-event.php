@@ -140,7 +140,7 @@ get_header(); ?>
             if($eventManagerData->post_content){
               ?>
               <span class="item-content-container">
-                  <?php echo $eventManagerData->post_content; ?>
+                  <?php echo apply_filters('the_content',$eventManagerData->post_content); ?>
               </span>
               <?php
             }

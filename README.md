@@ -36,15 +36,15 @@ having node js installed, cd to the root of this project (same directory as this
 
 ## Style guide
 
+The self-imposed rules for this template are the following:
 
-The rules for this template are the following:
-* the generated html has to be as css-agnostic as possible, meaning that applying any aesthetic by coding the html is avoided. The styling and positions are as much as possible attained using CSS; within reason. In this way, it is easier for future developers to tweak things
+* the generated html has to be as css-agnostic as possible, meaning that applying any aesthetic by coding the html is avoided. The styling and positions are as much as possible attained using CSS; within reason. In this way, it is easier for future developers to tweak things. Inspired in: https://www.sitepoint.com/sass-semantically-extend-bootstrap/
 * It is also possible to use javascript to prevent tailoring html to the styling
 * In order to be able to style in different ways posts of different types, the css class contains information about the post type, etc. so that the CSS can tailor custom behaviours.
 * Re-use styles and scss variables as much as possible, encouraging consistency.
 * Use the least CSS `@media` queries as possible. Try to make the content flexible for the rest of the width size range
-* https://en.bem.info/methodology/quick-start/
-* https://www.sitepoint.com/sass-semantically-extend-bootstrap/
+* Try to make clear which changes are done by javascript scripts, through the console.
+* Make the code as transparent and standard as possible, and explain otherwise, of course.
 
 The structure of the HTML is the same on every page:
 
@@ -90,7 +90,6 @@ The structure of the HTML is the same on every page:
 └────────────────────────────────────────┘   
 ```
 
-
 ## Getting Started
 
 - **Quick start** - [Download the stylesheet](https://taniarascia.github.io/primitive/css/main.css).
@@ -101,18 +100,3 @@ Simply run `npm run sass` to run a Sass watch on the entire project.
 ## Documentation
 
 All documentation can be found at [https://taniarascia.github.io/primitive](https://taniarascia.github.io/primitive).
-
-## Todo:
-
-_9/8/18_
-
-- [x] Add source maps
-- [x] Add minification
-- [ ] Add autoprefixing
-- [x] Change documentation page to remove Gulp
-
-## License
-
-The code is open source and available under the [MIT License](LICENSE.md).
-
-Built and maintained by [Tania Rascia](https://www.taniarascia.com)

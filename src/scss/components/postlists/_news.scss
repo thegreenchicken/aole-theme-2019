@@ -1,50 +1,46 @@
-.items-wrapper.items-news-wrapper{
-  .item-container{
-    .item-title-container{
-      font-weight: 600;
-      font-size: 1.1rem;
-    }
-  }
-}
 
 
 
 
-.main-news-container,.main-home-container{
+.main-container{
     $my-breakpoint: $screen-sm;
     $my-margins:40px;
-    .items-news-wrapper{
-        .item-news-container{
-            @include fully-wide-item($my-margins);
-            height: 250px;
+    .items-news-wrapper,.items-posts-wrapper{
+      .item-container{
+        @include default-post-item($my-margins);
+        .item-title-container{
+          font-weight: 600;
+          font-size: 1.1rem;
+        }
+        height: 250px;
 
-            .item-image-container{
-              img{
-                min-width:100%;
-                height:auto;
-                min-height: 100%;
-              }
-              @media (max-width: $my-breakpoint) {
-                &>img{
-                  margin-top:0;
-                  width:100%;
-                  margin-bottom: $my-margins;
-                }
-
-              }
+        .item-image-container{
+          img{
+            min-width:100%;
+            height:auto;
+            min-height: 100%;
+          }
+          @media (max-width: $my-breakpoint) {
+            &>img{
+              margin-top:0;
+              width:100%;
+              margin-bottom: $my-margins;
             }
 
-            .item-author-container{
-                opacity: 0.7;
-                text-transform: uppercase;
-                font-size: 0.7em;
-                position: absolute;
-                bottom:0px;
-                @media (max-width: $my-breakpoint) {
-                  position: relative;
-                  bottom:$my-margins;
-                }
+          }
+        }
+
+        .item-author-container{
+            opacity: 0.7;
+            text-transform: uppercase;
+            font-size: 0.7em;
+            position: absolute;
+            bottom:0px;
+            @media (max-width: $my-breakpoint) {
+              position: relative;
+              bottom:$my-margins;
             }
         }
+      }
     }
 }
