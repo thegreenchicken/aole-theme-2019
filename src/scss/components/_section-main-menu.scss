@@ -76,6 +76,7 @@ header.section-container.section-header-container{
               //only inmediate child of top-level menu
               // transition: top 0.3s;
               top: 1.5rem;
+            display: block;
               ul{
                 //then all the children menu lists
                 top:0px;
@@ -129,10 +130,11 @@ header.section-container.section-header-container{
               color: #000;
               text-decoration: none;
               // background: pink;
-              font-size: 0.8em;
+              font-size: 0.875rem;
               font-weight: 500;
               line-height: 16px;
               padding: 7px;
+              display: inline-block;
           }
           a:hover{
               // text-decoration: underline;
@@ -146,9 +148,12 @@ header.section-container.section-header-container{
             position: absolute;
           }
           ul.sub-menu{
-            width:400px;
+//            width:400px;
             background-color: white;
             top: -100vh;
+              padding: 10px;
+              margin-left: -10px;
+              display: none;
 
             // transition: top 1s;
             ul{
