@@ -83,6 +83,18 @@ body{
           ul > li {
               padding-bottom: 0.5rem;
           }
+          & > table, 
+          & > p > table {
+              width: 100%;
+              tr {
+              border-bottom: 1px solid #dddddd;
+                  text-align: left;
+                  th, td {
+                      padding-top: 2px;
+                      padding-bottom: 2px;
+                  }
+              }
+          }
       }
     }
 
