@@ -110,7 +110,7 @@ body.home{
   .section-container.section-more-about-container{
     @include hero-item();
     background-color:$blue;
-    padding-top: 135px;
+    padding-top: 130px;
     // blockquote{
     //   @extend .col-sm-8;
     //   float:none;
@@ -126,7 +126,10 @@ body.home{
       @include hero-item();
       text-align:center;
       background-color: $blackish;
-      // padding-top: 87px;
+      padding-top: 100px;
+      h2 {
+          margin-bottom: 4rem;
+      }
       img,.timezone,.hours{
           display: none;
       }
