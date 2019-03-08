@@ -14,6 +14,10 @@ body {
     color: $font-color;
     background: $background;
     font-size: $body-font-size;
+    font-variant-numeric: lining-nums;
+    -moz-font-feature-settings: "lnum";
+    -webkit-font-feature-settings: "lnum";
+    font-feature-settings: "lnum";
 }
 
 p,
